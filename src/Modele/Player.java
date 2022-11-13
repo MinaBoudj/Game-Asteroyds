@@ -3,25 +3,25 @@ package Modele;
 import java.util.ArrayList;
 
 public class Player {
-    private String name;
-    private ArrayList<int> relics;
-    private SpaceShip spaceShip;
+    public String name;
+    private ArrayList<Integer> relics;
 
-    Player(String name, Color color) { // Non terminé
+    /* Constructeur */
+    Player(String name) { // Non terminé
         this.name = name;
-        this.relics = new ArrayList<int>();
+        this.relics = new ArrayList<Integer>();
     }
 
     public void setMovement(int indice, Movement movement) {
     }
 
-    public int getNumberOfRelics() {
+    public int getNumberOfRelics() { // Retourne le nombre de reliques que possède le joueur.
         return this.relics.size();
     }
 
-    public boolean hasRelic(int relic) {
-        for (int i = 0; i<this.relics.size(); i++) {
-            if (this.relics[i] == relic) {
+    public boolean hasRelic(int relic) { // Vérifie si le joueur possède une relique passée en paramètre.
+        for (int i : relics) {
+            if (this.relics.get(i).equals(relic)) {
                 return true;
             }
         }
