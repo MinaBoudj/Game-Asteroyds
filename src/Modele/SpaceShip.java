@@ -41,8 +41,7 @@ public class SpaceShip implements VisualObject{
                     pos.x = super.getX() + 1;
 				    pos.y = super.getY() + 1;
             }
-            }
-		}
+        }
 		if(super.orientation == 3) {
 			if(super.getX() == 0 ) {
 				return super.positon;
@@ -247,23 +246,32 @@ public class SpaceShip implements VisualObject{
 			if(movement.get(i) == Movement.Left) {
 					pos = moveLeft();
                     //verifier que la case peut contenir des SpaceShips si oui l'ajouter dans la liste sinon le spaceShip se deplace pas
-					gameBoard[pos.getX()][pos.getY()].spaceShips.add(this.SpaceShip);
+					if(gameBoard[pos.getX()][pos.getY()].canContainSpaceShips == true){
+                        gameBoard[pos.getX()][pos.getY()].spaceShips.add(this);
+                    }
 				}
 			if(movement.get(i) == Movement.Right) {
 				pos = moveRight();
-				gameBoard[pos.getX()][pos.getY()].spaceShips.add(this.SpaceShip);
-
+                //verifier que la case peut contenir des SpaceShips si oui l'ajouter dans la liste sinon le spaceShip se deplace pas
+				if(gameBoard[pos.getX()][pos.getY()].canContainSpaceShips == true){
+                    gameBoard[pos.getX()][pos.getY()].spaceShips.add(this);
+                }
 			}
 			if(movement.get(i) == Movement.Forward) {
 				pos = moveForward();
-				gameBoard[pos.getX()][pos.getY()].spaceShips.add(this.SpaceShip);
-
+                //verifier que la case peut contenir des SpaceShips si oui l'ajouter dans la liste sinon le spaceShip se deplace pas
+				if(gameBoard[pos.getX()][pos.getY()].canContainSpaceShips == true){
+                    gameBoard[pos.getX()][pos.getY()].spaceShips.add(this);
+                }
 			}
 			if(movement.get(i) == Movement.TurnAround) {
-				pos = TurnAround();
-				gameBoard[pos.getX()][pos.getY()].spaceShips.add(this.SpaceShip);
+				TurnAround();
             }
-		}	
-	}
+		}
+    }
+    	
 }
+
+
+
 	
