@@ -9,18 +9,44 @@ public class SpaceShip extends VisualObject{
 	
 	
 	/* Constructeur */
-	SpaceShip(int orientation, Position pos, Color color){
+	public SpaceShip(int orientation, Position pos, Color color){
         this.color = color;
-        if(color == Color.r)//TODO
-		super("SpaceShip ", orientation, pos);
-		this.structurePoints = 6;
-        this.relics = new int[4]{0,0,0,0};
+        if(color == Color.Green){
+            super("Vaisseau gris", orientation, pos);
+		    this.structurePoints = 6;
+            this.relics = new int[4]{0,0,0,0};
+        }
+        if(color == Color.Blue){
+            super("Vaisseau bleu", orientation, pos);
+		    this.structurePoints = 6;
+            this.relics = new int[4]{0,0,0,0};
+        }
+        if(color == Color.Red){
+            super("Vaisseau rouge", orientation, pos);
+		    this.structurePoints = 6;
+            this.relics = new int[4]{0,0,0,0};
+        }
+        if(color == Color.Purple){
+            super("Vaisseau violet ", orientation, pos);
+		    this.structurePoints = 6;
+            this.relics = new int[4]{0,0,0,0};
+        }
+        if(color == Color.Orange){
+            super("Vaisseau orange ", orientation, pos);
+		    this.structurePoints = 6;
+            this.relics = new int[4]{0,0,0,0};
+        }
+        if(color == Color.Yellow){
+            super("Vaisseau jaune ", orientation, pos);
+		    this.structurePoints = 6;
+            this.relics = new int[4]{0,0,0,0};
+        }
 	}
 	
 	/* Getteur and setteur */
 	public Color getColor() { return this.color; }
 	public int getStructurePoints() { return this.structurePoints; }
-    public int getNumberOfRelics() { 
+    public int getNumberOfRelics() {  //nombre de relics que possede le vaisseau
         int nb =0;
         for (int i=0; i<=4; i++){
             if(relics[i] != 0){
