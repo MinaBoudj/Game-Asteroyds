@@ -2,16 +2,24 @@ package Modele;
 import javafx.scene.image.image;
 
 public class VisualObject {
-    Image image;
+    String imagePath;
     int orientation;
     Position position;
 
     /* Constructeurs */
-    public VisualObject(String imagePath, int orientation, int x, int y) { // Besoin d'informations supplémentaires sur JavaFX.
+    public VisualObject(int orientation, int x, int y) {
+        this.imagePath = " ";
+        this.orientation = orientation;
+        this.position.x = x;
+        this.position.y = y; 
     }
 
-    public VisualObject(String imagePath, int orientation, Position position) { // Besoin d'informations supplémentaires sur JavaFX.
+    public VisualObject(String imagePath, int orientation, Position position) {
+        this.imagePath = imagePath;
+        this.orientation = orientation;
+        this.position = position;
     }
+
 
     /* Getters */
     public Image getImage(){ // Besoin d'informations supplémentaires sur JavaFX.
@@ -27,6 +35,10 @@ public class VisualObject {
 
     /* Setter */
     public void setOrientation() { // Un setter n'est pas censé avoir un paramètre ??
+    }
+
+    public void setImagePath(String imagePath){
+        this.imagePath = imagePath;
     }
 
     /* Méthodes */
