@@ -1,4 +1,7 @@
 package Modele;
+/**
+ * @author amina
+*/
 
 public class WhitePortal extends WhiteAsteroyd {
 

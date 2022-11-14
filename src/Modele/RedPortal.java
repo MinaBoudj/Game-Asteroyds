@@ -1,5 +1,7 @@
 package Modele;
-
+/*
+ * @auto amina
+*/
 public class RedPortal extends RedAsteroyd{
 
 	private int relic;
