@@ -1,23 +1,35 @@
 package Modele;
 import java.util.*;
 
-public class SpaceShip implements VisualObject{
+public class SpaceShip extends VisualObject{
 	
 	private int structurePoints;
 	private Color color;
+    private int[] relics;
 	
 	
 	/* Constructeur */
-	SpaceShip(String imagePath, int orientation, Position pos, Color color){
-		super(imagePath, orientation, pos);
+	SpaceShip(int orientation, Position pos, Color color){
+        this.color = color;
+        if(color == Color.r)//TODO
+		super("SpaceShip ", orientation, pos);
 		this.structurePoints = 6;
-		this.color = color;
+        this.relics = new int[4]{0,0,0,0};
 	}
 	
 	/* Getteur and setteur */
 	public Color getColor() { return this.color; }
 	public int getStructurePoints() { return this.structurePoints; }
-	
+    public int getNumberOfRelics() { 
+        int nb =0;
+        for (int i=0; i<=4; i++){
+            if(relics[i] != 0){
+                nb++;
+            }
+        }
+        return nb;
+    }
+
 	public void setStucturepoints(int sttruct) { this.structurePoints = sttruct; }
 	
 	private Position moveLeft() { 
@@ -240,36 +252,42 @@ public class SpaceShip implements VisualObject{
             super.setOrientation(1);
     }
 	
-	public void move(ArrayList<ArrayList<Cell>> gameBoard, ArrayList<Movement> movement) {
+	public void move(ArrayList<ArrayList<Cell>> gameBoard, Movement[] movement) {
 		for(int i=0; i<movement.size(); i++) { //parcourir tous les mouvements 
 			Position pos;
-			if(movement.get(i) == Movement.Left) {
+			if(movement[i] == Movement.Left) {
 					pos = moveLeft();
                     //verifier que la case peut contenir des SpaceShips si oui l'ajouter dans la liste sinon le spaceShip se deplace pas
 					if(gameBoard[pos.getX()][pos.getY()].canContainSpaceShips == true){
                         gameBoard[pos.getX()][pos.getY()].spaceShips.add(this);
+                        //si c un portal ajouter relic
+                        //changer sa position
+                        //retiter de la liste ou il etait
                     }
 				}
-			if(movement.get(i) == Movement.Right) {
+			if(movement[i] == Movement.Right) {
 				pos = moveRight();
                 //verifier que la case peut contenir des SpaceShips si oui l'ajouter dans la liste sinon le spaceShip se deplace pas
 				if(gameBoard[pos.getX()][pos.getY()].canContainSpaceShips == true){
                     gameBoard[pos.getX()][pos.getY()].spaceShips.add(this);
                 }
 			}
-			if(movement.get(i) == Movement.Forward) {
+			if(movement[i] == Movement.Forward) {
 				pos = moveForward();
                 //verifier que la case peut contenir des SpaceShips si oui l'ajouter dans la liste sinon le spaceShip se deplace pas
 				if(gameBoard[pos.getX()][pos.getY()].canContainSpaceShips == true){
                     gameBoard[pos.getX()][pos.getY()].spaceShips.add(this);
                 }
 			}
-			if(movement.get(i) == Movement.TurnAround) {
+			if(movement[i] == Movement.TurnAround) {
 				TurnAround();
+            }
+            if(movement[i] == Movement.Null) {
+				break;
             }
 		}
     }
-    	
+
 }
 
 

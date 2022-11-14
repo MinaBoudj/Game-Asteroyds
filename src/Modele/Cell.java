@@ -2,7 +2,7 @@ package Modele;
 
 import java.util.ArrayList;
 
-public class Cell implements VisualObject {
+public class Cell extends VisualObject {
 	
 	private boolean canContainSpaceShips;
 	private ArrayList<SpaceShip> LSpaceShips;
