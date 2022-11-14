@@ -14,29 +14,30 @@ public class SpaceShip extends VisualObject{
             super("Vaisseau gris", orientation, pos);
 		    this.structurePoints = 6;
             this.relics = new int[4]{0,0,0,0};
-        }
-        if(color == Color.Blue){
+        }else if(color == Color.Blue){
             super("Vaisseau bleu", orientation, pos);
 		    this.structurePoints = 6;
             this.relics = new int[4]{0,0,0,0};
-        }
-        if(color == Color.Red){
+        }else if(color == Color.Red){
             super("Vaisseau rouge", orientation, pos);
 		    this.structurePoints = 6;
             this.relics = new int[4]{0,0,0,0};
-        }
-        if(color == Color.Purple){
+        } else if(color == Color.Purple){
             super("Vaisseau violet ", orientation, pos);
 		    this.structurePoints = 6;
             this.relics = new int[4]{0,0,0,0};
-        }
+        }else 
         if(color == Color.Orange){
             super("Vaisseau orange ", orientation, pos);
 		    this.structurePoints = 6;
             this.relics = new int[4]{0,0,0,0};
-        }
+        }else
         if(color == Color.Yellow){
             super("Vaisseau jaune ", orientation, pos);
+		    this.structurePoints = 6;
+            this.relics = new int[4]{0,0,0,0};
+        }else{
+            super("Vaisseau", orientation, pos);
 		    this.structurePoints = 6;
             this.relics = new int[4]{0,0,0,0};
         }
