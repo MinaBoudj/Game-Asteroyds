@@ -47,6 +47,10 @@ public class Position {
         return this.y;
     }
 
+    public Position getForward(int orientation) {
+        if ()
+    }
+
 
 
 }
