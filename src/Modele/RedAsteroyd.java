@@ -4,7 +4,7 @@ package Modele;
 */
 
 
-public class RedAsteroyd extends Asteroyd {
+public class RedAsteroyd extends  Asteroyd {
 	
 	RedAsteroyd(String image, int orientation, Position pos){
 		super(image,orientation,pos, false);

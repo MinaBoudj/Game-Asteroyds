@@ -4,8 +4,6 @@ import java.util.*;
  * @autor amina
 */
 
-import javax.crypto.spec.PSource;
-
 public class SpaceShip extends VisualObject{
 	
 	private int structurePoints;
