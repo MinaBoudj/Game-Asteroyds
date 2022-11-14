@@ -292,7 +292,7 @@ public class SpaceShip extends VisualObject{
 							gameBoard[pos.getX()][pos.getY()].addLSpaceShip(this); //ajouter dans la liste des vaiseaux
                         	//si c un portal ajouter relic
 							if(gameBoard[pos.getX()][pos.getY()] instanceof RedPortal || gameBoard[pos.getX()][pos.getY()] instanceof WhitePortal){
-								addRelic(gameBoard[pos.getX()][pos.getY()].getRelic());
+								//addRelic(gameBoard[pos.getX()][pos.getY()].getRelic());
 							}
 							//retiter de la liste ou il etait
 							gameBoard[super.getPosition().x][super.getPosition().y].removeLSpaceShip(this);
@@ -314,7 +314,7 @@ public class SpaceShip extends VisualObject{
 							gameBoard[pos.getX()][pos.getY()].addLSpaceShip(this); //ajouter dans la liste des vaiseaux
                         	//si c un portal ajouter relic
 							if(gameBoard[pos.getX()][pos.getY()] instanceof RedPortal || gameBoard[pos.getX()][pos.getY()] instanceof WhitePortal){
-								addRelic(gameBoard[pos.getX()][pos.getY()].getRelic());
+								//addRelic(gameBoard[pos.getX()][pos.getY()].getRelic());
 							}
 							//retiter de la liste ou il etait
 							gameBoard[super.getPosition().x][super.getPosition().y].removeLSpaceShip(this);
@@ -336,7 +336,7 @@ public class SpaceShip extends VisualObject{
 							gameBoard[pos.getX()][pos.getY()].addLSpaceShip(this); //ajouter dans la liste des vaiseaux
                         	//si c un portal ajouter relic
 							if(gameBoard[pos.getX()][pos.getY()] instanceof RedPortal || gameBoard[pos.getX()][pos.getY()] instanceof WhitePortal){
-								addRelic(gameBoard[pos.getX()][pos.getY()].getRelic());
+								//addRelic(gameBoard[pos.getX()][pos.getY()].getRelic());
 							}
 							//retiter de la liste ou il etait
 							gameBoard[super.getPosition().x][super.getPosition().y].removeLSpaceShip(this);
