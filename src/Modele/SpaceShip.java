@@ -10,7 +10,6 @@ public class SpaceShip extends VisualObject{
 	
 	/* Constructeur */
 	public SpaceShip(int orientation, Position pos, Color color){
-        this.color = color;
         if(color == Color.Green){
             super("Vaisseau gris", orientation, pos);
 		    this.structurePoints = 6;
@@ -41,6 +40,7 @@ public class SpaceShip extends VisualObject{
 		    this.structurePoints = 6;
             this.relics = new int[4]{0,0,0,0};
         }
+        this.color = color;
 	}
 	
 	/* Getteur and setteur */
