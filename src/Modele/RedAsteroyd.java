@@ -11,7 +11,7 @@ public class RedAsteroyd extends  Asteroyd {
 	}
 	
 	@Override
-	public void move(ArrayList<ArrayList<Cell>> gameBoard, ArrayList<int> directions) {
+	public void move(Cell[][] gameBoard, ArrayList<int> directions) {
 		
 	}
 	

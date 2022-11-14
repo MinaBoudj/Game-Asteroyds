@@ -4,6 +4,7 @@ import java.util.*;
  * @autor amina
 */
 
+
 public class SpaceShip extends VisualObject{
 	
 	private int structurePoints;
