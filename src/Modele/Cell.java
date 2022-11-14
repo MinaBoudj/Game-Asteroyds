@@ -1,4 +1,7 @@
 package Modele;
+/***
+ * @autor amina
+*/
 
 import java.util.ArrayList;
 
@@ -9,7 +12,8 @@ public class Cell extends VisualObject {
 	
 	/* Constructeur */
 	Cell(String image, int orientation, Position pos, boolean canContainSpaceShips){
-		super(image, orientation,pos);
+		super(orientation,pos);
+		super.setImagePath(image);
 		this.canContainSpaceShips = canContainSpaceShips;
 		this.LSpaceShips = null;
 	}
@@ -21,6 +25,10 @@ public class Cell extends VisualObject {
 	
 	public boolean getCanContainSpaceShips() {
 		return this.canContainSpaceShips;
+	}
+
+	public void addLSpaceShip(SpaceShip newSpace){
+			this.LSpaceShips.add(newSpace);
 	}
 
 }

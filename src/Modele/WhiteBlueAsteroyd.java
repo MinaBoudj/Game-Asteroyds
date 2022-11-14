@@ -1,6 +1,10 @@
 package Modele;
 
-public class WhiteBlueAsteroyd implements BlueAsteroyd{
+/***
+ * @autor amina
+*/
+
+public class WhiteBlueAsteroyd extends BlueAsteroyd{
 
 	WhiteBlueAsteroyd(String image, int orientation, Position pos){
 		super(image,orientation,pos, false);
