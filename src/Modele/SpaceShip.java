@@ -1,5 +1,5 @@
 package Modele;
-import java.util.*;
+//import java.util.*;
 /***
  * @autor amina
 */
@@ -185,7 +185,7 @@ public class SpaceShip extends VisualObject{
 	private Position moveForward() { //recuperer la position tous droit 
         Position pos = super.position;
 		if(super.orientation == 1) {
-			if(super.position.getX() == 0 || super.position.getY() == 0) { //ne peut pas bouger il est au bord du plateau
+			if((super.position.getX() == 0 && super.position.getY()%2 == 0) || super.position.getY() == 0) { //ne peut pas bouger il est au bord du plateau
 				return pos;
 			}
             if(super.position.getY()%2 == 0){
@@ -313,7 +313,7 @@ public class SpaceShip extends VisualObject{
 							gameBoard[pos.getX()][pos.getY()].addLSpaceShip(this); //ajouter dans la liste des vaiseaux
                         	//si c un portal ajouter relic
 							if(gameBoard[pos.getX()][pos.getY()] instanceof RedPortal || gameBoard[pos.getX()][pos.getY()] instanceof WhitePortal){
-								//addRelic(gameBoard[pos.getX()][pos.getY()].getRelic());
+								addRelic(gameBoard[pos.getX()][pos.getY()].getRelic());
 							}
 							//retiter de la liste ou il etait
 							gameBoard[super.getPosition().x][super.getPosition().y].removeLSpaceShip(this);

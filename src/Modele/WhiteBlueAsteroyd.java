@@ -11,7 +11,7 @@ public class WhiteBlueAsteroyd extends BlueAsteroyd{
 	}
 	
 	@Override
-	public void move(ArrayList<ArrayList<Cell>> gameBoard, ArrayList<int> directions) {
+	public void move(Cell[][] gameBoard, int[] directions) {
 		
 	}
 		
