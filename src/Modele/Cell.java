@@ -12,7 +12,7 @@ public  abstract class Cell extends VisualObject {
 	
 	/* Constructeur */
 	Cell(String image, int orientation, Position pos, boolean canContainSpaceShips){
-		super(image, orientation,pos);// coriiger
+		super(orientation,pos);
 		super.setImagePath(image);
 		this.canContainSpaceShips = canContainSpaceShips;
 		this.LSpaceShips = null;
@@ -41,4 +41,5 @@ public  abstract class Cell extends VisualObject {
 	public void removeLSpaceShip(SpaceShip newS){
 		this.LSpaceShips.remove(newS);
 	}
+
 }

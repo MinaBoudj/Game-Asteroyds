@@ -10,8 +10,8 @@ public class RedAsteroyd extends  Asteroyd {
 		super(image,orientation,pos, false);
 	}
 	
-	@Override
-	public void move(Cell[][] gameBoard, ArrayList<int> directions) {
+	
+	public void move(Cell[][] gameBoard, int[] directions) {
 		
 	}
 	
