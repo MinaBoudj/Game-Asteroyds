@@ -2,8 +2,7 @@
 
 
 
-## Name
-Asteroyds.
+## Name : Asteroyds
 
 ## Cahier des charges
 
@@ -14,11 +13,11 @@ Dès que le temps est fini, les joueurs arrêtent de programmer leurs mouvemen
 On déplace les astéroïdes selon les résultats indiqués pas les dés.
 Dans l’orde du tour on déplace les vaisseaux des joueurs selon la liste de leurs mouvements.
 Si, au cours de son déplacement, un vaisseau entre en collision avec un objet ou avec le bord du plateau, sa progression est stoppée, et le joueur encaisse des dommages. S’il perd tous ses points de structure, le vaisseau est détruit.
-Dès qu’un joueur passe les quatre portes, il a gagné la partie.ke it easy? [Use the template at the bottom](#editing-this-readme)!
+Dès qu’un joueur passe les quatre portes, il a gagné la partie.
 
 ## Description générale
 
-Un jeu possède une liste de 6 joueurs, une liste d'astéroïdes, un plateau de jeu de 16x13 cases, une durée et liste de valeurs que peuvent prendre les 3 dès. Un joueur est représenté par un nom, un vaisseau de sa couleur (qu’il aura choisi préalablement) , une liste de reliques et une liste de mouvements. Un vaisseau est un
+Un *jeu* possède une liste de 6 joueurs, une liste d'astéroïdes, un plateau de jeu de 16x13 cases, une durée et liste de valeurs que peuvent prendre les 3 dès. [Un joueur] est représenté par un nom, un vaisseau de sa couleur (qu’il aura choisi préalablement) , une liste de reliques et une liste de mouvements. Un vaisseau est un
 2
 VisualObject qui possède une couleur et des points de structure qui diminuent lorsqu’il rentre en collision avec un objet. Un VisualObject (abstact) a une position ,une image et une orientation.
 Une Position possède deux coordonnées x et y.
@@ -43,10 +42,10 @@ Un jeu à jouer entre amis.
 
 
 ## Authors 
-ABBACI Juba
-ACKERMANN Matéo
-BOUDJEDIR Amina
-MOGUE GEGOUE Bebeine
+-ABBACI Juba
+-ACKERMANN Matéo
+-BOUDJEDIR Amina
+-MOGUE GEGOUE Bebeine
 
 ## Project status
 L2 programation oriente objet
