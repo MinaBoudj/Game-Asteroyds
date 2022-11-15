@@ -59,17 +59,10 @@ public class View extends Application {
             {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
             {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", ""},
             {"", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", ""},
-            {"", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", "", ""},
-            {"", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", ""},
-            {"", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", "", ""},
             {"", "", "", " ", " ", " ", " ", "", "", " ", " ", " ", " ", "", "", ""}
         };
         int[] a = new int[]{1};
         gameMenu(gm, a);
-
-        Rectangle rect = new Rectangle(screenWidth*0.8,0, screenWidth*0.2,screenHeight);
-        rect.setFill(Color.GRAY);
-        root.getChildren().add(rect);
     }
 
     public void gameMenu(String[][] gameBoard, int[] turnDirections) {
@@ -95,6 +88,10 @@ public class View extends Application {
             x = i % 2 == 0 ? initX + hexWidth/2 : initX;
             y += hexSize * 1.5;
         }
+
+        Rectangle rect = new Rectangle(screenWidth*0.8,0, screenWidth*0.2,screenHeight);
+        rect.setFill(Color.GRAY);
+        root.getChildren().add(rect);
     }
 
     private Polyline newHexagon(double centerX, double centerY, double size) {

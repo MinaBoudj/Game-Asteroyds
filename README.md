@@ -2,91 +2,48 @@
 
 
 
-## Getting started
+## Name : Asteroyds
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Cahier des charges
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Ce projet, reprenant un jeu de société, consiste à gérer une course spatiale où les joueurs programment les trajectoires de leur vaisseau en essayant d’anticiper les mouvements aléatoires des astéroïdes.
+Les dés sont lancés : rouge/bleu/blanc. Ces dés indiquent la direction que prendront les astéroïdes rouges, blancs et bleus quand ils se déplaceront. Puis on lance le chronomètre de 20 secondes.
+Les joueurs peuvent alors programmer chacun leur tour jusqu’à 6 mouvements parmi les 4 possibilités suivantes : tout droit, demi-tour, avancer à gauche, avancer à droite.
+Dès que le temps est fini, les joueurs arrêtent de programmer leurs mouvements.
+On déplace les astéroïdes selon les résultats indiqués pas les dés.
+Dans l’orde du tour on déplace les vaisseaux des joueurs selon la liste de leurs mouvements.
+Si, au cours de son déplacement, un vaisseau entre en collision avec un objet ou avec le bord du plateau, sa progression est stoppée, et le joueur encaisse des dommages. S’il perd tous ses points de structure, le vaisseau est détruit.
+Dès qu’un joueur passe les quatre portes, il a gagné la partie.
 
-## Add your files
+## Description générale
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+Un __jeu__ possède une liste de 6 joueurs, une liste d'astéroïdes, un plateau de jeu de 16x13 cases, une durée et liste de valeurs que peuvent prendre les 3 dès. Un __joueur__ est représenté par un nom, un vaisseau de sa couleur (qu’il aura choisi préalablement) , une liste de reliques et une liste de mouvements. Un __vaisseau__ est un VisualObject qui possède une couleur et des points de structure qui diminuent lorsqu’il rentre en collision avec un objet. Un __VisualObject__ (abstact) a une position ,une image et une orientation.
+Une __Position__ possède deux coordonnées x et y.
+Une __case__ (abstract ) est un VisualObject de forme hexagonale, qui peut contenir un ou plusieurs vaisseaux. Elle possède une liste de vaisseaux et un booléen qui indique si la case peut contenir des vaisseaux.
+Une __Capsule__ de spectateur est un type de case qui ne bouge pas et qui ne peut pas accueillir de vaisseau.
+Une __Plateforme__ est un type de case qui ne bouge pas et d’où part un vaisseau.
+Une __Case vide__ est le seul type de case où peuvent se déplacer les autres types de case. Ce type est ainsi remplacé par le nouveau et une case vide est placée là ou était précédemment l’objet. Il peut accueillir des vaisseau.
+Un __Astéroïde__ (abstract) est un type de case avec une couleur. Les astéroïdes rouges, astéroïdes bleus et astéroïdes blancs sont des astéroïdes avec une couleur fixe.
+Un __portail blanc__ est un astéroïde blanc avec des reliques, et où un vaisseau peut se déplacer.
+Un __portail rouge__ est un astéroïde rouge avec des reliques, et où un vaisseau peut se déplacer.
+Un __WhiteBleuAsteroyd__ est un astéroïde bleu qui a les déplacements d’un astéroïde bleu et blanc cumulés.
+Un __WhiteRedAsteroyd__ est un astéroïde rouge qui a les déplacements d’un astéroïde bleu et blanc cumulés.
 
-```
-cd existing_repo
-git remote add origin https://gitlab.univ-nantes.fr/E213138X/poo22_384j_a.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.univ-nantes.fr/E213138X/poo22_384j_a/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Un jeu à jouer entre amis.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+## Support Utiliser
+- Java
+- Visual Studio Code
+- JavaFx
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
+## Authors 
+- ABBACI Juba
+- ACKERMANN Matéo
+- BOUDJEDIR Amina
+- MOGUE GEGOUE Bebeine
 
 ## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+L2 programation oriente objet
