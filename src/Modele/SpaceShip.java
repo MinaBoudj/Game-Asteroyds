@@ -14,7 +14,7 @@ public class SpaceShip extends VisualObject{
 	
 	/* Constructeur */
 	public SpaceShip(String image,int orientation, Position pos, Color color){
-        super(image,orientation, pos);// corriger demain avec juba
+        super(orientation, pos);// corriger demain avec juba
 		this.structurePoints = 6;
         this.relics = new int[]{0,0,0,0};    
         this.color = color;
