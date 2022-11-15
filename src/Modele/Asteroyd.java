@@ -2,7 +2,7 @@ package Modele;
 
 import java.util.ArrayList;
 
-public class Asteroyd extends Cell {
+public class Asteroyd implements Cell {
     
     public Asteroyd(String imagePath, int x, int y) { // Cell.java : Cell implementes VO ????
         this.imagePath = imagePath; 
