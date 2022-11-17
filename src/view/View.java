@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Polyline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -37,14 +38,14 @@ public class View extends Application {
         screenHeight = scene.getHeight();
 
         try {
-            InputStream bgStream = new FileInputStream("./res/images/background.png");
-            ImageView background = new ImageView();
-            Image im = new Image(bgStream);
-            background.setImage(im);
-            background.setFitWidth(screenWidth*1.1);
-            background.setPreserveRatio(true);
-            background.setSmooth(true);
-            root.getChildren().add(background);
+            InputStream backgroundStream = new FileInputStream("./res/images/background.png");
+            ImageView backgroundView = new ImageView();
+            Image im = new Image(backgroundStream);
+            backgroundView.setImage(im);
+            backgroundView.setFitWidth(screenWidth*1.1);
+            backgroundView.setPreserveRatio(true);
+            backgroundView.setSmooth(true);
+            root.getChildren().add(backgroundView);
         } catch (Exception e) {
             scene.setFill(Color.BLACK);
         }
@@ -52,17 +53,24 @@ public class View extends Application {
         String[][] gm = new String[][]{
             {"", "", "", " ", " ", " ", " ", "", "", " ", " ", " ", " ", "", "", ""},
             {"", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", "", ""},
-            {"", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", ""},
+            {"", "", " ", "white_asteroyd", " ", " ", "red_asteroyd", " ", " ", " ", " ", " ", " ", " ", "", ""},
             {"", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", "", ""},
-            {"", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", ""},
-            {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", ""},
+            {"", "red_asteroyd", " ", " ", " ", " ", " ", " ", " ", "blue_asteroyd", " ", "red_asteroyd", " ", " ", " ", ""},
+            {" ", " ", " ", " ", " ", " ", " ", " ", " ", "white_red_asteroyd", " ", " ", " ", " ", " ", ""},
             {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-            {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", ""},
-            {"", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", ""},
+            {" ", " ", " ", " ", " ", "white_asteroyd", " ", " ", " ", " ", " ", " ", " ", " ", " ", ""},
+            {"", "white_blue_asteroyd", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", ""},
+            {"", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", "", ""},
+            {"", "", " ", "red_asteroyd", " ", " ", " ", " ", " ", " ", " ", " ", "red_asteroyd", " ", "", ""},
+            {"", "", " ", "blue_asteroyd", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", "", ""},
             {"", "", "", " ", " ", " ", " ", "", "", " ", " ", " ", " ", "", "", ""}
         };
         int[] a = new int[]{1};
         gameMenu(gm, a);
+
+        Rectangle rect = new Rectangle(screenWidth*0.8,0, screenWidth*0.2,screenHeight);
+        rect.setFill(Color.GRAY);
+        root.getChildren().add(rect);
     }
 
     public void gameMenu(String[][] gameBoard, int[] turnDirections) {
@@ -78,9 +86,47 @@ public class View extends Application {
         for (int i = 0 ; i < gameBoard.length ; i++) {
             for (int j = 0 ; j < gameBoard[i].length ; j++) {
                 if (gameBoard[i][j] != "") {
-                    Polyline hex = newHexagon(x, y, hexSize);
-                    hex.setStroke(Color.WHITE);
-                    root.getChildren().add(hex);
+                    Polyline hexLine = new Polyline();
+                    hexLine.getPoints().addAll(newHexagonCorners(x, y, hexSize));
+                    hexLine.setStroke(Color.WHITE);
+                    root.getChildren().add(hexLine);
+
+                    if (gameBoard[i][j] == "red_asteroyd") {
+                        try {
+                            displayImage("red_asteroyd", hexSize, x - hexSize/2, y - hexSize/2);
+
+                        } catch (Exception e) {
+                            displayColoredHexagon(Color.RED, hexSize, x, y);
+                        }
+                    } else if (gameBoard[i][j] == "blue_asteroyd") {
+                        try {
+                            displayImage("blue_asteroyd", hexSize, x - hexSize/2, y - hexSize/2);
+
+                        } catch (Exception e) {
+                            displayColoredHexagon(Color.LIGHTBLUE, hexSize, x, y);
+                        }
+                    } else if (gameBoard[i][j] == "white_asteroyd") {
+                        try {
+                            displayImage("white_asteroyd", hexSize, x - hexSize/2, y - hexSize/2);
+
+                        } catch (Exception e) {
+                            displayColoredHexagon(Color.LIGHTBLUE, hexSize, x, y);
+                        }
+                    } else if (gameBoard[i][j] == "white_red_asteroyd") {
+                        try {
+                            displayImage("white_red_asteroyd", hexSize, x - hexSize/2, y - hexSize/2);
+
+                        } catch (Exception e) {
+                            displayColoredHexagon(Color.LIGHTBLUE, hexSize, x, y);
+                        }
+                    } else if (gameBoard[i][j] == "white_blue_asteroyd") {
+                        try {
+                            displayImage("white_blue_asteroyd", hexSize, x - hexSize/2, y - hexSize/2);
+
+                        } catch (Exception e) {
+                            displayColoredHexagon(Color.LIGHTBLUE, hexSize, x, y);
+                        }
+                    }
                 }
 
                 x += hexWidth;
@@ -88,23 +134,39 @@ public class View extends Application {
             x = i % 2 == 0 ? initX + hexWidth/2 : initX;
             y += hexSize * 1.5;
         }
-
-        Rectangle rect = new Rectangle(screenWidth*0.8,0, screenWidth*0.2,screenHeight);
-        rect.setFill(Color.GRAY);
-        root.getChildren().add(rect);
     }
 
-    private Polyline newHexagon(double centerX, double centerY, double size) {
-        Polyline hex = new Polyline();
-        for(int i = 0 ; i < 6 ; i++) {
-            double angleDeg = 60 * i - 30;
+    private Double[] newHexagonCorners(double centerX, double centerY, double size) {
+        Double[] hexCorners = new Double[14];
+        for(int i = 0 ; i < 12 ; i += 2) {
+            double angleDeg = 30 * (i - 1);
             double angleRad = Math.PI / 180 * angleDeg;
-            hex.getPoints().add(centerX + size * Math.cos(angleRad));
-            hex.getPoints().add(centerY + size * Math.sin(angleRad));
+            hexCorners[i] = centerX + size * Math.cos(angleRad);
+            hexCorners[i+1] = centerY + size * Math.sin(angleRad);
         }
-        hex.getPoints().add(centerX + size * Math.cos(-Math.PI/180*30));
-        hex.getPoints().add(centerY + size * Math.sin(-Math.PI/180*30));
+        hexCorners[12] = centerX + size * Math.cos(-Math.PI/180*30);
+        hexCorners[13] = centerY + size * Math.sin(-Math.PI/180*30);
 
-        return hex;
+        return hexCorners;
+    }
+
+    private void displayImage(String imageName, double size, double x, double y) throws Exception{
+        InputStream imageStream = new FileInputStream("./res/images/" + imageName + ".png");
+        Image image = new Image(imageStream);
+        ImageView imageView = new ImageView(image);
+        
+        imageView.setFitWidth(size);
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setX(x);
+        imageView.setY(y);
+        root.getChildren().add(imageView);
+    }
+
+    private void displayColoredHexagon(Color color, double size, double x, double y) {
+        Polygon hexagonArea = new Polygon();
+        hexagonArea.getPoints().addAll(newHexagonCorners(x, y, size));
+        hexagonArea.setFill(color);
+        root.getChildren().add(hexagonArea);
     }
 }
