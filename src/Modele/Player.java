@@ -1,21 +1,26 @@
 package Modele;
 
+@author Juba
+
 import java.util.ArrayList;
 
 public class Player {
     public String name; // Nom du joueur
     private ArrayList<Integer> relics; // Ensemble de reliques qu'il possède
-    SpaceShip spaceShip; // Son vaisseau
-    ArrayList<Movement> movements; // Sa liste de mouvements
+    private SpaceShip spaceShip; // Son vaisseau
+    public ArrayList<Movement> movements; // Sa liste de mouvements
 
     /* Constructeur */
-    Player(String name) { // Non terminé ! A définir en groupe
+    Player(String name, SpaceShip spaceShip) { // A VERIFIER AVEC LE GROUPE
         this.name = name;
         this.relics = new ArrayList<Integer>();
+        this.spaceShip = spaceShip;
+        this.movements = new ArrayList<Movement>(); // Est-ce une Arraylist ou un tableau (list)
     }
 
     /* Setter */
-    public void setMovement(int indice, Movement movement) {
+    public void setMovement(int indice, Movement movement) { // A VERIFIER AVEC LE GROUPE : A-t-on vraiment besoinde l'indice ?
+        this.movements.add(movement);
     }
 
     /* Getter */

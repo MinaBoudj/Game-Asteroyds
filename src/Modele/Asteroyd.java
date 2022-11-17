@@ -3,12 +3,12 @@ package Modele;
 public abstract class Asteroyd extends Cell {
     
     public Asteroyd(String image, int orientation, Position pos){
-        super(image,orientation,pos, false);
+        super(image,orientation, pos, false);
     }
 
     public Asteroyd(String image, int orientation, Position pos, boolean canContainSpaceShips){
-        super(image,orientation,pos, canContainSpaceShips);
+        super(image,orientation, pos, canContainSpaceShips);
     }
 
-    public abstract void move(Cell[][] gameBoard, int[] directions); // Besoin de plus d'informations
+    public abstract void move(Cell[][] gameBoard, int[] directions);
 }

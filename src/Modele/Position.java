@@ -1,5 +1,7 @@
 package Modele;
 
+@author Juba
+
 public class Position {
     int x; // Abscisse
     int y; // Ordonnée
@@ -41,7 +43,8 @@ public class Position {
         return this.y;
     }
 
-    public Position getForward(int orientation) {
+
+    public Position getForward(int orientation) { // Renvoie la position de la prochaine case selon l'orientation, ou la même position si il n'y a rien devant.
         switch (orientation) {
             case 1:
                 if ((this.x == 0 && this.y%2 == 0) || this.y == 0) {
@@ -75,36 +78,21 @@ public class Position {
                 }
                 break;
 
-            case 
-        }
+            case 2:
+                if ((this.x == 0 && this.y%2 == 0) || this.y == 13) {
+                    return this;
+                } else {
+                    return this.getBottomLeft();
+                }
+                break;
 
-
-        if (orientation == 1) {
-            if ((this.x == 0 && this.y%2 == 0) || this.y == 0) {
-                return this;
-            } else {
-                return this.getTopLeft();
-            }
-        }
-
-        if (orientation == 5) {
-            if ((this.x == 16 && this.y%2 != 0) || this.y == 0) {
-                return this;
-            } else {
-                return this.getTopRight();
-            }
-        }
-
-        if (orientation == 3) {
-            if (this.x == 16) {
-                return this;
-            } else {
-                return this.getRight();
-            }
-        }
-
-        if (orientation == 6) {
-
+            case 4: 
+                if (this.x == 0) {
+                    return this;
+                }
+                else {
+                    return this.getLeft();
+                }
         }
     }
 }

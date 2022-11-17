@@ -1,15 +1,16 @@
 package Modele;
 
+@author Juba
+
 public class BlueAsteroyd extends Asteroyd{
 
      /* Constructeurs */
-     public BlueAsteroyd(int x, int y){
-        super(imagePath, x, y);
-    }
+     public BlueAsteroyd(String image, int orientation, Position pos){
+		super(image,orientation, pos, false);
+	}
 
-    public BlueAsteroyd(Position position){
-        super(imagePath, position);
-    }
-
-    // BlueAsterod hérite de move d'Asteroyd.
+    public void move(Cell[][] gameBoard, int[] directions) { // Mouvements d'un astéroïde bleu
+		
+	}
+    
 }

@@ -1,5 +1,7 @@
 package Modele;
 
+@author Juba
+
 public class WhiteAsteroyd extends Asteroyd {
     
     /* Constructeurs */
@@ -11,5 +13,7 @@ public class WhiteAsteroyd extends Asteroyd {
         super(imagePath, position);
     }
 
-    // WhiteAsterod hérite de move d'Asteroyd.
+    
+    public void move(Cell[][] gameBoard, int[] directions) { // A CODER AVEC LE GROUPE : MOUVEMENTS DU BLANC
+    }
 }
