@@ -132,7 +132,7 @@ public class SpaceShip extends VisualObject{
 				this.position = pos;
 			} catch (Exception e) {
 					//le vaisseau se prend des degats et s'arrete 
-					this.structurePoints --;
+					this.structurePoints = this.structurePoints-2;
 			}
             if(movement[i] == null)
 				break;
