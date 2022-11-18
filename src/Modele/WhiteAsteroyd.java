@@ -15,6 +15,9 @@ public class WhiteAsteroyd extends Asteroyd {
         super(imagePath, orientation, position);
     }
 
+    public WhiteAsteroyd(String imagePath, int orientation, Position position, boolean canContainSpaceShip){
+        super(imagePath, orientation, position, canContainSpaceShip);
+    }
     
     public void move(Cell[][] gameBoard, int[] directions) { // A CODER AVEC LE GROUPE : MOUVEMENTS DU BLANC 1 déplacement
     }

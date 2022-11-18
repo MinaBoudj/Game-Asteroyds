@@ -11,8 +11,15 @@ public  abstract class Cell extends VisualObject {
 	private ArrayList<SpaceShip> LSpaceShips;
 	
 	/* Constructeur */
-	Cell(String image, int orientation, Position pos, boolean canContainSpaceShips){
+	public Cell(String image, int orientation, Position pos, boolean canContainSpaceShips){
 		super(orientation,pos);
+		//super.setImagePath(image);
+		this.canContainSpaceShips = canContainSpaceShips;
+		this.LSpaceShips = null;
+	}
+	
+	public Cell(String image,int orientation, int x, int y, boolean canContainSpaceShips) {
+		super(orientation,x,y);
 		//super.setImagePath(image);
 		this.canContainSpaceShips = canContainSpaceShips;
 		this.LSpaceShips = null;
