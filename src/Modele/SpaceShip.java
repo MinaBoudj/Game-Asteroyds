@@ -18,18 +18,6 @@ public class SpaceShip extends VisualObject{
 		this.structurePoints = 6;
         this.relics = new int[]{0,0,0,0};    
         this.color = color;
-        if(color == Color.Red)
-            super.setImagePath("rouge");
-        else if(color ==Color.Blue)
-                super.setImagePath("Bleu");
-            else if(color == Color.Yellow)
-                super.setImagePath("jaune");
-                else if(color == Color.Green)
-                    super.setImagePath("gris");
-                    else if(color == Color.Purple)
-                        super.setImagePath("violet");
-                        else if(color == Color.Orange)
-                            super.setImagePath("orange");
 	}
 	
 	/* Getteur and setteur */
