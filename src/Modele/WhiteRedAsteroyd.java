@@ -13,6 +13,9 @@ public class WhiteRedAsteroyd extends RedAsteroyd {
 	
 	@Override
 	public void move(Cell[][] gameBoard, int[] directions) {
+		//verifier que la case est pas null 
+		//il bouge selon le chiffre  directions[0] puis directions[1]
+		//peu faire bouger un objet devant lui avec le bleu
 		
 	}
 
