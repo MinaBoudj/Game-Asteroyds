@@ -1,5 +1,9 @@
 package Modele;
 
+/**
+* @author Juba
+*/
+
 public abstract class Asteroyd extends Cell {
     
     public Asteroyd(String image, int orientation, Position pos){

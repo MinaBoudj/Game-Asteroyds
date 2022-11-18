@@ -1,6 +1,8 @@
 package Modele;
 
-@author Juba
+/**
+* @author Juba
+*/
 
 public class Position {
     int x; // Abscisse
@@ -11,27 +13,27 @@ public class Position {
         this.x = x; this.y = y;
     }
 
-    public Position getTopRight() { // Retourne la position de la case en haut à droite
+    private Position getTopRight() { // Retourne la position de la case en haut à droite
         return new Position(x+1, y-1);
     }
 
-    public Position getTopLeft() { // Retourne la position de la case en haut à gauche
+    private Position getTopLeft() { // Retourne la position de la case en haut à gauche
         return new Position(x, y-1);
     }
 
-    public Position getBottomRight() { // Retourne la posiiton de la case en bas à droite
+    private Position getBottomRight() { // Retourne la posiiton de la case en bas à droite
         return new Position(x+1, y+1);
     }
 
-    public Position getBottomLeft() { // Retourne la position de la case en bas à gauche
+    private Position getBottomLeft() { // Retourne la position de la case en bas à gauche
         return new Position(x, y+1);
     }
 
-    public Position getLeft() { // Retourne la position de la case à gauche
+    private Position getLeft() { // Retourne la position de la case à gauche
         return new Position(x-1, y);
     }
 
-    public Position getRight() { // Retourne la position de la case à droite
+    private Position getRight() { // Retourne la position de la case à droite
         return new Position(x+1, y);
     }
 
@@ -44,11 +46,11 @@ public class Position {
     }
 
 
-    public Position getForward(int orientation) { // Renvoie la position de la prochaine case selon l'orientation, ou la même position si il n'y a rien devant.
+    public Position getForward(int orientation) throws Exception {  // Renvoie la position de la prochaine case selon l'orientation, ou la même position si il n'y a rien devant.
         switch (orientation) {
             case 1:
                 if ((this.x == 0 && this.y%2 == 0) || this.y == 0) {
-                    return this;
+                    throw new Exception("GameBoard Edge"); // Exception à faire pour les cas ou il retourne la même pos.
                 } else {
                     return this.getTopLeft();
                 }
@@ -56,7 +58,7 @@ public class Position {
 
             case 5:
                 if ((this.x == 16 && this.y%2 != 0) || this.y == 0) {
-                    return this;
+                    throw new Exception("GameBoard Edge");
                 } else {
                     return this.getTopRight();
                 }
@@ -64,7 +66,7 @@ public class Position {
 
             case 3:
                 if (this.x == 16) {
-                    return this;
+                    throw new Exception("GameBoard Edge");
                 } else {
                     return this.getRight();
                 }
@@ -72,31 +74,33 @@ public class Position {
 
             case 6: 
                 if ((this.x == 16 && this.y%2 != 0) || this.y == 13) {
-                    return this;
+                    throw new Exception("GameBoard Edge");
                 } else {
                     return this.getBottomRight();
                 }
-                break;
+            break;
 
             case 2:
                 if ((this.x == 0 && this.y%2 == 0) || this.y == 13) {
-                    return this;
+                    throw new Exception("GameBoard Edge");
                 } else {
                     return this.getBottomLeft();
                 }
-                break;
+            break;
 
             case 4: 
                 if (this.x == 0) {
-                    return this;
+                    throw new Exception("GameBoard Edge");
                 }
                 else {
                     return this.getLeft();
                 }
+            break;
+
+            default:
+                return this;
+
+            break;
         }
     }
-}
-
-
-
 }

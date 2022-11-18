@@ -1,7 +1,9 @@
 package Modele;
 // import javafx.scene.image.image;
 
-@author Juba
+/**
+* @author Juba
+*/
 
 public class VisualObject {
     String imagePath;
@@ -23,8 +25,8 @@ public class VisualObject {
 
 
     /* Getters */
-    public String getImage(){
-        return this.imagePath;
+    public String getImage(){ // A supprimer (remplacer par redef toString)
+        return this.imagePath; 
     }
 
     public Position getPosition() {
@@ -38,14 +40,5 @@ public class VisualObject {
     /* Setters */
     public void setOrientation(int orientation) {
         this.orientation = orientation;
-    }
-
-
-    public void setImagePath(String imagePath){
-        this.imagePath = imagePath;
-    }
-
-    /* Méthodes */
-    public void updateImage() { //  Besoin d'informations supplémentaires sur JavaFX. A FINIR EN GROUPE
     }
 }

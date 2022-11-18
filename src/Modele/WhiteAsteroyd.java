@@ -1,12 +1,14 @@
 package Modele;
 
-@author Juba
+/**
+* @author Juba
+*/
 
 public class WhiteAsteroyd extends Asteroyd {
     
     /* Constructeurs */
-    public WhiteAsteroyd(int x, int y){
-        super(imagePath, x, y);
+    public WhiteAsteroyd(int x, int orientation, int y){
+        super(imagePath, orientation, x, y);
     }
 
     public WhiteAsteroyd(Position position){
@@ -14,6 +16,6 @@ public class WhiteAsteroyd extends Asteroyd {
     }
 
     
-    public void move(Cell[][] gameBoard, int[] directions) { // A CODER AVEC LE GROUPE : MOUVEMENTS DU BLANC
+    public void move(Cell[][] gameBoard, int[] directions) { // A CODER AVEC LE GROUPE : MOUVEMENTS DU BLANC 1 déplacement
     }
 }
