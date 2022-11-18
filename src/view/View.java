@@ -96,35 +96,35 @@ public class View extends Application {
                             displayImage("red_asteroyd", hexSize, x - hexSize/2, y - hexSize/2);
 
                         } catch (Exception e) {
-                            displayColoredHexagon(Color.RED, hexSize, x, y);
+                            displayColoredHexagon(Color.TOMATO, hexSize, x, y);
                         }
                     } else if (gameBoard[i][j] == "blue_asteroyd") {
                         try {
                             displayImage("blue_asteroyd", hexSize, x - hexSize/2, y - hexSize/2);
 
                         } catch (Exception e) {
-                            displayColoredHexagon(Color.LIGHTBLUE, hexSize, x, y);
+                            displayColoredHexagon(Color.AQUA, hexSize, x, y);
                         }
                     } else if (gameBoard[i][j] == "white_asteroyd") {
                         try {
                             displayImage("white_asteroyd", hexSize, x - hexSize/2, y - hexSize/2);
 
                         } catch (Exception e) {
-                            displayColoredHexagon(Color.LIGHTBLUE, hexSize, x, y);
+                            displayColoredHexagon(Color.SILVER, hexSize, x, y);
                         }
                     } else if (gameBoard[i][j] == "white_red_asteroyd") {
                         try {
                             displayImage("white_red_asteroyd", hexSize, x - hexSize/2, y - hexSize/2);
 
                         } catch (Exception e) {
-                            displayColoredHexagon(Color.LIGHTBLUE, hexSize, x, y);
+                            displayColoredHexagon(Color.SILVER, Color.TOMATO, hexSize, x, y);
                         }
                     } else if (gameBoard[i][j] == "white_blue_asteroyd") {
                         try {
                             displayImage("white_blue_asteroyd", hexSize, x - hexSize/2, y - hexSize/2);
 
                         } catch (Exception e) {
-                            displayColoredHexagon(Color.LIGHTBLUE, hexSize, x, y);
+                            displayColoredHexagon(Color.SILVER, Color.AQUA, hexSize, x, y);
                         }
                     }
                 }
@@ -168,5 +168,27 @@ public class View extends Application {
         hexagonArea.getPoints().addAll(newHexagonCorners(x, y, size));
         hexagonArea.setFill(color);
         root.getChildren().add(hexagonArea);
+    }
+
+    private void displayColoredHexagon(Color color1, Color color2, double size, double x, double y) {
+        Double[] hexagonCorners = newHexagonCorners(x, y, size);
+
+        Polygon halfHexagonArea1 = new Polygon();
+        for (int i = 0 ; i < 8 ; i++) {
+            halfHexagonArea1.getPoints().add(hexagonCorners[i]);
+        }
+        halfHexagonArea1.getPoints().add(hexagonCorners[0]);
+        halfHexagonArea1.getPoints().add(hexagonCorners[1]);
+        halfHexagonArea1.setFill(color1);
+        root.getChildren().add(halfHexagonArea1);
+
+        Polygon halfHexagonArea2 = new Polygon();
+        for (int i = 6 ; i < 14 ; i++) {
+            halfHexagonArea2.getPoints().add(hexagonCorners[i]);
+        }
+        halfHexagonArea2.getPoints().add(hexagonCorners[6]);
+        halfHexagonArea2.getPoints().add(hexagonCorners[7]);
+        halfHexagonArea2.setFill(color2);
+        root.getChildren().add(halfHexagonArea2);
     }
 }
