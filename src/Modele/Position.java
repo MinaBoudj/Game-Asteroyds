@@ -50,11 +50,10 @@ public class Position {
         switch (orientation) {
             case 1:
                 if ((this.x == 0 && this.y%2 == 0) || this.y == 0) {
-                    throw new Exception("GameBoard Edge"); // Exception à faire pour les cas ou il retourne la même pos.
+                    throw new Exception("GameBoard Edge");
                 } else {
                     return this.getTopLeft();
                 }
-            break;
 
             case 5:
                 if ((this.x == 16 && this.y%2 != 0) || this.y == 0) {
@@ -62,7 +61,7 @@ public class Position {
                 } else {
                     return this.getTopRight();
                 }
-            break;
+                
 
             case 3:
                 if (this.x == 16) {
@@ -70,7 +69,7 @@ public class Position {
                 } else {
                     return this.getRight();
                 }
-                break;
+                
 
             case 6: 
                 if ((this.x == 16 && this.y%2 != 0) || this.y == 13) {
@@ -78,7 +77,7 @@ public class Position {
                 } else {
                     return this.getBottomRight();
                 }
-            break;
+                
 
             case 2:
                 if ((this.x == 0 && this.y%2 == 0) || this.y == 13) {
@@ -86,7 +85,7 @@ public class Position {
                 } else {
                     return this.getBottomLeft();
                 }
-            break;
+                
 
             case 4: 
                 if (this.x == 0) {
@@ -95,12 +94,10 @@ public class Position {
                 else {
                     return this.getLeft();
                 }
-            break;
+                
 
             default:
                 return this;
-
-            break;
         }
     }
 }
