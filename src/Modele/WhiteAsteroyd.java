@@ -7,12 +7,12 @@ package Modele;
 public class WhiteAsteroyd extends Asteroyd {
     
     /* Constructeurs */
-    public WhiteAsteroyd(int x, int orientation, int y){
+    public WhiteAsteroyd(String imagePath, int orientation, int x, int y){
         super(imagePath, orientation, x, y);
     }
 
-    public WhiteAsteroyd(Position position){
-        super(imagePath, position);
+    public WhiteAsteroyd(String imagePath, int orientation, Position position){
+        super(imagePath, orientation, position);
     }
 
     
