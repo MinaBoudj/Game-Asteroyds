@@ -6,11 +6,15 @@ package Modele;
 
 public class RedAsteroyd extends  Asteroyd {
 	
-	RedAsteroyd(String image, int orientation, Position pos){
+	public RedAsteroyd(String image, int orientation, Position pos){
 		super(image,orientation,pos, false);
 	}
 	
+	public RedAsteroyd(String image, int orientation, Position pos, boolean canContainSpaceShip) {
+		super(image, orientation, pos, canContainSpaceShip);
+	}
 	
+	@Override
 	public void move(Cell[][] gameBoard, int[] directions) {
 		
 	}

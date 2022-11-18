@@ -1,4 +1,5 @@
 package Modele;
+//@autor Amina
 
 public enum Color {
 	Green,

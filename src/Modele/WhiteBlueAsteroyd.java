@@ -6,8 +6,8 @@ package Modele;
 
 public class WhiteBlueAsteroyd extends BlueAsteroyd{
 
-	WhiteBlueAsteroyd(String image, int orientation, Position pos){
-		super(image,orientation,pos, false);
+	public WhiteBlueAsteroyd(String image, int orientation, Position pos){
+		super(image,orientation,pos);
 	}
 	
 	@Override

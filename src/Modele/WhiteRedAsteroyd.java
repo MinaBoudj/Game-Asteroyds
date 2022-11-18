@@ -7,12 +7,12 @@ package Modele;
 public class WhiteRedAsteroyd extends RedAsteroyd {
 
 
-	WhiteRedAsteroyd(String image, int orientation, Position pos){
+	public WhiteRedAsteroyd(String image, int orientation, Position pos){
 		super(image,orientation,pos, false);
 	}
 	
 	@Override
-	public void move(ArrayList<ArrayList<Cell>> gameBoard, ArrayList<int> directions) {
+	public void move(Cell[][] gameBoard, int[] directions) {
 		
 	}
 

@@ -27,7 +27,7 @@ public  abstract class Cell extends VisualObject {
 		return this.canContainSpaceShips;
 	}
 
-	public ArrayList<SpaceShip> getLSpaceShip(){
+	public ArrayList<SpaceShip> getLSpaceShips(){
 		return this.LSpaceShips;
 	}
 
