@@ -19,6 +19,10 @@ public class WhiteRedAsteroyd extends RedAsteroyd {
 		//peu faire bouger un objet devant lui avec le bleu
 		Position pos;
 		try{
+			//dabord en rouge 
+			super.move(gameBoard, directions);
+			//puis en blanche
+
 			//changer l'orientation
 			int neworientation;
 			if(super.getOrientation()==1 && directions[0]==2)
@@ -88,8 +92,6 @@ public class WhiteRedAsteroyd extends RedAsteroyd {
 				//super.setX(pos.getX());
 				//super.setY(pos.getY());
 			}//sinon ne bouge pas 
-			//puis selon le rouge
-			super.move(gameBoard, directions); 	
 		}catch(Exception e){//renvoie une position incorrect
 			//faire quoi quand c'est un asteroyd ??
 		}		
