@@ -8,10 +8,10 @@ public class EmptyCell extends Cell {
 
     // Constructeurs
     public EmptyCell(String imagePath, int orientation, int x, int y){
-        super(imagePath, orientation, pos, true);              
+        super(imagePath, orientation, x, y, true);              
     }
 
-    public EmptyCell(String imagePath, int orientation, Position position){
+    public EmptyCell(String imagePath, int orientation, Position pos){
         super(imagePath, orientation, pos, true);
     }
 }   
