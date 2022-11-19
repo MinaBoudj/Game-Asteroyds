@@ -8,10 +8,10 @@ public class LaunchPod extends Cell {
 
     // Constructeurs
     public LaunchPod(String imagePath, int orientation, int x, int y){
-        super(imagePath, orientation, pos, true);              
+        super(imagePath, orientation, x, y , true);              
     }
 
-    public LaunchPod(String imagePath, int orientation, Position position){
+    public LaunchPod(String imagePath, int orientation, Position pos){
         super(imagePath, orientation, pos, true);
     }
 }  
