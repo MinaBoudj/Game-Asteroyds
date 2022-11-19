@@ -23,10 +23,10 @@ public class RedAsteroyd extends  Asteroyd {
 		(super.orientation==5 && directions[0]==2) || (super.orientation==3 && directions[0]==6) ||(super.orientation==4 && directions[0]==5) ){
 			try{
 				pos1 = super.getPosition().getForward(super.orientation);
-				if(gameBoard[pos1.getX()][pos1.getY()]!= null && gameBoard[pos1.getX()][pos1.getY()] instanceof Asteroyd){ //case n'est pas null et vide
+				if(gameBoard[pos1.getX()][pos1.getY()]!= null && gameBoard[pos1.getX()][pos1.getY()] instanceof EmptyCell){ //case n'est pas null et vide
 					//il bouge selon la direction 1 de 2 case
 					pos2 = pos1.getForward(super.orientation);
-					if(gameBoard[pos2.getX()][pos2.getY()]!= null && gameBoard[pos2.getX()][pos2.getY()] instanceof Asteroyd){
+					if(gameBoard[pos2.getX()][pos2.getY()]!= null && gameBoard[pos2.getX()][pos2.getY()] instanceof EmptyCell){
 						//rien dans la case (il a bougé de 2 cases)
 						//super.setX(pos2.getX());
 						//super.setY(pos2.getY());
@@ -106,10 +106,10 @@ public class RedAsteroyd extends  Asteroyd {
 				else 
 					neworientation = super.getOrientation();
 				pos1 = super.getPosition().getForward(neworientation);
-				if(gameBoard[pos1.getX()][pos1.getY()]!= null && gameBoard[pos1.getX()][pos1.getY()] instanceof Asteroyd){ //case n'est pas null et vide
+				if(gameBoard[pos1.getX()][pos1.getY()]!= null && gameBoard[pos1.getX()][pos1.getY()] instanceof EmptyCell){ //case n'est pas null et vide
 					//il bouge selon la direction 1 de 2 case
 					pos2 = pos1.getForward(neworientation);
-					if(gameBoard[pos2.getX()][pos2.getY()]!= null && gameBoard[pos2.getX()][pos2.getY()] instanceof Asteroyd){
+					if(gameBoard[pos2.getX()][pos2.getY()]!= null && gameBoard[pos2.getX()][pos2.getY()] instanceof EmptyCell){
 						//rien dans la case (il a bougé de 2 cases)
 						//super.setX(pos2.getX());
 						//super.setY(pos2.getY());
