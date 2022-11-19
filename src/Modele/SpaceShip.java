@@ -111,13 +111,17 @@ public class SpaceShip extends VisualObject{
 				turnAround();
 			try {
 				pos = super.getPosition().getForward(super.orientation);
-				//demander si la suite va la ou apres le catch !!!!!!
-				//ajouter dans la liste des vaiseaux (a l'exterieur du catch)
-				gameBoard[pos.getX()][pos.getY()].addLSpaceShip(this); 
-				//retiter de la liste ou il etait
-				gameBoard[super.getPosition().x][super.getPosition().y].removeLSpaceShip(this);
-				//changer sa position
-				this.position = pos;
+				if(gameBoard[pos.getX()][pos.getY()] != null){//la pos qu'il a renvoyé n'est pas null
+					//demander si la suite va la ou apres le catch !!!!!!
+					//ajouter dans la liste des vaiseaux (a l'exterieur du catch)
+					gameBoard[pos.getX()][pos.getY()].addLSpaceShip(this); 
+					//retiter de la liste ou il etait
+					gameBoard[super.getPosition().x][super.getPosition().y].removeLSpaceShip(this);
+					//changer sa position
+					this.position = pos;
+				}else{//case null
+					this.structurePoints = this.structurePoints-2;
+				}
 			} catch (Exception e) {
 					//le vaisseau se prend des degats et s'arrete 
 					this.structurePoints = this.structurePoints-2;
