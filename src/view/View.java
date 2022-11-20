@@ -4,19 +4,11 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Polyline;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Polyline;
 import javafx.scene.paint.Color;
 import javafx.scene.input.KeyCombination;
-
-import java.io.FileInputStream;
-import java.io.InputStream;
 
 public class View extends Application {
     private Stage stage;
@@ -41,31 +33,27 @@ public class View extends Application {
         screenHeight = scene.getHeight();
 
         try {
-            InputStream backgroundStream = new FileInputStream("./res/images/background.png");
-            ImageView backgroundView = new ImageView();
-            Image im = new Image(backgroundStream);
-            backgroundView.setImage(im);
-            backgroundView.setFitWidth(screenWidth*1.1);
-            backgroundView.setPreserveRatio(true);
-            backgroundView.setSmooth(true);
-            root.getChildren().add(backgroundView);
+            ImageView background = ShapeConstructor.newImage("background", 1,1, 0,0);
+            background.setFitHeight(screenWidth*1.1);
+            background.setFitWidth(screenWidth*1.1);
+            root.getChildren().add(background);
         } catch (Exception e) {
             scene.setFill(Color.BLACK);
         }
 
         displayGameBoard(new String[][]{
             {"", "", "", " ", " ", " ", " ", "", "", " ", " ", " ", " ", "", "", ""},
-            {"", "", " ", "portal-red-1", " ", "asteroyd-white", " ", "audience_pod", " ", " ", "portal-white-2", " ", " ", "", "", ""},
-            {"", "", " ", " ", " ", " ", " ", " ", " ", "asteroyd-white", " ", " ", "asteroyd-white_red", " ", "", ""},
-            {"", "", " ", "asteroyd-red", " ", "asteroyd-blue", " ", " ", " ", " ", "asteroyd-red", " ", " ", "", "", ""},
-            {"", " ", " ", " ", " ", " ", " ", " ", "audience_pod", " ", " ", " ", "asteroyd-white_blue", " ", " ", ""},
-            {" ", " ", "asteroyd-white_red", " ", "asteroyd-white_blue", " ", " ", "launchpad", "launchpad", " ", "asteroyd-blue", " ", " ", " ", " ", ""},
+            {"", "", " ", "portal-red-21-1/", " ", "asteroyd-white-5", " ", "audience_pod", " ", " ", "portal-white-23-2", " ", " ", "", "", ""},
+            {"", "", " ", " ", " ", " ", " ", " ", " ", "asteroyd-white-6", " ", " ", "asteroyd-white_red-15", " ", "", ""},
+            {"", "", " ", "asteroyd-red-2", " ", "asteroyd-blue-11", " ", " ", " ", " ", "asteroyd-red-3", " ", " ", "", "", ""},
+            {"", " ", " ", " ", " ", " ", " ", " ", "audience_pod", " ", " ", " ", "asteroyd-white_blue-17", " ", " ", ""},
+            {" ", " ", "asteroyd-white_red-13", " ", "asteroyd-white_blue-20", " ", " ", "launchpad", "launchpad/space_ship-red-2/space_ship-blue-6", " ", "asteroyd-blue-10", " ", " ", " ", " ", ""},
             {" ", "audience_pod", " ", " ", " ", " ", " ", "launchpad", " ", "launchpad", " ", " ", " ", " ", "audience_pod", " "},
-            {" ", " ", "asteroyd-white_red", " ", "asteroyd_blue", " ", " ", "launchpad", "launchpad", " ", " ", " ", "asteroyd-white_red", " ", " ", ""},
-            {"", " ", " ", "asteroyd-white", " ", " ", " ", " ", "audience_pod", " ", " ", "asteroyd-red", " ", " ", " ", ""},
-            {"", "", " ", " ", "asteroyd-red", " ", " ", " ", " ", "asteroyd-blue", " ", " ", " ", "", "", ""},
-            {"", "", " ", "portal-white-3", " ", " ", "asteroyd-white_blue", " ", " ", " ", " ", " ", "asteroyd-white_blue", " ", "", ""},
-            {"", "", " ", " ", " ", " ", " ", "audience_pod", " ", "asteroyd-white", " ", "portal-red-4", " ", "", "", ""},
+            {" ", " ", "asteroyd-white_red-14", " ", "asteroyd-blue-9", " ", " ", "launchpad/space_ship-green-4", "launchpad", " ", " ", " ", "asteroyd-white_red-16", " ", " ", ""},
+            {"", " ", " ", "asteroyd-white-8", " ", " ", " ", " ", "audience_pod", " ", " ", "asteroyd-red-4", " ", " ", " ", ""},
+            {"", "", " ", " ", "asteroyd-red-1", " ", " ", " ", " ", "asteroyd-blue-12", " ", " ", " ", "", "", ""},
+            {"", "", " ", "portal-white-24-3", " ", " ", "asteroyd-white_blue-19", " ", " ", " ", " ", " ", "asteroyd-white_blue-18", " ", "", ""},
+            {"", "", " ", " ", " ", " ", " ", "audience_pod", " ", "asteroyd-white-7", " ", "portal-red-22-4", " ", "", "", ""},
             {"", "", "", " ", " ", " ", " ", "", "", " ", " ", " ", " ", "", "", ""}
         });
 
@@ -74,7 +62,7 @@ public class View extends Application {
         root.getChildren().add(rect);
     }
 
-    public void displayGameBoard(String[][] gameBoard) {
+    public void displayGameBoard(String[][] gameBoard) throws Exception {
         double gameBoardWidth = gameBoard[0].length + 0.5,
                gameBoardHeight = gameBoard.length * 1.5 + 0.5,
                hexSize = Math.min((screenWidth * 0.75 / gameBoardWidth) / Math.sqrt(3),
@@ -88,13 +76,13 @@ public class View extends Application {
             for (int j = 0 ; j < gameBoard[i].length ; j++) {
                 if (gameBoard[i][j] != "") {
                     Polyline hexLine = new Polyline();
-                    hexLine.getPoints().addAll(newHexagonCorners(x, y, hexSize));
+                    hexLine.getPoints().addAll(ShapeConstructor.newHexagonCorners(x, y, hexSize));
                     hexLine.setStroke(Color.WHITE);
                     root.getChildren().add(hexLine);
 
                     String[] objectsToDisplay = gameBoard[i][j].split("/");
                     for (String object : objectsToDisplay) {
-                        displayObject(object.split("-"), hexWidth, hexSize, x, y);
+                        displayObject(object.split("-"), root, hexWidth, hexSize, x, y);
                     }
                 }
 
@@ -105,174 +93,149 @@ public class View extends Application {
         }
     }
 
-    private void displayObject(String[] objectInformations, double hexWidth, double hexSize, double x, double y) {
+    private void displayObject(String[] objectInformations, Group group, double hexWidth, double hexSize, double x, double y) throws Exception {
         String objectType = objectInformations[0];
         switch (objectType) {
             case "asteroyd":
-                String asteroydColor = objectInformations[1];
-                /*int asteroydOrientation = Integer.parseInt(objectInformations[2]),
-                    priority = Integer.parseInt(objectInformations[3]);*/
+                String asteroydColor = objectInformations[1],
+                       asteroydPriority = objectInformations[2];
+                /*int asteroydOrientation = Integer.parseInt(objectInformations[2]);*/
                 try {
-                    displayImage(asteroydColor + "_asteroyd", hexWidth,hexSize, x,y);
+                    group.getChildren().add(ShapeConstructor.newImage(asteroydColor + "_asteroyd", hexWidth,hexSize, x,y));
                 } catch (Exception e) {
+                    Color color1, color2;
                     switch (asteroydColor) {
                         case "red":
-                            displayColoredHexagon(Color.RED, hexSize, x,y);
+                            color1 = Color.RED;
+                            color2 = color1;
                             break;
 
                         case "blue":
-                            displayColoredHexagon(Color.AQUA, hexSize, x,y);
+                            color1 = Color.AQUA;
+                            color2 = color1;
                             break;
 
                         case "white":
-                            displayColoredHexagon(Color.SILVER, hexSize, x,y);
+                            color1 = Color.SILVER;
+                            color2 = color1;
                             break;
 
                         case "white_red":
-                            displayColoredHexagon(Color.SILVER,Color.RED, hexSize, x,y);
+                            color1 = Color.SILVER;
+                            color2 = Color.RED;
                             break;
 
                         case "white_blue":
-                            displayColoredHexagon(Color.SILVER,Color.AQUA, hexSize, x,y);
+                            color1 = Color.SILVER;
+                            color2 = Color.AQUA;
                             break;
+
+                        default:
+                            throw new Exception(/*TODO*/);
                     }
+                    group.getChildren().addAll(ShapeConstructor.newHexagon(color1,color2, hexSize, x,y));
                 }
-                //displayAsteroydInformations(asteroydOrientation, priority, hexSize, x, y);
+
+                group.getChildren().add(ShapeConstructor.newText(asteroydPriority, Color.WHITE,Color.BLACK, hexWidth/4, x,y));
                 break;
 
             case "space_ship":
                 String spaceShipColor = objectInformations[1];
+                int spaceShipOrientation = Integer.parseInt(objectInformations[2]);
+                double centerX = x + hexSize/2 * Math.cos((60 * (spaceShipOrientation -2)) * ShapeConstructor.TORAD),
+                       centerY = y + hexSize/2 * Math.sin((60 * (spaceShipOrientation -2)) * ShapeConstructor.TORAD);
+
+                try {
+                    group.getChildren().add(ShapeConstructor.newImage(spaceShipColor + "_space_ship", hexSize/2,hexSize/2, centerX,centerY, spaceShipOrientation));
+                } catch (Exception e) {
+                    Color color;
+                    switch (spaceShipColor) {
+                        case "red":
+                            color = Color.BROWN;
+                            break;
+
+                        case "blue":
+                            color = Color.BLUE;
+                            break;
+
+                        case "green":
+                            color = Color.GREEN;
+                            break;
+
+                        case "yellow":
+                            color = Color.YELLOW;
+                            break;
+
+                        case "orange":
+                            color = Color.ORANGE;
+                            break;
+
+                        case "purple":
+                            color = Color.PURPLE;
+                            break;
+
+                        default:
+                            throw new Exception(/*TODO*/);
+                    }
+                    group.getChildren().add(ShapeConstructor.newTriangle(color, hexSize/2, centerX - hexSize/20,centerY, spaceShipOrientation));
+                }
                 break;
 
             case "launchpad":
                 try {
-                    displayImage(objectType, hexWidth,hexSize, x,y);
+                    group.getChildren().add(ShapeConstructor.newImage(objectType, hexWidth,hexSize, x,y));
 
                 } catch (Exception e) {
-                    displayColoredHexagon(Color.DARKGREEN, hexSize, x,y);
+                    group.getChildren().add(ShapeConstructor.newHexagon(Color.CHOCOLATE, hexSize, x,y));
                 }
                 break;
 
             case "audience_pod":
                 try {
-                    displayImage(objectType, hexWidth,hexSize, x,y);
+                    group.getChildren().add(ShapeConstructor.newImage(objectType, hexWidth,hexSize, x,y));
 
                 } catch (Exception e) {
-                    displayColoredHexagon(Color.WHITE, hexSize, x,y);
+                    group.getChildren().add(ShapeConstructor.newHexagon(Color.WHITE, hexSize, x,y));
                 }
                 break;
 
             case "portal":
-                String portalColor = objectInformations[1];
-                String relic = objectInformations[2];
+                String portalColor = objectInformations[1],
+                       portalPriority = objectInformations[2],
+                       relic = objectInformations[3];
                 try {
-                    displayImage("relic" + relic, hexWidth/2,hexSize/2, x,y);
+                    group.getChildren().add(ShapeConstructor.newImage("relic" + relic, hexWidth/2,hexSize/2, x,y));
                 } catch (Exception e) {
-                    displayText(relic, Color.CHARTREUSE, Color.TRANSPARENT, hexWidth/2, x,y);
+                    group.getChildren().add(ShapeConstructor.newText(relic, Color.CHARTREUSE, hexWidth/2, x,y));
                 }
 
                 try {
-                    displayImage(portalColor + "_portal", hexWidth,hexSize, x,y);
+                    group.getChildren().add(ShapeConstructor.newImage(portalColor + "_portal", hexWidth,hexSize, x,y));
                 } catch (Exception e) {
+                    Color color;
                     switch (portalColor) {
                         case "red":
-                            displayColoredCircle(Color.RED, hexWidth/3, x,y);
+                            color = Color.RED;
                             break;
                     
                         case "white":
-                            displayColoredCircle(Color.SILVER, hexWidth/3, x,y);
+                            color = Color.SILVER;
                             break;
+
+                        default:
+                            throw new Exception(/*TODO*/);
                     }
+                    group.getChildren().add(ShapeConstructor.newCircle(color, hexWidth/3, x,y));
                 }
+                
+                group.getChildren().add(ShapeConstructor.newText(portalPriority, Color.WHITE,Color.BLACK, hexWidth/4, x,y));
+                break;
+
+            case " ":
+                break;
+
+                default:
+                    throw new Exception(/*TODO*/);
         }
-    }
-
-    private Double[] newHexagonCorners(double centerX,double centerY, double size) {
-        Double[] hexCorners = new Double[14];
-        for(int i = 0 ; i < 12 ; i += 2) {
-            double angleDeg = 30 * (i - 1);
-            double angleRad = Math.PI / 180 * angleDeg;
-            hexCorners[i] = centerX + size * Math.cos(angleRad);
-            hexCorners[i+1] = centerY + size * Math.sin(angleRad);
-        }
-        hexCorners[12] = centerX + size * Math.cos(-Math.PI/180*30);
-        hexCorners[13] = centerY + size * Math.sin(-Math.PI/180*30);
-
-        return hexCorners;
-    }
-
-    private void displayText(String content, Color fill,Color background, double maxWidth, double centerX,double centerY) {
-        Text text = new Text(content);
-        text.setFill(fill);
-
-        Font font = new Font(maxWidth);
-        text.setFont(font);
-        while (text.getBoundsInLocal().getWidth() > maxWidth) {
-            font = new Font(font.getSize()-1);
-            text.setFont(font);
-        }
-
-        double textWidth = text.getBoundsInLocal().getWidth(),
-               textHeight = text.getBoundsInLocal().getHeight()/2;
-
-        text.setX(centerX - textWidth/2);
-        text.setY(centerY + textHeight/2);
-
-        Rectangle rect = new Rectangle(text.getX(),text.getY()-textHeight, textWidth,textHeight);
-        rect.setFill(background);
-
-        root.getChildren().add(rect);
-        root.getChildren().add(text);
-    }
-
-    private void displayImage(String imageName, double maxWidth,double maxHeight, double centerX,double centerY) throws Exception {
-        InputStream imageStream = new FileInputStream("./res/images/" + imageName + ".png");
-        Image image = new Image(imageStream);
-        ImageView imageView = new ImageView(image);
-        
-        imageView.setFitWidth(maxWidth);
-        imageView.setFitHeight(maxHeight);
-        imageView.setPreserveRatio(true);
-        imageView.setSmooth(true);
-        imageView.setX(centerX - imageView.getBoundsInLocal().getWidth()/2);
-        imageView.setY(centerY - imageView.getBoundsInLocal().getHeight()/2);
-        root.getChildren().add(imageView);
-    }
-
-    private void displayColoredHexagon(Color color, double size, double centerX,double centerY) {
-        Polygon hexagonArea = new Polygon();
-        hexagonArea.getPoints().addAll(newHexagonCorners(centerX,centerY, size));
-        hexagonArea.setFill(color);
-        root.getChildren().add(hexagonArea);
-    }
-
-    private void displayColoredHexagon(Color color1,Color color2, double size, double centerX,double centerY) {
-        Double[] hexagonCorners = newHexagonCorners(centerX,centerY, size);
-
-        Polygon halfHexagonArea1 = new Polygon();
-        for (int i = 0 ; i < 8 ; i++) {
-            halfHexagonArea1.getPoints().add(hexagonCorners[i]);
-        }
-        halfHexagonArea1.getPoints().add(hexagonCorners[0]);
-        halfHexagonArea1.getPoints().add(hexagonCorners[1]);
-        halfHexagonArea1.setFill(color1);
-        root.getChildren().add(halfHexagonArea1);
-
-        Polygon halfHexagonArea2 = new Polygon();
-        for (int i = 6 ; i < 14 ; i++) {
-            halfHexagonArea2.getPoints().add(hexagonCorners[i]);
-        }
-        halfHexagonArea2.getPoints().add(hexagonCorners[6]);
-        halfHexagonArea2.getPoints().add(hexagonCorners[7]);
-        halfHexagonArea2.setFill(color2);
-        root.getChildren().add(halfHexagonArea2);
-    }
-
-    private void displayColoredCircle(Color color, double radius, double centerX,double centerY) {
-        Circle circle = new Circle(centerX,centerY, radius);
-        circle.setStrokeWidth(radius/10);
-        circle.setStroke(color);
-        circle.setFill(Color.TRANSPARENT);
-        root.getChildren().add(circle);
     }
 }
