@@ -82,8 +82,8 @@ public class WhiteBlueAsteroyd extends BlueAsteroyd{
 				neworientation = super.getOrientation();
 			pos = super.getPosition().getForward(neworientation);
 			if(gameBoard[pos.getX()][pos.getY()]!= null && gameBoard[pos.getX()][pos.getY()] instanceof EmptyCell){ //case n'est pas null et vide
-				//super.setX(pos.getX());
-				//super.setY(pos.getY());
+				super.getPosition().setX(pos.getX());
+				super.getPosition().setY(pos.getY());
 			}//sinon ne bouge pas 
 			//puis selon le bleu
 			super.move(gameBoard, directions); 	

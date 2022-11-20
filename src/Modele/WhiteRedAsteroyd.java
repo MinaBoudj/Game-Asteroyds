@@ -89,8 +89,8 @@ public class WhiteRedAsteroyd extends RedAsteroyd {
 				neworientation = super.getOrientation();
 			pos = super.getPosition().getForward(neworientation);
 			if(gameBoard[pos.getX()][pos.getY()]!= null && gameBoard[pos.getX()][pos.getY()] instanceof EmptyCell){ //case n'est pas null et vide
-				//super.setX(pos.getX());
-				//super.setY(pos.getY());
+				super.getPosition().setX(pos.getX());
+				super.getPosition().setY(pos.getY());
 			}//sinon ne bouge pas 
 		}catch(Exception e){//renvoie une position incorrect
 			//faire quoi quand c'est un asteroyd ??

@@ -90,12 +90,12 @@ public class RedAsteroyd extends  Asteroyd {
 					pos2 = pos1.getForward(neworientation);
 					if(gameBoard[pos2.getX()][pos2.getY()]!= null && gameBoard[pos2.getX()][pos2.getY()] instanceof EmptyCell){
 						//rien dans la case (il a bougé de 2 cases)
-						//super.setX(pos2.getX());
-						//super.setY(pos2.getY());
+						super.getPosition().setX(pos2.getX());
+						super.getPosition().setY(pos2.getY());
 					}else{//la 2eme case est sois null ou n'est pas vide
 						//le metre donc dans la 1eme
-						//super.setX(pos1.getX());
-						//super.setY(pos1.getY());
+						super.getPosition().setX(pos1.getX());
+						super.getPosition().setY(pos1.getY());
 					}
 				}//premiere case sois n'est pas vide sois null donc ne bouge pas 	
 			}catch(Exception e){//renvoie une position incorrect
