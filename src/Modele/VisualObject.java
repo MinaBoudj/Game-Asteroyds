@@ -25,10 +25,6 @@ public class VisualObject {
 
 
     /* Getters */
-    public String getImage(){ // A supprimer (remplacer par redef toString)
-        return this.imagePath; 
-    }
-
     public Position getPosition() {
         return this.position;
     }
@@ -40,5 +36,11 @@ public class VisualObject {
     /* Setters */
     public void setOrientation(int orientation) {
         this.orientation = orientation;
+    }
+
+    /* Méthode */
+    @Override
+    public String toString(){
+        return this.imagePath; 
     }
 }

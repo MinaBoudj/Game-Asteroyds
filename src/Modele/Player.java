@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Player {
     public String name; // Nom du joueur
     private ArrayList<Integer> relics; // Ensemble de reliques qu'il possède
-    private SpaceShip spaceShip; // Son vaisseau VOIR LE CONSTRUCTEUR DE SPACESHIP
+    private SpaceShip spaceShip; // Son vaisseau
     public Movement[] movements; // Sa liste de mouvements
 
     /* Constructeur */
