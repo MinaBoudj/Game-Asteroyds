@@ -10,19 +10,19 @@ public class Player {
     public String name; // Nom du joueur
     private ArrayList<Integer> relics; // Ensemble de reliques qu'il possède
     private SpaceShip spaceShip; // Son vaisseau VOIR LE CONSTRUCTEUR DE SPACESHIP
-    public ArrayList<Movement> movements; // Sa liste de mouvements
+    public Movement[] movements; // Sa liste de mouvements
 
     /* Constructeur */
-    Player(String name, Color color, String image, int orientation, Position pos) { // A VERIFIER AVEC LE GROUPE
+    Player(String name, Color color, String image, int orientation, Position pos) {
         this.name = name;
         this.relics = new ArrayList<Integer>();
         this.spaceShip = new SpaceShip(image, orientation, pos, color);
-        this.movements = new ArrayList<Movement>(); // A modifier tableau
+        this.movements = new Movement[6];
     }
 
     /* Setter */
-    public void setMovement(int indice_tab, Movement movement) { // A finir
-        this.movements.add(movement);
+    public void setMovement(int indice_tab, Movement movement) {
+        this.movements[indice_tab] = movement;
     }
 
     /* Getter */
