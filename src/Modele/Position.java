@@ -45,6 +45,14 @@ public class Position {
         return this.y;
     }
 
+    public void setX(int x){ // Setter
+        this.x = x;
+    }
+
+    public void setY(int y){ // Setter
+        this.y = y;
+    }
+
 
     public Position getForward(int orientation) throws Exception {  // Renvoie la position de la prochaine case selon l'orientation, ou la même position si il n'y a rien devant.
         switch (orientation) {
