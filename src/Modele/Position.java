@@ -56,14 +56,14 @@ public class Position {
 
     public Position getForward(int orientation) throws Exception {  // Renvoie la position de la prochaine case selon l'orientation, ou la même position si il n'y a rien devant.
         switch (orientation) {
-            case 1:
+            case 6:
                 if ((this.x == 0 && this.y%2 == 0) || this.y == 0) {
                     throw new Exception("GameBoard Edge");
                 } else {
                     return this.getTopLeft();
                 }
 
-            case 5:
+            case 1:
                 if ((this.x == 16 && this.y%2 != 0) || this.y == 0) {
                     throw new Exception("GameBoard Edge");
                 } else {
@@ -71,7 +71,7 @@ public class Position {
                 }
                 
 
-            case 3:
+            case 2:
                 if (this.x == 16) {
                     throw new Exception("GameBoard Edge");
                 } else {
@@ -79,7 +79,7 @@ public class Position {
                 }
                 
 
-            case 6: 
+            case 3: 
                 if ((this.x == 16 && this.y%2 != 0) || this.y == 13) {
                     throw new Exception("GameBoard Edge");
                 } else {
@@ -87,7 +87,7 @@ public class Position {
                 }
                 
 
-            case 2:
+            case 4:
                 if ((this.x == 0 && this.y%2 == 0) || this.y == 13) {
                     throw new Exception("GameBoard Edge");
                 } else {
@@ -95,7 +95,7 @@ public class Position {
                 }
                 
 
-            case 4: 
+            case 5: 
                 if (this.x == 0) {
                     throw new Exception("GameBoard Edge");
                 }

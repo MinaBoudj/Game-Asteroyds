@@ -19,6 +19,20 @@ public class WhiteAsteroyd extends Asteroyd {
         super(imagePath, orientation, position, canContainSpaceShip);
     }
     
-    public void move(Cell[][] gameBoard, int[] directions) { // A CODER AVEC LE GROUPE : MOUVEMENTS DU BLANC 1 déplacement
+    public void move(Cell[][] gameBoard, int[] directions) { // MOUVEMENTS DU BLANC 1 déplacement
+        Position pos;
+        try{
+            //Définir l'orientation
+            int neworientation = calculeOrientation(directions[1]);
+            pos = super.getPosition().getForward(neworientation);
+
+            if(gameBoard[pos.getX()][pos.getY()]!= null && gameBoard[pos.getX()][pos.getY()] instanceof EmptyCell){ // Inspection de la case
+                super.getPosition().setX(pos.getX());
+                super.getPosition().setY(pos.getY());
+            } 	
+        }catch(Exception e){//renvoie une position incorrect
+            //faire quoi quand c'est un asteroyd ??
+        }	
     }
+
 }
