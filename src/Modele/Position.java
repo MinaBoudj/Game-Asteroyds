@@ -14,18 +14,26 @@ public class Position {
     }
 
     private Position getTopRight() { // Retourne la position de la case en haut à droite
+        if (this.y%2 == 0)
+            return new Position(x, y-1);
         return new Position(x+1, y-1);
     }
 
     private Position getTopLeft() { // Retourne la position de la case en haut à gauche
+        if (this.y%2 == 0)
+            return new Position(x-1, y-1);
         return new Position(x, y-1);
     }
 
     private Position getBottomRight() { // Retourne la posiiton de la case en bas à droite
+         if (this.y%2 == 0)
+            return new Position(x, y+1);
         return new Position(x+1, y+1);
     }
 
     private Position getBottomLeft() { // Retourne la position de la case en bas à gauche
+         if (this.y%2 == 0)
+            return new Position(x-1, y+1);
         return new Position(x, y+1);
     }
 
