@@ -21,74 +21,12 @@ public class RedAsteroyd extends  Asteroyd {
 		//ne peu pas faire bouger un objet devant lui
 		try{
 				//changer l'orientation
-				int neworientation;
-				if(super.getOrientation()==1 && directions[0]==2)
-					neworientation = 5;
-				if(super.getOrientation()==1 && directions[0]==3)
-					neworientation = 2;
-				if(super.getOrientation()==1 && directions[0]==4)
-					neworientation = 6;
-				if(super.getOrientation()==1 && directions[0]==5)
-					neworientation = 4;
-				if(super.getOrientation()==1 && directions[0]==6)
-					neworientation = 3;
-				if(super.getOrientation()==2 && directions[0]==1)
-					neworientation = 5;
-				if(super.getOrientation()==2 && directions[0]==2)
-					neworientation = 2;
-				if(super.getOrientation()==2 && directions[0]==4)
-					neworientation = 4;
-				if(super.getOrientation()==2 && directions[0]==5)
-					neworientation = 3;
-				if(super.getOrientation()==2 && directions[0]==6)
-					neworientation = 3;
-				if(super.getOrientation()==3 && directions[0]==1)
-					neworientation = 1;
-				if(super.getOrientation()==3 && directions[0]==2)
-					neworientation = 5;
-				if(super.getOrientation()==3 && directions[0]==3)
-					neworientation = 2;
-				if(super.getOrientation()==3 && directions[0]==4)
-					neworientation = 6;
-				if(super.getOrientation()==3 && directions[0]==5)
-					neworientation = 4;
-				if(super.getOrientation()==4 && directions[0]==1)
-					neworientation = 1;
-				if(super.getOrientation()==4 && directions[0]==2)
-					neworientation = 5;
-				if(super.getOrientation()==4 && directions[0]==3)
-					neworientation = 2;
-				if(super.getOrientation()==4 && directions[0]==4)
-					neworientation = 6;
-				if(super.getOrientation()==4 && directions[0]==6)
-					neworientation = 3;
-				if(super.getOrientation()==5 && directions[0]==1)
-					neworientation = 1;
-				if(super.getOrientation()==5 && directions[0]==3)
-					neworientation = 2;
-				if(super.getOrientation()==5 && directions[0]==4)
-					neworientation = 6;
-				if(super.getOrientation()==5 && directions[0]==5)
-					neworientation = 2;
-				if(super.getOrientation()==5 && directions[0]==6)
-					neworientation = 3;
-				if(super.getOrientation()==6 && directions[0]==1)
-					neworientation = 1;
-				if(super.getOrientation()==6 && directions[0]==2)
-					neworientation = 5;
-				if(super.getOrientation()==6 && directions[0]==3)
-					neworientation = 2;
-				if(super.getOrientation()==6 && directions[0]==5)
-					neworientation = 4;
-				if(super.getOrientation()==6 && directions[0]==6)
-					neworientation = 3;
-				else 
-					neworientation = super.getOrientation();
+				int neworientation = calculeOrientation(directions[0]);
 				pos1 = super.getPosition().getForward(neworientation);
 				if(gameBoard[pos1.getX()][pos1.getY()]!= null && gameBoard[pos1.getX()][pos1.getY()] instanceof EmptyCell){ //case n'est pas null et vide
 					//il bouge selon la direction 1 de 2 case
 					pos2 = pos1.getForward(neworientation);
-					if(gameBoard[pos2.getX()][pos2.getY()]!= null && gameBoard[pos2.getX()][pos2.getY()] instanceof EmptyCell){
+					if(gameBoard[pos2.getX()][pos2.getY()]!= null && gameBoard[pos2.getX()][pos2.getY()] instanceof EmptyCell){ //+ sans vesseau
 						//rien dans la case (il a bougé de 2 cases)
 						super.getPosition().setX(pos2.getX());
 						super.getPosition().setY(pos2.getY());
