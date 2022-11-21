@@ -131,12 +131,12 @@ public class View extends Application {
                             break;
 
                         default:
-                            throw new Exception(/*TODO*/);
+                            throw new Exception("Couleur d'astéroïde non reconnue : " + asteroydColor);
                     }
                     group.getChildren().addAll(ShapeConstructor.newHexagon(color1,color2, hexSize, x,y));
                 }
 
-                group.getChildren().add(ShapeConstructor.newText(asteroydPriority, Color.WHITE,Color.BLACK, hexWidth/4, x,y));
+                //group.getChildren().add(ShapeConstructor.newText(asteroydPriority, Color.WHITE,Color.BLACK, hexWidth/4, x,y));
                 break;
 
             case "space_ship":
@@ -175,7 +175,7 @@ public class View extends Application {
                             break;
 
                         default:
-                            throw new Exception(/*TODO*/);
+                            throw new Exception("Couleur de vaisseau non reconnue : " + spaceShipColor);
                     }
                     group.getChildren().add(ShapeConstructor.newTriangle(color, hexSize/2, centerX - hexSize/20,centerY, spaceShipOrientation));
                 }
@@ -223,19 +223,19 @@ public class View extends Application {
                             break;
 
                         default:
-                            throw new Exception(/*TODO*/);
+                            throw new Exception("Couleur de portail non reconnue : " + portalColor);
                     }
                     group.getChildren().add(ShapeConstructor.newCircle(color, hexWidth/3, x,y));
                 }
                 
-                group.getChildren().add(ShapeConstructor.newText(portalPriority, Color.WHITE,Color.BLACK, hexWidth/4, x,y));
+                //group.getChildren().add(ShapeConstructor.newText(portalPriority, Color.WHITE,Color.BLACK, hexWidth/4, x,y));
                 break;
 
             case " ":
                 break;
 
                 default:
-                    throw new Exception(/*TODO*/);
+                    throw new Exception("Type d'objet visuel non reconnu : " + objectType);
         }
     }
 }
