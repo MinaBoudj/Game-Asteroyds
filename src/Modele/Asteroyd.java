@@ -22,15 +22,15 @@ public abstract class Asteroyd extends Cell {
         int neworientation;
         neworientation = super.getOrientation();
         if(direction == 2 )
-            neworientation = (super.getOrientation()-2 %6)+1;
-        if(direction == 3)
-            neworientation = (super.getOrientation()+2 %6)+1;
-        if(direction == 4)
-            neworientation = (super.getOrientation()-1 %6)+1;
-        if(direction == 5)
-            neworientation = (super.getOrientation()+1 %6)+1;
-        if(direction == 6)
             neworientation = (super.getOrientation()+3 %6)+1;
+        if(direction == 3)
+            neworientation = (super.getOrientation()+1 %6)+1;
+        if(direction == 4)
+            neworientation = (super.getOrientation()+4 %6)+1;
+        if(direction == 5)
+            neworientation = (super.getOrientation() %6)+1;
+        if(direction == 6)
+            neworientation = (super.getOrientation()+2 %6)+1;
         
         return neworientation;
     }
