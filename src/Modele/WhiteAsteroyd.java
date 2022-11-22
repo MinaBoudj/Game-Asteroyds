@@ -31,7 +31,7 @@ public class WhiteAsteroyd extends Asteroyd {
                 super.getPosition().setY(pos.getY());
             } 	
         }catch(Exception e){//renvoie une position incorrect
-            //faire quoi quand c'est un asteroyd ??
+            
         }	
     }
 

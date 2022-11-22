@@ -6,9 +6,9 @@ package Modele;
 */
 
 public class VisualObject {
-    String imagePath;
-    int orientation;
-    Position position;
+    private String imagePath;
+    private int orientation;
+    private Position position;
 
     /* Constructeurs */
     public VisualObject(int orientation, int x, int y) {
