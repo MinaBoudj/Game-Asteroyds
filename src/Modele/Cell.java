@@ -40,7 +40,7 @@ public  abstract class Cell extends VisualObject {
 
 	/* Methode  */
 	// ajouter un vaisseau dans la liste des vaisseaux
-	public void addLSpaceShip(SpaceShip newSpace){
+	public void addLSpaceShip(SpaceShip newSpace) throws Exception{
 			this.LSpaceShips.add(newSpace);
 	}
 

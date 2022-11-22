@@ -15,15 +15,12 @@ public class RedPortal extends RedAsteroyd{
 	public int getRelic(){ return this.relic; }
 
 	@Override
-	public void addLSpaceShip(SpaceShip newSpace){
+	public void addLSpaceShip(SpaceShip newSpace)throws Exception{
 		super.getLSpaceShips().add(newSpace);
-		try{
-			if(!newSpace.hasRelic(this.relic)) //s'il n'a pas cette relic l'ajouter à sa liste de relic
+		if(this.relic <1 || this.relic>4) throw new Exception("valeur de relic à ajouter < 1 ou > 4");
+		else if(!newSpace.hasRelic(this.relic)) //s'il n'a pas cette relic l'ajouter à sa liste de relic
 				newSpace.addRelic(this.relic);
-		}catch(Exception e){
-			//retourner une erreur
-			
-		}
+	
 	}
 	
 }
