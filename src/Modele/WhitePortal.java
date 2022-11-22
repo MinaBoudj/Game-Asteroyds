@@ -18,8 +18,13 @@ public class WhitePortal extends WhiteAsteroyd {
 	@Override
 	public void addLSpaceShip(SpaceShip newSpace){
 		super.getLSpaceShips().add(newSpace);
-		if(!newSpace.hasRelic(this.relic)) //s'il n'a pas cette relic l'ajouter à sa liste de relic
-			newSpace.addRelic(this.relic);
+		try{
+			if(!newSpace.hasRelic(this.relic)) //s'il n'a pas cette relic l'ajouter à sa liste de relic
+				newSpace.addRelic(this.relic);
+
+		}catch(Exception e){
+			//renvoyer une erreur
+		}
 	}
 		
 }

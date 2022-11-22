@@ -123,7 +123,7 @@ public class SpaceShip extends VisualObject{
 					//retiter de la liste ou il etait
 					gameBoard[super.getPosition().x][super.getPosition().y].removeLSpaceShip(this);
 					//changer sa position
-					this.position = pos;
+					super.setPosition(pos);
 				}else{//case null
 					this.structurePoints = this.structurePoints-2;
 				}
