@@ -41,6 +41,7 @@ public class WhiteAsteroyd extends Asteroyd {
                 }
             } 	
         } catch(Exception e) {
+            
         }	
     }
 
