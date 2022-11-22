@@ -21,7 +21,7 @@ public class WhiteAsteroyd extends Asteroyd {
     
     public void move(Cell[][] gameBoard, int[] directions) { // MOUVEMENTS DU BLANC 1 déplacement
         Position pos;
-        try{
+        try {
             //Définir l'orientation
             int neworientation = calculeOrientation(directions[1]);
             pos = super.getPosition().getForward(neworientation);
@@ -40,7 +40,7 @@ public class WhiteAsteroyd extends Asteroyd {
                     }
                 }
             } 	
-        }catch(Exception e){
+        } catch(Exception e) {
         }	
     }
 
