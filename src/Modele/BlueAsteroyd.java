@@ -19,15 +19,23 @@ public class BlueAsteroyd extends Asteroyd{
           pos1 = super.getPosition().getForward(neworientation); // Case en face.
           pos2 = pos1.getForward(neworientation); // Case derrière la case en face.
 
-          if(gameBoard[pos1.getX()][pos1.getY()]!= null && gameBoard[pos1.getX()][pos1.getY()] instanceof EmptyCell && gameBoard[pos1.getX()][pos1.getY()].getLSpaceShips().size() == 0){ // Si la première case est vide
-            // Déplacement de l'astéroïde
-            EmptyCell nec = new EmptyCell(super.toString(), super.getOrientation(), super.getPosition());  
-            super.getPosition().setX(pos1.getX());
-            super.getPosition().setY(pos1.getY());
-          } else if (gameBoard[pos2.getX()][pos2.getY()]!= null && gameBoard[pos2.getX()][pos2.getY()] instanceof EmptyCell){ // Si la 2ème case est vide
-              
+          if(gameBoard[pos1.getX()][pos1.getY()]!= null && gameBoard[pos1.getX()][pos1.getY()] instanceof EmptyCell) { // Si la première case est vide
+            if (gameBoard[pos1.getX()][pos1.getY()].getLSpaceShips().size() == 0) {
+              // Déplacement de l'astéroïde
+              EmptyCell nec = new EmptyCell(super.toString(), super.getOrientation(), super.getPosition());  
+              super.getPosition().setX(pos1.getX());
+              super.getPosition().setY(pos1.getY());
+            } 
+            else if (gameBoard[pos2.getX()][pos2.getY()]!= null && gameBoard[pos2.getX()][pos2.getY()] instanceof EmptyCell) { // Si la 2ème case est vide
+              if (gameBoard[pos2.getX()][pos2.getY()].getLSpaceShips().size() == 0) {
+                // Déplacement de l'astéroïde (obstacle)
+                EmptyCell nec = new EmptyCell(pos1.toString(), pos1.getOrientation(), pos1.getPosition());
+                pos1.getPosition().setX(pos2.getX());
+                pos1.getPosition().setY(pos2.getY());
+              } // A finir
 
           }
+        }
       } catch(Exception e) {
           
       }	
