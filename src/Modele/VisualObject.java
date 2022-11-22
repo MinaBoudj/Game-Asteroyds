@@ -5,10 +5,10 @@ package Modele;
 * @author Juba
 */
 
-public class VisualObject {
-    String imagePath;
-    int orientation;
-    Position position;
+public abstract class VisualObject {
+    private String imagePath;
+    private int orientation;
+    private Position position;
 
     /* Constructeurs */
     public VisualObject(int orientation, int x, int y) {
@@ -36,6 +36,10 @@ public class VisualObject {
     /* Setters */
     public void setOrientation(int orientation) {
         this.orientation = orientation;
+    }
+
+    public void setPosition(Position pos) {
+        this.position = pos;
     }
 
     /* Méthode */
