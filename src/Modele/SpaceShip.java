@@ -44,56 +44,61 @@ public class SpaceShip extends VisualObject{
 
 	public void setStucturepoints(int sttruct) { this.structurePoints = sttruct; }
 	
+	public void minusStructurePoint(int value) { this.structurePoints = this.structurePoints- value; }
+
 	private void moveLeft() { 
-		if(super.orientation == 1) 
-			super.setOrientation(4);
-		if(super.orientation == 2) 
+		if(super.getOrientation() == 1) 
 			super.setOrientation(6);
-		if(super.orientation == 3) 
-			super.setOrientation(5);
-		if(super.orientation == 4)
-			super.setOrientation(2);
-		if(super.orientation == 5)
+		if(super.getOrientation() == 2) 
 			super.setOrientation(1);
-		if(super.orientation == 6)
+		if(super.getOrientation() == 3) 
+			super.setOrientation(2);
+		if(super.getOrientation() == 4)
 			super.setOrientation(3);
+		if(super.getOrientation() == 5)
+			super.setOrientation(4);
+		if(super.getOrientation() == 6)
+			super.setOrientation(5);
 	}
 	
 	private void moveRight() {  //recuperer la position à droite de cette case
-        if(super.orientation == 1) 
-			super.setOrientation(5);
-		if(super.orientation == 2) 
-			super.setOrientation(4);
-		if(super.orientation == 3) 
-			super.setOrientation(6);
-		if(super.orientation == 4)
-			super.setOrientation(1);
-		if(super.orientation == 5)
-			super.setOrientation(3);
-		if(super.orientation == 6)
+        if(super.getOrientation() == 1) 
 			super.setOrientation(2);
+		if(super.getOrientation() == 2) 
+			super.setOrientation(3);
+		if(super.getOrientation() == 3) 
+			super.setOrientation(4);
+		if(super.getOrientation() == 4)
+			super.setOrientation(5);
+		if(super.getOrientation() == 5)
+			super.setOrientation(6);
+		if(super.getOrientation() == 6)
+			super.setOrientation(1);
     }
           
 	private void turnAround() { 
         if( super.getOrientation() == 1)
-            super.setOrientation(6);
+            super.setOrientation(4);
         if( super.getOrientation() == 2)
             super.setOrientation(5);
         if( super.getOrientation() == 3)
-            super.setOrientation(4);
+            super.setOrientation(6);
         if( super.getOrientation() == 4)
-            super.setOrientation(3);
+            super.setOrientation(1);
         if( super.getOrientation() == 5)
             super.setOrientation(2);
         if( super.getOrientation() == 6)
-            super.setOrientation(1);
+            super.setOrientation(3);
     }
 	
 	//ajouter des relics dans le tableau de relics
-	public void addRelic(int relic){
-		for(int i=0; i< relics.length; i++){
-			if(this.relics[i] != 0 ){
-				relics[i] = relic;
+	public void addRelic(int relic) throws Exception{
+		if( relic<1 || relic>4 ) throw new Exception("valeur de relic à ajouter < 1 ou > 4");
+		else {
+			for(int i=0; i< relics.length; i++){
+				if(this.relics[i] != 0 ){
+					relics[i] = relic;
+				}
 			}
 		}
 	}
@@ -110,7 +115,7 @@ public class SpaceShip extends VisualObject{
 			if(movement[i] == Movement.TurnAround)
 				turnAround();
 			try {
-				pos = super.getPosition().getForward(super.orientation);
+				pos = super.getPosition().getForward(super.getOrientation());
 				if(gameBoard[pos.getX()][pos.getY()] != null){//la pos qu'il a renvoyé n'est pas null
 					//demander si la suite va la ou apres le catch !!!!!!
 					//ajouter dans la liste des vaiseaux (a l'exterieur du catch)
