@@ -26,7 +26,7 @@ public class BlueAsteroyd extends Asteroyd{
               
 
           }
-      }catch(Exception e){
+      } catch(Exception e) {
           
       }	
 	}

@@ -27,11 +27,11 @@ public class WhiteAsteroyd extends Asteroyd {
             pos = super.getPosition().getForward(neworientation);
 
             if(gameBoard[pos.getX()][pos.getY()]!= null && gameBoard[pos.getX()][pos.getY()] instanceof EmptyCell){ // Inspection de la case
+                // Manque le moyen d'indiquer que la case devient vide.
                 super.getPosition().setX(pos.getX());
                 super.getPosition().setY(pos.getY());
             } 	
-        }catch(Exception e){//renvoie une position incorrect
-            
+        }catch(Exception e){
         }	
     }
 
