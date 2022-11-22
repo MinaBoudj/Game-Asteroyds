@@ -35,6 +35,9 @@ public class WhiteAsteroyd extends Asteroyd {
                 }
                 else { // la case contient déja un vaisseau.
                     // Infliger des dégâts au vaisseau.
+                    for(int i=0; i<gameBoard[pos.getX()][pos.getY()].getLSpaceShips().size(); i++){
+                        gameBoard[pos.getX()][pos.getY()].getLSpaceShips().get(i).minusStructurePoint(1);
+                    }
                 }
             } 	
         }catch(Exception e){
