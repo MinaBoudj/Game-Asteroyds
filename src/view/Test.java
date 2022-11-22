@@ -1,5 +1,9 @@
 package view;
 
+/**
+ * @author Matéo
+ */
+
 import javafx.application.Application;
 
 public class Test {

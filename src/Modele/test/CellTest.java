@@ -1,6 +1,13 @@
 package Modele.test;
 
+/**
+ * @author Matéo
+ */
+
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+import org.junit.Before;
 
 import Modele.Cell;
 import Modele.EmptyCell;
@@ -8,6 +15,7 @@ import Modele.SpaceShip;
 import Modele.Position;
 import Modele.Color;
 
+// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANER LA CALSSE DE TESTS /!\
 public class CellTest {
     private Cell cell;
 
@@ -16,7 +24,6 @@ public class CellTest {
         cell = new EmptyCell(1, 5 ,3);
     }
 
-    // /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE TESTER LE CONSTRUCTEUR /!\
     @Test(expected = Exception.class)
     public void testConstructorWithNullOrientation() {
         new Cell(0, 2, 4, true);
@@ -42,15 +49,19 @@ public class CellTest {
         new Cell(2, 7, -12, true);
     }
 
+    @Test(expected = Exception.class)
+    public void testConstructorWithNullPosition() {
+        new Cell(2, null, false);
+    }
+
     @Test
     public void testConstructorWithGoodArguments() {
         new Cell(3, 7, 14, false);
     }
-    // /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE TESTER LE CONSTRUCTEUR /!\
 
     @Test
     public void testListOfSpaceShipsIsEmptyByDefault() {
-        assertTrue(cell.getLSpaceShip().size() == 0);
+        assertTrue(cell.getLSpaceShips().size() == 0);
     }
 
     @Test(expected = Exception.class)
@@ -60,15 +71,16 @@ public class CellTest {
 
     @Test
     public void testRemoveSpaceShipNotInside() {
-        cell.addLspaceShip(new SpaceShip(6, new Position(7, 4), Color.Green));
+        cell.addLSpaceShip(new SpaceShip(6, new Position(7, 4), Color.Green));
         cell.removeLSpaceShip(new SpaceShip(3, new Position(2, 8), Color.Blue));
-        assertTrue(cell.getLSpaceShip().size() == 1);
+        assertTrue(cell.getLSpaceShips().size() == 1);
     }
 
     @Test
     public void testRemoveSpaceShip() {
-        cell.addLspaceShip(new SpaceShip(6, new Position(7, 4), Color.Green));
+        cell.addLSpaceShip(new SpaceShip(6, new Position(7, 4), Color.Green));
         cell.removeLSpaceShip(new SpaceShip(6, new Position(7, 4), Color.Green));
-        assertTrue(cell.getLSpaceShip().size() == 0);
+        assertTrue(cell.getLSpaceShips().size() == 0);
     }
 }
+// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANER LA CALSSE DE TESTS /!\

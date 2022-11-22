@@ -7,66 +7,72 @@ package Modele.test;
 import org.junit.Test;
 import org.junit.Before;
 
-import Modele.VisualObject;
-import Modele.EmptyCell;
+import Modele.Asteroyd;
+import Modele.WhiteAsteroyd;
+import Modele.Position;
 
 // /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANER LA CALSSE DE TESTS /!\
-public class VisualObjectTest {
-    private VisualObject vObj;
+public class AsteroydTest {
+    private Asteroyd ast;
 
     @Before
-    public void constructVisualObject() {
-        vObj = new EmptyCell(1, 5 ,3);
+    public void constructAsteroyd() {
+        ast = new Asteroyd(4, new Position(13, 12));
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullOrientation() {
-        new VisualObject(0, 2, 4);
+        new Asteroyd(0, 2, 4);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeOrientation() {
-        new VisualObject(-3, 1, 6);
+        new Asteroyd(-3, 1, 6);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithTooBigOrientation() {
-        new VisualObject(7, 8, 0);
+        new Asteroyd(7, 8, 0);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeX() {
-        new VisualObject(2, -3, 4);
+        new Asteroyd(2, -3, 4);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeY() {
-        new VisualObject(2, 7, -12);
+        new Asteroyd(2, 7, -12);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullPosition() {
-        new VisualObject(2, null);
+        new Asteroyd(4, null);
     }
 
     @Test
     public void testConstructorWithGoodArguments() {
-        new VisualObject(3, 7, 14);
+        new Asteroyd(3, 7, 14);
     }
 
     @Test(expected = Exception.class)
-    public void testSetOrientationWithNullOrientation() {
-        vObj.setOrientation(0);
+    public void testCalculeOrientationWithNullDirection() {
+        ast.calculeOrientation(0);
     }
 
     @Test(expected = Exception.class)
-    public void testSetOrientationWithNegativeOrientation() {
-        vObj.setOrientation(-2);
+    public void testCalculeOrientationWithNegativeDirection() {
+        ast.calculeOrientation(-2);
     }
 
     @Test(expected = Exception.class)
-    public void testSetOrientationWithTooBigOrientation() {
-        vObj.setOrientation(18);
+    public void testCalculeOrientationWithTooBigDirection() {
+        ast.calculeOrientation(8);
+    }
+
+    @Test
+    public testAsteroydCanNotContainSpaceShipByDefault() {
+        assertFalse(ast.getCanContainSpaceShips());
     }
 }
 // /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANER LA CALSSE DE TESTS /!\

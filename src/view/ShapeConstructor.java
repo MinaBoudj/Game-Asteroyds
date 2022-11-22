@@ -1,5 +1,9 @@
 package view;
 
+/**
+ * @author Matéo
+ */
+
 import javafx.scene.Group;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Circle;

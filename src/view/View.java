@@ -1,5 +1,9 @@
 package view;
 
+/**
+ * @author Matéo
+ */
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -28,15 +32,12 @@ public class View extends Application {
         stage.setFullScreenExitHint("");
         stage.setFullScreenExitKeyCombination(null);
         stage.show();
-        
+
         screenWidth = scene.getWidth();
         screenHeight = scene.getHeight();
 
         try {
-            ImageView background = ShapeConstructor.newImage("background", 1,1, 0,0);
-            background.setFitHeight(screenWidth*1.1);
-            background.setFitWidth(screenWidth*1.1);
-            root.getChildren().add(background);
+            root.getChildren().add(ShapeConstructor.newImage("background", screenWidth,screenHeight, screenWidth/2,screenHeight/2, 1));
         } catch (Exception e) {
             scene.setFill(Color.BLACK);
         }
