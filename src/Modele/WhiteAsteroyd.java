@@ -26,10 +26,16 @@ public class WhiteAsteroyd extends Asteroyd {
             int neworientation = calculeOrientation(directions[1]);
             pos = super.getPosition().getForward(neworientation);
 
-            if(gameBoard[pos.getX()][pos.getY()]!= null && gameBoard[pos.getX()][pos.getY()] instanceof EmptyCell){ // Inspection de la case
-                // Manque le moyen d'indiquer que la case devient vide.
-                super.getPosition().setX(pos.getX());
-                super.getPosition().setY(pos.getY());
+            if(gameBoard[pos.getX()][pos.getY()]!= null && gameBoard[pos.getX()][pos.getY()] instanceof EmptyCell){ // Vérifie le type de case
+                if (gameBoard[pos.getX()][pos.getY()].getLSpaceShips().size() == 0) { // Vérifie si la case ne contient rien
+                    // Déplacement de l'astéroïde
+                    EmptyCell nec = new EmptyCell(super.toString(), super.getOrientation(), super.getPosition());
+                    super.getPosition().setX(pos.getX());
+                    super.getPosition().setY(pos.getY());
+                }
+                else { // la case contient déja un vaisseau.
+                    // Infliger des dégâts au vaisseau.
+                }
             } 	
         }catch(Exception e){
         }	
