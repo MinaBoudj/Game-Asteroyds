@@ -26,8 +26,17 @@ public class WhiteRedAsteroyd extends RedAsteroyd {
 			int neworientation = super.calculeOrientation(directions[1]);
 			pos = super.getPosition().getForward(neworientation);
 			if(gameBoard[pos.getX()][pos.getY()]!= null && gameBoard[pos.getX()][pos.getY()] instanceof EmptyCell){ //case n'est pas null et vide
-				super.getPosition().setX(pos.getX());
-				super.getPosition().setY(pos.getY());
+				if(gameBoard[pos.getX()][pos.getY()].getLSpaceShips().size() == 0){//la pos1 ne contient pas de SpaceShip
+					EmptyCell newOne = new EmptyCell(super.toString(),super.getOrientation(), super.getPosition());
+					super.getPosition().setX(pos.getX());
+					super.getPosition().setY(pos.getY());
+				}else{//contient un ou plusier spaceShip
+					//infliger des dêgats
+					for(int i=0; i<gameBoard[pos.getX()][pos.getY()].getLSpaceShips().size(); i++){
+						gameBoard[pos.getX()][pos.getY()].getLSpaceShips().get(i).minusStructurePoint(1);
+					}
+					//ne bouge pas plus
+				}
 			}//sinon ne bouge pas 
 		}catch(Exception e){//renvoie une position incorrect
 			//faire quoi quand c'est un asteroyd ??
