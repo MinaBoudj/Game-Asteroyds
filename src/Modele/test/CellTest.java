@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.Before;
 
 import Modele.Cell;
-import Modele.EmptyCell;
 import Modele.SpaceShip;
 import Modele.Position;
 import Modele.Color;
@@ -21,7 +20,7 @@ public class CellTest {
 
     @Before
     public void constructCell() {
-        cell = new EmptyCell(1, 5 ,3);
+        cell = new Cell(1, 5 ,3);
     }
 
     @Test(expected = Exception.class)

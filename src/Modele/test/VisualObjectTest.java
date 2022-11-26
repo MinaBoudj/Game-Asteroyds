@@ -16,7 +16,7 @@ public class VisualObjectTest {
 
     @Before
     public void constructVisualObject() {
-        vObj = new EmptyCell(1, 5 ,3);
+        vObj = new VisualObject(1, 5 ,3);
     }
 
     @Test(expected = Exception.class)
