@@ -6,7 +6,7 @@ package Modele;
 
 public class WhiteBlueAsteroyd extends BlueAsteroyd{
 
-	public WhiteBlueAsteroyd(String image, int orientation, Position pos){
+	public WhiteBlueAsteroyd(String image, int orientation, Position pos)throws Exception{
 		super(image,orientation,pos);
 	}
 	

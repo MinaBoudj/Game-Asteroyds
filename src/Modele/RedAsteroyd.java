@@ -6,11 +6,11 @@ package Modele;
 
 public class RedAsteroyd extends  Asteroyd {
 	
-	public RedAsteroyd(String image, int orientation, Position pos){
+	public RedAsteroyd(String image, int orientation, Position pos)throws Exception{
 		super(image,orientation,pos, false);
 	}
 	
-	public RedAsteroyd(String image, int orientation, Position pos, boolean canContainSpaceShip) {
+	public RedAsteroyd(String image, int orientation, Position pos, boolean canContainSpaceShip)throws Exception {
 		super(image, orientation, pos, canContainSpaceShip);
 	}
 	

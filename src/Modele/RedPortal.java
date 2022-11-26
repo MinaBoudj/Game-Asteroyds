@@ -6,7 +6,7 @@ public class RedPortal extends RedAsteroyd{
 
 	private int relic;
 
-	public RedPortal(String image, int orientation, Position pos, int relic){
+	public RedPortal(String image, int orientation, Position pos, int relic)throws Exception{
 		super(image,orientation,pos, true);
 		this.relic = relic;
 	}
