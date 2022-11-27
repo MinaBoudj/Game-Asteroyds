@@ -4,7 +4,7 @@ package Modele;
 * @author Maylis
 */
 
-public class LaunchPod extends Cell {
+public class LaunchPad extends Cell {
 
     // Constructeurs
     public LaunchPod(String imagePath, int orientation, int x, int y){

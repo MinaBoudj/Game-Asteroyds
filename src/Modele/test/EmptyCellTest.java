@@ -19,56 +19,56 @@ public class EmptyCellTest {
     private EmptyCell eCell;
 
     @Before
-    public void constructEmptyCell() {
+    public void constructEmptyCell() throws Exception {
         eCell = new EmptyCell(5 ,3);
     }
 
     @Test(expected = Exception.class)
-    public void testConstructorWithNegativeX() {
+    public void testConstructorWithNegativeX() throws Exception {
         new EmptyCell(-3, 4);
     }
 
     @Test(expected = Exception.class)
-    public void testConstructorWithNegativeY() {
+    public void testConstructorWithNegativeY() throws Exception {
         new EmptyCell(7, -12);
     }
 
     @Test(expected = Exception.class)
-    public void testConstructorWithNullPosition() {
+    public void testConstructorWithNullPosition() throws Exception {
         new EmptyCell(null);
     }
 
     @Test
-    public void testConstructorWithGoodArguments() {
+    public void testConstructorWithGoodArguments() throws Exception {
         new EmptyCell(7, 14);
     }
 
     @Test
-    public void testListOfSpaceShipsIsEmptyByDefault() {
+    public void testListOfSpaceShipsIsEmptyByDefault() throws Exception {
         assertTrue(eCell.getLSpaceShips().size() == 0);
     }
 
     @Test(expected = Exception.class)
-    public void testAddLSpaceShipWithNullSpaceShip() {
+    public void testAddLSpaceShipWithNullSpaceShip() throws Exception {
         eCell.addLSpaceShip(null);
     }
 
     @Test
-    public void testRemoveSpaceShipNotInside() {
+    public void testRemoveSpaceShipNotInside() throws Exception {
         eCell.addLSpaceShip(new SpaceShip(6, new Position(7, 4), Color.Green));
         eCell.removeLSpaceShip(new SpaceShip(3, new Position(2, 8), Color.Blue));
         assertTrue(eCell.getLSpaceShips().size() == 1);
     }
 
     @Test
-    public void testRemoveSpaceShip() {
+    public void testRemoveSpaceShip() throws Exception {
         eCell.addLSpaceShip(new SpaceShip(6, new Position(7, 4), Color.Green));
         eCell.removeLSpaceShip(new SpaceShip(6, new Position(7, 4), Color.Green));
         assertTrue(eCell.getLSpaceShips().size() == 0);
     }
 
     @Test
-    public void testCanContainSpaceShipsIsTrueByDefault() {
+    public void testCanContainSpaceShipsIsTrueByDefault() throws Exception {
         assertTrue(eCell.getCanContainSpaceShips());
     }
 }

@@ -16,62 +16,62 @@ public class AsteroydTest {
     private Asteroyd ast;
 
     @Before
-    public void constructAsteroyd() {
+    public void constructAsteroyd() throws Exception {
         ast = new Asteroyd(4, new Position(13, 12));
     }
 
     @Test(expected = Exception.class)
-    public void testConstructorWithNullOrientation() {
+    public void testConstructorWithNullOrientation() throws Exception {
         new Asteroyd(0, 2, 4);
     }
 
     @Test(expected = Exception.class)
-    public void testConstructorWithNegativeOrientation() {
+    public void testConstructorWithNegativeOrientation() throws Exception {
         new Asteroyd(-3, 1, 6);
     }
 
     @Test(expected = Exception.class)
-    public void testConstructorWithTooBigOrientation() {
+    public void testConstructorWithTooBigOrientation() throws Exception {
         new Asteroyd(7, 8, 0);
     }
 
     @Test(expected = Exception.class)
-    public void testConstructorWithNegativeX() {
+    public void testConstructorWithNegativeX() throws Exception {
         new Asteroyd(2, -3, 4);
     }
 
     @Test(expected = Exception.class)
-    public void testConstructorWithNegativeY() {
+    public void testConstructorWithNegativeY() throws Exception {
         new Asteroyd(2, 7, -12);
     }
 
     @Test(expected = Exception.class)
-    public void testConstructorWithNullPosition() {
+    public void testConstructorWithNullPosition() throws Exception {
         new Asteroyd(4, null);
     }
 
     @Test
-    public void testConstructorWithGoodArguments() {
+    public void testConstructorWithGoodArguments() throws Exception {
         new Asteroyd(3, 7, 14);
     }
 
     @Test(expected = Exception.class)
-    public void testCalculeOrientationWithNullDirection() {
+    public void testCalculeOrientationWithNullDirection() throws Exception {
         ast.calculeOrientation(0);
     }
 
     @Test(expected = Exception.class)
-    public void testCalculeOrientationWithNegativeDirection() {
+    public void testCalculeOrientationWithNegativeDirection() throws Exception {
         ast.calculeOrientation(-2);
     }
 
     @Test(expected = Exception.class)
-    public void testCalculeOrientationWithTooBigDirection() {
+    public void testCalculeOrientationWithTooBigDirection() throws Exception {
         ast.calculeOrientation(8);
     }
 
     @Test
-    public testAsteroydCanNotContainSpaceShipByDefault() {
+    public void testAsteroydCanNotContainSpaceShipByDefault() throws Exception {
         assertFalse(ast.getCanContainSpaceShips());
     }
 }

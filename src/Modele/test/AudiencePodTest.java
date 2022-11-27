@@ -14,27 +14,27 @@ import Modele.Position;
 
 public class AudiencePodTest {
     @Test(expected = Exception.class)
-    public void testConstructorWithNegativeX() {
+    public void testConstructorWithNegativeX() throws Exception {
         new AudiencePod(-3, 4);
     }
 
     @Test(expected = Exception.class)
-    public void testConstructorWithNegativeY() {
+    public void testConstructorWithNegativeY() throws Exception {
         new AudiencePod(7, -12);
     }
 
     @Test(expected = Exception.class)
-    public void testConstructorWithNullPosition() {
+    public void testConstructorWithNullPosition() throws Exception {
         new AudiencePod(null);
     }
 
     @Test
-    public void testConstructorWithGoodArguments() {
+    public void testConstructorWithGoodArguments() throws Exception {
         new AudiencePod(7, 14);
     }
 
     @Test
-    public void testCanContainSpaceShipsIsFalseByDefault() {
+    public void testCanContainSpaceShipsIsFalseByDefault() throws Exception {
         AudiencePod aPod = new AudiencePod(5, 3);
         assertFalse(aPod.getCanContainSpaceShips());
     }
