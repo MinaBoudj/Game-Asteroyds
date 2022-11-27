@@ -32,13 +32,16 @@ public class BlueAsteroyd extends Asteroyd{
                 EmptyCell nec = new EmptyCell(pos1.toString(), pos1.getOrientation(), pos1.getPosition());
                 pos1.getPosition().setX(pos2.getX());
                 pos1.getPosition().setY(pos2.getY());
-              } // A finir
-
-          }
-        }
-      } catch(Exception e) {
+              } else {
+                // Infliger des dégâts
+                for(int i=0; i<gameBoard[pos1.getX()][pos1.getY()].getLSpaceShips().size(); i++){
+                    gameBoard[pos1.getX()][pos1.getY()].getLSpaceShips().get(i).minusStructurePoint(1);
+                }
+              }
+            }
+          } catch(Exception e) {
           
-      }	
+            }	
 	}
     
 }
