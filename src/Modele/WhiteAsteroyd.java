@@ -7,15 +7,15 @@ package Modele;
 public class WhiteAsteroyd extends Asteroyd {
     
     /* Constructeurs */
-    public WhiteAsteroyd(String imagePath, int orientation, int x, int y){
+    public WhiteAsteroyd(String imagePath, int orientation, int x, int y)throws Exception{
         super(imagePath, orientation, x, y);
     }
 
-    public WhiteAsteroyd(String imagePath, int orientation, Position position){
+    public WhiteAsteroyd(String imagePath, int orientation, Position position)throws Exception{
         super(imagePath, orientation, position);
     }
 
-    public WhiteAsteroyd(String imagePath, int orientation, Position position, boolean canContainSpaceShip){
+    public WhiteAsteroyd(String imagePath, int orientation, Position position, boolean canContainSpaceShip)throws Exception{
         super(imagePath, orientation, position, canContainSpaceShip);
     }
     

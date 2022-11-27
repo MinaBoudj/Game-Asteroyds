@@ -6,16 +6,18 @@ package Modele;
 public class BlueAsteroyd extends Asteroyd{
 
      /* Constructeurs */
-     public BlueAsteroyd(String image, int orientation, Position pos) { // ERREUR : Lien avec le constructeur de Asteroyd concernant l'exception ? 
-		super(image, orientation, pos, false);
-	}
+    public BlueAsteroyd(String image, int orientation, Position pos) throws Exception{ // ERREUR : Lien avec le constructeur de Asteroyd concernant l'exception ? 
+		    super(image, orientation, pos, false);
+	  }
 
     @Override
-    public void move(Cell[][] gameBoard, int[] directions) { // Mouvements d'un astéroïde bleu : 1 pas + peut pousser si besoin
+    public void move(Cell[][] gameBoard, int[] directions) throws Exception{ // Mouvements d'un astéroïde bleu : 1 pas + peut pousser si besoin
       Position pos1, pos2;
-      try{
+      if(directions[2]<0||directions[2]>6) throw new Exception("erreur de direction bleu");
+      else{
+        try{
           // Définir l'orientation
-          int neworientation = calculeOrientation(directions[1]);
+          int neworientation = calculeOrientation(directions[2]);
           pos1 = super.getPosition().getForward(neworientation); // Case en face.
           pos2 = pos1.getForward(neworientation); // Case derrière la case en face.
 
@@ -43,7 +45,8 @@ public class BlueAsteroyd extends Asteroyd{
           }
         catch(Exception e) {
           // Traitement de l'erreur (orientation négative)
-            }	
+            }
+      }	
 	}
     
 }
