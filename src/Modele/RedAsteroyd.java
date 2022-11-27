@@ -15,11 +15,13 @@ public class RedAsteroyd extends  Asteroyd {
 	}
 	
 	@Override
-	public void move(Cell[][] gameBoard, int[] directions) {
+	public void move(Cell[][] gameBoard, int[] directions)throws Exception {
 		Position pos1, pos2;
-		//changer l'orientation selon la direction
-		//ne peu pas faire bouger un objet devant lui
-		try{
+		if(directions[0]<0||directions[0]>6) throw new Exception("direction rouge incorrect ");
+		else{
+			//changer l'orientation selon la direction
+			//ne peu pas faire bouger un objet devant lui
+			try{
 				//changer l'orientation
 				int neworientation = calculeOrientation(directions[0]);
 				pos1 = super.getPosition().getForward(neworientation);
@@ -56,9 +58,10 @@ public class RedAsteroyd extends  Asteroyd {
 						}
 					}
 				}	
-			}catch(Exception e){//renvoie une position incorrect
+				}catch(Exception e){//renvoie une position incorrect
 				//faire quoi quand c'est un asteroyd ??
-			}		
+				}
+		}		
 	}	
 }
 

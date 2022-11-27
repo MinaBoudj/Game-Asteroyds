@@ -46,7 +46,7 @@ public class SpaceShip extends VisualObject{
 	
 	public void minusStructurePoint(int value) { this.structurePoints = this.structurePoints- value; }
 
-	private void moveLeft() { 
+	private void moveLeft()throws Exception { 
 		if(super.getOrientation() == 1) 
 			super.setOrientation(6);
 		if(super.getOrientation() == 2) 
@@ -61,7 +61,7 @@ public class SpaceShip extends VisualObject{
 			super.setOrientation(5);
 	}
 	
-	private void moveRight() {  //recuperer la position à droite de cette case
+	private void moveRight() throws Exception{  //recuperer la position à droite de cette case
         if(super.getOrientation() == 1) 
 			super.setOrientation(2);
 		if(super.getOrientation() == 2) 
@@ -76,7 +76,7 @@ public class SpaceShip extends VisualObject{
 			super.setOrientation(1);
     }
           
-	private void turnAround() { 
+	private void turnAround()throws Exception { 
         if( super.getOrientation() == 1)
             super.setOrientation(4);
         if( super.getOrientation() == 2)
@@ -105,7 +105,7 @@ public class SpaceShip extends VisualObject{
 
 
 	// procedure qui deplace un vaisseau selon les mouvements choisis par le joureur
-	public void move(Cell[][] gameBoard, Movement[] movement) {
+	public void move(Cell[][] gameBoard, Movement[] movement)throws Exception {
 		for(int i=0; i<movement.length; i++) { //parcourir tous les mouvements 
 			Position pos;
 			if(movement[i] == Movement.Left) //changer l'orientation

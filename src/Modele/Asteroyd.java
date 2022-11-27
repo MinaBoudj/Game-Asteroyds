@@ -6,15 +6,15 @@ package Modele;
 
 public abstract class Asteroyd extends Cell {
     
-    public Asteroyd(String image, int orientation, Position pos){
+    public Asteroyd(String image, int orientation, Position pos)throws Exception{
         super(image,orientation, pos, false);
     }
 
-    public Asteroyd(String image, int orientation, Position pos, boolean canContainSpaceShips){
+    public Asteroyd(String image, int orientation, Position pos, boolean canContainSpaceShips)throws Exception{
         super(image, orientation, pos, canContainSpaceShips);
     }
 
-    public Asteroyd(String image, int orientation, int x, int y){
+    public Asteroyd(String image, int orientation, int x, int y) throws Exception{
         super(image,orientation, x, y, false);
     }
 
@@ -35,5 +35,5 @@ public abstract class Asteroyd extends Cell {
         return neworientation;
     }
 
-    public abstract void move(Cell[][] gameBoard, int[] directions);
+    public abstract void move(Cell[][] gameBoard, int[] directions)throws Exception;
 }
