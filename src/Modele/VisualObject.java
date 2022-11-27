@@ -11,16 +11,22 @@ public abstract class VisualObject {
     private Position position;
 
     /* Constructeurs */
-    public VisualObject(int orientation, int x, int y) {
-        this.imagePath = " ";
-        this.orientation = orientation;
-        this.position = new Position(x, y);
+    public VisualObject(int orientation, int x, int y) throws Exception{
+        if(orientation<0||orientation>6) throw new Exception("Erreur dans la valeur de l'orientation");
+        else{
+            this.imagePath = " ";
+            this.orientation = orientation;
+            this.position = new Position(x, y);
+        }
     }
 
-    public VisualObject(int orientation, Position position) {
-        this.imagePath = " ";
-        this.orientation = orientation;
-        this.position = position;
+    public VisualObject(int orientation, Position position) throws Exception{
+        if(orientation<0||orientation>6) throw new Exception("Erreur dans la valeur de l'orientation");
+        else{
+            this.imagePath = " ";
+            this.orientation = orientation;
+            this.position = position;
+        }
     }
 
 
@@ -34,8 +40,10 @@ public abstract class VisualObject {
     }
 
     /* Setters */
-    public void setOrientation(int orientation) {
-        this.orientation = orientation;
+    public void setOrientation(int orientation) throws Exception{
+        if(orientation<0||orientation>6) throw new Exception("Erreur dans la valeur de l'orientation");
+        else
+            this.orientation = orientation;
     }
 
     public void setPosition(Position pos) {

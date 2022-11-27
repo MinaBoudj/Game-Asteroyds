@@ -13,7 +13,7 @@ public class Player {
     public Movement[] movements; // Sa liste de mouvements
 
     /* Constructeur */
-    Player(String name, Color color, String image, int orientation, Position pos) {
+    Player(String name, Color color, String image, int orientation, Position pos) throws Exception{
         this.name = name;
         this.relics = new ArrayList<Integer>();
         this.spaceShip = new SpaceShip(image, orientation, pos, color);
