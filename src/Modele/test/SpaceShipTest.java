@@ -24,12 +24,12 @@ public class SpaceShipTest {
     @Before
     public void constructSpaceShip() throws Exception {
         spaceShip1 = new SpaceShip("Green",4,new Position(4,4), Color.Green);
-        spaceShip2 = new SpaceShip("Green",4,new Position(1,4), Color.Green);        
+        spaceShip2 = new SpaceShip("Green",5,new Position(1,4), Color.Green);        
     }
 
     @Test(expected = Exception.class)
-    public void testConstructorWithNullOrientation() throws Exception {
-        new SpaceShip(0, 2, 4);
+    public void testConstructorWithNullOrientation() throws Exception{
+        new SpaceShip("Green",0,new Position(4,4), Color.Green);
     }
 
     @Test
