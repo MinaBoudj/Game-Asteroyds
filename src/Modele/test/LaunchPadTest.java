@@ -14,7 +14,6 @@ import Modele.SpaceShip;
 import Modele.Position;
 import Modele.Color;
 
-// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANER LA CALSSE DE TESTS /!\
 public class LaunchPadTest {
     private LaunchPad lPad;
 
@@ -71,7 +70,4 @@ public class LaunchPadTest {
     public void testCanContainSpaceShipsIsTrueByDefault() throws Exception {
         assertTrue(lPad.getCanContainSpaceShips());
     }
-}
-// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANER LA CALSSE DE TESTS /!\ {
-    
 }

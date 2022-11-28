@@ -48,9 +48,9 @@ public class View extends Application {
             {"", "", " ", " ", " ", " ", " ", " ", " ", "asteroyd-white-6", " ", " ", "asteroyd-white_red-15", " ", "", ""},
             {"", "", " ", "asteroyd-red-2", " ", "asteroyd-blue-11", " ", " ", " ", " ", "asteroyd-red-3", " ", " ", "", "", ""},
             {"", " ", " ", " ", " ", " ", " ", " ", "audience_pod", " ", " ", " ", "asteroyd-white_blue-17", " ", " ", ""},
-            {" ", " ", "asteroyd-white_red-13", " ", "asteroyd-white_blue-20", " ", " ", "launchpad", "launchpad/space_ship-red-2/space_ship-blue-6", " ", "asteroyd-blue-10", " ", " ", " ", " ", ""},
+            {" ", " ", "asteroyd-white_red-13", " ", "asteroyd-white_blue-20", " ", " ", "launchpad", "launchpad/space_ship-Red-2/space_ship-Blue-6", " ", "asteroyd-blue-10", " ", " ", " ", " ", ""},
             {" ", "audience_pod", " ", " ", " ", " ", " ", "launchpad", " ", "launchpad", " ", " ", " ", " ", "audience_pod", " "},
-            {" ", " ", "asteroyd-white_red-14", " ", "asteroyd-blue-9", " ", " ", "launchpad/space_ship-green-4", "launchpad", " ", " ", " ", "asteroyd-white_red-16", " ", " ", ""},
+            {" ", " ", "asteroyd-white_red-14", " ", "asteroyd-blue-9", " ", " ", "launchpad/space_ship-Green-4", "launchpad", " ", " ", " ", "asteroyd-white_red-16", " ", " ", ""},
             {"", " ", " ", "asteroyd-white-8", " ", " ", " ", " ", "audience_pod", " ", " ", "asteroyd-red-4", " ", " ", " ", ""},
             {"", "", " ", " ", "asteroyd-red-1", " ", " ", " ", " ", "asteroyd-blue-12", " ", " ", " ", "", "", ""},
             {"", "", " ", "portal-white-24-3", " ", " ", "asteroyd-white_blue-19", " ", " ", " ", " ", " ", "asteroyd-white_blue-18", " ", "", ""},
@@ -151,27 +151,27 @@ public class View extends Application {
                 } catch (Exception e) {
                     Color color;
                     switch (spaceShipColor) {
-                        case "red":
+                        case "Red":
                             color = Color.BROWN;
                             break;
 
-                        case "blue":
+                        case "Blue":
                             color = Color.BLUE;
                             break;
 
-                        case "green":
+                        case "Green":
                             color = Color.GREEN;
                             break;
 
-                        case "yellow":
+                        case "Yellow":
                             color = Color.YELLOW;
                             break;
 
-                        case "orange":
+                        case "Orange":
                             color = Color.ORANGE;
                             break;
 
-                        case "purple":
+                        case "Purple":
                             color = Color.PURPLE;
                             break;
 

@@ -14,5 +14,10 @@ public class LaunchPad extends Cell {
     public LaunchPad(Position pos)throws Exception{
         super(1, pos, true);
     }
+
+    @Override
+    public String toString() {
+        return "launchpad";
+    }
 }  
 

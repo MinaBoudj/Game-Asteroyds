@@ -10,7 +10,6 @@ import org.junit.Before;
 import static org.junit.Assert.assertTrue;
 
 import Modele.WhitePortal;
-import Modele.Position;
 import Modele.Cell;
 import Modele.EmptyCell;
 import Modele.LaunchPad;
@@ -48,7 +47,7 @@ public class WhitePortalTest {
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeX() throws Exception {
-        new WhitePortal(2, -3, 4), 2;
+        new WhitePortal(2, -3,4, 2);
     }
 
     @Test(expected = Exception.class)
@@ -58,7 +57,7 @@ public class WhitePortalTest {
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullPosition() throws Exception {
-        new WhitePortal(4, null), 2;
+        new WhitePortal(4, null, 2);
     }
 
     @Test(expected = Exception.class)

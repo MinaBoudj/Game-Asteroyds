@@ -8,9 +8,8 @@ import org.junit.Test;
 import org.junit.Before;
 
 import Modele.VisualObject;
-import Modele.EmptyCell;
 
-// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANER LA CALSSE DE TESTS /!\
+// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANCER LA CLASSE DE TESTS /!\
 public class VisualObjectTest {
     private VisualObject vObj;
 
@@ -69,4 +68,4 @@ public class VisualObjectTest {
         vObj.setOrientation(18);
     }
 }
-// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANER LA CALSSE DE TESTS /!\
+// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANCER LA CLASSE DE TESTS /!\

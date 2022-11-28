@@ -7,7 +7,14 @@ public class RedPortal extends RedAsteroyd{
 	private int relic;
 
 	public RedPortal(int orientation, Position pos, int relic)throws Exception{
-		super(orientation,pos, true);
+		super(orientation, pos);
+		this.setCanContainSpaceShips(true);
+		this.relic = relic;
+	}
+
+	public RedPortal(int orientation, int x, int y, int relic)throws Exception{
+		super(orientation, x,y);
+		this.setCanContainSpaceShips(true);
 		this.relic = relic;
 	}
 	
@@ -23,6 +30,10 @@ public class RedPortal extends RedAsteroyd{
 	
 	}
 	
+	@Override
+	public String toString() {
+		return "portal-red-" + this.getOrientation() + "-" + this.relic;
+	}
 }
 
 

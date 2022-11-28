@@ -7,11 +7,11 @@ package Modele;
 public class RedAsteroyd extends  Asteroyd {
 	
 	public RedAsteroyd(int orientation, Position pos)throws Exception{
-		super(orientation,pos, false);
+		super(orientation, pos);
 	}
 	
-	public RedAsteroyd(int orientation, Position pos, boolean canContainSpaceShip)throws Exception {
-		super(orientation, pos, canContainSpaceShip);
+	public RedAsteroyd(int orientation, int x, int y)throws Exception {
+		super(orientation, x,y);
 	}
 	
 	@Override
@@ -63,5 +63,10 @@ public class RedAsteroyd extends  Asteroyd {
 				}
 		}		
 	}	
+
+	@Override
+	public String toString() {
+		return "asteroyd-red-" + this.getOrientation();
+	}
 }
 

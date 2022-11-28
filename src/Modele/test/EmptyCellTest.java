@@ -14,7 +14,6 @@ import Modele.SpaceShip;
 import Modele.Position;
 import Modele.Color;
 
-// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANER LA CALSSE DE TESTS /!\
 public class EmptyCellTest {
     private EmptyCell eCell;
 
@@ -71,7 +70,4 @@ public class EmptyCellTest {
     public void testCanContainSpaceShipsIsTrueByDefault() throws Exception {
         assertTrue(eCell.getCanContainSpaceShips());
     }
-}
-// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANER LA CALSSE DE TESTS /!\ {
-    
 }

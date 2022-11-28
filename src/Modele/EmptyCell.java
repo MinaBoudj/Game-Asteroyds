@@ -14,4 +14,9 @@ public class EmptyCell extends Cell {
     public EmptyCell(Position pos)throws Exception{
         super(1, pos, true);
     }
+
+    @Override
+    public String toString() {
+        return " ";
+    }
 }   

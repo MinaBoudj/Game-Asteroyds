@@ -10,7 +10,6 @@ import org.junit.Before;
 import static org.junit.Assert.assertTrue;
 
 import Modele.WhiteRedAsteroyd;
-import Modele.Position;
 import Modele.Cell;
 import Modele.EmptyCell;
 import Modele.LaunchPad;
@@ -22,7 +21,7 @@ public class WhiteRedAsteroydTest {
     @Before
     public void constructGameBoard() throws Exception {
         wrAst = new WhiteRedAsteroyd(6, 0,2);
-        gm = new Cell[][]{{new EmptyCell(0,0), new EmptyCell(1,0), null}, {new EmptyCell(0,1), null, new EmptyCell(2,1)}, {wrAst, new EmptyCell(1,2), new LaunchPad(2,2)};
+        gm = new Cell[][]{{new EmptyCell(0,0), new EmptyCell(1,0), null}, {new EmptyCell(0,1), null, new EmptyCell(2,1)}, {wrAst, new EmptyCell(1,2), new LaunchPad(2,2)}};
     }
 
     @Test(expected = Exception.class)

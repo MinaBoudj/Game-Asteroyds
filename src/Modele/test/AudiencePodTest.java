@@ -7,10 +7,8 @@ package Modele.test;
 import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
-import org.junit.Before;
 
 import Modele.AudiencePod;
-import Modele.Position;
 
 public class AudiencePodTest {
     @Test(expected = Exception.class)

@@ -10,7 +10,6 @@ import org.junit.Before;
 import static org.junit.Assert.assertTrue;
 
 import Modele.RedPortal;
-import Modele.Position;
 import Modele.Cell;
 import Modele.EmptyCell;
 import Modele.LaunchPad;
@@ -76,7 +75,7 @@ public class RedPortalTest {
 
     @Test
     public void testConstructorWithGoodArguments() throws Exception {
-        new RedPortal(3, 7,14; 1);
+        new RedPortal(3, 7,14, 1);
     }
 
     @Test(expected = Exception.class)

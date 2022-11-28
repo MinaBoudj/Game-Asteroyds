@@ -14,13 +14,13 @@ import Modele.SpaceShip;
 import Modele.Position;
 import Modele.Color;
 
-// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANER LA CALSSE DE TESTS /!\
+// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANCER LA CLASSE DE TESTS /!\
 public class CellTest {
     private Cell cell;
 
     @Before
     public void constructCell() throws Exception {
-        cell = new Cell(1, 5 ,3);
+        cell = new Cell(1, 5 ,3, true);
     }
 
     @Test(expected = Exception.class)
@@ -64,6 +64,12 @@ public class CellTest {
     }
 
     @Test(expected = Exception.class)
+    public void testAddLSpaceShipWithWhenCanNotContain() throws Exception {
+        Cell c = new Cell(1, 5,5, false);
+        c.addLSpaceShip(new SpaceShip(3, new Position(5,6), Color.Purple));
+    }
+
+    @Test(expected = Exception.class)
     public void testAddLSpaceShipWithNullSpaceShip() throws Exception {
         cell.addLSpaceShip(null);
     }
@@ -82,4 +88,4 @@ public class CellTest {
         assertTrue(cell.getLSpaceShips().size() == 0);
     }
 }
-// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANER LA CALSSE DE TESTS /!\
+// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANCER LA CLASSE DE TESTS /!\

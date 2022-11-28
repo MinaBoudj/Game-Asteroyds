@@ -20,6 +20,13 @@ public class SpaceShip extends VisualObject{
         this.color = color;
 	}
 	
+	public SpaceShip(int orientation, int x, int y, Color color)throws Exception{//exception dans VisualObject
+		super(orientation, x,y);
+		this.structurePoints = 6;
+        this.relics = new int[]{0,0,0,0};    
+        this.color = color;
+	}
+	
 	/* Getteur and setteur */
 	public Color getColor() { return this.color; }
 	public int getStructurePoints() { return this.structurePoints; }
@@ -136,6 +143,10 @@ public class SpaceShip extends VisualObject{
 		}
     }
 
+	@Override
+	public String toString() {
+		return "space_ship-" + this.color + "-" + this.getOrientation();
+	}
 }
 
 

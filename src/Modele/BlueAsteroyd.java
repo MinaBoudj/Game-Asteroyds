@@ -7,7 +7,10 @@ public class BlueAsteroyd extends Asteroyd{
 
      /* Constructeurs */
     public BlueAsteroyd(int orientation, Position pos) throws Exception{ // ERREUR : Lien avec le constructeur de Asteroyd concernant l'exception ? 
-		    super(orientation, pos, false);
+		    super(orientation, pos);
+	  }
+    public BlueAsteroyd(int orientation, int x, int y) throws Exception{ // ERREUR : Lien avec le constructeur de Asteroyd concernant l'exception ? 
+		    super(orientation, x,y);
 	  }
 
     
@@ -51,4 +54,8 @@ public class BlueAsteroyd extends Asteroyd{
       }	
 	}
     
+  @Override
+  public String toString() {
+    return "asteroyd-blue-" + this.getOrientation();
+  }
 }

@@ -14,10 +14,6 @@ public class WhiteAsteroyd extends Asteroyd {
     public WhiteAsteroyd(int orientation, Position position)throws Exception{
         super(orientation, position);
     }
-
-    public WhiteAsteroyd(int orientation, Position position, boolean canContainSpaceShip)throws Exception{
-        super(orientation, position, canContainSpaceShip);
-    }
     
     public void move(Cell[][] gameBoard, int[] directions) throws Exception{ // MOUVEMENTS DU BLANC 1 déplacement
         Position pos;
@@ -48,5 +44,8 @@ public class WhiteAsteroyd extends Asteroyd {
         }
     }	
     
-
+    @Override
+    public String tosString() {
+        return "asteroyd-white-" + this.getOrientation();
+    }
 }

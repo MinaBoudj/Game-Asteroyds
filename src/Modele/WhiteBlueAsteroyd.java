@@ -9,6 +9,10 @@ public class WhiteBlueAsteroyd extends BlueAsteroyd{
 	public WhiteBlueAsteroyd(int orientation, Position pos)throws Exception{
 		super(orientation,pos);
 	}
+
+	public WhiteBlueAsteroyd(int orientation, int x, int y)throws Exception{
+		super(orientation, x,y);
+	}
 	
 	@Override
 	public void move(Cell[][] gameBoard, int[] directions) throws Exception{
@@ -43,4 +47,8 @@ public class WhiteBlueAsteroyd extends BlueAsteroyd{
 		
 	}
 		
+	@Override
+	public String toString() {
+		return "asteroyd-white_blue-" + this.getOrientation();
+	}
 }

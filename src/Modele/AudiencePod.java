@@ -14,4 +14,9 @@ public class AudiencePod extends Cell {
     public AudiencePod(Position pos)throws Exception{
         super(1, pos, false);
     }
+
+    @Override
+    public String toString() {
+        return "audience_pod";
+    }
 }

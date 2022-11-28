@@ -7,11 +7,12 @@ package Modele.test;
 import org.junit.Test;
 import org.junit.Before;
 
+import static org.junit.Assert.assertFalse;
+
 import Modele.Asteroyd;
-import Modele.WhiteAsteroyd;
 import Modele.Position;
 
-// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANER LA CALSSE DE TESTS /!\
+// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANCER LA CLASSE DE TESTS /!\
 public class AsteroydTest {
     private Asteroyd ast;
 
@@ -75,4 +76,4 @@ public class AsteroydTest {
         assertFalse(ast.getCanContainSpaceShips());
     }
 }
-// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANER LA CALSSE DE TESTS /!\
+// /!\ NE PAS OUBLIER DE RENDRE LA CLASSE CONCRETE AVANT DE LANCER LA CLASSE DE TESTS /!\

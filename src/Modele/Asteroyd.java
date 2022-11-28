@@ -11,17 +11,13 @@ public abstract class Asteroyd extends Cell {
         super(orientation, pos, false);
     }
 
-    public Asteroyd(int orientation, Position pos, boolean canContainSpaceShips)throws Exception{
-        super( orientation, pos, canContainSpaceShips);
-    }
-
     public Asteroyd(int orientation, int x, int y) throws Exception{
         super(orientation, x, y, false);
     }
 
 
     /* Méthodes */
-    int calculeOrientation(int direction){
+    public int calculeOrientation(int direction){
         int neworientation;
         neworientation = super.getOrientation();
         if(direction == 2 )

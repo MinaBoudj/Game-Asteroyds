@@ -8,7 +8,11 @@ public class WhiteRedAsteroyd extends RedAsteroyd {
 
 
 	public WhiteRedAsteroyd(int orientation, Position pos)throws Exception{
-		super(orientation,pos, false);
+		super(orientation,pos);
+	}
+
+	public WhiteRedAsteroyd(int orientation, int x, int y)throws Exception{
+		super(orientation, x,y);
 	}
 	
 	@Override
@@ -44,5 +48,10 @@ public class WhiteRedAsteroyd extends RedAsteroyd {
 				//faire quoi quand c'est un asteroyd ??
 			}		
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "asteroyd-white_red-" + this.getOrientation();
 	}
 }

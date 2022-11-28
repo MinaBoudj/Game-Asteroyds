@@ -10,7 +10,6 @@ import org.junit.Before;
 import static org.junit.Assert.assertTrue;
 
 import Modele.RedAsteroyd;
-import Modele.Position;
 import Modele.Cell;
 import Modele.EmptyCell;
 import Modele.LaunchPad;
