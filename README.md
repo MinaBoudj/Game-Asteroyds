@@ -39,6 +39,7 @@ pour pouvoir exécuter javafx et lancer le projet. il est nécessaire d'instaler
 - Etape 4 : compiler avec la commande :  
 
     `__javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics src/view/*.java__`
+
 - Etape 5 : excecuter avec la commande :  
 
         `__java -cp bin --module-path "./lib" --add-modules javafx.base,javafx.graphics view/Test__`
