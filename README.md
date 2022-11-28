@@ -42,9 +42,10 @@ pour pouvoir exécuter javafx et lancer le projet. il est nécessaire d'instaler
         __java -cp bin --module-path "./lib" --add-modules javafx.base,javafx.graphics view/Test__
 
 ## Support Utiliser
-- Java
-- Visual Studio Code
-- JavaFx
+une liste de technologies utiliser dans le projet:
+* [java](https://example.com): java 17 2021-09-14 LTS
+* [javaFx](https://example.com): javafx-sdk-11.0.2
+* [VisualStudioCode](https://example.com): Version : 1.73.1 (Universal)
 
 
 ## Authors 
