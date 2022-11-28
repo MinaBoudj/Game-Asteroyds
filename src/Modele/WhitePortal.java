@@ -7,8 +7,8 @@ public class WhitePortal extends WhiteAsteroyd {
 
 	private int relic;
 
-	public WhitePortal(String image, int orientation, Position pos , int relic)throws Exception{
-		super(image,orientation,pos, true);
+	public WhitePortal(int orientation, Position pos , int relic)throws Exception{
+		super(orientation,pos, true);
 		this.relic = relic;
 	}
 

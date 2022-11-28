@@ -7,8 +7,8 @@ package Modele;
 public class WhiteRedAsteroyd extends RedAsteroyd {
 
 
-	public WhiteRedAsteroyd(String image, int orientation, Position pos)throws Exception{
-		super(image,orientation,pos, false);
+	public WhiteRedAsteroyd(int orientation, Position pos)throws Exception{
+		super(orientation,pos, false);
 	}
 	
 	@Override
@@ -29,7 +29,7 @@ public class WhiteRedAsteroyd extends RedAsteroyd {
 				pos = super.getPosition().getForward(neworientation);
 				if(gameBoard[pos.getX()][pos.getY()]!= null && gameBoard[pos.getX()][pos.getY()] instanceof EmptyCell){ //case n'est pas null et vide
 					if(gameBoard[pos.getX()][pos.getY()].getLSpaceShips().size() == 0){//la pos1 ne contient pas de SpaceShip
-						EmptyCell newOne = new EmptyCell(super.toString(),super.getOrientation(), super.getPosition());
+						EmptyCell newOne = new EmptyCell(super.getPosition());
 						super.getPosition().setX(pos.getX());
 						super.getPosition().setY(pos.getY());
 					}else{//contient un ou plusier spaceShip

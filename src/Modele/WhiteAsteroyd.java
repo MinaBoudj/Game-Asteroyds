@@ -7,16 +7,16 @@ package Modele;
 public class WhiteAsteroyd extends Asteroyd {
     
     /* Constructeurs */
-    public WhiteAsteroyd(String imagePath, int orientation, int x, int y)throws Exception{
-        super(imagePath, orientation, x, y);
+    public WhiteAsteroyd(int orientation, int x, int y)throws Exception{
+        super(orientation, x, y);
     }
 
-    public WhiteAsteroyd(String imagePath, int orientation, Position position)throws Exception{
-        super(imagePath, orientation, position);
+    public WhiteAsteroyd(int orientation, Position position)throws Exception{
+        super(orientation, position);
     }
 
-    public WhiteAsteroyd(String imagePath, int orientation, Position position, boolean canContainSpaceShip)throws Exception{
-        super(imagePath, orientation, position, canContainSpaceShip);
+    public WhiteAsteroyd(int orientation, Position position, boolean canContainSpaceShip)throws Exception{
+        super(orientation, position, canContainSpaceShip);
     }
     
     public void move(Cell[][] gameBoard, int[] directions) throws Exception{ // MOUVEMENTS DU BLANC 1 déplacement
@@ -31,7 +31,7 @@ public class WhiteAsteroyd extends Asteroyd {
                 if(gameBoard[pos.getX()][pos.getY()]!= null && gameBoard[pos.getX()][pos.getY()] instanceof EmptyCell){ // Vérifie le type de case
                     if (gameBoard[pos.getX()][pos.getY()].getLSpaceShips().size() == 0) { // Vérifie si la case ne contient rien
                         // Déplacement de l'astéroïde
-                        EmptyCell nec = new EmptyCell(super.toString(), super.getOrientation(), super.getPosition());
+                        EmptyCell nec = new EmptyCell(super.getPosition());
                         super.getPosition().setX(pos.getX());
                         super.getPosition().setY(pos.getY());
                     }

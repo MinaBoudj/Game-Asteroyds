@@ -13,7 +13,7 @@ public class SpaceShip extends VisualObject{
 	
 	
 	/* Constructeur */
-	public SpaceShip(String image,int orientation, Position pos, Color color)throws Exception{//exception dans VisualObject
+	public SpaceShip(int orientation, Position pos, Color color)throws Exception{//exception dans VisualObject
 		super(orientation, pos);
 		this.structurePoints = 6;
         this.relics = new int[]{0,0,0,0};    

@@ -7,11 +7,11 @@ package Modele;
 public class AudiencePod extends Cell {
 
     // Constructeurs
-    public AudiencePod(String imagePath, int orientation, int x, int y)throws Exception{
-        super(imagePath, orientation, x, y, false);               
+    public AudiencePod(int x, int y)throws Exception{
+        super(1, x, y, false);               
     }
 
-    public AudiencePod(String imagePath, int orientation, Position pos)throws Exception{
-        super(imagePath, orientation, pos, false);
+    public AudiencePod(Position pos)throws Exception{
+        super(1, pos, false);
     }
 }

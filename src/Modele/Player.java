@@ -14,10 +14,10 @@ public class Player {
 
 
     /* Constructeur */
-    Player(String name, Color color, String image, int orientation, Position pos) throws Exception{
+    Player(String name, Color color, int orientation, Position pos) throws Exception{
         this.name = name;
         this.relics = new ArrayList<Integer>();
-        this.spaceShip = new SpaceShip(image, orientation, pos, color);
+        this.spaceShip = new SpaceShip(orientation, pos, color);
         this.movements = new Movement[6];
     }
 

@@ -6,18 +6,18 @@ package Modele;
 
 public class RedAsteroyd extends  Asteroyd {
 	
-	public RedAsteroyd(String image, int orientation, Position pos)throws Exception{
-		super(image,orientation,pos, false);
+	public RedAsteroyd(int orientation, Position pos)throws Exception{
+		super(orientation,pos, false);
 	}
 	
-	public RedAsteroyd(String image, int orientation, Position pos, boolean canContainSpaceShip)throws Exception {
-		super(image, orientation, pos, canContainSpaceShip);
+	public RedAsteroyd(int orientation, Position pos, boolean canContainSpaceShip)throws Exception {
+		super(orientation, pos, canContainSpaceShip);
 	}
 	
 	@Override
 	public void move(Cell[][] gameBoard, int[] directions)throws Exception {
 		Position pos1, pos2;
-		if(directions[0]<0||directions[0]>6) throw new Exception("direction rouge incorrect ");
+		if(directions[0]<0||directions[0]>6||gameBoard[super.getPosition().getX()][super.getPosition().getY()]!= this) throw new Exception("direction rouge incorrect ");
 		else{
 			//changer l'orientation selon la direction
 			//ne peu pas faire bouger un objet devant lui
@@ -32,7 +32,7 @@ public class RedAsteroyd extends  Asteroyd {
 						if(gameBoard[pos2.getX()][pos2.getY()]!= null && gameBoard[pos2.getX()][pos2.getY()] instanceof EmptyCell){ //case n'est pas null et vide 
 								//verifier que la case ne contient pas de vesseau
 								if(gameBoard[pos2.getX()][pos2.getY()].getLSpaceShips().size() == 0){ //ne contient pas de SpaceShip 
-										EmptyCell newOne = new EmptyCell(super.toString(),super.getOrientation(), super.getPosition());
+										EmptyCell newOne = new EmptyCell(super.getPosition());
 										//rien dans la case (il a bougé de 2 cases)
 										super.getPosition().setX(pos2.getX());
 										super.getPosition().setY(pos2.getY());
@@ -42,12 +42,12 @@ public class RedAsteroyd extends  Asteroyd {
 											gameBoard[pos2.getX()][pos2.getY()].getLSpaceShips().get(i).minusStructurePoint(1);
 									}
 									//et on le met dans la pos1
-									EmptyCell newOne = new EmptyCell(super.toString(),super.getOrientation(), super.getPosition());
+									EmptyCell newOne = new EmptyCell(super.getPosition());
 									super.getPosition().setX(pos1.getX());
 									super.getPosition().setY(pos1.getY());
 								}
 						}else{ //le metre donc dans la 1eme
-							EmptyCell newOne = new EmptyCell(super.toString(),super.getOrientation(), super.getPosition());
+							EmptyCell newOne = new EmptyCell(super.getPosition());
 							super.getPosition().setX(pos1.getX());
 							super.getPosition().setY(pos1.getY());
 						}
