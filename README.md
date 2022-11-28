@@ -38,11 +38,11 @@ pour pouvoir exécuter javafx et lancer le projet. il est nécessaire d'instaler
 - Etape 3 : cree un répertoire vide nommé bin dans la branche du projet. Qui contiendra tous les fichiers d'excution des classes
 - Etape 4 : compiler avec la commande :  
 
-        `__javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics src/view/*.java__`
+        __javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics src/view/*.java__
 
 - Etape 5 : excecuter avec la commande :  
 
-        `__java -cp bin --module-path "./lib" --add-modules javafx.base,javafx.graphics view/Test__`
+        __java -cp bin --module-path "./lib" --add-modules javafx.base,javafx.graphics view/Test__
 
 ## Support Utiliser
 une liste de technologies utiliser dans le projet:
