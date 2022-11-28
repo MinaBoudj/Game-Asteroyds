@@ -36,16 +36,16 @@ pour pouvoir exécuter javafx et lancer le projet. il est nécessaire d'instaler
 - Etape 1 : installer javafx selon la version de votre systéme d'exploitation. cliquer sur le lien d'instalation https://openjfx.io
 - Etape 2 : copier le docier lib dans la branche du projet
 - Etape 3 : cree un répertoire vide nommé bin dans la branche du projet. Qui contiendra tous les fichiers d'excution des classes
-- Etape 4 : compiler avec la commande : 
-        __javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics src/view/*.java__
-- Etape 5 : excecuter avec la commande :
-        __java -cp bin --module-path "./lib" --add-modules javafx.base,javafx.graphics view/Test__
+- Etape 4 : compiler avec la commande :  
+    `*__javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics src/view/*.java__`
+- Etape 5 : excecuter avec la commande :  
+        `*__java -cp bin --module-path "./lib" --add-modules javafx.base,javafx.graphics view/Test__`
 
 ## Support Utiliser
 une liste de technologies utiliser dans le projet:
-* [java](https://example.com): java 17 2021-09-14 LTS
-* [javaFx](https://example.com): javafx-sdk-11.0.2
-* [VisualStudioCode](https://example.com): Version : 1.73.1 (Universal)
+* [java] (https://www.java.com/fr/) : java 17 2021-09-14 LTS
+* [javaFx] (https://openjfx.io) : javafx-sdk-11.0.2
+* [VisualStudioCode](https://code.visualstudio.com) : Version : 1.73.1 (Universal)
 
 
 ## Authors 
