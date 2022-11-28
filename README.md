@@ -30,8 +30,16 @@ Un __WhiteBleuAsteroyd__ est un astéroïde bleu qui a les déplacements d’
 Un __WhiteRedAsteroyd__ est un astéroïde rouge qui a les déplacements d’un astéroïde bleu et blanc cumulés.
 
 
-## Usage
-Un jeu à jouer entre amis.
+## Compilation et excution du projet 
+pour pouvoir exécuter javafx et lancer le projet. il est nécessaire d'instaler quelque fonctionnalité java.
+
+Etape 1 : installer javafx selon la version de votre systéme d'exploitation. cliquer sur le lien d'instalation https://openjfx.io
+Etape 2 : copier le docier lib dans la branche du projet
+Etape 3 : cree un répertoire vide nommé bin dans la branche du projet. Qui contiendra tous les fichiers d'excution des classes
+Etape 4 : compiler avec la commande : 
+        javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics src/view/*.java
+Etape 5 : excecuter avec la commande :
+        java -cp bin --module-path "./lib" --add-modules javafx.base,javafx.graphics view/Test
 
 ## Support Utiliser
 - Java
