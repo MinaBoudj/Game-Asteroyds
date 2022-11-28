@@ -33,13 +33,13 @@ Un __WhiteRedAsteroyd__ est un astéroïde rouge qui a les déplacements d’
 ## Compilation et excution du projet 
 pour pouvoir exécuter javafx et lancer le projet. il est nécessaire d'instaler quelque fonctionnalité java.
 
-Etape 1 : installer javafx selon la version de votre systéme d'exploitation. cliquer sur le lien d'instalation https://openjfx.io
-Etape 2 : copier le docier lib dans la branche du projet
-Etape 3 : cree un répertoire vide nommé bin dans la branche du projet. Qui contiendra tous les fichiers d'excution des classes
-Etape 4 : compiler avec la commande : 
-        javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics src/view/*.java
-Etape 5 : excecuter avec la commande :
-        java -cp bin --module-path "./lib" --add-modules javafx.base,javafx.graphics view/Test
+- Etape 1 : installer javafx selon la version de votre systéme d'exploitation. cliquer sur le lien d'instalation https://openjfx.io
+- Etape 2 : copier le docier lib dans la branche du projet
+- Etape 3 : cree un répertoire vide nommé bin dans la branche du projet. Qui contiendra tous les fichiers d'excution des classes
+- Etape 4 : compiler avec la commande : 
+        __javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics src/view/*.java__
+- Etape 5 : excecuter avec la commande :
+        __java -cp bin --module-path "./lib" --add-modules javafx.base,javafx.graphics view/Test__
 
 ## Support Utiliser
 - Java
@@ -51,6 +51,7 @@ Etape 5 : excecuter avec la commande :
 - ABBACI Juba
 - ACKERMANN Matéo
 - BOUDJEDIR Amina
+- BOUILLON Maylis
 - MOGUE GEGOUE Bebeine
 
 ## Project status
