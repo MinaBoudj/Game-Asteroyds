@@ -6,6 +6,7 @@ package Modele;
 
 public abstract class Asteroyd extends Cell {
     
+    /* Constructeurs */
     public Asteroyd(String image, int orientation, Position pos)throws Exception{
         super(image,orientation, pos, false);
     }
@@ -18,6 +19,8 @@ public abstract class Asteroyd extends Cell {
         super(image,orientation, x, y, false);
     }
 
+
+    /* Méthodes */
     int calculeOrientation(int direction){
         int neworientation;
         neworientation = super.getOrientation();
@@ -35,5 +38,6 @@ public abstract class Asteroyd extends Cell {
         return neworientation;
     }
 
+    /* Méthodes abstraites */
     public abstract void move(Cell[][] gameBoard, int[] directions)throws Exception;
 }

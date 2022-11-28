@@ -10,6 +10,8 @@ public class BlueAsteroyd extends Asteroyd{
 		    super(image, orientation, pos, false);
 	  }
 
+    
+    /* Méthodes */
     @Override
     public void move(Cell[][] gameBoard, int[] directions) throws Exception{ // Mouvements d'un astéroïde bleu : 1 pas + peut pousser si besoin
       Position pos1, pos2;

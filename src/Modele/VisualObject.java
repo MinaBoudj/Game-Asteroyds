@@ -10,6 +10,7 @@ public abstract class VisualObject {
     private int orientation;
     private Position position;
 
+
     /* Constructeurs */
     public VisualObject(int orientation, int x, int y) throws Exception{
         if(orientation<0||orientation>6) throw new Exception("Erreur dans la valeur de l'orientation");
@@ -39,6 +40,7 @@ public abstract class VisualObject {
         return this.orientation;
     }
 
+
     /* Setters */
     public void setOrientation(int orientation) throws Exception{
         if(orientation<0||orientation>6) throw new Exception("Erreur dans la valeur de l'orientation");
@@ -50,6 +52,7 @@ public abstract class VisualObject {
         this.position = pos;
     }
 
+    
     /* Méthode */
     @Override
     public String toString(){

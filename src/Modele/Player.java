@@ -12,6 +12,7 @@ public class Player {
     private SpaceShip spaceShip; // Son vaisseau
     public Movement[] movements; // Sa liste de mouvements
 
+
     /* Constructeur */
     Player(String name, Color color, String image, int orientation, Position pos) throws Exception{
         this.name = name;
@@ -20,16 +21,19 @@ public class Player {
         this.movements = new Movement[6];
     }
 
+
     /* Setter */
     public void setMovement(int indice_tab, Movement movement) {
         this.movements[indice_tab] = movement;
     }
+
 
     /* Getter */
     public int getNumberOfRelics() { // Retourne le nombre de reliques que possède le joueur.
         return this.relics.size();
     }
 
+    
     /* Méthode */
     public boolean hasRelic(int relic) { // Vérifie si le joueur possède une relique passée en paramètre.
         for (int i : relics) {
