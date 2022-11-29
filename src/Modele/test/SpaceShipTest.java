@@ -12,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 import Modele.SpaceShip;
 import Modele.Position;
 import Modele.Color;
+import Modele.EmptyCell;
 import Modele.Cell;
 import Modele.Movement;
 
@@ -23,36 +24,21 @@ public class SpaceShipTest {
 
     @Before
     public void constructSpaceShip() throws Exception {
-        spaceShip1 = new SpaceShip("Green",4,new Position(4,4), Color.Green);
-        spaceShip2 = new SpaceShip("Green",5,new Position(1,4), Color.Green);        
+        spaceShip1 = new SpaceShip(4,new Position(4,4), Color.Green);
+        spaceShip2 = new SpaceShip(5,new Position(1,4), Color.Green);  
+        EmptyCell eCell = new EmptyCell(4,4);
+        eCell.addLSpaceShip(spaceShip1);   
+        gameBoard = new Cell[][]{{null,null,null,null,null},{null,null,null,null,null},{null,null,null,null,null},{null,null,null,null,null},{null,new EmptyCell(1,4), new EmptyCell(2,4), new EmptyCell(3,4), eCell}};  
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullOrientation() throws Exception{
-        new SpaceShip("Green",0,new Position(4,4), Color.Green);
-    }
-
-    @Test
-    public void testMoveLeft() throws Exception {
-        spaceShip1.moveLeft();
-        assertTrue(spaceShip1.getOrientation()==3);
-    }
-
-    @Test
-    public void testMoveRight() throws Exception {
-        spaceShip1.moveRight();
-        assertTrue(spaceShip1.getOrientation()==5);
-    }
-    
-    @Test
-    public void testTurnAround() throws Exception {
-        spaceShip1.turnAround();
-        assertTrue(spaceShip1.getOrientation()==1);
+        new SpaceShip(0,new Position(4,4), Color.Green);
     }
     
     @Test
     public void testMove() throws Exception {
-        spaceShip1.Move(gameBoard,new Movement[]{Movement.Right,Movement.Forward,Movement.Forward});
-        assertTrue(gameBoard[1][4] == spaceShip2);
+        spaceShip1.move(gameBoard,new Movement[]{Movement.Right,Movement.Forward,Movement.Forward});
+        assertTrue(gameBoard[1][4].getLSpaceShips().contains(spaceShip2));
     }
 }
