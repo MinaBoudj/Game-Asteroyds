@@ -45,7 +45,7 @@ public class WhiteAsteroyd extends Asteroyd {
     }	
     
     @Override
-    public String tosString() {
+    public String toString() {
         return "asteroyd-white-" + this.getOrientation();
     }
 }
