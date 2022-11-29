@@ -6,28 +6,21 @@ package Modele;
 */
 
 public abstract class VisualObject {
-    private String imagePath;
     private int orientation;
     private Position position;
 
 
     /* Constructeurs */
-    public VisualObject(int orientation, int x, int y) throws Exception{
-        if(orientation<0 || orientation>6 || x<0 || y<0) throw new Exception("Erreur dans la valeur de l'orientation");
-        else{
-            this.imagePath = " ";
-            this.orientation = orientation;
-            this.position = new Position(x, y);
-        }
-    }
-
     public VisualObject(int orientation, Position position) throws Exception{
-        if(orientation<0||orientation>6 || position==null) throw new Exception("Erreur dans la valeur de l'orientation");
+        if(orientation<=0 || orientation>6 || position.getX()<0 || position.getY()<0) throw new Exception("Erreur dans la valeur de l'orientation");
         else{
-            this.imagePath = " ";
             this.orientation = orientation;
             this.position = position;
         }
+    }
+
+    public VisualObject(int orientation, int x, int y) throws Exception{
+        this(orientation, new Position(x, y));
     }
 
 
@@ -43,7 +36,7 @@ public abstract class VisualObject {
 
     /* Setters */
     public void setOrientation(int orientation) throws Exception{
-        if(orientation<0||orientation>6) throw new Exception("Erreur dans la valeur de l'orientation");
+        if(orientation<=0||orientation>6) throw new Exception("Erreur dans la valeur de l'orientation");
         else
             this.orientation = orientation;
     }
@@ -53,9 +46,5 @@ public abstract class VisualObject {
     }
 
     
-    /* Méthode */
-    @Override
-    public String toString(){
-        return this.imagePath; 
-    }
+    
 }

@@ -17,32 +17,32 @@ public class PlayerTest {
 
     @Before
     public void constructPlayer() throws Exception {
-        player = new Player("amina",Color.Red,3, new position(1,3));
+        player = new Player("amina",Color.Red,3, new Position(1,3));
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullOrientation() throws Exception {
-        new Player("amina",Color.Red,0, new position(1,3));
+        new Player("amina",Color.Red,0, new Position(1,3));
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeOrientation() throws Exception {
-        new Player("amina",Color.Red,-1, new position(1,3));
+        new Player("amina",Color.Red,-1, new Position(1,3));
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithTooBigOrientation() throws Exception {
-        new Player("amina",Color.Red,18, new position(1,3));
+        new Player("amina",Color.Red,18, new Position(1,3));
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeX() throws Exception {
-        new Player("amina",Color.Red,3, new position(-1,3));
+        new Player("amina",Color.Red,3, new Position(-1,3));
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeY() throws Exception {
-        new Player("amina",Color.Red,3, new position(1,-3));
+        new Player("amina",Color.Red,3, new Position(1,-3));
     }
 
     @Test(expected = Exception.class)
@@ -52,7 +52,7 @@ public class PlayerTest {
 
     @Test
     public void testConstructorWithGoodArguments() throws Exception {
-        new Player("amina",Color.Red,3, new position(1,3));
+        new Player("amina",Color.Red,3, new Position(1,3));
     }
 
     @Test(expected = Exception.class)

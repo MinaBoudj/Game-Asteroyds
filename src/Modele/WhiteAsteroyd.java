@@ -17,15 +17,15 @@ public class WhiteAsteroyd extends Asteroyd {
     
     public void move(Cell[][] gameBoard, int[] directions) throws Exception{ // MOUVEMENTS DU BLANC 1 déplacement
         Position pos;
-        if(directions[1]<0||directions[1]>6) throw new Exception("direction rouge incorrect ");
+        if(directions[1]<=0||directions[1]>6 || gameBoard[super.getPosition().getY()][super.getPosition().getX()]!= this) throw new Exception("direction rouge incorrect ");
 		else{
             try {
                 //Définir l'orientation
                 int neworientation = calculeOrientation(directions[1]);
                 pos = super.getPosition().getForward(neworientation);
 
-                if(gameBoard[pos.getX()][pos.getY()]!= null && gameBoard[pos.getX()][pos.getY()] instanceof EmptyCell){ // Vérifie le type de case
-                    if (gameBoard[pos.getX()][pos.getY()].getLSpaceShips().size() == 0) { // Vérifie si la case ne contient rien
+                if(gameBoard[pos.getY()][pos.getX()]!= null && gameBoard[pos.getY()][pos.getX()] instanceof EmptyCell){ // Vérifie le type de case
+                    if (gameBoard[pos.getY()][pos.getX()].getLSpaceShips().size() == 0) { // Vérifie si la case ne contient rien
                         // Déplacement de l'astéroïde
                         EmptyCell nec = new EmptyCell(super.getPosition());
                         super.getPosition().setX(pos.getX());
@@ -33,8 +33,8 @@ public class WhiteAsteroyd extends Asteroyd {
                     }
                 else { // la case contient déja un vaisseau.
                     // Infliger des dégâts au vaisseau.
-                    for(int i=0; i<gameBoard[pos.getX()][pos.getY()].getLSpaceShips().size(); i++){
-                        gameBoard[pos.getX()][pos.getY()].getLSpaceShips().get(i).minusStructurePoint(1);
+                    for(int i=0; i<gameBoard[pos.getY()][pos.getX()].getLSpaceShips().size(); i++){
+                        gameBoard[pos.getY()][pos.getX()].getLSpaceShips().get(i).minusStructurePoint(1);
                     }
                 }
             } 	

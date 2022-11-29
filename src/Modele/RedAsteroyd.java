@@ -15,9 +15,9 @@ public class RedAsteroyd extends  Asteroyd {
 	}
 	
 	@Override
-	public void move(Cell[][] gameBoard, int[] directions)throws Exception {
+	public void move(Cell[][] gameBoard, int[] directions)throws Exception {//inverser Ligne et colonne dans tt les gameBoard
 		Position pos1, pos2;
-		if(directions[0]<0||directions[0]>6||gameBoard[super.getPosition().getX()][super.getPosition().getY()]!= this) throw new Exception("direction rouge incorrect ");
+		if(directions[0]<=0||directions[0]>6||gameBoard[super.getPosition().getX()][super.getPosition().getY()]!= this) throw new Exception("direction rouge incorrect ");
 		else{
 			//changer l'orientation selon la direction
 			//ne peu pas faire bouger un objet devant lui

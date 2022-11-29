@@ -17,7 +17,8 @@ public abstract class Asteroyd extends Cell {
 
 
     /* Méthodes */
-    public int calculeOrientation(int direction){
+    public int calculeOrientation(int direction)throws Exception{
+        if(direction<=0 || direction>6) throw new Exception("orientation incorrect");
         int neworientation;
         neworientation = super.getOrientation();
         if(direction == 2 )

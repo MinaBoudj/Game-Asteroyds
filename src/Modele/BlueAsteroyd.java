@@ -18,7 +18,7 @@ public class BlueAsteroyd extends Asteroyd{
     @Override
     public void move(Cell[][] gameBoard, int[] directions) throws Exception{ // Mouvements d'un astéroïde bleu : 1 pas + peut pousser si besoin
       Position pos1, pos2;
-      if(directions[2]<0||directions[2]>6||gameBoard[super.getPosition().getX()][super.getPosition().getY()]!= this) throw new Exception("erreur de direction bleu");
+      if(directions[2]<=0||directions[2]>6||gameBoard[super.getPosition().getY()][super.getPosition().getX()]!= this) throw new Exception("erreur de direction bleu");
       else{
         try{
           // Définir l'orientation
@@ -26,23 +26,23 @@ public class BlueAsteroyd extends Asteroyd{
           pos1 = super.getPosition().getForward(neworientation); // Case en face.
           pos2 = pos1.getForward(neworientation); // Case derrière la case en face.
 
-          if(gameBoard[pos1.getX()][pos1.getY()]!= null && gameBoard[pos1.getX()][pos1.getY()] instanceof EmptyCell) { // Si la première case est vide
+          if(gameBoard[pos1.getY()][pos1.getX()]!= null && gameBoard[pos1.getY()][pos1.getX()] instanceof EmptyCell) { // Si la première case est vide
               if (gameBoard[pos1.getX()][pos1.getY()].getLSpaceShips().size() == 0) {
                 // Déplacement de l'astéroïde
                 EmptyCell nec = new EmptyCell(super.getPosition());  
                 super.getPosition().setX(pos1.getX());
                 super.getPosition().setY(pos1.getY());
               } 
-              else if (gameBoard[pos2.getX()][pos2.getY()]!= null && gameBoard[pos2.getX()][pos2.getY()] instanceof EmptyCell) { // Si la 2ème case est vide
-                if (gameBoard[pos2.getX()][pos2.getY()].getLSpaceShips().size() == 0) {
+              else if (gameBoard[pos2.getY()][pos2.getX()]!= null && gameBoard[pos2.getY()][pos2.getX()] instanceof EmptyCell) { // Si la 2ème case est vide
+                if (gameBoard[pos2.getY()][pos2.getX()].getLSpaceShips().size() == 0) {
                   // Déplacement de l'astéroïde (obstacle)
                   EmptyCell nec = new EmptyCell(super.getPosition()); // super au lieu de pos 1 ?
                   super.getPosition().setX(pos2.getX()); // super au lieu de pos 1 ?
                   super.getPosition().setY(pos2.getY()); // super au lieu de pos 1 ?
                 } else {
                     // Infliger des dégâts
-                    for(int i=0; i<gameBoard[pos1.getX()][pos1.getY()].getLSpaceShips().size(); i++){
-                      gameBoard[pos1.getX()][pos1.getY()].getLSpaceShips().get(i).minusStructurePoint(1);
+                    for(int i=0; i<gameBoard[pos1.getY()][pos1.getX()].getLSpaceShips().size(); i++){
+                      gameBoard[pos1.getY()][pos1.getX()].getLSpaceShips().get(i).minusStructurePoint(1);
                     }
                   }
               }

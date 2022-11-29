@@ -8,14 +8,13 @@ public class RedPortal extends RedAsteroyd{
 
 	public RedPortal(int orientation, Position pos, int relic)throws Exception{
 		super(orientation, pos);
+		if(relic <=0 || relic>4) throw new Exception("relic incorrect");
 		this.setCanContainSpaceShips(true);
 		this.relic = relic;
 	}
 
 	public RedPortal(int orientation, int x, int y, int relic)throws Exception{
-		super(orientation, x,y);
-		this.setCanContainSpaceShips(true);
-		this.relic = relic;
+		this(orientation, new Position(x,y), relic);
 	}
 	
 	/* getteur et setteur */

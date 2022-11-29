@@ -9,39 +9,40 @@ public class Position {
     int y; // Ordonnée
 
     
-    public Position(int x, int y) {  /* Constructeur */
+    public Position(int x, int y)throws Exception {  /* Constructeur */
+        if(x<0 || y<0) throw new Exception("x ou y < 0"); 
         this.x = x; this.y = y;
     }
 
-    private Position getTopRight() { // Retourne la position de la case en haut à droite
+    private Position getTopRight() throws Exception { // Retourne la position de la case en haut à droite
         if (this.y%2 == 0)
             return new Position(x, y-1);
         return new Position(x+1, y-1);
     }
 
-    private Position getTopLeft() { // Retourne la position de la case en haut à gauche
+    private Position getTopLeft()throws Exception { // Retourne la position de la case en haut à gauche
         if (this.y%2 == 0)
             return new Position(x-1, y-1);
         return new Position(x, y-1);
     }
 
-    private Position getBottomRight() { // Retourne la posiiton de la case en bas à droite
+    private Position getBottomRight() throws Exception{ // Retourne la posiiton de la case en bas à droite
          if (this.y%2 == 0)
-            return new Position(x, y+1);
-        return new Position(x+1, y+1);
+            return new Position(x+1, y+1);
+        return new Position(x, y+1);
     }
 
-    private Position getBottomLeft() { // Retourne la position de la case en bas à gauche
+    private Position getBottomLeft()throws Exception { // Retourne la position de la case en bas à gauche
          if (this.y%2 == 0)
             return new Position(x-1, y+1);
         return new Position(x, y+1);
     }
 
-    private Position getLeft() { // Retourne la position de la case à gauche
+    private Position getLeft() throws Exception{ // Retourne la position de la case à gauche
         return new Position(x-1, y);
     }
 
-    private Position getRight() { // Retourne la position de la case à droite
+    private Position getRight() throws Exception{ // Retourne la position de la case à droite
         return new Position(x+1, y);
     }
 
@@ -63,6 +64,7 @@ public class Position {
 
 
     public Position getForward(int orientation) throws Exception {  // Renvoie la position de la prochaine case selon l'orientation, ou la même position si il n'y a rien devant.
+        if (orientation<=0 || orientation>6) throw new Exception("orientation <= 0 ou 6");
         switch (orientation) {
             case 6:
                 if ((this.x == 0 && this.y%2 == 0) || this.y == 0) {

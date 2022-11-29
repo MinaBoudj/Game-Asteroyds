@@ -22,7 +22,7 @@ public abstract class Cell extends VisualObject {
 		super(orientation,x,y);
 		//super.setImagePath(image);
 		this.canContainSpaceShips = canContainSpaceShips;
-		this.LSpaceShips = null;
+		this.LSpaceShips = new ArrayList<SpaceShip>();
 	}
 	
 	/* getteur and setteur */
