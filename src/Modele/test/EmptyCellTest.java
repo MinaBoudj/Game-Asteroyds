@@ -61,8 +61,9 @@ public class EmptyCellTest {
 
     @Test
     public void testRemoveSpaceShip() throws Exception {
-        eCell.addLSpaceShip(new SpaceShip(6, new Position(7, 4), Color.Green));
-        eCell.removeLSpaceShip(new SpaceShip(6, new Position(7, 4), Color.Green));
+        SpaceShip ship = new SpaceShip(6, new Position(7, 4), Color.Green);
+        eCell.addLSpaceShip(ship);
+        eCell.removeLSpaceShip(ship);
         assertTrue(eCell.getLSpaceShips().size() == 0);
     }
 

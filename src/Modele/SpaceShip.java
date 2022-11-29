@@ -29,7 +29,7 @@ public class SpaceShip extends VisualObject{
 	public int getStructurePoints() { return this.structurePoints; }
     public int getNumberOfRelics() {  //nombre de relics que possede le vaisseau
         int nb =0;
-        for (int i=0; i<=4; i++){
+        for (int i=0; i<4; i++){
             if(relics[i] != 0){
                 nb++;
             }

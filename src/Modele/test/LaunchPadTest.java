@@ -61,8 +61,9 @@ public class LaunchPadTest {
 
     @Test
     public void testRemoveSpaceShip() throws Exception {
-        lPad.addLSpaceShip(new SpaceShip(6, new Position(7, 4), Color.Green));
-        lPad.removeLSpaceShip(new SpaceShip(6, new Position(7, 4), Color.Green));
+        SpaceShip ship = new SpaceShip(6, new Position(7, 4), Color.Green);
+        lPad.addLSpaceShip(ship);
+        lPad.removeLSpaceShip(ship);
         assertTrue(lPad.getLSpaceShips().size() == 0);
     }
 
