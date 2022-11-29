@@ -8,9 +8,9 @@ import org.junit.Test;
 import org.junit.Before;
 
 import Modele.Player;
-import Modele.SpaceShip;
 import Modele.Color;
 import Modele.Movement;
+import Modele.Position;
 
 public class PlayerTest {
     private Player player;

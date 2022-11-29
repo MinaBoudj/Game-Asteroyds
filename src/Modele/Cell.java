@@ -13,16 +13,12 @@ public abstract class Cell extends VisualObject {
 	/* Constructeur */
 	public Cell(int orientation, Position pos, boolean canContainSpaceShips)throws Exception{
 		super(orientation,pos);
-		//super.setImagePath(image);
 		this.canContainSpaceShips = canContainSpaceShips;
 		this.LSpaceShips = new ArrayList<SpaceShip>();
 	}
 	
 	public Cell(int orientation, int x, int y, boolean canContainSpaceShips)throws Exception {
-		super(orientation,x,y);
-		//super.setImagePath(image);
-		this.canContainSpaceShips = canContainSpaceShips;
-		this.LSpaceShips = new ArrayList<SpaceShip>();
+		this(orientation, new Position(x, y), canContainSpaceShips);
 	}
 	
 	/* getteur and setteur */

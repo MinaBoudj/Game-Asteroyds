@@ -21,10 +21,7 @@ public class SpaceShip extends VisualObject{
 	}
 	
 	public SpaceShip(int orientation, int x, int y, Color color)throws Exception{//exception dans VisualObject
-		super(orientation, x,y);
-		this.structurePoints = 6;
-        this.relics = new int[]{0,0,0,0};    
-        this.color = color;
+		this(orientation, new Position(x, y), color);
 	}
 	
 	/* Getteur and setteur */
