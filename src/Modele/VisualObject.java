@@ -13,7 +13,7 @@ public abstract class VisualObject {
 
     /* Constructeurs */
     public VisualObject(int orientation, int x, int y) throws Exception{
-        if(orientation<0||orientation>6) throw new Exception("Erreur dans la valeur de l'orientation");
+        if(orientation<0||orientation>6||x<0||y<0) throw new Exception("Erreur dans la valeur de l'orientation");
         else{
             this.imagePath = " ";
             this.orientation = orientation;
@@ -22,7 +22,7 @@ public abstract class VisualObject {
     }
 
     public VisualObject(int orientation, Position position) throws Exception{
-        if(orientation<0||orientation>6) throw new Exception("Erreur dans la valeur de l'orientation");
+        if(orientation<0||orientation>6||x<0||y<0) throw new Exception("Erreur dans la valeur de l'orientation");
         else{
             this.imagePath = " ";
             this.orientation = orientation;
