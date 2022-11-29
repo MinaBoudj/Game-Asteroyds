@@ -38,15 +38,13 @@ public abstract class Cell extends VisualObject {
 	// ajouter un vaisseau dans la liste des vaisseaux
 	public void addLSpaceShip(SpaceShip newSpace) throws Exception{
 		if(newSpace == null) throw new Exception("pointeur null");
-		else
-			this.LSpaceShips.add(newSpace);
+		this.LSpaceShips.add(newSpace);
 	}
 
 	//retirer un vaisseau de la liste des vaisseaux
 	public void removeLSpaceShip(SpaceShip newS)throws Exception{
 		if(newS == null) throw new Exception("pointeur null");
-		else
-			this.LSpaceShips.remove(newS);
+		this.LSpaceShips.remove(newS);
 	}
 
 }
