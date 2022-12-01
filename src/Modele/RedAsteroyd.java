@@ -6,6 +6,7 @@ package Modele;
 
 public class RedAsteroyd extends  Asteroyd {
 	
+	/* constructeur d'un asteroid rouge */
 	public RedAsteroyd(int orientation, Position pos)throws Exception{
 		super(orientation, pos);
 	}
@@ -15,7 +16,8 @@ public class RedAsteroyd extends  Asteroyd {
 	}
 	
 	@Override
-	public void move(Cell[][] gameBoard, int[] directions)throws Exception {//inverser Ligne et colonne dans tt les gameBoard
+	//mouvement d'un asteroid rouge
+	public void move(Cell[][] gameBoard, int[] directions)throws Exception {
 		Position pos1, pos2;
 		if(directions[0]<=0||directions[0]>6||gameBoard[super.getPosition().getY()][super.getPosition().getX()]!= this) throw new Exception("direction rouge incorrect ");
 		else{

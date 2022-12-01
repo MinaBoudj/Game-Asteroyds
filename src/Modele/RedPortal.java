@@ -6,6 +6,7 @@ public class RedPortal extends RedAsteroyd{
 
 	private int relic;
 
+	/* construction d'un portail rouge */
 	public RedPortal(int orientation, Position pos, int relic)throws Exception{
 		super(orientation, pos);
 		if(relic <=0 || relic>4) throw new Exception("relic incorrect");
@@ -21,6 +22,7 @@ public class RedPortal extends RedAsteroyd{
 	public int getRelic(){ return this.relic; }
 
 	@Override
+	//redefinition de la methode ajout de spaceShip
 	public void addLSpaceShip(SpaceShip newSpace)throws Exception{
 		super.getLSpaceShips().add(newSpace);
 		if(this.relic <1 || this.relic>4) throw new Exception("valeur de relic à ajouter < 1 ou > 4");
