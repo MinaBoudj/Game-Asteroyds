@@ -4,7 +4,7 @@ package view;
  * @autor Maylis
 */
 
-import javafx.application.Application;
+//import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-//import javafx.scene.image.ImageView; 
 import javafx.geometry.Insets; 
 import javafx.scene.Group;
 import javafx.scene.layout.BackgroundFill;
@@ -27,29 +26,21 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.effect.Glow; 
 import javafx.stage.Screen;
 import javafx.geometry.Rectangle2D;
-//import javafx.stage.*;
 
 
 
 public class Mainscene {
 
-  private Stage stage;
-  //private Scene menu, select, game, results, finalresults;
-  //private Group root; 						// To see
-  private double screenWidth,
-                 screenHeight;
-
-    public Mainscene(Stage s){ 
+    public Mainscene(Stage stage, double screenWidth, double screenHeight){ 
 
 		// ------------- Edition du stage ----------------------
         StackPane stackmenu = new StackPane();
 		Scene menu = new Scene(stackmenu);
 
-        stage = s;
-        stage.setTitle("Asteroyds");		// nom de la fenetre
-        stage.setScene(menu);				// spécifie la scene a utiliser
-        stage.setFullScreen(true);			// met en plein écran
-        stage.show();						// montre la scene
+        stage.setTitle("Asteroyds");		
+        stage.setScene(menu);				
+        stage.setFullScreen(true);			
+        stage.show();						
         
         screenWidth = menu.getWidth();		// largeur de la scene
         screenHeight = menu.getHeight();	// longueur de la scene
@@ -57,40 +48,34 @@ public class Mainscene {
 
 		// ---------------Création du menu principal---------------------
 		
-		// Background creation
+		// Background build
 		try {
 			Screen screen = Screen.getPrimary();
 			Rectangle2D bounds = screen.getVisualBounds();
 			
-			stage.setFullScreen(true);
 			stage.setX(bounds.getMinX());
 			stage.setY(bounds.getMinY());
 			stage.setWidth(bounds.getWidth());
 			stage.setHeight(bounds.getHeight());
 	
 			StackPane back = new StackPane();
-			back.setStyle("-fx-background-image: url(" +
+			stack.setStyle("-fx-background-image: url(" +
 						  "'https://cutewallpaper.org/28/cool-black-space-gif-wallpaper/resultado-de-imagem-para-space-gif-outer-space-wallpaper-star-wallpaper-wallpaper-space.gif'" +"); " +
 						  "-fx-background-size: cover;"
 			);
 			stackmenu.getChildren().add(back);
 
-            //stackmenu.getChildren().add(ShapeConstructor.newImage("background", screenWidth,screenHeight, screenWidth/2,screenHeight/2, 1));
-            //ImageView backmenu = ShapeConstructor.newImage("Back_menu", 1,1, 0,0);
-			//backmenu.setFitHeight(screenWidth*1.1);	
-			//backmenu.setFitWidth(screenWidth*1.1);
         } catch (Exception e) {
 			// si erreur, couleur par défaut en noir
             menu.setFill(Color.BLACK);	
         }
-		
-        
-		AnchorPane pane_menu = new AnchorPane();
-		stackmenu.getChildren().add(pane_menu);
-		
+	
 		// Sérapartion des espaces
 		// Menu
-		Group test = new Group();
+		AnchorPane pane_menu = new AnchorPane();
+		stackmenu.getChildren().add(pane_menu);
+		Group container = new Group();
+
 		VBox container_menu = new VBox();
         container_menu.setPadding(new Insets(20));
         container_menu.setSpacing(16);
@@ -98,11 +83,10 @@ public class Mainscene {
         container_menu.setPrefHeight(screenHeight);
 
         
-			// set background of container
-			// note si marche pas, travailler avec les proportions screenWidth*1.1
-			BackgroundFill background_fill = new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
-			Background background = new Background(background_fill);
-			container_menu.setBackground(background);
+		// set background of container
+		BackgroundFill background_fill = new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
+		Background background = new Background(background_fill);
+		container_menu.setBackground(background);
 	
         // Rectangle vide
         Rectangle rect = new Rectangle(0,0, screenWidth*0.7,screenHeight);
@@ -110,8 +94,8 @@ public class Mainscene {
 		
         AnchorPane.setLeftAnchor(rect, 0.0);
         AnchorPane.setRightAnchor(container_menu,0.0);
-		test.getChildren().add(container_menu);
-        pane_menu.getChildren().addAll(rect, test);
+		container.getChildren().add(container_menu);
+        pane_menu.getChildren().addAll(rect, container);
 
 		// Title creation
 		Label title = new Label("Asteroyds");
@@ -123,7 +107,7 @@ public class Mainscene {
         glow.setLevel(0.9); 
         title.setEffect(glow);  
 
-
+		// Creation des titres du menu
         Label players = new Label("Select players number : ");
         players.setTextFill(Color.web("#FFF8DC"));
         Label difficulty = new Label("Select a difficulty : ");
@@ -177,7 +161,7 @@ public class Mainscene {
 		b_start.setOnAction(eventS);
 */
 
-		test.getChildren().add(title);
+		container.getChildren().add(title);
 		container_menu.getChildren().add(parameters);
 		container_menu.getChildren().add(players);
 		container_menu.getChildren().add(cb_nbplayer);
@@ -185,7 +169,7 @@ public class Mainscene {
 		container_menu.getChildren().add(cb_difficulty);
 		container_menu.getChildren().add(rules);
 		container_menu.getChildren().add(b_rules);
-		test.getChildren().add(b_start);
+		container.getChildren().add(b_start);
 	
 		
 	}
