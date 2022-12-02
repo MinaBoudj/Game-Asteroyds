@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.util.TimeUnit;
 
-public class Asteroyds extends Application {
+public class View_Scene extends Application {
 
   private Stage stage;
   private Scene menu, select, game, results, finalresults;
