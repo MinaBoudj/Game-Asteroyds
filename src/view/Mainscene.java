@@ -129,10 +129,10 @@ public class Mainscene {
 
 		// Choix de la difficulté
 		ComboBox<String> cb_difficulty = new ComboBox<String>();
-			cb_difficulty.getItems().add("Easy - 50s");
-			cb_difficulty.getItems().add("Normal - 40s");
-			cb_difficulty.getItems().add("Hard - 30s");
-			cb_difficulty.getItems().add("Very Hard - 20s");
+			cb_difficulty.getItems().add("Amateur driver");
+			cb_difficulty.getItems().add("Co-pilot");
+			cb_difficulty.getItems().add("Captain");
+			cb_difficulty.getItems().add("Flight champion");
 
 		// Rules buttom
         String URL = "http://www.cuk.ch/articles/4626/";
