@@ -10,7 +10,7 @@ public class Position {
 
     
     public Position(int x, int y)throws Exception {  /* Constructeur */
-        if(x<0 || y<0) throw new Exception("x ou y < 0"); 
+        if(x<0 || y<0) throw new Exception("ERREUR : x ou y < 0"); 
         this.x = x; this.y = y;
     }
 

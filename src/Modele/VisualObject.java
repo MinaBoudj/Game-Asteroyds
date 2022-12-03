@@ -11,15 +11,17 @@ public abstract class VisualObject {
 
 
     /* Constructeurs */
-    public VisualObject(int orientation, Position position) throws Exception{
-        if(orientation<=0 || orientation>6 || position.getX()<0 || position.getY()<0) throw new Exception("Erreur dans la valeur de l'orientation");
+    public VisualObject(int orientation, Position position) throws Exception {
+        if(orientation<=0 || orientation>6 || position.getX()<0 || position.getY()<0) { // Vérification de la valeur de l'orientation.
+            throw new Exception("Erreur dans la valeur de l'orientation");
+        }
         else{
             this.orientation = orientation;
             this.position = position;
         }
     }
 
-    public VisualObject(int orientation, int x, int y) throws Exception{
+    public VisualObject(int orientation, int x, int y) throws Exception {
         this(orientation, new Position(x, y));
     }
 
@@ -36,7 +38,9 @@ public abstract class VisualObject {
 
     /* Setters */
     public void setOrientation(int orientation) throws Exception{
-        if(orientation<=0||orientation>6) throw new Exception("Erreur dans la valeur de l'orientation");
+        if(orientation<=0||orientation>6) { // Vérification de la valeur de l'orientation.
+            throw new Exception("Erreur dans la valeur de l'orientation");
+        }
         else
             this.orientation = orientation;
     }

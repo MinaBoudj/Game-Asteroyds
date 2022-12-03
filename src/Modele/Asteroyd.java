@@ -7,21 +7,25 @@ package Modele;
 public abstract class Asteroyd extends Cell {
     
     /* Constructeurs */
-    public Asteroyd(int orientation, Position pos)throws Exception{
+    public Asteroyd(int orientation, Position pos)throws Exception {
         super(orientation, pos, false);
     }
 
-    public Asteroyd(int orientation, int x, int y) throws Exception{
+    public Asteroyd(int orientation, int x, int y) throws Exception {
         super(orientation, x, y, false);
     }
 
 
     /* Méthodes */
     public int calculeOrientation(int direction)throws Exception{
-        if(direction<=0 || direction>6) throw new Exception("orientation incorrect");
+
+        if(direction<=0 || direction>6) { // Vérification de la valeur de la direction.
+            throw new Exception("ERREUR : direction incorrecte");
+        }
+
         int neworientation;
         neworientation = super.getOrientation();
-        if(direction == 2 )
+        if(direction == 2)
             neworientation = (super.getOrientation()+3 %6)+1;
         if(direction == 3)
             neworientation = (super.getOrientation()+1 %6)+1;
