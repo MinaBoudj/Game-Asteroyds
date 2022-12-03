@@ -4,7 +4,6 @@ package view;
  * @autor Maylis
 */
 
-import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
