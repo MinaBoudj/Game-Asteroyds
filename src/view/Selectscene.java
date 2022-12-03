@@ -28,7 +28,8 @@ import javafx.stage.Screen;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.TextField;
-
+import javafx.collections.FXCollections;
+import javafx.application.Platform;
 
 public class Selectscene {
     
@@ -126,9 +127,19 @@ public class Selectscene {
 			};
 			TF.setOnAction(name_event);
 
-        ComboBox<Color> cb_color = new ComboBox<Color>();
-        //ObservableList<Color> l_color = List_color.getColorList();
-        //cb_color.setItems(l_color);
+        ComboBox<String> cb_color = new ComboBox<String>(FXCollections.observableArrayList(colors));
+        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                String value = cb_color.getValue();
+                if (value != null) {
+                    Platform.runLater(() -> {
+                        cb_color.setValue(null);        // à mettre dans le view
+                        cb_color.getItems().remove(value);
+                    });
+                }
+            }
+        };
+        cb_color.setOnAction(event);
 
         ComboBox<String> cb_launch = new ComboBox<String>();
         cb_launch.getItems().add("Top Left");
