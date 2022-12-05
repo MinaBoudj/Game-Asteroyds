@@ -12,12 +12,18 @@ import javafx.scene.layout.CornerRadii;
 import javafx.stage.Stage;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Screen;
+import javafx.scene.text.Font;
+import javafx.scene.control.Label;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.VBox;
 import javafx.collections.*;
 
 
 public class Control_creator {
+    public Control_creator(){
+         
+    }
+
     public static Button Buttom(String text, double X, double Y, EventHandler<ActionEvent> event) {
         Button btn = new Button(text);  
         btn.setLayoutX(X);
@@ -26,7 +32,7 @@ public class Control_creator {
         return btn;
     }
 
-    public static ComboBox<String> ComboBox(String list[], String text, double X, double Y, EventHandler<ActionEvent> event) {
+    public static ComboBox<String> Combo_Box(String list[], String text, double X, double Y, EventHandler<ActionEvent> event) {
         ComboBox<String> cb = new ComboBox<String>(FXCollections.observableArrayList(list));        
         cb.setLayoutX(X);
         cb.setLayoutY(Y); 
@@ -63,5 +69,12 @@ public class Control_creator {
         BackgroundFill background_fill = new BackgroundFill(Color.web("#"+ color), CornerRadii.EMPTY, Insets.EMPTY);
 		Background background = new Background(background_fill);
         return background;
+    }
+
+    public static Label Label(String name, String color, String police, double taille) {
+        Label label = new Label(name);
+		label.setFont(new Font(police, taille)); 
+        label.setTextFill(Color.web("#color"));
+        return label;
     }
 }
