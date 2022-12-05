@@ -20,6 +20,10 @@ import java.io.InputStream;
 public class ShapeConstructor {
     public static double TORAD = Math.PI / 180; 
 
+    public ShapeConstructor(){
+        this.TORAD = Math.PI / 180; 
+    }
+
     public static Double[] newHexagonCorners(double centerX,double centerY, double size) {
         Double[] hexCorners = new Double[14];
         for(int i = 0 ; i < 12 ; i += 2) {
@@ -56,7 +60,7 @@ public class ShapeConstructor {
 
         Rectangle textBackground = newRectangle(background, textWidth,textHeight*1.2, centerX,centerY);
 
-        return new Group(textBackground, text);
+        return new Group(textBackground, text); 
     }
 
     public static Rectangle newRectangle(Color color, double width,double height, double centerX,double centerY) {

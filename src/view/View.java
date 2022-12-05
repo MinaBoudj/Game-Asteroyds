@@ -19,7 +19,7 @@ public class View extends Application {
     private Group root;
     private double screenWidth,
                    screenHeight;
-
+                   
     @Override
     public void start(Stage s) throws Exception {
         root = new Group();
@@ -61,6 +61,13 @@ public class View extends Application {
         Rectangle rect = new Rectangle(screenWidth*0.8,0, screenWidth*0.2,screenHeight);
         rect.setFill(Color.GRAY);
         root.getChildren().add(rect);
+    }
+
+    public View(Stage stage, Group root, double wid, double hei){
+        this.stage = stage;
+        this.root = root;
+        this.screenWidth = wid;
+        this.screenHeight = hei;
     }
 
     public void displayGameBoard(String[][] gameBoard) throws Exception {
