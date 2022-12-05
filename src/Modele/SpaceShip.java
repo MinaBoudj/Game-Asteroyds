@@ -12,7 +12,7 @@ public class SpaceShip extends VisualObject{
     private int[] relics;
 	
 	
-	/* Constructeur */
+	/* Constructeur d'un vaisseau */
 	public SpaceShip(int orientation, Position pos, Color color)throws Exception{//exception dans VisualObject
 		super(orientation, pos);
 		this.structurePoints = 6;
@@ -27,7 +27,9 @@ public class SpaceShip extends VisualObject{
 	/* Getteur and setteur */
 	public Color getColor() { return this.color; }
 	public int getStructurePoints() { return this.structurePoints; }
-    public int getNumberOfRelics() {  //nombre de relics que possede le vaisseau
+
+	//nombre de relics que possede le vaisseau
+    public int getNumberOfRelics() {  
         int nb =0;
         for (int i=0; i<4; i++){
             if(relics[i] != 0){
@@ -37,6 +39,10 @@ public class SpaceShip extends VisualObject{
         return nb;
     }
 	public int[] getRelic(){ return this.relics; }
+	public void setStucturepoints(int sttruct) { this.structurePoints = sttruct; }
+
+	/* Methode */
+	//verifie si le vaisseau possede cette relic ou pas
 	public boolean hasRelic(int relic){
 		boolean resul = false;
 		for(int i=0; i<getNumberOfRelics(); i++){
@@ -45,11 +51,11 @@ public class SpaceShip extends VisualObject{
 		}
 		return resul;
 	}
-
-	public void setStucturepoints(int sttruct) { this.structurePoints = sttruct; }
 	
+	//diminu les points de structure de ce vaisseau
 	public void minusStructurePoint(int value) { this.structurePoints = this.structurePoints- value; }
 
+	//le vaisseau bouge a gauche donc modification de son orientation
 	private void moveLeft()throws Exception { 
 		if(super.getOrientation() == 1) 
 			super.setOrientation(6);
@@ -65,7 +71,8 @@ public class SpaceShip extends VisualObject{
 			super.setOrientation(5);
 	}
 	
-	private void moveRight() throws Exception{  //recuperer la position à droite de cette case
+	//le vaisseau bouge à droite donc modification de son orientation
+	private void moveRight() throws Exception{  
         if(super.getOrientation() == 1) 
 			super.setOrientation(2);
 		if(super.getOrientation() == 2) 
@@ -79,7 +86,8 @@ public class SpaceShip extends VisualObject{
 		if(super.getOrientation() == 6)
 			super.setOrientation(1);
     }
-          
+     
+	//le vaisseau fait demi-tourd donc modification de son orientation
 	private void turnAround()throws Exception { 
         if( super.getOrientation() == 1)
             super.setOrientation(4);

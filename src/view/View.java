@@ -4,6 +4,11 @@ package view;
  * @author Matéo
  */
 
+import java.io.File;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -14,14 +19,20 @@ import javafx.scene.shape.Polyline;
 import javafx.scene.paint.Color;
 import javafx.scene.input.KeyCombination;
 
-public class View extends Application {
+public class View{
     private Stage stage;
     private Group root;
     private double screenWidth,
                    screenHeight;
+<<<<<<< HEAD
                    
     @Override
     public void start(Stage s) throws Exception {
+=======
+
+    public View(Stage s) {
+        stage = s;
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
         root = new Group();
         Scene scene = new Scene(root);
 
@@ -41,26 +52,6 @@ public class View extends Application {
         } catch (Exception e) {
             scene.setFill(Color.BLACK);
         }
-
-        displayGameBoard(new String[][]{
-            {"", "", "", " ", " ", " ", " ", "", "", " ", " ", " ", " ", "", "", ""},
-            {"", "", " ", "portal-red-21-1/", " ", "asteroyd-white-5", " ", "audience_pod", " ", " ", "portal-white-23-2", " ", " ", "", "", ""},
-            {"", "", " ", " ", " ", " ", " ", " ", " ", "asteroyd-white-6", " ", " ", "asteroyd-white_red-15", " ", "", ""},
-            {"", "", " ", "asteroyd-red-2", " ", "asteroyd-blue-11", " ", " ", " ", " ", "asteroyd-red-3", " ", " ", "", "", ""},
-            {"", " ", " ", " ", " ", " ", " ", " ", "audience_pod", " ", " ", " ", "asteroyd-white_blue-17", " ", " ", ""},
-            {" ", " ", "asteroyd-white_red-13", " ", "asteroyd-white_blue-20", " ", " ", "launchpad", "launchpad/space_ship-Red-2/space_ship-Blue-6", " ", "asteroyd-blue-10", " ", " ", " ", " ", ""},
-            {" ", "audience_pod", " ", " ", " ", " ", " ", "launchpad", " ", "launchpad", " ", " ", " ", " ", "audience_pod", " "},
-            {" ", " ", "asteroyd-white_red-14", " ", "asteroyd-blue-9", " ", " ", "launchpad/space_ship-Green-4", "launchpad", " ", " ", " ", "asteroyd-white_red-16", " ", " ", ""},
-            {"", " ", " ", "asteroyd-white-8", " ", " ", " ", " ", "audience_pod", " ", " ", "asteroyd-red-4", " ", " ", " ", ""},
-            {"", "", " ", " ", "asteroyd-red-1", " ", " ", " ", " ", "asteroyd-blue-12", " ", " ", " ", "", "", ""},
-            {"", "", " ", "portal-white-24-3", " ", " ", "asteroyd-white_blue-19", " ", " ", " ", " ", " ", "asteroyd-white_blue-18", " ", "", ""},
-            {"", "", " ", " ", " ", " ", " ", "audience_pod", " ", "asteroyd-white-7", " ", "portal-red-22-4", " ", "", "", ""},
-            {"", "", "", " ", " ", " ", " ", "", "", " ", " ", " ", " ", "", "", ""}
-        });
-
-        Rectangle rect = new Rectangle(screenWidth*0.8,0, screenWidth*0.2,screenHeight);
-        rect.setFill(Color.GRAY);
-        root.getChildren().add(rect);
     }
 
     public View(Stage stage, Group root, double wid, double hei){
@@ -99,6 +90,10 @@ public class View extends Application {
             x = i % 2 == 0 ? initX + hexWidth/2 : initX;
             y += hexSize * 1.5;
         }
+
+        //Rectangle rect = new Rectangle(screenWidth*0.8,0, screenWidth*0.2,screenHeight);
+        //rect.setFill(Color.GRAY);
+        //root.getChildren().add(rect);
     }
 
     private void displayObject(String[] objectInformations, Group group, double hexWidth, double hexSize, double x, double y) throws Exception {
@@ -245,5 +240,18 @@ public class View extends Application {
                 default:
                     throw new Exception("Type d'objet visuel non reconnu : " + objectType);
         }
+    }
+
+    public ArrayList<String> readTextFile(String pathName) throws Exception {
+        ArrayList<String> lines = new ArrayList<String>();
+        File doc = new File(pathName);
+        Scanner scan = new Scanner(doc);
+
+        while (scan.hasNextLine()) {
+            lines.add(scan.nextLine());
+        }
+
+        scan.close();
+        return lines;
     }
 }

@@ -14,11 +14,11 @@ public class Player {
 
 
     /* Constructeur */
-    public Player(String name, Color color, int orientation, Position pos) throws Exception{
+    public Player(String name, Color color, int orientation, Position pos) throws Exception {
         this.name = name;
         this.relics = new ArrayList<Integer>();
         this.spaceShip = new SpaceShip(orientation, pos, color);
-        this.movements = new Movement[6];
+        this.movements = new Movement[6]; // Chaque joueur peut choisir 6 mouvements par tour.
     }
 
 

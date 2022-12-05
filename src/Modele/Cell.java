@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public abstract class Cell extends VisualObject {
 	
-	private boolean canContainSpaceShips;
-	private ArrayList<SpaceShip> LSpaceShips;
+	private boolean canContainSpaceShips;	//si cette cellule peut contenir un vaisseau ou pas
+	private ArrayList<SpaceShip> LSpaceShips;	// la liste de tout les vaisseaux que contient une celle
 	
 	/* Constructeur */
 	public Cell(int orientation, Position pos, boolean canContainSpaceShips)throws Exception{

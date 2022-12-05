@@ -3,8 +3,13 @@ package view;
 /*
  * @autor Maylis
 */
+<<<<<<< HEAD
  
 import javafx.application.Application;
+=======
+
+//import javafx.application.Application;
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -29,17 +34,29 @@ import javafx.geometry.Rectangle2D;
 
 
 
+<<<<<<< HEAD
 public class Mainscene{
+=======
+public class Mainscene {
+
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
     public Mainscene(Stage stage, double screenWidth, double screenHeight){ 
 
 		// ------------- Edition du stage ----------------------
         StackPane stackmenu = new StackPane();
 		Scene menu = new Scene(stackmenu);
 
+<<<<<<< HEAD
         stage.setTitle("Asteroyds");		// nom de la fenetre
         stage.setScene(menu);				// spécifie la scene a utiliser
         stage.setFullScreen(true);			// met en plein écran
         stage.show();						// montre la scene
+=======
+        stage.setTitle("Asteroyds");		
+        stage.setScene(menu);				
+        stage.setFullScreen(true);			
+        stage.show();						
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
         
         screenWidth = menu.getWidth();		// largeur de la scene
         screenHeight = menu.getHeight();	// longueur de la scene
@@ -47,32 +64,47 @@ public class Mainscene{
 
 		// ---------------Création du menu principal---------------------
 		
+<<<<<<< HEAD
 		// Background creation
+=======
+		// Background build
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
 		try {
 			Screen screen = Screen.getPrimary();
 			Rectangle2D bounds = screen.getVisualBounds();
 			
+<<<<<<< HEAD
 			stage.setFullScreen(true);
+=======
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
 			stage.setX(bounds.getMinX());
 			stage.setY(bounds.getMinY());
 			stage.setWidth(bounds.getWidth());
 			stage.setHeight(bounds.getHeight());
 	
 			StackPane back = new StackPane();
+<<<<<<< HEAD
 			back.setStyle("-fx-background-image: url(" +
+=======
+			stack.setStyle("-fx-background-image: url(" +
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
 						  "'https://cutewallpaper.org/28/cool-black-space-gif-wallpaper/resultado-de-imagem-para-space-gif-outer-space-wallpaper-star-wallpaper-wallpaper-space.gif'" +"); " +
 						  "-fx-background-size: cover;"
 			);
 			stackmenu.getChildren().add(back);
 
+<<<<<<< HEAD
             //stackmenu.getChildren().add(ShapeConstructor.newImage("background", screenWidth,screenHeight, screenWidth/2,screenHeight/2, 1));
             //ImageView backmenu = ShapeConstructor.newImage("Back_menu", 1,1, 0,0);
 			//backmenu.setFitHeight(screenWidth*1.1);	
 			//backmenu.setFitWidth(screenWidth*1.1);
+=======
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
         } catch (Exception e) {
 			// si erreur, couleur par défaut en noir
             menu.setFill(Color.BLACK);	
         }
+<<<<<<< HEAD
 		
         
 		AnchorPane pane_menu = new AnchorPane();
@@ -81,6 +113,15 @@ public class Mainscene{
 		// Sérapartion des espaces
 		// Menu
 		Group test = new Group();
+=======
+	
+		// Sérapartion des espaces
+		// Menu
+		AnchorPane pane_menu = new AnchorPane();
+		stackmenu.getChildren().add(pane_menu);
+		Group container = new Group();
+
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
 		VBox container_menu = new VBox();
         container_menu.setPadding(new Insets(20));
         container_menu.setSpacing(16);
@@ -88,11 +129,18 @@ public class Mainscene{
         container_menu.setPrefHeight(screenHeight);
 
         
+<<<<<<< HEAD
 			// set background of container
 			// note si marche pas, travailler avec les proportions screenWidth*1.1
 			BackgroundFill background_fill = new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
 			Background background = new Background(background_fill);
 			container_menu.setBackground(background);
+=======
+		// set background of container
+		BackgroundFill background_fill = new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
+		Background background = new Background(background_fill);
+		container_menu.setBackground(background);
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
 	
         // Rectangle vide
         Rectangle rect = new Rectangle(0,0, screenWidth*0.7,screenHeight);
@@ -100,8 +148,13 @@ public class Mainscene{
 		
         AnchorPane.setLeftAnchor(rect, 0.0);
         AnchorPane.setRightAnchor(container_menu,0.0);
+<<<<<<< HEAD
 		test.getChildren().add(container_menu);
         pane_menu.getChildren().addAll(rect, test);
+=======
+		container.getChildren().add(container_menu);
+        pane_menu.getChildren().addAll(rect, container);
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
 
 		// Title creation
 		Label title = new Label("Asteroyds");
@@ -113,7 +166,11 @@ public class Mainscene{
         glow.setLevel(0.9); 
         title.setEffect(glow);  
 
+<<<<<<< HEAD
 
+=======
+		// Creation des titres du menu
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
         Label players = new Label("Select players number : ");
         players.setTextFill(Color.web("#FFF8DC"));
         Label difficulty = new Label("Select a difficulty : ");
@@ -135,10 +192,17 @@ public class Mainscene{
 
 		// Choix de la difficulté
 		ComboBox<String> cb_difficulty = new ComboBox<String>();
+<<<<<<< HEAD
 			cb_difficulty.getItems().add("Easy - 50s");
 			cb_difficulty.getItems().add("Normal - 40s");
 			cb_difficulty.getItems().add("Hard - 30s");
 			cb_difficulty.getItems().add("Very Hard - 20s");
+=======
+			cb_difficulty.getItems().add("Amateur driver");
+			cb_difficulty.getItems().add("Co-pilot");
+			cb_difficulty.getItems().add("Captain");
+			cb_difficulty.getItems().add("Flight champion");
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
 
 		// Rules buttom
         String URL = "http://www.cuk.ch/articles/4626/";
@@ -167,7 +231,11 @@ public class Mainscene{
 		b_start.setOnAction(eventS);
 */
 
+<<<<<<< HEAD
 		test.getChildren().add(title);
+=======
+		container.getChildren().add(title);
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
 		container_menu.getChildren().add(parameters);
 		container_menu.getChildren().add(players);
 		container_menu.getChildren().add(cb_nbplayer);
@@ -175,8 +243,16 @@ public class Mainscene{
 		container_menu.getChildren().add(cb_difficulty);
 		container_menu.getChildren().add(rules);
 		container_menu.getChildren().add(b_rules);
+<<<<<<< HEAD
 		test.getChildren().add(b_start);
 	
 		
 	}
 }
+=======
+		container.getChildren().add(b_start);
+	
+		
+	}
+}
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af

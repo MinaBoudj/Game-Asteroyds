@@ -194,4 +194,8 @@ public class Selectscene {
 
         root_select.getChildren().addAll(b_exit, b_next);
     }	
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af

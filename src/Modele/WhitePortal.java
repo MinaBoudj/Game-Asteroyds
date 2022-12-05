@@ -7,6 +7,7 @@ public class WhitePortal extends WhiteAsteroyd {
 
 	private int relic;
 
+	/* constructeur d'un portail blanc */
 	public WhitePortal(int orientation, Position pos , int relic)throws Exception{
 		super(orientation,pos);
 		if(relic <=0 || relic>4) throw new Exception("valeur de relic incorrect");

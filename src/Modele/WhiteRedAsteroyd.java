@@ -6,7 +6,7 @@ package Modele;
 
 public class WhiteRedAsteroyd extends RedAsteroyd {
 
-
+	/* construction d'un asteroid rouge et blanc */
 	public WhiteRedAsteroyd(int orientation, Position pos)throws Exception{
 		super(orientation,pos);
 	}
