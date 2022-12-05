@@ -78,9 +78,9 @@ public class View{
             y += hexSize * 1.5;
         }
 
-        Rectangle rect = new Rectangle(screenWidth*0.8,0, screenWidth*0.2,screenHeight);
-        rect.setFill(Color.GRAY);
-        root.getChildren().add(rect);
+        //Rectangle rect = new Rectangle(screenWidth*0.8,0, screenWidth*0.2,screenHeight);
+        //rect.setFill(Color.GRAY);
+        //root.getChildren().add(rect);
     }
 
     private void displayObject(String[] objectInformations, Group group, double hexWidth, double hexSize, double x, double y) throws Exception {
