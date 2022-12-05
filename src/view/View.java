@@ -24,15 +24,9 @@ public class View{
     private Group root;
     private double screenWidth,
                    screenHeight;
-<<<<<<< HEAD
-                   
-    @Override
-    public void start(Stage s) throws Exception {
-=======
 
     public View(Stage s) {
         stage = s;
->>>>>>> fe72e24d85f6973482ad747a4eed0326cf8e60af
         root = new Group();
         Scene scene = new Scene(root);
 

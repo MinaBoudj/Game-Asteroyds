@@ -179,7 +179,6 @@ import java.io.InputStream;
         infos.getChildren().add(b_exit);
 
         // Affichage des infos sur les joueurs en haut
-        // HELP
         String l_playertest[] = {"J1", "J2", "J3"};
         //while (i <= l_playertest.length ){ // ou i > 6) 
             HBox inf_p1 = new HBox();
@@ -218,7 +217,10 @@ import java.io.InputStream;
                 dir_blue.setFont(new Font("cmmi10", 20)); 
                 dir_blue.setTextFill(Color.web("#FFF8DC"));
 
-				liste_ast.add(dir_red, 1, 0, 1, 1);
+				liste_ast.add(dir_red, 1, 0, 1, 1);            
+				//liste_ast.add(ShapeConstructor.newImage("red_asteroyd", screenHeight, maxHeight, centerX, centerY)"", 1, 1, 1, 1);
+				liste_ast.add(dir_blue, 1, 2, 1, 1);
+                liste_ast.add(dir_red, 1, 0, 1, 1);
 				liste_ast.add(dir_white, 1, 1, 1, 1);
 				liste_ast.add(dir_blue, 1, 2, 1, 1);
 
@@ -260,6 +262,7 @@ import java.io.InputStream;
             ComboBox<String> cb4 = new ComboBox<String>(FXCollections.observableArrayList(listmove));
             ComboBox<String> cb5 = new ComboBox<String>(FXCollections.observableArrayList(listmove));
             ComboBox<String> cb6 = new ComboBox<String>(FXCollections.observableArrayList(listmove));
+            // leur mettre des events
 
 
             liste_move.add(cb1, 1, 0, 1, 1); // liste_move.add(cb_move, 0, 0, 1, 1);
@@ -306,6 +309,7 @@ import java.io.InputStream;
 
     }    
 }
+
             /* 
 			// création de la barre de chargement, aussi dépendante du temps
 			ProgressBar progressBar = new ProgressBar(0);
