@@ -30,9 +30,11 @@ import javafx.scene.control.TextField;
 import javafx.collections.FXCollections;
 import javafx.application.Platform;
 
+
+
 public class Selectscene {
     
-    public Selectscene(Stage stage, int player, double screenWidth, double screenHeight){  // + ObservableList l_color 
+    public Selectscene(Stage stage, int player, double screenWidth, double screenHeight, String colors[]){  // + ObservableList l_color 
 
 		// ------------- Edition du stage ----------------------
 
@@ -126,6 +128,7 @@ public class Selectscene {
 			};
 			TF.setOnAction(name_event);
 
+
         ComboBox<String> cb_color = new ComboBox<String>(FXCollections.observableArrayList(colors));
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
@@ -139,6 +142,7 @@ public class Selectscene {
             }
         };
         cb_color.setOnAction(event);
+
 
         ComboBox<String> cb_launch = new ComboBox<String>();
         cb_launch.getItems().add("Top Left");
