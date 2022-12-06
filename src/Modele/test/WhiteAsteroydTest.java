@@ -18,13 +18,14 @@ import Modele.LaunchPad;
 public class WhiteAsteroydTest {
     private Cell[][] gm;
     private WhiteAsteroyd wAst1,
-                          wAst2;
+            wAst2;
 
     @Before
     public void constructGameBoard() throws Exception {
-        wAst1 = new WhiteAsteroyd(2, 1,1);
-        wAst2 = new WhiteAsteroyd(2, 0,2);
-        gm = new Cell[][]{{null, null, new EmptyCell(2,0)}, {new LaunchPad(0,1), wAst1, null}, {wAst2, null, null}};
+        wAst1 = new WhiteAsteroyd(2, 1, 1);
+        wAst2 = new WhiteAsteroyd(2, 0, 2);
+        gm = new Cell[][] { { null, null, new EmptyCell(2, 0) }, { new LaunchPad(0, 1), wAst1, null },
+                { wAst2, null, null } };
     }
 
     @Test(expected = Exception.class)
@@ -64,41 +65,42 @@ public class WhiteAsteroydTest {
 
     @Test(expected = Exception.class)
     public void testMoveWhileNotInGameBoard() throws Exception {
-        gm[1][1] = new EmptyCell(1,1);
-        wAst1.move(gm, new int[]{1,2,3});
+        gm[1][1] = new EmptyCell(1, 1);
+        wAst1.move(gm, new int[] { 1, 2, 3 });
     }
 
     @Test(expected = Exception.class)
     public void testMoveWithNotEnoughtDirections() throws Exception {
-        wAst1.move(gm, new int[]{2});
+        wAst1.move(gm, new int[] { 2 });
     }
 
     @Test(expected = Exception.class)
     public void testMoveWithBadWhiteDirection() throws Exception {
-        wAst1.move(gm, new int[]{2, 8, 2});
+        wAst1.move(gm, new int[] { 2, 8, 2 });
     }
 
     @Test
     public void testMoveToEmptyCell() throws Exception {
-        wAst1.move(gm, new int[]{5,4,4});
+        wAst1.move(gm, new int[] { 5, 4, 4 });
+        System.out.println(gm[0][2] == wAst1);
         assertTrue(gm[0][2] == wAst1 && gm[1][1] instanceof EmptyCell);
     }
 
     @Test
     public void testMoveToFullCell() throws Exception {
-        wAst1.move(gm, new int[]{2,6,1});
+        wAst1.move(gm, new int[] { 2, 6, 1 });
         assertTrue(gm[1][1] == wAst1 && gm[1][0] instanceof LaunchPad);
     }
 
     @Test
     public void testMoveToNullCell() throws Exception {
-        wAst1.move(gm, new int[]{2,5,1});
+        wAst1.move(gm, new int[] { 2, 5, 1 });
         assertTrue(gm[1][1] == wAst1 && gm[1][1] == null);
     }
-
+ 
     @Test
     public void testMoveOutsideGameBoard() throws Exception {
-        wAst2.move(gm, new int[]{2,3,1});
+        wAst2.move(gm, new int[] { 2, 3, 1 });
         assertTrue(gm[2][0] == wAst2);
     }
 }
