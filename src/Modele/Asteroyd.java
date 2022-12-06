@@ -17,7 +17,7 @@ public abstract class Asteroyd extends Cell {
 
 
     /* Méthodes */
-    public int calculeOrientation(int direction)throws Exception{
+    public int calculeOrientation(int direction) throws Exception{
 
         if(direction<=0 || direction>6) { // Vérification de la valeur de la direction.
             throw new Exception("ERREUR : direction incorrecte");
@@ -40,5 +40,5 @@ public abstract class Asteroyd extends Cell {
     }
 
     /* Méthodes abstraites */
-    public abstract void move(Cell[][] gameBoard, int[] directions)throws Exception;
+    public abstract void move(Cell[][] gameBoard, int[] directions) throws Exception;
 }
