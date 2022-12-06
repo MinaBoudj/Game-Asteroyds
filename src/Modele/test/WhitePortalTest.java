@@ -7,6 +7,8 @@ package Modele.test;
 import org.junit.Test;
 import org.junit.Before;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertTrue;
 
 import Modele.WhitePortal;
@@ -111,7 +113,7 @@ public class WhitePortalTest {
     @Test
     public void testMoveToNullCell() throws Exception {
         wPort1.move(gm, new int[]{2,5,1});
-        assertTrue(gm[1][1] == wPort1 && gm[1][1] == null);
+        assertTrue(gm[1][1] == wPort1 && gm[0][1] == null);
     }
 
     @Test
@@ -129,7 +131,7 @@ public class WhitePortalTest {
     public void testAddLSpaceShipWhenAlreadyHasRelic() throws Exception {
         ship.addRelic(wPort1.getRelic());
         wPort1.addLSpaceShip(ship);
-        assertTrue(ship.getRelic() == new int[]{wPort1.getRelic(),0,0,0});
+        assertTrue(Arrays.equals(ship.getRelics(), new int[]{wPort1.getRelic(),0,0,0}));
     }
 
     @Test

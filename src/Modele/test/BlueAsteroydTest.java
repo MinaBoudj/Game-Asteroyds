@@ -24,8 +24,8 @@ public class BlueAsteroydTest {
     public void constructGameBoard() throws Exception {
         bAst1 = new BlueAsteroyd(2, 1,1);
         bAst2 = new BlueAsteroyd(2, 0,2);
-        bAst3 = new BlueAsteroyd(5, 1,2);
-        gm = new Cell[][]{{null, null, new EmptyCell(2,0)}, {new LaunchPad(0,1), bAst1, null}, {bAst2, bAst3, new EmptyCell(2,2)}};
+        bAst3 = new BlueAsteroyd(1, 1,2);
+        gm = new Cell[][]{{null, null, new EmptyCell(2,0)}, {new LaunchPad(0,1), bAst1, new EmptyCell(1,2)}, {bAst2, bAst3, null}};
     }
 
     @Test(expected = Exception.class)
@@ -81,8 +81,8 @@ public class BlueAsteroydTest {
 
     @Test
     public void testMoveToEmptyCell() throws Exception {
-        bAst1.move(gm, new int[]{5,4,4});
-        assertTrue(gm[0][2] == bAst1 && gm[1][1] instanceof EmptyCell);
+        bAst1.move(gm, new int[]{5,4,3});
+        assertTrue(gm[1][1] == bAst1 && gm[1][2] instanceof EmptyCell);
     }
 
     @Test
@@ -94,7 +94,7 @@ public class BlueAsteroydTest {
     @Test
     public void testMoveToNullCell() throws Exception {
         bAst1.move(gm, new int[]{2,1,5});
-        assertTrue(gm[1][1] == bAst1 && gm[1][2] == null);
+        assertTrue(gm[1][1] == bAst1 && gm[2][2] == null);
     }
 
     @Test
@@ -105,7 +105,7 @@ public class BlueAsteroydTest {
 
     @Test
     public void testMoveToAsteroydCell() throws Exception {
-        bAst2.move(gm, new int[]{2,1,2});
-        assertTrue(gm[2][0] instanceof EmptyCell && gm[2][1] == bAst2 && gm[2][2] == bAst3);
+        bAst3.move(gm, new int[]{2,1,1});
+        assertTrue(gm[2][1] == bAst3 && gm[1][1]==bAst1);
     }
 }

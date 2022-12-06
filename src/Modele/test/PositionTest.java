@@ -52,7 +52,7 @@ public class PositionTest {
 
     @Test
     public void testGetForward() throws Exception {
-        pos.getForward(4);
-        assertTrue(pos.getX() == 1 && pos.getY() == 1);
+        Position newPos = pos.getForward(4);
+        assertTrue(newPos.getX() == 1 && newPos.getY() == 1);
     }
 }

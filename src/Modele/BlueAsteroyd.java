@@ -36,7 +36,8 @@ public class BlueAsteroyd extends Asteroyd{
                 gameBoard[super.getPosition().getY()][super.getPosition().getX()] = this;
 
               } 
-              else if (gameBoard[pos2.getY()][pos2.getX()]!= null && gameBoard[pos2.getY()][pos2.getX()] instanceof EmptyCell) { // Si la 2ème case est vide
+              else 
+              if (gameBoard[pos2.getY()][pos2.getX()]!= null && gameBoard[pos2.getY()][pos2.getX()] instanceof EmptyCell) { // Si la 2ème case est vide
                 if (gameBoard[pos2.getY()][pos2.getX()].getLSpaceShips().size() == 0) {
                   // Déplacement de l'astéroïde (obstacle)
                   EmptyCell nec = new EmptyCell(super.getPosition()); // super au lieu de pos 1 ?

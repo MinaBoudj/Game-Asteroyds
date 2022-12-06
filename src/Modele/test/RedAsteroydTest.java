@@ -83,8 +83,8 @@ public class RedAsteroydTest {
 
     @Test
     public void testMoveOneCellToEmptyCell() throws Exception {
-        rAst.move(gm, new int[]{3,4,4});
-        assertTrue(gm[1][1] == rAst && gm[2][1] instanceof EmptyCell && gm[0][0] instanceof LaunchPad);
+        rAst.move(gm, new int[]{3,4,1});
+        assertTrue(gm[2][1] == rAst && gm[1][1] instanceof EmptyCell && gm[2][0] instanceof LaunchPad);
     }
 
     @Test

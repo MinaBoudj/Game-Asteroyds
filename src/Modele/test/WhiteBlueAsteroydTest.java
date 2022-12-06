@@ -86,7 +86,7 @@ public class WhiteBlueAsteroydTest {
     @Test
     public void testMoveToEmptyCell() throws Exception {
         wbAst.move(gm, new int[]{5,5,1});
-        assertTrue(gm[1][1] == wbAst && gm[2][0] instanceof EmptyCell && gm[0][0] instanceof EmptyCell);
+        assertTrue(gm[1][0] == wbAst && gm[2][0] instanceof EmptyCell && gm[0][0] instanceof EmptyCell);
     }
 
     @Test
@@ -110,6 +110,6 @@ public class WhiteBlueAsteroydTest {
     @Test
     public void testMoveBlueToAsteroydCell() throws Exception {
         wbAst.move(gm, new int[]{2,5,3});
-        assertTrue(gm[2][0] instanceof EmptyCell && gm[1][2] == wbAst2 && gm[1][1] == wbAst);
+        assertTrue(gm[2][0] instanceof EmptyCell && gm[1][1] == wbAst2 && gm[1][0] == wbAst);
     }
 }
