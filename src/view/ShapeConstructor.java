@@ -4,7 +4,6 @@ package view;
  * @author Matéo
  */
 
-import javafx.scene.Group;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
@@ -18,11 +17,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class ShapeConstructor {
-    public static double TORAD = Math.PI / 180; 
-
-    public ShapeConstructor(){
-        this.TORAD = Math.PI / 180; 
-    }
+    public static double TORAD = Math.PI / 180;
 
     public static Double[] newHexagonCorners(double centerX,double centerY, double size) {
         Double[] hexCorners = new Double[14];
@@ -37,18 +32,14 @@ public class ShapeConstructor {
         return hexCorners;
     }
 
-    public static Group newText(String content, Color fill, double maxWidth, double centerX,double centerY) {
-        return newText(content, fill,Color.TRANSPARENT, maxWidth, centerX,centerY);
-    }
-
-    public static Group newText(String content, Color fill,Color background, double maxWidth, double centerX,double centerY) {
+    public static Text newText(String content, Color fill, double maxWidth,double maxHeight, double centerX,double centerY) {
         Text text = new Text(content);
         text.setFill(fill);
 
         Font font = new Font(maxWidth);
         text.setFont(font);
-        while (text.getBoundsInLocal().getWidth() > maxWidth) {
-            font = new Font(font.getSize()-1);
+        while (text.getBoundsInLocal().getWidth() > maxWidth || text.getBoundsInLocal().getHeight() > maxHeight) {
+            font = new Font(font.getSize() - 1);
             text.setFont(font);
         }
 
@@ -58,9 +49,7 @@ public class ShapeConstructor {
         text.setX(centerX - textWidth/2);
         text.setY(centerY + textHeight/2);
 
-        Rectangle textBackground = newRectangle(background, textWidth,textHeight*1.2, centerX,centerY);
-
-        return new Group(textBackground, text); 
+        return text; 
     }
 
     public static Rectangle newRectangle(Color color, double width,double height, double centerX,double centerY) {

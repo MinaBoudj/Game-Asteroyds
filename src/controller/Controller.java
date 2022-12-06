@@ -10,7 +10,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import Modele.*;
-import view.View;
+import view.*;
 
 public class Controller extends Application {
     private View view;
@@ -21,10 +21,37 @@ public class Controller extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        //view = new Mainscene(stage);
-        view = new View(stage);
-        constructGameBoard(view.readTextFile("res\\gameboard.txt"));
-        view.displayGameBoard(gameBoardToString(gameBoard));
+        Sendable gameInfos = (String[] args) -> {start(args);};
+        view = new View(stage, gameInfos);
+        //view.displayGameBoard(gameBoardToString(gameBoard));
+    }
+
+    private void start(String[] gameInfos) {
+        players = new Player[Integer.parseInt(gameInfos[0])];
+
+        switch(gameInfos[1]) {
+            case "Amateur - 50s":
+                difficulty = 50;
+                break;
+
+            case "Co-Pilot - 40s":
+                difficulty = 40;
+                break;
+
+            case "Captain - 30s":
+                difficulty = 30;
+                break;
+
+            case "Flight champion - 20s":
+                difficulty = 20;
+                break;
+        }
+
+        try {
+            constructGameBoard(view.readTextFile("res\\gameboards\\" + gameInfos[2] + ".txt"));
+        } catch (Exception e) {
+            System.err.println("Aïe");
+        }
     }
 
     private void constructGameBoard(ArrayList<String> text) throws Exception {

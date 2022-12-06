@@ -9,50 +9,50 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
-import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Polyline;
 import javafx.scene.paint.Color;
 import javafx.scene.input.KeyCombination;
 
-public class View{
+public class View {
     private Stage stage;
+    private Scene menu,
+                  options,
+                  main,
+                  player,
+                  end,
+                  gameKey;
     private Group root;
     private double screenWidth,
                    screenHeight;
 
-    public View(Stage s) {
-        stage = s;
-        root = new Group();
-        Scene scene = new Scene(root);
-
+    public View(Stage s, Sendable gameInfos) {
         stage = s;
         stage.setTitle("Asteroyds");
-        stage.setScene(scene);
+
+        Scene tmp = new Scene(new Group());
+        stage.setScene(tmp);
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
-        stage.setFullScreenExitKeyCombination(null);
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.show();
 
-        screenWidth = scene.getWidth();
-        screenHeight = scene.getHeight();
+        screenWidth = tmp.getWidth();
+        screenHeight = tmp.getHeight();
 
-        try {
-            root.getChildren().add(ShapeConstructor.newImage("background", screenWidth,screenHeight, screenWidth/2,screenHeight/2, 1));
-        } catch (Exception e) {
-            scene.setFill(Color.BLACK);
-        }
-    }
+        Executable exit = (me) -> {stage.close();};
 
-    public View(Stage stage, Group root, double wid, double hei){
-        this.stage = stage;
-        this.root = root;
-        this.screenWidth = wid;
-        this.screenHeight = hei;
+        menu = new MenuScene(screenWidth, screenHeight, new Group(), exit, gameInfos);
+        /*options = new OptionsScene(screenWidth, screenHeight, new Group()), exit;
+        main = new MainScene(screenWidth, screenHeight, new Group(), exit);
+        player = new PlayerScene(screenWidth, screenHeight, new Group(), exit);
+        end = new EndScene(screenWidth, screenHeight, new Group(), exit);
+        gameKey = new GameKeyScene(screenWidth, screenHeight, new Group(), exit);*/
+
+        stage.setScene(menu);
+        stage.setFullScreen(true);
     }
 
     public void displayGameBoard(String[][] gameBoard) throws Exception {
@@ -203,7 +203,7 @@ public class View{
                 try {
                     group.getChildren().add(ShapeConstructor.newImage("relic" + relic, hexWidth/2,hexSize/2, x,y));
                 } catch (Exception e) {
-                    group.getChildren().add(ShapeConstructor.newText(relic, Color.CHARTREUSE, hexWidth/2, x,y));
+                    group.getChildren().add(ShapeConstructor.newText(relic, Color.CHARTREUSE, hexWidth/2,hexWidth/2, x,y));
                 }
 
                 try {

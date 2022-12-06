@@ -119,7 +119,7 @@ import java.io.InputStream;
         pane_game.setRight(container_game);
         pane_game.setTop(infos);
 
-        View viewtest = new View(stage, root_game, screenWidth, screenHeight);
+        /*View viewtest = new View(stage, root_game, screenWidth, screenHeight);
         try{
             viewtest.displayGameBoard(new String[][]{ // board
                 {"", "", "", " ", " ", " ", " ", "", "", " ", " ", " ", " ", "", "", ""},
@@ -138,7 +138,7 @@ import java.io.InputStream;
             });
         } catch (Exception e) {
             game.setFill(Color.BLACK);
-        } 
+        } */
 
         // Label indiquant le nom / numéro du Joueur
 		Label name_player = new Label("Nom Joueur"); // TO DO = getname de l'objet i de la liste des joueurs
