@@ -30,8 +30,11 @@ public class WhiteBlueAsteroyd extends BlueAsteroyd{
 				if(gameBoard[pos.getY()][pos.getX()]!= null && gameBoard[pos.getY()][pos.getX()] instanceof EmptyCell){ //case n'est pas null et vide
 					if(gameBoard[pos.getY()][pos.getX()].getLSpaceShips().size() == 0){//la pos1 ne contient pas de SpaceShip
 						EmptyCell newOne = new EmptyCell(super.getPosition());
+						gameBoard[super.getPosition().getY()][super.getPosition().getX()] = newOne;
 						super.getPosition().setX(pos.getX());
 						super.getPosition().setY(pos.getY());
+						gameBoard[super.getPosition().getY()][super.getPosition().getX()] = this;
+
 					}else{//contient un ou plusier spaceShip
 						//infliger des dêgats
 						for(int i=0; i<gameBoard[pos.getY()][pos.getX()].getLSpaceShips().size(); i++){

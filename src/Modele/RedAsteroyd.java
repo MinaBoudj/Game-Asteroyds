@@ -35,9 +35,12 @@ public class RedAsteroyd extends  Asteroyd {
 								//verifier que la case ne contient pas de vesseau
 								if(gameBoard[pos2.getY()][pos2.getX()].getLSpaceShips().size() == 0){ //ne contient pas de SpaceShip 
 										EmptyCell newOne = new EmptyCell(super.getPosition());
+										gameBoard[super.getPosition().getY()][super.getPosition().getX()] = newOne;
 										//rien dans la case (il a bougé de 2 cases)
 										super.getPosition().setX(pos2.getX());
 										super.getPosition().setY(pos2.getY());
+										gameBoard[super.getPosition().getY()][super.getPosition().getX()] = this;
+
 								}else{//contient un ou plusier spaceShip
 									//infliger des dêgats
 									for(int i=0; i<gameBoard[pos2.getY()][pos2.getX()].getLSpaceShips().size(); i++){
@@ -45,13 +48,19 @@ public class RedAsteroyd extends  Asteroyd {
 									}
 									//et on le met dans la pos1
 									EmptyCell newOne = new EmptyCell(super.getPosition());
+									gameBoard[super.getPosition().getY()][super.getPosition().getX()] = newOne;
 									super.getPosition().setX(pos1.getX());
 									super.getPosition().setY(pos1.getY());
+									gameBoard[super.getPosition().getY()][super.getPosition().getX()] = this;
+
 								}
 						}else{ //le metre donc dans la 1eme
 							EmptyCell newOne = new EmptyCell(super.getPosition());
+							gameBoard[super.getPosition().getY()][super.getPosition().getX()] = newOne;
 							super.getPosition().setX(pos1.getX());
 							super.getPosition().setY(pos1.getY());
+							gameBoard[super.getPosition().getY()][super.getPosition().getX()] = this;
+
 						}
 					}else{//la pos1 contient un spaceShip
 						//infliger des dêgats
