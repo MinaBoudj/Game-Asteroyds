@@ -17,7 +17,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class ShapeConstructor {
-    public static double TORAD = Math.PI / 180;
+    public static boolean NOIMAGE = false;
+    public static final double TORAD = Math.PI / 180;
 
     public static Double[] newHexagonCorners(double centerX,double centerY, double size) {
         Double[] hexCorners = new Double[14];
@@ -66,6 +67,9 @@ public class ShapeConstructor {
     }
 
     public static ImageView newImage(String imageName, double maxWidth,double maxHeight, double centerX,double centerY, int orientation) throws Exception {
+        if(NOIMAGE)
+            throw new Exception();
+            
         InputStream imageStream = new FileInputStream("./res/images/" + imageName + ".png");
         Image image = new Image(imageStream);
         ImageView imageView = new ImageView(image);

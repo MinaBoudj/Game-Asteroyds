@@ -13,8 +13,6 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.shape.Polyline;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 import javafx.scene.input.KeyCombination;
 
@@ -22,10 +20,11 @@ public class View {
     private Stage stage;
     private Scene menu,
                   options,
-                  main,
-                  player,
+                  turn,
                   end,
                   gameKey;
+    private MainScene main;
+    private Group gameBoardGroup;
     private double screenWidth,
                    screenHeight;
 
@@ -43,27 +42,46 @@ public class View {
         screenWidth = tmp.getWidth();
         screenHeight = tmp.getHeight();
 
-        Executable exit = (me) -> {stage.close();};
+        Executable exit = (ev) -> {stage.close();};
 
-        menu = new MenuScene(screenWidth, screenHeight, new Group(), exit, gameInfos);
-        /*options = new OptionsScene(screenWidth, screenHeight, new Group()), exit;
-        main = new MainScene(screenWidth, screenHeight, new Group(), exit);
-        player = new PlayerScene(screenWidth, screenHeight, new Group(), exit);
-        end = new EndScene(screenWidth, screenHeight, new Group(), exit);
+        menu = new MenuScene(screenWidth,screenHeight, exit, gameInfos);
+        //options = new OptionsScene(screenWidth, screenHeight, new Group()), exit;
+        main = new MainScene(screenWidth,screenHeight);
+        turn = new TurnScene(screenWidth, screenHeight);
+        /*end = new EndScene(screenWidth, screenHeight, new Group(), exit);
         gameKey = new GameKeyScene(screenWidth, screenHeight, new Group(), exit);*/
 
         stage.setScene(menu);
         stage.setFullScreen(true);
     }
 
-    public void displayGameBoard(String[][] gameBoard) throws Exception {
-        Group root = new Group();
-        Scene scene = new Scene(root);
+    public void displayMainScene(String[][] gameBoard, String[] players) throws Exception {
+        updateGameBoardGroup(gameBoard);
+        Executable mainMenu = (ev) -> {
+                stage.setScene(menu);
+                stage.setFullScreen(true);
+            };
+        Executable nextTurn = (ev) -> {System.out.println("Yeah");};
+        Executable simpInterface = (ev) -> {
+                ShapeConstructor.NOIMAGE = !ShapeConstructor.NOIMAGE;
+                try{
+                    displayMainScene(gameBoard, players);
+                } catch (Exception e) {
+
+                }
+            };
+        main.update(gameBoardGroup, players, nextTurn, mainMenu, simpInterface);
+        stage.setScene(main);
+        stage.setFullScreen(true);
+    }
+
+    public void updateGameBoardGroup(String[][] gameBoard) throws Exception {
+        gameBoardGroup = new Group();
 
         try {
-            root.getChildren().add(ShapeConstructor.newImage("menu_background", screenWidth*1.5,screenHeight*1.5, screenWidth/2,screenHeight/2, 1));
+            gameBoardGroup.getChildren().add(ShapeConstructor.newImage("background", screenWidth*1.5,screenHeight*1.5, screenWidth/2,screenHeight/2, 1));
         } catch (Exception e) {
-            scene.setFill(Color.BLACK);
+            gameBoardGroup.getChildren().add(ShapeConstructor.newRectangle(Color.BLACK, screenWidth*1.5, screenHeight*1.5, screenWidth/2, screenHeight/2));
         }
 
         double gameBoardWidth = gameBoard[0].length + 0.5,
@@ -81,11 +99,11 @@ public class View {
                     Polyline hexLine = new Polyline();
                     hexLine.getPoints().addAll(ShapeConstructor.newHexagonCorners(x, y, hexSize));
                     hexLine.setStroke(Color.WHITE);
-                    root.getChildren().add(hexLine);
+                    gameBoardGroup.getChildren().add(hexLine);
 
                     String[] objectsToDisplay = gameBoard[i][j].split("/");
                     for (String object : objectsToDisplay) {
-                        displayObject(object.split("-"), root, hexWidth, hexSize, x, y);
+                        displayObject(object.split("-"), gameBoardGroup, hexWidth, hexSize, x, y);
                     }
                 }
 
@@ -95,19 +113,7 @@ public class View {
             y += hexSize * 1.5;
         }
 
-        Rectangle rect = ShapeConstructor.newRectangle(Color.web("A9A9A9",0.6), screenWidth*0.2,screenHeight, screenWidth*0.9,screenHeight/2);
-        rect.setFill(Color.web("A9A9A9",0.6));
-        root.getChildren().add(rect);
-
-        Executable mainMenu = (me) -> {
-                stage.setScene(menu);
-                stage.setFullScreen(true);
-            };
-		Text startButton = ControlConstructor.newButton("Main Menu", Color.WHITE, screenWidth*0.18,screenHeight*0.05, screenWidth*0.9,screenHeight*0.9, Color.BLACK, mainMenu);
-        root.getChildren().add(startButton);
-
-        stage.setScene(scene);
-        stage.setFullScreen(true);
+        gameBoardGroup.getChildren().add(ShapeConstructor.newRectangle(Color.web("A9A9A9",0.6), screenWidth*0.2,screenHeight, screenWidth*0.9,screenHeight/2));
     }
 
     private void displayObject(String[] objectInformations, Group group, double hexWidth, double hexSize, double x, double y) throws Exception {

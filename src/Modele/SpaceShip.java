@@ -38,7 +38,7 @@ public class SpaceShip extends VisualObject{
         }
         return nb;
     }
-	public int[] getRelic(){ return this.relics; }
+	public int[] getRelics(){ return this.relics; }
 	public void setStucturepoints(int sttruct) { this.structurePoints = sttruct; }
 
 	/* Methode */
@@ -106,12 +106,13 @@ public class SpaceShip extends VisualObject{
 	//ajouter des relics dans le tableau de relics
 	public void addRelic(int relic) throws Exception{
 		if( relic<1 || relic>4 ) throw new Exception("valeur de relic à ajouter < 1 ou > 4");
-		else {
-			for(int i=0; i< relics.length; i++){
-				if(this.relics[i] != 0 ){
-					relics[i] = relic;
-				}
+		if(!hasRelic(relic)) {
+			int i = 0;
+			while(i < relics.length && relics[i] != 0) {
+				i++;
 			}
+			if(i < relics.length)
+				relics[i] = relic;
 		}
 	}
 

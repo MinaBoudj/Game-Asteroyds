@@ -1,6 +1,11 @@
 package view;
 
+/**
+ * @author Matéo
+ */
+
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -77,5 +82,16 @@ public class ControlConstructor {
         });
 
         return comboBox;
+    }
+
+    public static CheckBox newCheckBox(double size, double centerX,double centerY) {
+        CheckBox checkBox = new CheckBox();
+
+        checkBox.setMinWidth(size);
+        checkBox.setMinHeight(size);
+        checkBox.setLayoutX(centerX - size/2);
+        checkBox.setLayoutY(centerY - size/2);
+
+        return checkBox;
     }
 }

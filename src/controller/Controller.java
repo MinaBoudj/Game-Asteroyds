@@ -26,7 +26,20 @@ public class Controller extends Application {
     }
 
     private void start(String[] gameInfos) {
-        players = new Player[Integer.parseInt(gameInfos[0])];
+        //players = new Player[Integer.parseInt(gameInfos[0])];
+        try{
+            players = new Player[]{new Player("Bobby", Color.Red, 3, 1, 2), new Player("Kiki", Color.Blue, 6, 4, 3), new Player("Kiki", Color.Blue, 6, 4, 3), new Player("Kiki", Color.Blue, 6, 4, 3), new Player("Kiki", Color.Blue, 6, 4, 3), new Player("Kiki", Color.Blue, 6, 4, 3)};
+            players[0].getSpaceShip().addRelic(1);
+            players[0].getSpaceShip().addRelic(3);
+            players[1].getSpaceShip().addRelic(3);
+            players[1].getSpaceShip().addRelic(2);
+            players[1].getSpaceShip().addRelic(4);
+            players[1].getSpaceShip().addRelic(1);
+            players[5].getSpaceShip().addRelic(2);
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
 
         switch(gameInfos[1]) {
             case "Amateur - 50s":
@@ -53,19 +66,26 @@ public class Controller extends Application {
         }
 
         try {
-        view.displayGameBoard(gameBoardToString(gameBoard));
+            view.displayMainScene(gameBoardToString(gameBoard), playersToString(players));
         } catch (Exception e) {
-            // TODO: handle exception
+            System.out.println(e.toString());
         }
+    }
+
+    public String[] playersToString(Player[] players) {
+        String[] playerStrings = new String[players.length];
+        for(int i = 0 ; i < players.length ; i++)
+            playerStrings[i] = players[i].toString();
+        return playerStrings;
     }
 
     private void constructGameBoard(ArrayList<String> text) throws Exception {
         String[] size = text.get(0).split("x");
         int width = Integer.parseInt(size[0]),
             height = Integer.parseInt(size[1]),
-            asteroydsRemaining = Integer.parseInt(text.get(1));
+            remainingAsteroyds = Integer.parseInt(text.get(1));
         gameBoard = new Cell[height][width];
-        asteroyds = new Asteroyd[asteroydsRemaining];
+        asteroyds = new Asteroyd[remainingAsteroyds];
         
 
         int textCursor = 3,
@@ -110,8 +130,8 @@ public class Controller extends Application {
                             };
 
                             gameBoard[lineCursor][columnCursor] = portal;
-                            asteroyds[asteroydsRemaining-1] = portal;
-                            asteroydsRemaining--;
+                            asteroyds[remainingAsteroyds-1] = portal;
+                            remainingAsteroyds--;
                             break;
 
                         case "asteroyd":
@@ -144,8 +164,8 @@ public class Controller extends Application {
                             }
 
                             gameBoard[lineCursor][columnCursor] = ast;
-                            asteroyds[asteroydsRemaining-1] = ast;
-                            asteroydsRemaining--;
+                            asteroyds[remainingAsteroyds-1] = ast;
+                            remainingAsteroyds--;
                             break;
 
                         case "launchpad":

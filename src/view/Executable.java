@@ -1,7 +1,7 @@
 package view;
 
-import javafx.scene.input.MouseEvent;
+import javafx.event.Event;
 
 public interface Executable {
-    public void execute(MouseEvent me);
+    public void execute(Event ev);
 }

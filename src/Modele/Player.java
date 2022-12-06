@@ -4,21 +4,21 @@ package Modele;
 * @author Juba
 */
 
-import java.util.ArrayList;
-
 public class Player {
-    public String name; // Nom du joueur
-    private ArrayList<Integer> relics; // Ensemble de reliques qu'il possède
+    private String name; // Nom du joueur
     private SpaceShip spaceShip; // Son vaisseau
-    public Movement[] movements; // Sa liste de mouvements
+    private Movement[] movements; // Sa liste de mouvements
 
 
     /* Constructeur */
     public Player(String name, Color color, int orientation, Position pos) throws Exception {
         this.name = name;
-        this.relics = new ArrayList<Integer>();
         this.spaceShip = new SpaceShip(orientation, pos, color);
         this.movements = new Movement[6]; // Chaque joueur peut choisir 6 mouvements par tour.
+    }
+
+    public Player(String name, Color color, int orientation, int x, int y) throws Exception {
+        this(name, color, orientation, new Position(x,y));
     }
 
 
@@ -30,17 +30,22 @@ public class Player {
 
     /* Getter */
     public int getNumberOfRelics() { // Retourne le nombre de reliques que possède le joueur.
-        return this.relics.size();
+        return spaceShip.getNumberOfRelics();
+    }
+
+    public SpaceShip getSpaceShip() {
+        return spaceShip;
     }
 
     
     /* Méthode */
-    public boolean hasRelic(int relic) { // Vérifie si le joueur possède une relique passée en paramètre.
-        for (int i : relics) {
-            if (this.relics.get(i).equals(relic)) {
-                return true;
-            }
-        }
-        return false;
+    @Override
+    public String toString() {
+        String str = "";
+        for(int r : spaceShip.getRelics())
+            if(r != 0)
+                str += r + "/";
+        str += "-" + name + "-" + spaceShip.getStructurePoints() + "-" + spaceShip.getColor();
+        return str;
     }
 }
