@@ -107,13 +107,16 @@ public class SpaceShip extends VisualObject{
 	public void addRelic(int relic) throws Exception{
 		if( relic<1 || relic>4 ) throw new Exception("valeur de relic à ajouter < 1 ou > 4");
 		if(!hasRelic(relic)) {
-			int i = 0;
+			this.relics[getNumberOfRelics()] = relic; 
+		}
+		/* 
+		 * int i = 0;
 			while(i < relics.length && relics[i] != 0) {
 				i++;
 			}
 			if(i < relics.length)
 				relics[i] = relic;
-		}
+		*/
 	}
 
 
@@ -129,23 +132,25 @@ public class SpaceShip extends VisualObject{
 				turnAround();
 			try {
 				pos = super.getPosition().getForward(super.getOrientation());
-				if(gameBoard[pos.getX()][pos.getY()] != null){//la pos qu'il a renvoyé n'est pas null
-					//demander si la suite va la ou apres le catch !!!!!!
+				System.out.println("x="+pos.getX()+" y="+pos.getY()+ " i="+i+ " size="+movement.length);
+				if(gameBoard[pos.getY()][pos.getX()] != null){//la pos qu'il a renvoyé n'est pas null
 					//ajouter dans la liste des vaiseaux (a l'exterieur du catch)
-					gameBoard[pos.getX()][pos.getY()].addLSpaceShip(this); 
+					gameBoard[pos.getY()][pos.getX()].addLSpaceShip(this); 
 					//retiter de la liste ou il etait
-					gameBoard[super.getPosition().x][super.getPosition().y].removeLSpaceShip(this);
+					gameBoard[super.getPosition().y][super.getPosition().x].removeLSpaceShip(this);
 					//changer sa position
 					super.setPosition(pos);
 				}else{//case null
 					this.structurePoints = this.structurePoints-2;
+					break;
 				}
 			} catch (Exception e) {
 					//le vaisseau se prend des degats et s'arrete 
 					this.structurePoints = this.structurePoints-2;
+					break;
 			}
             if(movement[i] == null)
-				break;
+				{break;}
 		}
     }
 

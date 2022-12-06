@@ -9,6 +9,8 @@ import org.junit.Before;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
+
 import Modele.RedPortal;
 import Modele.Cell;
 import Modele.EmptyCell;
@@ -133,7 +135,7 @@ public class RedPortalTest {
     public void testAddLSpaceShipWhenAlreadyHasRelic() throws Exception {
         ship.addRelic(rPort.getRelic());
         rPort.addLSpaceShip(ship);
-        assertTrue(ship.getRelic() == new int[]{rPort.getRelic(),0,0,0});
+        assertTrue(Arrays.equals(ship.getRelics(), new int[]{rPort.getRelic(),0,0,0}));
     }
 
     @Test

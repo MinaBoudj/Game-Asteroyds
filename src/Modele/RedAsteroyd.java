@@ -22,7 +22,7 @@ public class RedAsteroyd extends  Asteroyd {
 		if(directions[0]<=0||directions[0]>6||gameBoard[super.getPosition().getY()][super.getPosition().getX()]!= this) throw new Exception("direction rouge incorrect ");
 		else{
 			//changer l'orientation selon la direction
-			//ne peu pas faire bouger un objet devant lui
+			//ne peu pas faire bouger un objet devant lui 
 			try{
 				//changer l'orientation
 				int neworientation = calculeOrientation(directions[0]);
