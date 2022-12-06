@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.shape.Polyline;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 import javafx.scene.input.KeyCombination;
 
@@ -24,7 +26,6 @@ public class View {
                   player,
                   end,
                   gameKey;
-    private Group root;
     private double screenWidth,
                    screenHeight;
 
@@ -56,6 +57,15 @@ public class View {
     }
 
     public void displayGameBoard(String[][] gameBoard) throws Exception {
+        Group root = new Group();
+        Scene scene = new Scene(root);
+
+        try {
+            root.getChildren().add(ShapeConstructor.newImage("menu_background", screenWidth*1.5,screenHeight*1.5, screenWidth/2,screenHeight/2, 1));
+        } catch (Exception e) {
+            scene.setFill(Color.BLACK);
+        }
+
         double gameBoardWidth = gameBoard[0].length + 0.5,
                gameBoardHeight = gameBoard.length * 1.5 + 0.5,
                hexSize = Math.min((screenWidth * 0.75 / gameBoardWidth) / Math.sqrt(3),
@@ -85,9 +95,19 @@ public class View {
             y += hexSize * 1.5;
         }
 
-        //Rectangle rect = new Rectangle(screenWidth*0.8,0, screenWidth*0.2,screenHeight);
-        //rect.setFill(Color.GRAY);
-        //root.getChildren().add(rect);
+        Rectangle rect = ShapeConstructor.newRectangle(Color.web("A9A9A9",0.6), screenWidth*0.2,screenHeight, screenWidth*0.9,screenHeight/2);
+        rect.setFill(Color.web("A9A9A9",0.6));
+        root.getChildren().add(rect);
+
+        Executable mainMenu = (me) -> {
+                stage.setScene(menu);
+                stage.setFullScreen(true);
+            };
+		Text startButton = ControlConstructor.newButton("Main Menu", Color.WHITE, screenWidth*0.18,screenHeight*0.05, screenWidth*0.9,screenHeight*0.9, Color.BLACK, mainMenu);
+        root.getChildren().add(startButton);
+
+        stage.setScene(scene);
+        stage.setFullScreen(true);
     }
 
     private void displayObject(String[] objectInformations, Group group, double hexWidth, double hexSize, double x, double y) throws Exception {

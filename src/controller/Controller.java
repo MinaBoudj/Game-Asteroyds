@@ -23,7 +23,6 @@ public class Controller extends Application {
     public void start(Stage stage) throws Exception {
         Sendable gameInfos = (String[] args) -> {start(args);};
         view = new View(stage, gameInfos);
-        //view.displayGameBoard(gameBoardToString(gameBoard));
     }
 
     private void start(String[] gameInfos) {
@@ -51,6 +50,12 @@ public class Controller extends Application {
             constructGameBoard(view.readTextFile("res\\gameboards\\" + gameInfos[2] + ".txt"));
         } catch (Exception e) {
             System.err.println("Aïe");
+        }
+
+        try {
+        view.displayGameBoard(gameBoardToString(gameBoard));
+        } catch (Exception e) {
+            // TODO: handle exception
         }
     }
 

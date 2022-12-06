@@ -33,19 +33,19 @@ public class MenuScene extends Scene {
 
 		Rectangle paneMenu = ShapeConstructor.newRectangle(Color.web("A9A9A9",0.6), screenWidth*0.3, screenHeight, screenWidth*0.15, screenHeight/2);
 
-		Text playersBoxLabel = ShapeConstructor.newText("Number of players : ", Color.WHITE, screenWidth*0.28,screenHeight*0.1, screenWidth*0.15,screenHeight*0.1);
-		ComboBox<String> playersBox = ControlConstructor.newComboBox(numberOfPlayersChoices, screenWidth*0.28,screenHeight*0.08, screenWidth*0.15,screenHeight*0.18);
+		Text playersBoxLabel = ShapeConstructor.newText("Number of players : ", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.125);
+		ComboBox<String> playersBox = ControlConstructor.newComboBox(numberOfPlayersChoices, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.175);
 
-		Text difficultyBoxLabel = ShapeConstructor.newText("Difficulty : ", Color.WHITE, screenWidth*0.28,screenHeight*0.1, screenWidth*0.15,screenHeight*0.3);
-		ComboBox<String> difficultyBox = ControlConstructor.newComboBox(difficultyChoices, screenWidth*0.28,screenHeight*0.08, screenWidth*0.15,screenHeight*0.38);
+		Text difficultyBoxLabel = ShapeConstructor.newText("Difficulty : ", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.325);
+		ComboBox<String> difficultyBox = ControlConstructor.newComboBox(difficultyChoices, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.375);
 
-		Text gameBoardBoxLabel = ShapeConstructor.newText("Game board file : ", Color.WHITE, screenWidth*0.28,screenHeight*0.1, screenWidth*0.15,screenHeight*0.5);
-		ComboBox<String> gameBoardBox = ControlConstructor.newComboBox(gameBoardChoices, screenWidth*0.28,screenHeight*0.08, screenWidth*0.15,screenHeight*0.58);
+		Text gameBoardBoxLabel = ShapeConstructor.newText("Game board file : ", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.525);
+		ComboBox<String> gameBoardBox = ControlConstructor.newComboBox(gameBoardChoices, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.575);
 		
 		Executable start = (me) -> {gameInfos.send(new String[]{playersBox.getValue(), difficultyBox.getValue(), gameBoardBox.getValue()});};
-		Text startButton = ControlConstructor.newButton("Start", Color.WHITE, screenWidth*0.28,screenHeight*0.1, screenWidth*0.15,screenHeight*0.75, Color.BLACK, start);
+		Text startButton = ControlConstructor.newButton("Start", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.725, Color.BLACK, start);
 
-		Text exitButton = ControlConstructor.newButton("Exit Game", Color.WHITE, screenWidth*0.28,screenHeight*0.1, screenWidth*0.15,screenHeight*0.9, Color.BLACK, exit);
+		Text exitButton = ControlConstructor.newButton("Exit Game", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.875, Color.BLACK, exit);
 
 		root.getChildren().addAll(paneMenu, playersBoxLabel,playersBox, difficultyBoxLabel,difficultyBox, gameBoardBoxLabel,gameBoardBox, startButton,exitButton);
 	}
