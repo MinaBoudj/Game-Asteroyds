@@ -7,15 +7,15 @@ public class RedPortal extends RedAsteroyd{
 	private int relic;
 
 	/* construction d'un portail rouge */
-	public RedPortal(int orientation, Position pos, int relic)throws Exception{
-		super(orientation, pos);
+	public RedPortal(int orientation, Position pos, int relic, int priority)throws Exception{
+		super(orientation, pos, priority);
 		if(relic <=0 || relic>4) throw new Exception("relic incorrect");
 		this.setCanContainSpaceShips(true);
 		this.relic = relic;
 	}
 
-	public RedPortal(int orientation, int x, int y, int relic)throws Exception{
-		this(orientation, new Position(x,y), relic);
+	public RedPortal(int orientation, int x, int y, int relic, int priority)throws Exception{
+		this(orientation, new Position(x,y), relic, priority);
 	}
 	
 	/* getteur et setteur */
@@ -33,7 +33,7 @@ public class RedPortal extends RedAsteroyd{
 	
 	@Override
 	public String toString() {
-		return "portal-red-" + this.getOrientation() + "-" + this.relic;
+		return "portal-red-" + getOrientation() + "-" + getPriority() + "-" + this.relic;
 	}
 }
 

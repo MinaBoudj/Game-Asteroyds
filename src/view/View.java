@@ -27,55 +27,72 @@ public class View {
     private Group gameBoardGroup;
     private double screenWidth,
                    screenHeight;
+    private Executable mainMenu;
 
     public View(Stage s, Sendable gameInfos) {
         stage = s;
         stage.setTitle("Asteroyds");
-
-        Scene tmp = new Scene(new Group());
-        stage.setScene(tmp);
-        stage.setFullScreen(true);
-        stage.setFullScreenExitHint("");
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.show();
 
+        Scene tmp = new Scene(new Group());
+        setScene(tmp);
         screenWidth = tmp.getWidth();
         screenHeight = tmp.getHeight();
 
-        Executable exit = (ev) -> {stage.close();};
-
-        menu = new MenuScene(screenWidth,screenHeight, exit, gameInfos);
+        menu = new MenuScene(screenWidth,screenHeight, (ev) -> {stage.close();}, gameInfos);
         //options = new OptionsScene(screenWidth, screenHeight, new Group()), exit;
         main = new MainScene(screenWidth,screenHeight);
         turn = new TurnScene(screenWidth, screenHeight);
         /*end = new EndScene(screenWidth, screenHeight, new Group(), exit);
         gameKey = new GameKeyScene(screenWidth, screenHeight, new Group(), exit);*/
 
-        stage.setScene(menu);
-        stage.setFullScreen(true);
+        setScene(menu);
+        mainMenu = (ev) -> {
+                setScene(menu);
+            };
     }
 
-    public void displayMainScene(String[][] gameBoard, String[] players) throws Exception {
-        updateGameBoardGroup(gameBoard);
-        Executable mainMenu = (ev) -> {
-                stage.setScene(menu);
-                stage.setFullScreen(true);
-            };
-        Executable nextTurn = (ev) -> {System.out.println("Yeah");};
+    public void displayMainScene(String[][] gameBoard, String[] players, Executable newTurn) throws Exception {
+        updateGameBoardGroup(gameBoard, false);
         Executable simpInterface = (ev) -> {
                 ShapeConstructor.NOIMAGE = !ShapeConstructor.NOIMAGE;
                 try{
-                    displayMainScene(gameBoard, players);
-                } catch (Exception e) {
-
-                }
+                    displayMainScene(gameBoard, players, newTurn);
+                } catch (Exception e) {/*TODO*/}
             };
-        main.update(gameBoardGroup, players, nextTurn, mainMenu, simpInterface);
-        stage.setScene(main);
+        main.newTurn(gameBoardGroup, players, newTurn, mainMenu, simpInterface);
+        setScene(main);
+    }
+
+    private void setScene(Scene scene) {
+        stage.setScene(scene);
         stage.setFullScreen(true);
     }
 
-    public void updateGameBoardGroup(String[][] gameBoard) throws Exception {
+    public void displayMainScene(String[][] gameBoard, String[] players, String nextPlayer, Executable newPlayerTurn) throws Exception {
+        updateGameBoardGroup(gameBoard, false);
+        Executable simpInterface = (ev) -> {
+                ShapeConstructor.NOIMAGE = !ShapeConstructor.NOIMAGE;
+                try{
+                    displayMainScene(gameBoard, players, nextPlayer, newPlayerTurn);
+                } catch (Exception e) {/*TODO*/}
+            };
+        Executable startPlayerTurn = (ev) -> {
+                displayTurnScene(gameBoard, nextPlayer, newPlayerTurn);
+            };
+        main.newPlayerTurn(gameBoardGroup, players, nextPlayer, startPlayerTurn, mainMenu, simpInterface);
+        setScene(main);
+    }
+
+    public void displayTurnScene(String[][] gameBoard, String player, Executable newPlayerTurn) {
+        try {
+            updateGameBoardGroup(gameBoard, true);
+        } catch(Exception e) {/*TODO*/}
+        //TODO
+    }
+
+    public void updateGameBoardGroup(String[][] gameBoard, boolean displayAstInfos) throws Exception {
         gameBoardGroup = new Group();
 
         try {
@@ -154,7 +171,7 @@ public class View {
                             break;
 
                         default:
-                            throw new Exception("Couleur d'astéroïde non reconnue : " + asteroydColor);
+                            throw new Exception(/*TODO*/);
                     }
                     group.getChildren().addAll(ShapeConstructor.newHexagon(color1,color2, hexSize, x,y));
                 }
@@ -198,7 +215,7 @@ public class View {
                             break;
 
                         default:
-                            throw new Exception("Couleur de vaisseau non reconnue : " + spaceShipColor);
+                            throw new Exception(/*TODO*/);
                     }
                     group.getChildren().add(ShapeConstructor.newTriangle(color, hexSize/2, centerX - hexSize/20,centerY, spaceShipOrientation));
                 }
@@ -225,7 +242,7 @@ public class View {
             case "portal":
                 String portalColor = objectInformations[1],
                        portalPriority = objectInformations[2],
-                       relic = objectInformations[3];
+                       relic = objectInformations[4];
                 try {
                     group.getChildren().add(ShapeConstructor.newImage("relic" + relic, hexWidth/2,hexSize/2, x,y));
                 } catch (Exception e) {
@@ -246,7 +263,7 @@ public class View {
                             break;
 
                         default:
-                            throw new Exception("Couleur de portail non reconnue : " + portalColor);
+                            throw new Exception(/*TODO*/);
                     }
                     group.getChildren().add(ShapeConstructor.newCircle(color, hexWidth/3, x,y));
                 }
@@ -258,7 +275,7 @@ public class View {
                 break;
 
                 default:
-                    throw new Exception("Type d'objet visuel non reconnu : " + objectType);
+                    throw new Exception(/*TODO*/);
         }
     }
 

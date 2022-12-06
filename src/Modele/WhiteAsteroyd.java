@@ -7,12 +7,12 @@ package Modele;
 public class WhiteAsteroyd extends Asteroyd {
     
     /* Constructeurs */
-    public WhiteAsteroyd(int orientation, int x, int y)throws Exception{
-        super(orientation, x, y);
+    public WhiteAsteroyd(int orientation, int x, int y, int priority)throws Exception{
+        super(orientation, x, y, priority);
     }
 
-    public WhiteAsteroyd(int orientation, Position position)throws Exception{
-        super(orientation, position);
+    public WhiteAsteroyd(int orientation, Position position, int priority)throws Exception{
+        super(orientation, position, priority);
     }
     
     public void move(Cell[][] gameBoard, int[] directions) throws Exception{ // MOUVEMENTS DU BLANC 1 déplacement
@@ -47,6 +47,6 @@ public class WhiteAsteroyd extends Asteroyd {
     
     @Override
     public String toString() {
-        return "asteroyd-white-" + this.getOrientation();
+        return "asteroyd-white-" + getOrientation() + "-" + getPriority();
     }
 }

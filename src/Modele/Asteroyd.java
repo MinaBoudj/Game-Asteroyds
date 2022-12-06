@@ -5,14 +5,16 @@ package Modele;
 */
 
 public abstract class Asteroyd extends Cell {
+    private int priority;
     
     /* Constructeurs */
-    public Asteroyd(int orientation, Position pos)throws Exception {
+    public Asteroyd(int orientation, Position pos, int priority)throws Exception {
         super(orientation, pos, false);
+        this.priority = priority;
     }
 
-    public Asteroyd(int orientation, int x, int y) throws Exception {
-        super(orientation, x, y, false);
+    public Asteroyd(int orientation, int x, int y, int priority) throws Exception {
+        this(orientation, new Position(x,y), priority);
     }
 
 
@@ -37,6 +39,8 @@ public abstract class Asteroyd extends Cell {
             neworientation = ((super.getOrientation()+2) %6)+1;
         return neworientation;
     }
+
+    public int getPriority() {return priority;}
 
     /* Méthodes abstraites */
     public abstract void move(Cell[][] gameBoard, int[] directions) throws Exception;

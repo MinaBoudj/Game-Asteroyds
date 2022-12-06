@@ -6,11 +6,11 @@ package Modele;
 public class BlueAsteroyd extends Asteroyd{
 
      /* Constructeurs */
-    public BlueAsteroyd(int orientation, Position pos) throws Exception{ // ERREUR : Lien avec le constructeur de Asteroyd concernant l'exception ? 
-		    super(orientation, pos);
+    public BlueAsteroyd(int orientation, Position pos, int priority) throws Exception{ // ERREUR : Lien avec le constructeur de Asteroyd concernant l'exception ? 
+		    super(orientation, pos, priority);
 	  }
-    public BlueAsteroyd(int orientation, int x, int y) throws Exception{ // ERREUR : Lien avec le constructeur de Asteroyd concernant l'exception ? 
-		    super(orientation, x,y);
+    public BlueAsteroyd(int orientation, int x, int y, int priority) throws Exception{ // ERREUR : Lien avec le constructeur de Asteroyd concernant l'exception ? 
+		    super(orientation, x,y, priority);
 	  }
 
     
@@ -62,6 +62,6 @@ public class BlueAsteroyd extends Asteroyd{
     
   @Override
   public String toString() {
-    return "asteroyd-blue-" + this.getOrientation();
+    return "asteroyd-blue-" + getOrientation() + "-" + getPriority();
   }
 }

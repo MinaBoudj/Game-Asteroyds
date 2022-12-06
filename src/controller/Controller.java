@@ -18,28 +18,20 @@ public class Controller extends Application {
     private Asteroyd[] asteroyds;
     private Player[] players;
     private int difficulty;
+    private int[] turnDirections;
 
     @Override
     public void start(Stage stage) throws Exception {
-        Sendable gameInfos = (String[] args) -> {start(args);};
-        view = new View(stage, gameInfos);
+        view = new View(stage, (String[] args) -> {start(args);});
     }
 
     private void start(String[] gameInfos) {
         //players = new Player[Integer.parseInt(gameInfos[0])];
         try{
-            players = new Player[]{new Player("Bobby", Color.Red, 3, 1, 2), new Player("Kiki", Color.Blue, 6, 4, 3), new Player("Kiki", Color.Blue, 6, 4, 3), new Player("Kiki", Color.Blue, 6, 4, 3), new Player("Kiki", Color.Blue, 6, 4, 3), new Player("Kiki", Color.Blue, 6, 4, 3)};
-            players[0].getSpaceShip().addRelic(1);
-            players[0].getSpaceShip().addRelic(3);
-            players[1].getSpaceShip().addRelic(3);
-            players[1].getSpaceShip().addRelic(2);
-            players[1].getSpaceShip().addRelic(4);
-            players[1].getSpaceShip().addRelic(1);
-            players[5].getSpaceShip().addRelic(2);
+            players = new Player[]{new Player("Bobby", Color.Orange, 3, 1, 2), new Player("Billie", Color.Blue, 6, 4, 3)};
+            players[0].getSpaceShip().minusStructurePoint(6);
         }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        catch (Exception e) {/*TODO*/}
 
         switch(gameInfos[1]) {
             case "Amateur - 50s":
@@ -61,15 +53,11 @@ public class Controller extends Application {
 
         try {
             constructGameBoard(view.readTextFile("res\\gameboards\\" + gameInfos[2] + ".txt"));
-        } catch (Exception e) {
-            System.err.println("Aïe");
-        }
+        } catch (Exception e) {/*TODO*/}
 
         try {
-            view.displayMainScene(gameBoardToString(gameBoard), playersToString(players));
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+            view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), (ev) -> {newTurn();});
+        } catch (Exception e) {/*TODO*/}
     }
 
     public String[] playersToString(Player[] players) {
@@ -77,6 +65,34 @@ public class Controller extends Application {
         for(int i = 0 ; i < players.length ; i++)
             playerStrings[i] = players[i].toString();
         return playerStrings;
+    }
+
+    public void newTurn() {
+        turnDirections = new int[]{rollDice(),rollDice(),rollDice()};
+        newPlayerTurn(0);
+    }
+
+    public void newPlayerTurn(int nextPlayerIndex) {
+        while(nextPlayerIndex < players.length && players[nextPlayerIndex].getSpaceShip().getStructurePoints() <= 0) {
+            nextPlayerIndex++;
+        }
+        final int i = nextPlayerIndex;
+
+        if(i < players.length) {
+            try {
+                view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), players[i].toString(), (ev) -> {newPlayerTurn(i + 1);});
+            } catch(Exception e) {/*TODO*/}
+        }
+
+        endTurn();
+    }
+
+    public void endTurn() {
+        //TODO
+    }
+
+    private int rollDice() {
+        return (int)(Math.random() * 6 + 1);
     }
 
     private void constructGameBoard(ArrayList<String> text) throws Exception {
@@ -114,19 +130,19 @@ public class Controller extends Application {
                         case "portal":
                             Asteroyd portal = null;
                             int relic = Integer.parseInt(content[3]);
-                            int pOrientation = (int)(Math.random() * 6 + 1);
+                            int pOrientation = rollDice();
 
                             switch(content[2]) {
                                 case "red":
-                                    portal = new RedPortal(pOrientation, columnCursor,lineCursor, relic);
+                                    portal = new RedPortal(pOrientation, columnCursor,lineCursor, relic, remainingAsteroyds);
                                     break;
 
                                 case "white":
-                                    portal = new WhitePortal(pOrientation, columnCursor,lineCursor, relic);
+                                    portal = new WhitePortal(pOrientation, columnCursor,lineCursor, relic, remainingAsteroyds);
                                     break;
 
                                 default:
-                                    throw new Exception();
+                                    throw new Exception(/*TODO*/);
                             };
 
                             gameBoard[lineCursor][columnCursor] = portal;
@@ -136,31 +152,31 @@ public class Controller extends Application {
 
                         case "asteroyd":
                             Asteroyd ast;
-                            int aOrientation = (int)(Math.random() * 6 + 1);
+                            int aOrientation = rollDice();
 
                             switch(content[2]) {
                                 case "red":
-                                    ast = new RedAsteroyd(aOrientation, columnCursor,lineCursor);
+                                    ast = new RedAsteroyd(aOrientation, columnCursor,lineCursor, remainingAsteroyds);
                                     break;
 
                                 case "blue":
-                                    ast = new BlueAsteroyd(aOrientation, columnCursor,lineCursor);
+                                    ast = new BlueAsteroyd(aOrientation, columnCursor,lineCursor, remainingAsteroyds);
                                     break;
                             
                                 case "white":
-                                    ast = new WhiteAsteroyd(aOrientation, columnCursor,lineCursor);
+                                    ast = new WhiteAsteroyd(aOrientation, columnCursor,lineCursor, remainingAsteroyds);
                                     break;
                             
                                 case "white_red":
-                                    ast = new WhiteRedAsteroyd(aOrientation, columnCursor,lineCursor);
+                                    ast = new WhiteRedAsteroyd(aOrientation, columnCursor,lineCursor, remainingAsteroyds);
                                     break;
                             
                                 case "white_blue":
-                                    ast = new WhiteBlueAsteroyd(aOrientation, columnCursor,lineCursor);
+                                    ast = new WhiteBlueAsteroyd(aOrientation, columnCursor,lineCursor, remainingAsteroyds);
                                     break;
 
                                 default:
-                                    throw new Exception();
+                                    throw new Exception(/*TODO*/);
                             }
 
                             gameBoard[lineCursor][columnCursor] = ast;
@@ -177,7 +193,7 @@ public class Controller extends Application {
                             break;
 
                         default:
-                            throw new Exception();
+                            throw new Exception(/*TODO*/);
                     }
 
                     columnCursor++;

@@ -8,15 +8,15 @@ public class WhitePortal extends WhiteAsteroyd {
 	private int relic;
 
 	/* constructeur d'un portail blanc */
-	public WhitePortal(int orientation, Position pos , int relic)throws Exception{
-		super(orientation,pos);
+	public WhitePortal(int orientation, Position pos , int relic, int priority)throws Exception{
+		super(orientation,pos, priority);
 		if(relic <=0 || relic>4) throw new Exception("valeur de relic incorrect");
 		this.setCanContainSpaceShips(true);
 		this.relic = relic;
 	}
 
-	public WhitePortal(int orientation, int x, int y, int relic)throws Exception{
-		this(orientation, new Position(x,y), relic);
+	public WhitePortal(int orientation, int x, int y, int relic, int priority)throws Exception{
+		this(orientation, new Position(x,y), relic, priority);
 	}
 
 
@@ -33,6 +33,6 @@ public class WhitePortal extends WhiteAsteroyd {
 		
 	@Override
 	public String toString() {
-		return "portal-white-" + this.getOrientation() + "-" + this.relic;
+		return "portal-white-" + getOrientation() + "-" + getPriority() + "-" + this.relic;
 	}
 }

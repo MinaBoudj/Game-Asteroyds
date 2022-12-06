@@ -7,12 +7,12 @@ package Modele;
 public class RedAsteroyd extends  Asteroyd {
 	
 	/* constructeur d'un asteroid rouge */
-	public RedAsteroyd(int orientation, Position pos)throws Exception{
-		super(orientation, pos);
+	public RedAsteroyd(int orientation, Position pos, int priority)throws Exception{
+		super(orientation, pos, priority);
 	}
 	
-	public RedAsteroyd(int orientation, int x, int y)throws Exception {
-		super(orientation, x,y);
+	public RedAsteroyd(int orientation, int x, int y, int priority)throws Exception {
+		super(orientation, x,y, priority);
 	}
 	
 	@Override
@@ -77,7 +77,7 @@ public class RedAsteroyd extends  Asteroyd {
 
 	@Override
 	public String toString() {
-		return "asteroyd-red-" + this.getOrientation();
+		return "asteroyd-red-" + getOrientation() + "-" + getPriority();
 	}
 }
 
