@@ -140,4 +140,21 @@ public class ShapeConstructor {
 
         return triangle;
     }
+
+    // A vérif
+    public static Polygon newArrow(Color color, double startX,double startY, double endX, double endY, double arrowHeadSize, double orientation) {
+        Polygon arrow = new Polygon();
+        
+        double angle = Math.atan2((endY - startY), (endX - startX)) - Math.PI / 2.0;
+        arrow.getPoints().add((- 1.0 / 2.0 * Math.cos(angle) + Math.sqrt(3) / 2 * Math.sin(angle)) * arrowHeadSize + endX);
+        arrow.getPoints().add((- 1.0 / 2.0 * Math.sin(angle) - Math.sqrt(3) / 2 * Math.cos(angle)) * arrowHeadSize + endY);
+        
+        arrow.getPoints().add((1.0 / 2.0 * Math.cos(angle) + Math.sqrt(3) / 2 * Math.sin(angle)) * arrowHeadSize + endX);
+        arrow.getPoints().add((1.0 / 2.0 * Math.sin(angle) - Math.sqrt(3) / 2 * Math.cos(angle)) * arrowHeadSize + endY);
+
+        arrow.setFill(color);
+        arrow.setRotate(orientation * 60);
+
+        return arrow;
+    }
 }

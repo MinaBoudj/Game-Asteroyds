@@ -1,13 +1,16 @@
 package view;
 
+/*
+ * @autor Maylis
+*/
+
 import javafx.scene.Scene;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import javafx.scene.Group;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
+import javafx.scene.paint.Color; 
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.control.ComboBox;
@@ -16,12 +19,11 @@ import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-// /!\ Dimensions à vérifier /!\
-public class OptionsScene extends Scene {
+
+public class EndScene extends Scene {
     private ImageView delaySpaceShip;
-    private Polygon delayShape;
 	
-    public OptionsScene(double screenWidth, double screenHeight, Executable exit, Sendable playerinfo, double hexSize, double[] cellLaunchPositions){ // liste répertoriant deux a deux les coordonnées des lauchPad)
+    public EndScene(double screenWidth, double screenHeight, Executable exit, Sendable backmenu, ){
 		super(new Group());
 		Group root = (Group)getRoot();
         
@@ -36,17 +38,17 @@ public class OptionsScene extends Scene {
 				 cellLaunchChoices = new String[]{"n°1", "n°2", "n°3", "n°4", "n°5", "n°6"},
                  colorSpaceshipChoices = new String[]{"Green", "Blue", "Red", "Yellow", "Orange","Purple"};
 
-		Rectangle paneMenu = ShapeConstructor.newRectangle(Color.web("A9A9A9",0.6), screenWidth*0.2, screenHeight, screenWidth*0.85, screenHeight/2);
+		Rectangle paneMenu = ShapeConstructor.newRectangle(Color.web("A9A9A9",0.6), screenWidth*0.3, screenHeight, screenWidth*0.85, screenHeight/2);
 
-		Text namefieldLabel = ShapeConstructor.newText("Select your name : ", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.85,screenHeight*0.125);
+		Text namefieldLabel = ShapeConstructor.newText("Select your name : ", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.125);
         TextField namefield = new TextField(); 
             namefield.setMaxWidth(screenWidth*0.28);
             namefield.setMaxHeight(screenHeight*0.05);
-            namefield.setLayoutX(screenWidth*0.85);
+            namefield.setLayoutX(screenWidth*0.15);
             namefield.setLayoutY(screenWidth*0.175);
 
-		Text colorBoxLabel = ShapeConstructor.newText("Color : ", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.85,screenHeight*0.300);
-        ComboBox<String> colorBox = ControlConstructor.newComboBox(colorSpaceshipChoices, screenWidth*0.28,screenHeight*0.05, screenWidth*0.85,screenHeight*0.350);
+		Text colorBoxLabel = ShapeConstructor.newText("Color : ", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.300);
+        ComboBox<String> colorBox = ControlConstructor.newComboBox(colorSpaceshipChoices, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.350);
         EventHandler<ActionEvent> delay_color = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e){
@@ -79,13 +81,13 @@ public class OptionsScene extends Scene {
                 }
                 try {
                     delaySpaceShip = ShapeConstructor.newImage(spaceShipColor +"_space_ship.png", hexSize/2,hexSize/2, screenHeight*0.5,screenWidth*0.5, 1);
-                } catch (Exception e){ }
+               } catch (Exception e){ }
             }
         }; 
         colorBox.setOnAction(delay_color);
 
-		Text cellLaunchBoxLabel = ShapeConstructor.newText("Cell of LaunchPad : ", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.85,screenHeight*0.450);
-        ComboBox<String> cellLaunchBox = ControlConstructor.newComboBox(cellLaunchChoices, screenWidth*0.28,screenHeight*0.05, screenWidth*0.85,screenHeight*0.500);
+		Text cellLaunchBoxLabel = ShapeConstructor.newText("Cell of LaunchPad : ", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.450);
+        ComboBox<String> cellLaunchBox = ControlConstructor.newComboBox(cellLaunchChoices, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.500);
         EventHandler<ActionEvent> delay_position = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e){
@@ -120,14 +122,13 @@ public class OptionsScene extends Scene {
                 }
                 try{
                     delaySpaceShip = ShapeConstructor.newImage("green_space_ship.png", hexSize/2,hexSize/2, cellLaunchPositions[spaceShipLaunch],cellLaunchPositions[spaceShipLaunch+1], 1);
-                    delayShape = ShapeConstructor.newHexagon(Color.RED, hexSize/2, cellLaunchPositions[spaceShipLaunch],cellLaunchPositions[spaceShipLaunch+1]);
                 } catch (Exception e) { };
             }
         };
         cellLaunchBox.setOnAction(delay_position);
 
-        Text orientatoBoxLabel = ShapeConstructor.newText("Orientation : ", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.85,screenHeight*0.650);
-        ComboBox<String> orientationBox = ControlConstructor.newComboBox(orientationShipChoices, screenWidth*0.28,screenHeight*0.05, screenWidth*0.85,screenHeight*0.700);
+        Text orientatoBoxLabel = ShapeConstructor.newText("Orientation : ", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.650);
+        ComboBox<String> orientationBox = ControlConstructor.newComboBox(orientationShipChoices, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.700);
         EventHandler<ActionEvent> delay_orientation = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e){
@@ -161,17 +162,16 @@ public class OptionsScene extends Scene {
                         break;
                 }
                 try {
-                    delaySpaceShip = ShapeConstructor.newImage("green_space_ship.png", hexSize/2,hexSize/2, cellLaunchPositions[1],cellLaunchPositions[1+1], orientationSpaceShip);
-                    delayShape = ShapeConstructor.newArrow(Color.RED, screenHeight*0.5,screenWidth*0.5, screenHeight*0.45,screenWidth*0.45, 2.0, orientationSpaceShip);
-                } catch(Exception e) { }
+                delaySpaceShip = ShapeConstructor.newImage("green_space_ship.png", hexSize/2,hexSize/2, cellLaunchPositions[1],cellLaunchPositions[1+1], orientationSpaceShip);
+                } catch(Exception e) {}
             }
         };
         cellLaunchBox.setOnAction(delay_orientation);
 
 
 		Executable next = (me) -> {playerinfo.send(new String[]{namefield.getText(), colorBox.getValue(), cellLaunchBox.getValue(), orientationBox.getValue()});};
-		Text nextButton = ControlConstructor.newButton("Start", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.85,screenHeight*0.800, Color.BLACK, next);
-		Text exitButton = ControlConstructor.newButton("Exit Game", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.85,screenHeight*0.875, Color.BLACK, exit);
+		Text nextButton = ControlConstructor.newButton("Start", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.800, Color.BLACK, next);
+		Text exitButton = ControlConstructor.newButton("Exit Game", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.875, Color.BLACK, exit);
 
 		root.getChildren().addAll(paneMenu, namefieldLabel, namefield, colorBoxLabel, colorBox, cellLaunchBoxLabel, cellLaunchBox, orientatoBoxLabel, orientationBox, nextButton, exitButton);
 	}
