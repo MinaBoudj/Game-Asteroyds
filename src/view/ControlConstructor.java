@@ -94,4 +94,39 @@ public class ControlConstructor {
 
         return checkBox;
     }
+    
+    public static Color getPlayerColor(String colorInfo) throws Exception {
+        Color color;
+
+        switch(colorInfo) {
+            case "Red":
+                color = Color.BROWN;
+                break;
+
+            case "Blue":
+                color = Color.BLUE;
+                break;
+
+            case "Green":
+                color = Color.GREEN;
+                break;
+
+            case "Yellow":
+                color = Color.YELLOW;
+                break;
+
+            case "Orange":
+                color = Color.ORANGE;
+                break;
+
+            case "Purple":
+                color = Color.PURPLE;
+                break;
+
+            default:
+                throw new Exception(/*TODO*/);
+        }
+
+        return color;
+    }
 }

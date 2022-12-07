@@ -10,6 +10,8 @@ public abstract class Asteroyd extends Cell {
     /* Constructeurs */
     public Asteroyd(int orientation, Position pos, int priority)throws Exception {
         super(orientation, pos, false);
+        if(priority <= 0)
+            throw new Exception(/*TODO*/);
         this.priority = priority;
     }
 

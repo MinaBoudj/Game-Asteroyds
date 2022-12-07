@@ -33,7 +33,7 @@ public class MainScene extends Scene {
             String[] playerInfos = players[i].split("-"),
                      relics = playerInfos[0].split("/");
             String playerString = playerInfos[1] + " : " + playerInfos[2] + "/6 Structure points";
-            Color color = getPlayerColor(playerInfos[3]);
+            Color color = ControlConstructor.getPlayerColor(playerInfos[3]);
 
             root.getChildren().add(ShapeConstructor.newText(playerString, color, screenWidth*0.18,maxTextHeight, screenWidth*0.9,maxTextHeight*(i*2.5 + 1)));
 
@@ -69,43 +69,8 @@ public class MainScene extends Scene {
         Group root = updateRoot(gameBoardGroup, players, mainMenu, simpInterface);
         String[] playerInfos = nextPlayer.split("-");
         String name = playerInfos[1];
-        Color color = getPlayerColor(playerInfos[3]);
+        Color color = ControlConstructor.getPlayerColor(playerInfos[3]);
 
         root.getChildren().add(ControlConstructor.newButton("Start " + name + "'s Turn", Color.WHITE, screenWidth*0.18,screenHeight*0.8/18.5, screenWidth*0.9,screenHeight*16/18.5, color, startPlayerTurn));
-    }
-
-    private Color getPlayerColor(String colorInfo) throws Exception {
-        Color color;
-
-        switch(colorInfo) {
-            case "Red":
-                color = Color.BROWN;
-                break;
-
-            case "Blue":
-                color = Color.BLUE;
-                break;
-
-            case "Green":
-                color = Color.GREEN;
-                break;
-
-            case "Yellow":
-                color = Color.YELLOW;
-                break;
-
-            case "Orange":
-                color = Color.ORANGE;
-                break;
-
-            case "Purple":
-                color = Color.PURPLE;
-                break;
-
-            default:
-                throw new Exception(/*TODO*/);
-        }
-
-        return color;
     }
 }

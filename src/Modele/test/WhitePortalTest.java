@@ -26,60 +26,60 @@ public class WhitePortalTest {
 
     @Before
     public void constructGameBoard() throws Exception {
-        wPort1 = new WhitePortal(2, 1,1, 1);
-        wPort2 = new WhitePortal(2, 0,2, 2);
+        wPort1 = new WhitePortal(2, 1,1, 1, 1);
+        wPort2 = new WhitePortal(2, 0,2, 2, 2);
         ship = new SpaceShip(1, 1,2, Color.Green);
         gm = new Cell[][]{{null, null, new EmptyCell(2,0)}, {new LaunchPad(0,1), wPort1, null}, {wPort2, null, null}};
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullOrientation() throws Exception {
-        new WhitePortal(0, 2, 4, 2);
+        new WhitePortal(0, 2, 4, 2, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeOrientation() throws Exception {
-        new WhitePortal(-3, 1, 6, 2);
+        new WhitePortal(-3, 1, 6, 2, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithTooBigOrientation() throws Exception {
-        new WhitePortal(7, 8, 0, 2);
+        new WhitePortal(7, 8, 0, 2, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeX() throws Exception {
-        new WhitePortal(2, -3,4, 2);
+        new WhitePortal(2, -3,4, 2, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeY() throws Exception {
-        new WhitePortal(2, 7, -12, 2);
+        new WhitePortal(2, 7, -12, 2, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullPosition() throws Exception {
-        new WhitePortal(4, null, 2);
+        new WhitePortal(4, null, 2, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeRelic() throws Exception {
-        new WhitePortal(2, 3,4, -3);
+        new WhitePortal(2, 3,4, -3, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithTooBigRelic() throws Exception {
-        new WhitePortal(2, 7,2, 6);
+        new WhitePortal(2, 7,2, 6, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullRelic() throws Exception {
-        new WhitePortal(4, 6,7, 0);
+        new WhitePortal(4, 6,7, 0, 1);
     }
 
     @Test
     public void testConstructorWithGoodArguments() throws Exception {
-        new WhitePortal(3, 7, 14, 2);
+        new WhitePortal(3, 7, 14, 2, 1);
     }
 
     @Test(expected = Exception.class)

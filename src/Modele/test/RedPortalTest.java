@@ -25,59 +25,59 @@ public class RedPortalTest {
 
     @Before
     public void constructGameBoard() throws Exception {
-        rPort = new RedPortal(4, 1,2, 3);
+        rPort = new RedPortal(4, 1,2, 3, 1);
         ship = new SpaceShip(3, 0,1, Color.Blue);
         gm = new Cell[][]{{new LaunchPad(0,0), null, new EmptyCell(2,0)}, {null, new EmptyCell(1,1), null}, {new LaunchPad(0,2), rPort, null}};
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullOrientation() throws Exception {
-        new RedPortal(0, 2,4, 2);
+        new RedPortal(0, 2,4, 2, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeOrientation() throws Exception {
-        new RedPortal(-3, 1,6, 2);
+        new RedPortal(-3, 1,6, 2, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithTooBigOrientation() throws Exception {
-        new RedPortal(7, 8,0, 2);
+        new RedPortal(7, 8,0, 2, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeX() throws Exception {
-        new RedPortal(2, -3,4, 2);
+        new RedPortal(2, -3,4, 2, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeY() throws Exception {
-        new RedPortal(2, 7,-12, 2);
+        new RedPortal(2, 7,-12, 2, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullPosition() throws Exception {
-        new RedPortal(4, null, 2);
+        new RedPortal(4, null, 2, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeRelic() throws Exception {
-        new RedPortal(2, 3,4, -3);
+        new RedPortal(2, 3,4, -3, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithTooBigRelic() throws Exception {
-        new RedPortal(2, 7,2, 6);
+        new RedPortal(2, 7,2, 6, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullRelic() throws Exception {
-        new RedPortal(4, 6,7, 0);
+        new RedPortal(4, 6,7, 0, 1);
     }
 
     @Test
     public void testConstructorWithGoodArguments() throws Exception {
-        new RedPortal(3, 7,14, 1);
+        new RedPortal(3, 7,14, 1, 1);
     }
 
     @Test(expected = Exception.class)

@@ -18,42 +18,42 @@ public class AsteroydTest {
 
     @Before
     public void constructAsteroyd() throws Exception {
-        ast = new Asteroyd(4, new Position(13, 12));
+        ast = new Asteroyd(4, new Position(13, 12), 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullOrientation() throws Exception {
-        new Asteroyd(0, 2, 4);
+        new Asteroyd(0, 2, 4, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeOrientation() throws Exception {
-        new Asteroyd(-3, 1, 6);
+        new Asteroyd(-3, 1, 6, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithTooBigOrientation() throws Exception {
-        new Asteroyd(7, 8, 0);
+        new Asteroyd(7, 8, 0, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeX() throws Exception {
-        new Asteroyd(2, -3, 4);
+        new Asteroyd(2, -3, 4, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeY() throws Exception {
-        new Asteroyd(2, 7, -12);
+        new Asteroyd(2, 7, -12, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullPosition() throws Exception {
-        new Asteroyd(4, null);
+        new Asteroyd(4, null, 1);
     }
 
     @Test
     public void testConstructorWithGoodArguments() throws Exception {
-        new Asteroyd(3, 7, 14);
+        new Asteroyd(3, 7, 14, 1);
     }
 
     @Test(expected = Exception.class)

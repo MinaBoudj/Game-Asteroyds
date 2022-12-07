@@ -10,7 +10,6 @@ import org.junit.Before;
 import static org.junit.Assert.assertTrue;
 
 import Modele.WhiteAsteroyd;
-import Modele.Position;
 import Modele.Cell;
 import Modele.EmptyCell;
 import Modele.LaunchPad;
@@ -22,45 +21,45 @@ public class WhiteAsteroydTest {
 
     @Before
     public void constructGameBoard() throws Exception {
-        wAst1 = new WhiteAsteroyd(2, 1, 1);
-        wAst2 = new WhiteAsteroyd(2, 0, 2);
+        wAst1 = new WhiteAsteroyd(2, 1, 1, 1);
+        wAst2 = new WhiteAsteroyd(2, 0, 2, 2);
         gm = new Cell[][] { { null, null, new EmptyCell(2, 0) }, { new LaunchPad(0, 1), wAst1, null },
                 { wAst2, null, null } };
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullOrientation() throws Exception {
-        new WhiteAsteroyd(0, 2, 4);
+        new WhiteAsteroyd(0, 2, 4, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeOrientation() throws Exception {
-        new WhiteAsteroyd(-3, 1, 6);
+        new WhiteAsteroyd(-3, 1, 6, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithTooBigOrientation() throws Exception {
-        new WhiteAsteroyd(7, 8, 0);
+        new WhiteAsteroyd(7, 8, 0, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeX() throws Exception {
-        new WhiteAsteroyd(2, -3, 4);
+        new WhiteAsteroyd(2, -3, 4, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeY() throws Exception {
-        new WhiteAsteroyd(2, 7, -12);
+        new WhiteAsteroyd(2, 7, -12, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullPosition() throws Exception {
-        new WhiteAsteroyd(4, null);
+        new WhiteAsteroyd(4, null, 1);
     }
 
     @Test
     public void testConstructorWithGoodArguments() throws Exception {
-        new WhiteAsteroyd(3, 7, 14);
+        new WhiteAsteroyd(3, 7, 14, 1);
     }
 
     @Test(expected = Exception.class)

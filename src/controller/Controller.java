@@ -47,7 +47,7 @@ public class Controller extends Application {
                 break;
 
             case "Flight champion - 20s":
-                difficulty = 20;
+                difficulty = 2;
                 break;
         }
 
@@ -80,7 +80,7 @@ public class Controller extends Application {
 
         if(i < players.length) {
             try {
-                view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), players[i].toString(), (ev) -> {newPlayerTurn(i + 1);});
+                view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), players[i].toString(), difficulty, (ev) -> {newPlayerTurn(i + 1);});
             } catch(Exception e) {/*TODO*/}
         }
 

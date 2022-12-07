@@ -22,45 +22,45 @@ public class BlueAsteroydTest {
 
     @Before
     public void constructGameBoard() throws Exception {
-        bAst1 = new BlueAsteroyd(2, 1,1);
-        bAst2 = new BlueAsteroyd(2, 0,2);
-        bAst3 = new BlueAsteroyd(1, 1,2);
+        bAst1 = new BlueAsteroyd(2, 1,1, 1);
+        bAst2 = new BlueAsteroyd(2, 0,2, 2);
+        bAst3 = new BlueAsteroyd(1, 1,2, 3);
         gm = new Cell[][]{{null, null, new EmptyCell(2,0)}, {new LaunchPad(0,1), bAst1, new EmptyCell(1,2)}, {bAst2, bAst3, null}};
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullOrientation() throws Exception {
-        new BlueAsteroyd(0, 2, 4);
+        new BlueAsteroyd(0, 2, 4, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeOrientation() throws Exception {
-        new BlueAsteroyd(-3, 1, 6);
+        new BlueAsteroyd(-3, 1, 6, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithTooBigOrientation() throws Exception {
-        new BlueAsteroyd(7, 8, 0);
+        new BlueAsteroyd(7, 8, 0, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeX() throws Exception {
-        new BlueAsteroyd(2, -3, 4);
+        new BlueAsteroyd(2, -3, 4, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeY() throws Exception {
-        new BlueAsteroyd(2, 7, -12);
+        new BlueAsteroyd(2, 7, -12, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullPosition() throws Exception {
-        new BlueAsteroyd(4, null);
+        new BlueAsteroyd(4, null, 1);
     }
 
     @Test
     public void testConstructorWithGoodArguments() throws Exception {
-        new BlueAsteroyd(3, 7, 14);
+        new BlueAsteroyd(3, 7, 14, 1);
     }
 
     @Test(expected = Exception.class)

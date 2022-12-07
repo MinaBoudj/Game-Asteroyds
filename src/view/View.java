@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.shape.Polyline;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 import javafx.scene.input.KeyCombination;
 
@@ -20,10 +22,10 @@ public class View {
     private Stage stage;
     private Scene menu,
                   options,
-                  turn,
                   end,
                   gameKey;
     private MainScene main;
+    private TurnScene turn;
     private Group gameBoardGroup;
     private double screenWidth,
                    screenHeight;
@@ -70,26 +72,27 @@ public class View {
         stage.setFullScreen(true);
     }
 
-    public void displayMainScene(String[][] gameBoard, String[] players, String nextPlayer, Executable newPlayerTurn) throws Exception {
+    public void displayMainScene(String[][] gameBoard, String[] players, String nextPlayer, int difficulty, Executable newPlayerTurn) throws Exception {
         updateGameBoardGroup(gameBoard, false);
         Executable simpInterface = (ev) -> {
                 ShapeConstructor.NOIMAGE = !ShapeConstructor.NOIMAGE;
                 try{
-                    displayMainScene(gameBoard, players, nextPlayer, newPlayerTurn);
+                    displayMainScene(gameBoard, players, nextPlayer, difficulty, newPlayerTurn);
                 } catch (Exception e) {/*TODO*/}
             };
         Executable startPlayerTurn = (ev) -> {
-                displayTurnScene(gameBoard, nextPlayer, newPlayerTurn);
+                displayTurnScene(gameBoard, nextPlayer, difficulty, newPlayerTurn);
             };
         main.newPlayerTurn(gameBoardGroup, players, nextPlayer, startPlayerTurn, mainMenu, simpInterface);
         setScene(main);
     }
 
-    public void displayTurnScene(String[][] gameBoard, String player, Executable newPlayerTurn) {
+    public void displayTurnScene(String[][] gameBoard, String player, int difficulty, Executable newPlayerTurn) {
         try {
             updateGameBoardGroup(gameBoard, true);
+            turn.updateRoot(gameBoardGroup, player, difficulty, mainMenu);
         } catch(Exception e) {/*TODO*/}
-        //TODO
+        setScene(turn);
     }
 
     public void updateGameBoardGroup(String[][] gameBoard, boolean displayAstInfos) throws Exception {
@@ -114,13 +117,13 @@ public class View {
             for (int j = 0 ; j < gameBoard[i].length ; j++) {
                 if (gameBoard[i][j] != "") {
                     Polyline hexLine = new Polyline();
-                    hexLine.getPoints().addAll(ShapeConstructor.newHexagonCorners(x, y, hexSize));
+                    hexLine.getPoints().addAll(ShapeConstructor.newHexagonCorners(x,y, hexSize));
                     hexLine.setStroke(Color.WHITE);
                     gameBoardGroup.getChildren().add(hexLine);
 
                     String[] objectsToDisplay = gameBoard[i][j].split("/");
                     for (String object : objectsToDisplay) {
-                        displayObject(object.split("-"), gameBoardGroup, hexWidth, hexSize, x, y);
+                        displayObject(object.split("-"), gameBoardGroup, hexWidth,hexSize, x,y, displayAstInfos);
                     }
                 }
 
@@ -133,13 +136,13 @@ public class View {
         gameBoardGroup.getChildren().add(ShapeConstructor.newRectangle(Color.web("A9A9A9",0.6), screenWidth*0.2,screenHeight, screenWidth*0.9,screenHeight/2));
     }
 
-    private void displayObject(String[] objectInformations, Group group, double hexWidth, double hexSize, double x, double y) throws Exception {
+    private void displayObject(String[] objectInformations, Group group, double hexWidth,double hexSize, double x,double y, boolean displayAstInfos) throws Exception {
         String objectType = objectInformations[0];
         switch (objectType) {
             case "asteroyd":
                 String asteroydColor = objectInformations[1],
-                       asteroydPriority = objectInformations[2];
-                /*int asteroydOrientation = Integer.parseInt(objectInformations[2]);*/
+                       asteroydPriority = objectInformations[3];
+                int asteroydOrientation = Integer.parseInt(objectInformations[2]);
                 try {
                     group.getChildren().add(ShapeConstructor.newImage(asteroydColor + "_asteroyd", hexWidth,hexSize, x,y));
                 } catch (Exception e) {
@@ -176,7 +179,8 @@ public class View {
                     group.getChildren().addAll(ShapeConstructor.newHexagon(color1,color2, hexSize, x,y));
                 }
 
-                //group.getChildren().add(ShapeConstructor.newText(asteroydPriority, Color.WHITE,Color.BLACK, hexWidth/4, x,y));
+                if(displayAstInfos)
+                    displayAstInfos(group, asteroydOrientation, asteroydPriority, hexWidth,hexSize, x,y);
                 break;
 
             case "space_ship":
@@ -241,8 +245,9 @@ public class View {
 
             case "portal":
                 String portalColor = objectInformations[1],
-                       portalPriority = objectInformations[2],
+                       portalPriority = objectInformations[3],
                        relic = objectInformations[4];
+                int portalOrientation = Integer.parseInt(objectInformations[2]);
                 try {
                     group.getChildren().add(ShapeConstructor.newImage("relic" + relic, hexWidth/2,hexSize/2, x,y));
                 } catch (Exception e) {
@@ -267,8 +272,9 @@ public class View {
                     }
                     group.getChildren().add(ShapeConstructor.newCircle(color, hexWidth/3, x,y));
                 }
-                
-                //group.getChildren().add(ShapeConstructor.newText(portalPriority, Color.WHITE,Color.BLACK, hexWidth/4, x,y));
+
+                if(displayAstInfos)
+                    displayAstInfos(group, portalOrientation, portalPriority, hexWidth,hexSize, x,y);
                 break;
 
             case " ":
@@ -276,6 +282,25 @@ public class View {
 
                 default:
                     throw new Exception(/*TODO*/);
+        }
+    }
+
+    private void displayAstInfos(Group group, double orientation, String priority, double hexWidth,double hexSize, double x,double y) {
+        Text priorityText = ShapeConstructor.newText(priority, Color.WHITE, hexWidth/4,hexWidth, x,y);
+        Rectangle priorityRect = ShapeConstructor.newRectangle(Color.BLACK, hexWidth/4,priorityText.getBoundsInLocal().getHeight()*0.8, x, y);
+        group.getChildren().addAll(priorityRect, priorityText);
+
+        for(int i = 0 ; i < 6 ; i++) {
+            double centerX = x + hexSize*2/3 * Math.cos((60 * (orientation +i -2)) * ShapeConstructor.TORAD),
+                   centerY = y + hexSize*2/3 * Math.sin((60 * (orientation +i -2)) * ShapeConstructor.TORAD);
+            String direction = i == 0 ? "1" :
+                                   i == 1 ? "5" :
+                                       i == 2 ? "3" :
+                                           i == 3 ? "6" :
+                                               i == 4 ? "2" : "4";
+            Text directionText = ShapeConstructor.newText(direction, Color.WHITE, hexSize/4,hexWidth, centerX,centerY);
+            Rectangle directionRect = ShapeConstructor.newRectangle(Color.BLACK, hexSize/4,directionText.getBoundsInLocal().getHeight()*0.8, centerX, centerY);
+            group.getChildren().addAll(directionRect, directionText);
         }
     }
 

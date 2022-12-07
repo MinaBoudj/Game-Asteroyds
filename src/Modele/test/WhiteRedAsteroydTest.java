@@ -20,43 +20,43 @@ public class WhiteRedAsteroydTest {
 
     @Before
     public void constructGameBoard() throws Exception {
-        wrAst = new WhiteRedAsteroyd(6, 0,2);
+        wrAst = new WhiteRedAsteroyd(6, 0,2, 1);
         gm = new Cell[][]{{new EmptyCell(0,0), new EmptyCell(1,0), null}, {new EmptyCell(0,1), null, new EmptyCell(2,1)}, {wrAst, new EmptyCell(1,2), new LaunchPad(2,2)}};
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullOrientation() throws Exception {
-        new WhiteRedAsteroyd(0, 2, 4);
+        new WhiteRedAsteroyd(0, 2, 4, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeOrientation() throws Exception {
-        new WhiteRedAsteroyd(-3, 1, 6);
+        new WhiteRedAsteroyd(-3, 1, 6, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithTooBigOrientation() throws Exception {
-        new WhiteRedAsteroyd(7, 8, 0);
+        new WhiteRedAsteroyd(7, 8, 0, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeX() throws Exception {
-        new WhiteRedAsteroyd(2, -3, 4);
+        new WhiteRedAsteroyd(2, -3, 4, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNegativeY() throws Exception {
-        new WhiteRedAsteroyd(2, 7, -12);
+        new WhiteRedAsteroyd(2, 7, -12, 1);
     }
 
     @Test(expected = Exception.class)
     public void testConstructorWithNullPosition() throws Exception {
-        new WhiteRedAsteroyd(4, null);
+        new WhiteRedAsteroyd(4, null, 1);
     }
 
     @Test
     public void testConstructorWithGoodArguments() throws Exception {
-        new WhiteRedAsteroyd(3, 7, 14);
+        new WhiteRedAsteroyd(3, 7, 14, 1);
     }
 
     @Test(expected = Exception.class)
