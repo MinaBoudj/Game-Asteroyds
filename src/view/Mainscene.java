@@ -12,17 +12,11 @@ import javafx.scene.text.Text;
 
 
 
-<<<<<<< HEAD
 public class MainScene extends Scene {
     private double screenWidth,
                    screenHeight;
-=======
-public class Mainscene extends Scene {
-    double screenWidth,
-           screenHeight;
->>>>>>> 8c0ac7e82930213c1775a6f85aa593a8cfe3a4af
 
-    public Mainscene(double screenWidth, double screenHeight) {
+    public MainScene(double screenWidth, double screenHeight) {
         super(new Group());
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
