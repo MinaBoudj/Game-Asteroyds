@@ -33,6 +33,9 @@ public class WhitePortal extends WhiteAsteroyd {
 		
 	@Override
 	public String toString() {
-		return "portal-white-" + getOrientation() + "-" + getPriority() + "-" + this.relic;
+		String str = "portal-white-" + getOrientation() + "-" + getPriority() + "-" + this.relic;
+        for(SpaceShip sp : getLSpaceShips())
+            str += "/" + sp;
+		return str;
 	}
 }

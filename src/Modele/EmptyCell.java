@@ -17,6 +17,9 @@ public class EmptyCell extends Cell {
 
     @Override
     public String toString() {
-        return " ";
+        String str =  " ";
+        for(SpaceShip sp : getLSpaceShips())
+            str += "/" + sp;
+        return str;
     }
 }   

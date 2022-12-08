@@ -16,23 +16,19 @@ public class Controller extends Application {
     private View view;
     private Cell[][] gameBoard;
     private Asteroyd[] asteroyds;
-    private Player[] players;
     private int difficulty;
     private int[] turnDirections;
+    private Player[] players;
+    private ArrayList<Player> winners;
 
     @Override
     public void start(Stage stage) throws Exception {
         view = new View(stage, (String[] args) -> {start(args);});
+        winners = new ArrayList<Player>();
     }
 
     private void start(String[] gameInfos) {
         //players = new Player[Integer.parseInt(gameInfos[0])];
-        try{
-            players = new Player[]{new Player("Bobby", Color.Orange, 3, 1, 2), new Player("Billie", Color.Blue, 6, 4, 3)};
-            players[0].getSpaceShip().minusStructurePoint(6);
-            players[1].getSpaceShip().addRelic(2);
-        }
-        catch (Exception e) {/*TODO*/}
 
         switch(gameInfos[1]) {
             case "Amateur - 50s":
@@ -56,9 +52,46 @@ public class Controller extends Application {
             constructGameBoard(view.readTextFile("res\\gameboards\\" + gameInfos[2] + ".txt"));
         } catch (Exception e) {/*TODO*/}
 
-        try {
-            view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), (ev) -> {newTurn();});
+        try{
+            players = new Player[]{new Player("Roro", Color.Green, 1, 8, 5), new Player("Toto", Color.Purple, 6, 7, 5)};
+
+            for(Player p : players) {
+                SpaceShip sp = p.getSpaceShip();
+                gameBoard[sp.getPosition().getY()][sp.getPosition().getX()].addLSpaceShip(sp);
+            }
         } catch (Exception e) {/*TODO*/}
+
+        try {
+            view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), ev -> {newTurn();});
+        } catch (Exception e) {/*TODO*/}
+    }
+
+    public void savePlayerMovements(Player player, String[] movements) {
+        for(int i = 0 ; i < movements.length ; i++) {
+            if(movements[i] == null)
+                player.setMovement(i, null);
+            else
+                switch(movements[i]) {
+                    case "forward":
+                        player.setMovement(i, Movement.Forward);
+                        break;
+
+                    case "right":
+                        player.setMovement(i, Movement.Right);
+                        break;
+                        
+                    case "left":
+                        player.setMovement(i, Movement.Left);
+                        break;
+                        
+                    case "turn_around":
+                        player.setMovement(i, Movement.TurnAround);
+                        break;
+                        
+                    default:
+                        //TODO
+                }
+        }
     }
 
     public String[] playersToString(Player[] players) {
@@ -80,16 +113,38 @@ public class Controller extends Application {
         final int i = nextPlayerIndex;
 
         if(i < players.length) {
-            try {
-                view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), players[i].toString(), difficulty, turnDirections, (ev) -> {newPlayerTurn(i + 1);});
-            } catch(Exception e) {/*TODO*/}
-        }
+            Sendable newPlayerTurn = args -> {
+                    savePlayerMovements(players[i], args);
+                    newPlayerTurn(i + 1);
+                };
 
-        endTurn();
+            try {
+                view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), players[i].toString(), difficulty, turnDirections, newPlayerTurn);
+            } catch(Exception e) {/*TODO*/}
+        } else
+            try {
+                endTurn();
+            } catch(Exception e) {/*TODO*/}
     }
 
-    public void endTurn() {
-        //TODO
+    public void endTurn() throws Exception {
+        for(Asteroyd ast : asteroyds)
+            ast.move(gameBoard, turnDirections);
+
+        for(Player p : players) {
+            if(p.hasSpaceShipInCondition())
+                p.move(gameBoard);
+            if(!p.hasSpaceShipInCondition())
+                gameBoard[p.getSpaceShip().getPosition().getX()][p.getSpaceShip().getPosition().getY()].removeLSpaceShip(p.getSpaceShip());
+            else if(p.getNumberOfRelics() == 4)
+                winners.add(p);
+        }
+
+        if(isGameOver()) {}
+        else
+            try {
+                view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), ev -> {newTurn();});
+            } catch (Exception e) {/*TODO*/}
     }
 
     private int rollDice() {
@@ -210,14 +265,7 @@ public class Controller extends Application {
         }
     }
 
-    public boolean isGameOver() {
-        for(Player p : players) {
-            if(p.getNumberOfRelics() == 4)
-                return true;
-        }
-
-        return false;
-    }
+    public boolean isGameOver() {return winners.size() > 0;}
 
     public String[][] gameBoardToString(Cell[][] gameBoard) {
         String[][] stringGameBoard = new String[gameBoard.length][gameBoard[0].length];

@@ -17,7 +17,9 @@ public class LaunchPad extends Cell {
 
     @Override
     public String toString() {
-        return "launchpad";
+        String str = "launchpad";
+        for(SpaceShip sp : getLSpaceShips())
+            str += "/" + sp;
+        return str;
     }
 }  
-

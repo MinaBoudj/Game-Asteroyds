@@ -7,5 +7,6 @@ public enum Movement {
 	Left,
 	Right,
 	Forward,
-	TurnAround
+	TurnAround,
+	Null
 }

@@ -19,13 +19,11 @@ import Modele.Movement;
 
 public class SpaceShipTest {
     private SpaceShip spaceShip1;
-    private SpaceShip spaceShip2;
     private Cell[][] gameBoard;
 
     @Before
     public void constructSpaceShip() throws Exception {
         spaceShip1 = new SpaceShip(4,new Position(4,4), Color.Green);
-        spaceShip2 = new SpaceShip(5,new Position(1,4), Color.Green);  
         EmptyCell eCell = new EmptyCell(4,4);
         eCell.addLSpaceShip(spaceShip1);   
         gameBoard = new Cell[][]{{null,null,null,null,null},{null,null,null,null,null},{null,null,null,null,null},{null,null,null,null,null},{null,new EmptyCell(1,4), new EmptyCell(2,4), new EmptyCell(3,4), eCell}};  

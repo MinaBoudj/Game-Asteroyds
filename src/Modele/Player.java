@@ -36,9 +36,14 @@ public class Player {
     public SpaceShip getSpaceShip() {
         return spaceShip;
     }
-
     
     /* Méthode */
+    public void move(Cell[][] gameBoard) throws Exception {
+        spaceShip.move(gameBoard, movements);
+    }
+
+    public boolean hasSpaceShipInCondition() {return spaceShip.getStructurePoints() > 0;}
+    
     @Override
     public String toString() {
         String str = "";

@@ -115,32 +115,34 @@ public class SpaceShip extends VisualObject{
 	// procedure qui deplace un vaisseau selon les mouvements choisis par le joureur
 	public void move(Cell[][] gameBoard, Movement[] movement)throws Exception {
 		for(Movement m : movement) { //parcourir tous les mouvements for(Movement m : movement)
-			Position pos;
-			if(m == Movement.Left) //changer l'orientation
-				moveLeft();
-			if(m == Movement.Right)
-				moveRight();
 			if(m == Movement.TurnAround)
 				turnAround();
-			if(m == null)
-				{break;}
-			try {
-				pos = super.getPosition().getForward(super.getOrientation());
-				if(gameBoard[pos.getY()][pos.getX()] != null){//la pos qu'il a renvoyé n'est pas null
-					//ajouter dans la liste des vaiseaux (a l'exterieur du catch)
-					gameBoard[pos.getY()][pos.getX()].addLSpaceShip(this); 
-					//retiter de la liste ou il etait
-					gameBoard[super.getPosition().y][super.getPosition().x].removeLSpaceShip(this);
-					//changer sa position
-					super.setPosition(pos);
-				}else{//case null
-					this.structurePoints = this.structurePoints-2;
-					break;
+			else {
+				Position pos;
+				if(m == Movement.Left) //changer l'orientation
+					moveLeft();
+				if(m == Movement.Right)
+					moveRight();
+				if(m == null)
+					{break;}
+				try {
+					pos = super.getPosition().getForward(super.getOrientation());
+					if(gameBoard[pos.getY()][pos.getX()] != null){//la pos qu'il a renvoyé n'est pas null
+						//ajouter dans la liste des vaiseaux (a l'exterieur du catch)
+						gameBoard[pos.getY()][pos.getX()].addLSpaceShip(this); 
+						//retiter de la liste ou il etait
+						gameBoard[super.getPosition().y][super.getPosition().x].removeLSpaceShip(this);
+						//changer sa position
+						super.setPosition(pos);
+					}else{//case null
+						this.structurePoints = this.structurePoints-2;
+						break;
+					}
+				} catch (Exception e) {
+						//le vaisseau se prend des degats et s'arrete 
+						this.structurePoints = this.structurePoints-2;
+						break;
 				}
-			} catch (Exception e) {
-					//le vaisseau se prend des degats et s'arrete 
-					this.structurePoints = this.structurePoints-2;
-					break;
 			}
 		}
     }

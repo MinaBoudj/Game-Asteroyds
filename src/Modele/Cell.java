@@ -46,5 +46,4 @@ public abstract class Cell extends VisualObject {
 		if(newS == null) throw new Exception("pointeur null");
 		this.LSpaceShips.remove(newS);
 	}
-
 }

@@ -19,81 +19,76 @@ import javafx.scene.input.KeyCombination;
 
 public class View {
     private Stage stage;
-    private Scene menu,
+    private Group menu,
                   options,
                   end,
                   gameKey;
-    private MainScene main;
-    private TurnScene turn;
+    private MainGroup main;
+    private TurnGroup turn;
     private Group gameBoardGroup;
     private double screenWidth,
                    screenHeight;
     private Executable mainMenu;
+    private Scene scene;
 
     public View(Stage s, Sendable gameInfos) {
+        scene = new Scene(new Group());
         stage = s;
+        stage.setScene(scene);
+        stage.setFullScreen(true);
         stage.setTitle("Asteroyds");
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.show();
 
-        Scene tmp = new Scene(new Group());
-        setScene(tmp);
-        screenWidth = tmp.getWidth();
-        screenHeight = tmp.getHeight();
+        screenWidth = scene.getWidth();
+        screenHeight = scene.getHeight();
 
-        menu = new MenuScene(screenWidth,screenHeight, (ev) -> {stage.close();}, gameInfos);
+        menu = new MenuGroup(screenWidth,screenHeight, ev -> {stage.close();}, gameInfos);
         //options = new OptionsScene(screenWidth, screenHeight, new Group()), exit;
-        main = new MainScene(screenWidth,screenHeight);
-        turn = new TurnScene(screenWidth, screenHeight);
+        main = new MainGroup(screenWidth,screenHeight);
+        turn = new TurnGroup(screenWidth, screenHeight);
         /*end = new EndScene(screenWidth, screenHeight, new Group(), exit);
         gameKey = new GameKeyScene(screenWidth, screenHeight, new Group(), exit);*/
 
-        setScene(menu);
-        mainMenu = (ev) -> {
-                setScene(menu);
-                main = new MainScene(screenWidth,screenHeight);
-                turn = new TurnScene(screenWidth, screenHeight);
+        scene.setRoot(menu);
+        mainMenu = ev -> {
+                scene.setRoot(menu);
             };
     }
 
     public void displayMainScene(String[][] gameBoard, String[] players, Executable newTurn) throws Exception {
         updateGameBoardGroup(gameBoard, false);
-        Executable simpInterface = (ev) -> {
+        Executable simpInterface = ev -> {
                 ShapeConstructor.NOIMAGE = !ShapeConstructor.NOIMAGE;
                 try{
                     displayMainScene(gameBoard, players, newTurn);
                 } catch (Exception e) {/*TODO*/}
             };
         main.newTurn(gameBoardGroup, players, newTurn, mainMenu, simpInterface);
-        setScene(main);
+        scene.setRoot(main);
     }
 
-    private void setScene(Scene scene) {
-        stage.setScene(scene);
-        stage.setFullScreen(true);
-    }
-
-    public void displayMainScene(String[][] gameBoard, String[] players, String nextPlayer, int difficulty, int[] directions, Executable newPlayerTurn) throws Exception {
+    public void displayMainScene(String[][] gameBoard, String[] players, String nextPlayer, int difficulty, int[] directions, Sendable newPlayerTurn) throws Exception {
         updateGameBoardGroup(gameBoard, false);
-        Executable simpInterface = (ev) -> {
+        Executable simpInterface = ev -> {
                 ShapeConstructor.NOIMAGE = !ShapeConstructor.NOIMAGE;
                 try{
                     displayMainScene(gameBoard, players, nextPlayer, difficulty, directions, newPlayerTurn);
                 } catch (Exception e) {/*TODO*/}
             };
-        Executable startPlayerTurn = (ev) -> {
+        Executable startPlayerTurn = ev -> {
                 displayTurnScene(gameBoard, nextPlayer, difficulty, directions, newPlayerTurn);
             };
         main.newPlayerTurn(gameBoardGroup, players, nextPlayer, startPlayerTurn, mainMenu, simpInterface);
-        setScene(main);
+        scene.setRoot(main);
     }
 
-    public void displayTurnScene(String[][] gameBoard, String player, int difficulty, int[] directions, Executable newPlayerTurn) {
+    public void displayTurnScene(String[][] gameBoard, String player, int difficulty, int[] directions, Sendable newPlayerTurn) {
         try {
             updateGameBoardGroup(gameBoard, true);
-            turn.updateRoot(gameBoardGroup, player, difficulty, directions, mainMenu);
+            turn.updateRoot(gameBoardGroup, player, difficulty, directions, mainMenu, newPlayerTurn);
         } catch(Exception e) {/*TODO*/}
-        setScene(turn);
+        scene.setRoot(turn);
     }
 
     public void updateGameBoardGroup(String[][] gameBoard, boolean displayAstInfos) throws Exception {
@@ -135,6 +130,11 @@ public class View {
     }
 
     private void displayObject(String[] objectInformations, Group group, double hexWidth,double hexSize, double x,double y, boolean displayAstInfos) throws Exception {
+        Group astInfoGroup = new Group();
+        group.getChildren().add(astInfoGroup);
+        astInfoGroup.setViewOrder(-1);
+        astInfoGroup.setVisible(displayAstInfos);
+        
         String objectType = objectInformations[0];
         switch (objectType) {
             case "asteroyd":
@@ -177,8 +177,7 @@ public class View {
                     group.getChildren().addAll(ShapeConstructor.newHexagon(color1,color2, hexSize, x,y));
                 }
 
-                if(displayAstInfos)
-                    displayAstInfos(group, asteroydOrientation, asteroydPriority, hexWidth,hexSize, x,y);
+                displayAstInfos(astInfoGroup, asteroydOrientation, asteroydPriority, hexWidth,hexSize, x,y);
                 break;
 
             case "space_ship":
@@ -271,8 +270,7 @@ public class View {
                     group.getChildren().add(ShapeConstructor.newCircle(color, hexWidth/3, x,y));
                 }
 
-                if(displayAstInfos)
-                    displayAstInfos(group, portalOrientation, portalPriority, hexWidth,hexSize, x,y);
+                displayAstInfos(astInfoGroup, portalOrientation, portalPriority, hexWidth,hexSize, x,y);
                 break;
 
             case " ":

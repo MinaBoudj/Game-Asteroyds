@@ -56,6 +56,12 @@ public class ShapeConstructor {
         return text; 
     }
 
+    public static Text newText(String content, Color fill,Color stroke, double maxWidth,double maxHeight, double centerX,double centerY) {
+        Text text = newText(content, fill, maxWidth,maxHeight, centerX,centerY);
+        text.setStroke(stroke);
+        return text;
+    }
+
     public static Rectangle newRectangle(Color color, double width,double height, double centerX,double centerY) {
         Rectangle rectangle = new Rectangle(width, height);
         rectangle.setX(centerX - width/2);
@@ -152,7 +158,7 @@ public class ShapeConstructor {
         triangle.getPoints().add(centerY + distToCenter * Math.sin(-TORAD));
 
         triangle.setFill(color);
-        triangle.setRotate(orientation * 30);
+        triangle.setRotate(orientation * 60);
 
         return triangle;
     }

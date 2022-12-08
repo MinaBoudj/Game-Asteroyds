@@ -4,8 +4,6 @@ package view;
  * @author Matéo
  */
 
-import javafx.scene.Scene;
-
 import java.io.File;
 import java.util.ArrayList;
 
@@ -17,15 +15,14 @@ import javafx.scene.control.ComboBox;
 
 
 
-public class MenuScene extends Scene {
-	public MenuScene(double screenWidth, double screenHeight, Executable exit, Sendable gameInfos){ 
-		super(new Group());
-		Group root = (Group)getRoot();
+public class MenuGroup extends Group {
+	public MenuGroup(double screenWidth, double screenHeight, Executable exit, Sendable gameInfos){ 
+		super();
 
 		try {
-            root.getChildren().add(ShapeConstructor.newImage("background", screenWidth*1.5,screenHeight*1.5, screenWidth/2,screenHeight/2, 1));
+            getChildren().add(ShapeConstructor.newImage("background", screenWidth*1.5,screenHeight*1.5, screenWidth/2,screenHeight/2, 1));
         } catch (Exception e) {
-            setFill(Color.BLACK);
+            getChildren().add(ShapeConstructor.newRectangle(Color.BLACK, screenWidth*1.5, screenHeight*1.5, screenWidth/2, screenHeight/2));
         }
 		
 		String[] numberOfPlayersChoices = new String[]{"2","3","4","5","6"},
@@ -43,12 +40,12 @@ public class MenuScene extends Scene {
 		Text gameBoardBoxLabel = ShapeConstructor.newText("Game board file : ", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.525);
 		ComboBox<String> gameBoardBox = ControlConstructor.newComboBox(gameBoardChoices, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.575);
 		
-		Executable start = (ev) -> {gameInfos.send(new String[]{playersBox.getValue(), difficultyBox.getValue(), gameBoardBox.getValue()});};
+		Executable start = ev -> {gameInfos.send(new String[]{playersBox.getValue(), difficultyBox.getValue(), gameBoardBox.getValue()});};
 		Text startButton = ControlConstructor.newButton("Start", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.725, Color.BLACK, start);
 
 		Text exitButton = ControlConstructor.newButton("Exit Game", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.875, Color.BLACK, exit);
 
-		root.getChildren().addAll(paneMenu, playersBoxLabel,playersBox, difficultyBoxLabel,difficultyBox, gameBoardBoxLabel,gameBoardBox, startButton,exitButton);
+		getChildren().addAll(paneMenu, playersBoxLabel,playersBox, difficultyBoxLabel,difficultyBox, gameBoardBoxLabel,gameBoardBox, startButton,exitButton);
 	}
 
 	private String[] findAllFilesInFolder(File folder) {

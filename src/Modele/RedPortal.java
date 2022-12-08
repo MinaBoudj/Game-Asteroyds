@@ -33,7 +33,10 @@ public class RedPortal extends RedAsteroyd{
 	
 	@Override
 	public String toString() {
-		return "portal-red-" + getOrientation() + "-" + getPriority() + "-" + this.relic;
+		String str = "portal-red-" + getOrientation() + "-" + getPriority() + "-" + this.relic;
+        for(SpaceShip sp : getLSpaceShips())
+            str += "/" + sp;
+		return str;
 	}
 }
 
