@@ -12,7 +12,6 @@ import java.util.Scanner;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
-import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
@@ -90,7 +89,7 @@ public class View {
     public void displayTurnScene(String[][] gameBoard, String player, int difficulty, Executable newPlayerTurn) {
         try {
             updateGameBoardGroup(gameBoard, true);
-            turn.updateRoot(gameBoardGroup, player, difficulty, mainMenu);
+            turn.updateRoot(gameBoardGroup, player, difficulty, mainMenu, stage, menu);
         } catch(Exception e) {/*TODO*/}
         setScene(turn);
     }
@@ -116,10 +115,7 @@ public class View {
         for (int i = 0 ; i < gameBoard.length ; i++) {
             for (int j = 0 ; j < gameBoard[i].length ; j++) {
                 if (gameBoard[i][j] != "") {
-                    Polyline hexLine = new Polyline();
-                    hexLine.getPoints().addAll(ShapeConstructor.newHexagonCorners(x,y, hexSize));
-                    hexLine.setStroke(Color.WHITE);
-                    gameBoardGroup.getChildren().add(hexLine);
+                    gameBoardGroup.getChildren().add(ShapeConstructor.newHexagonStroke(Color.WHITE, hexSize, x,y));
 
                     String[] objectsToDisplay = gameBoard[i][j].split("/");
                     for (String object : objectsToDisplay) {

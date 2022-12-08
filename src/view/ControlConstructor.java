@@ -5,11 +5,15 @@ package view;
  */
 
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Polyline;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
@@ -82,6 +86,87 @@ public class ControlConstructor {
         });
 
         return comboBox;
+    }
+
+    public static ComboBox<String> newMovementComboBox(double size, double centerX,double centerY) {
+        String[] items = new String[]{null, "forward", "right", "left", "turn_around"};
+
+        double x = centerX - size/2,
+               y = centerY - size/2;
+        
+        ComboBox<String> comboBox = new ComboBox<String>();
+        comboBox.getItems().addAll(items);
+        comboBox.setValue(items[0]);
+        comboBox.setMinWidth(size);
+        comboBox.setMinHeight(size);
+        comboBox.setLayoutX(x);
+        comboBox.setLayoutY(y);
+
+        comboBox.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+                @Override
+                public ListCell<String> call(ListView<String> p) {
+                    return new ListCell<String>() {
+                        @Override
+                        protected void updateItem(String item, boolean empty) {
+                            super.updateItem(item, empty);
+                            if(item == null || empty)
+                                setGraphic(ShapeConstructor.newCross(Color.BLACK, size,size, x,y));
+                            else
+                                setGraphic(newMovementCellGroup(item, size, x,y));
+                            setContentDisplay(ContentDisplay.GRAPHIC_ONLY); 
+                        }
+                    };
+                };
+            });
+
+        comboBox.buttonCellProperty().set(new ListCell<String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if(item == null || empty)
+                    setGraphic(ShapeConstructor.newCross(Color.BLACK, size,size, x,y));
+                else  
+                    setGraphic(newMovementCellGroup(item, size, x,y));
+                setContentDisplay(ContentDisplay.GRAPHIC_ONLY); 
+            }
+        });
+
+        return comboBox;
+    }
+
+    private static Group newMovementCellGroup(String movement, double size, double centerX,double centerY) {
+        Group movementCellGroup = new Group();
+        Polygon arrow = null;
+        Polyline hexagon = null;
+        double hexSize = size/2,
+               hexWidth = Math.sqrt(3) * hexSize/2;
+
+        switch(movement) {
+            case "forward":
+                arrow = ShapeConstructor.newArrow(Color.BLACK, size/2,size/2, centerX,centerY - size/4, 0);
+                hexagon = ShapeConstructor.newHexagonStroke(Color.BLACK, hexSize*0.825, centerX,centerY + size/4);
+                break;
+
+            case "right":
+                arrow = ShapeConstructor.newArrow(Color.BLACK, size/2,size/2, centerX + size/4,centerY - size/4 + hexWidth/2, 2);
+                hexagon = ShapeConstructor.newHexagonStroke(Color.BLACK, hexSize, centerX - size/4,centerY + size/4);
+                break;
+
+            case "left":
+                arrow = ShapeConstructor.newArrow(Color.BLACK, size/2,size/2, centerX - size/4,centerY - size/4 + hexWidth/2, -2);
+                hexagon = ShapeConstructor.newHexagonStroke(Color.BLACK, hexSize, centerX + size/4,centerY + size/4);
+                break;
+
+            case "turn_around":
+                arrow = ShapeConstructor.newArrow(Color.BLACK, size/2.2,size/2.8, centerX,centerY + size/4, 6);
+                hexagon = ShapeConstructor.newHexagonStroke(Color.BLACK, hexSize, centerX,centerY);
+                break;
+        }
+
+        hexagon.setRotate(30);
+        movementCellGroup.getChildren().addAll(arrow,hexagon);
+
+        return movementCellGroup;
     }
 
     public static CheckBox newCheckBox(double size, double centerX,double centerY) {

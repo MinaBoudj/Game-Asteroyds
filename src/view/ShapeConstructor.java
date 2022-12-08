@@ -6,7 +6,10 @@ package view;
 
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Polyline;
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
@@ -85,6 +88,19 @@ public class ShapeConstructor {
         return imageView;
     }
 
+    public static Polyline newHexagonStroke(Color color, double strokeWidth, double size, double centerX,double centerY) {
+        Polyline hexStroke = newHexagonStroke(color, size, centerX,centerY);
+        hexStroke.setStrokeWidth(strokeWidth);
+        return hexStroke;
+    }
+
+    public static Polyline newHexagonStroke(Color color, double size, double centerX,double centerY) {
+        Polyline hexStroke = new Polyline();
+        hexStroke.getPoints().addAll(newHexagonCorners(centerX,centerY, size));
+        hexStroke.setStroke(color);
+        return hexStroke;
+    }
+
     public static Polygon newHexagon(Color color, double size, double centerX,double centerY) {
         Polygon hexagon = new Polygon();
         hexagon.getPoints().addAll(newHexagonCorners(centerX,centerY, size));
@@ -136,9 +152,34 @@ public class ShapeConstructor {
         triangle.getPoints().add(centerY + distToCenter * Math.sin(-TORAD));
 
         triangle.setFill(color);
-        triangle.setRotate(orientation * 60);
+        triangle.setRotate(orientation * 30);
 
         return triangle;
+    }
+
+    public static Group newCross(Color color, double width,double height, double centerX,double centerY) {
+        Line diag1 = new Line(centerX - width/2,centerY - height/2, centerX + width/2,centerY + height/2),
+             diag2 = new Line(centerX + width/2,centerY - height/2, centerX - width/2,centerY + height/2);
+             
+        diag1.setStrokeWidth(Math.min(width, height)/10);
+        diag2.setStrokeWidth(diag1.getStrokeWidth());
+        diag1.setStroke(color);
+        diag2.setStroke(color);
+
+        return new Group(diag1, diag2);
+    }
+
+    public static Polygon newArrow(Color color, double width,double height, double centerX,double centerY, int orientation) {
+        Polygon arrow = new Polygon();
+
+        arrow.getPoints().addAll(centerX,centerY - height/2, centerX - width/2,centerY + height/4,
+                                 centerX - width/4,centerY + height/4, centerX - width/4,centerY + height/2,
+                                 centerX + width/4,centerY + height/2, centerX + width/4,centerY + height/4,
+                                 centerX + width/2,centerY + height/4, centerX,centerY - height/2);
+        arrow.setFill(color);
+        arrow.setRotate(orientation * 30);
+
+        return arrow;
     }
 
     // A vérif

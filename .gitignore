@@ -6,3 +6,4 @@ bin/
 **.classpath
 .vscode/
 !.vscode/settings.json
+**.log

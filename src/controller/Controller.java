@@ -30,6 +30,7 @@ public class Controller extends Application {
         try{
             players = new Player[]{new Player("Bobby", Color.Orange, 3, 1, 2), new Player("Billie", Color.Blue, 6, 4, 3)};
             players[0].getSpaceShip().minusStructurePoint(6);
+            players[1].getSpaceShip().addRelic(2);
         }
         catch (Exception e) {/*TODO*/}
 
@@ -47,7 +48,7 @@ public class Controller extends Application {
                 break;
 
             case "Flight champion - 20s":
-                difficulty = 2;
+                difficulty = 20;
                 break;
         }
 
