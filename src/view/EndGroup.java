@@ -1,25 +1,19 @@
 package view;
 
-import javafx.scene.Scene;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.TreeSet;
-
 import javafx.scene.Group;
 import javafx.scene.paint.Color; 
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+
 
 public class EndGroup extends Group {
     private double screenWidth;
     private double screenHeight;
     private ArrayList<String[]> ranking_player;
     private ArrayList<String[]> player_over;
+    private String[] playersplit;
 	
     public EndGroup(double screenWidth, double screenHeight) {
         super();
@@ -27,22 +21,23 @@ public class EndGroup extends Group {
         this.screenHeight = screenHeight;
     }
 
-    public void updateEndScene(Executable exit, Executable mainMenu, String[] players){ 
+    public void updateEndScene(Executable exit, Executable mainMenu, String players){ 
 	
         ranking_player(players);
         Text resultsText = ShapeConstructor.newText("Results : ", Color.WHITE, screenWidth*0.28,screenHeight*0.1, screenWidth*0.5,screenHeight*0.5);
 		Rectangle paneResultats = ShapeConstructor.newRectangle(Color.web("A9A9A9",0.6), screenWidth, screenHeight*0.3, screenWidth, screenHeight*0.2);
         
-        displayRanking(players.length);
+        displayRanking(playersplit.length);
 		Text backmainButton = ControlConstructor.newButton("Start", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.800, Color.BLACK, mainMenu);
 		Text exitButton = ControlConstructor.newButton("Exit Game", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.875, Color.BLACK, exit);
 
-		getChildren().addAll(resultsText, backmainButton, exitButton);
+		getChildren().addAll(resultsText, paneResultats, backmainButton, exitButton);
 	}
 
-    public void ranking_player(String players[]){
-        for (int i = 0; i < players.length; i++){
-            String[] playerInfos = players[i].split("-");
+    public void ranking_player(String players){
+        playersplit = players.split("_");
+        for (int i = 0; i < playersplit.length; i++){
+            String [] playerInfos = playersplit[i].split("-");
             ranking_player.get(i)[0] = playerInfos[0];
             ranking_player.get(i)[1] = playerInfos[1];
             ranking_player.get(i)[2] = playerInfos[2];

@@ -1,10 +1,5 @@
 package view;
 
-import javafx.scene.Scene;
-
-import java.io.File;
-import java.util.ArrayList;
-
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -28,7 +23,7 @@ public class OptionsGroup extends Group {
         this.screenWidth = screenWidth;
     }
 
-    public void updateOptionsGroup(Executable exit, double hexSize){// Executable mainMenu, Sendable playerinfo, double[] cellLaunchPositions){ // , double[] cellLaunchPositions liste répertoriant deux a deux les coordonnées des lauchPad)
+    public void updateOptionsGroup(Executable exit, double hexSize, Executable mainMenu, Sendable playerinfo, double[] cellLaunchPositions){ // , double[] cellLaunchPositions liste répertoriant deux a deux les coordonnées des lauchPad)
 		//Group root = (Group)getRoot();
 		
 		String[] orientationShipChoices = new String[]{"1","2","3","4","5","6"},
@@ -123,8 +118,8 @@ public class OptionsGroup extends Group {
                 }
                 try{
                     getChildren().removeAll(delaySpaceShip, delayShape);
-                    //delaySpaceShip = ShapeConstructor.newImage("green_space_ship.png", hexSize/2,hexSize/2, cellLaunchPositions[spaceShipLaunch],cellLaunchPositions[spaceShipLaunch+1], 1);
-                    //delayShape = ShapeConstructor.newHexagon(Color.RED, hexSize/2, cellLaunchPositions[spaceShipLaunch],cellLaunchPositions[spaceShipLaunch+1]);
+                    delaySpaceShip = ShapeConstructor.newImage("green_space_ship.png", hexSize/2,hexSize/2, cellLaunchPositions[spaceShipLaunch],cellLaunchPositions[spaceShipLaunch+1], 1);
+                    delayShape = ShapeConstructor.newHexagon(Color.RED, hexSize/2, cellLaunchPositions[spaceShipLaunch],cellLaunchPositions[spaceShipLaunch+1]);
                     getChildren().addAll(delaySpaceShip, delayShape);
                 } catch (Exception ex) { 
 
