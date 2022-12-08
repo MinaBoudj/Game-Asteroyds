@@ -17,20 +17,19 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 // /!\ Dimensions à vérifier /!\
-public class OptionsScene extends Scene {
+public class OptionsGroup extends Group {
+    private double screenHeight;
+    private double screenWidth;
     private ImageView delaySpaceShip;
     private Polygon delayShape;
 	
-    public OptionsScene(double screenWidth, double screenHeight, Executable exit, Sendable playerinfo, double hexSize, double[] cellLaunchPositions){ // liste répertoriant deux a deux les coordonnées des lauchPad)
-		super(new Group());
-		Group root = (Group)getRoot();
-        
-        // Background construction
-		try {
-            root.getChildren().add(ShapeConstructor.newImage("menu_background", screenWidth*1.5,screenHeight*1.5, screenWidth/2,screenHeight/2, 1));
-        } catch (Exception e) {
-            setFill(Color.BLACK);
-        }
+    public OptionsGroup(double screenWidth, double screenHeight){
+        this.screenHeight = screenHeight;
+        this.screenWidth = screenWidth;
+    }
+
+    public void updateOptionsGroup(Executable exit, double hexSize){// Executable mainMenu, Sendable playerinfo, double[] cellLaunchPositions){ // , double[] cellLaunchPositions liste répertoriant deux a deux les coordonnées des lauchPad)
+		//Group root = (Group)getRoot();
 		
 		String[] orientationShipChoices = new String[]{"1","2","3","4","5","6"},
 				 cellLaunchChoices = new String[]{"n°1", "n°2", "n°3", "n°4", "n°5", "n°6"},
@@ -78,8 +77,12 @@ public class OptionsScene extends Scene {
                     default : spaceShipColor = "green"; break;
                 }
                 try {
+                    getChildren().removeAll(delaySpaceShip, delayShape);
                     delaySpaceShip = ShapeConstructor.newImage(spaceShipColor +"_space_ship.png", hexSize/2,hexSize/2, screenHeight*0.5,screenWidth*0.5, 1);
-                } catch (Exception e){ }
+                    getChildren().add(delaySpaceShip);
+                } catch (Exception exp){ 
+
+                }
             }
         }; 
         colorBox.setOnAction(delay_color);
@@ -119,9 +122,13 @@ public class OptionsScene extends Scene {
                         break;
                 }
                 try{
-                    delaySpaceShip = ShapeConstructor.newImage("green_space_ship.png", hexSize/2,hexSize/2, cellLaunchPositions[spaceShipLaunch],cellLaunchPositions[spaceShipLaunch+1], 1);
-                    delayShape = ShapeConstructor.newHexagon(Color.RED, hexSize/2, cellLaunchPositions[spaceShipLaunch],cellLaunchPositions[spaceShipLaunch+1]);
-                } catch (Exception e) { };
+                    getChildren().removeAll(delaySpaceShip, delayShape);
+                    //delaySpaceShip = ShapeConstructor.newImage("green_space_ship.png", hexSize/2,hexSize/2, cellLaunchPositions[spaceShipLaunch],cellLaunchPositions[spaceShipLaunch+1], 1);
+                    //delayShape = ShapeConstructor.newHexagon(Color.RED, hexSize/2, cellLaunchPositions[spaceShipLaunch],cellLaunchPositions[spaceShipLaunch+1]);
+                    getChildren().addAll(delaySpaceShip, delayShape);
+                } catch (Exception ex) { 
+
+                }
             }
         };
         cellLaunchBox.setOnAction(delay_position);
@@ -161,19 +168,24 @@ public class OptionsScene extends Scene {
                         break;
                 }
                 try {
-                    delaySpaceShip = ShapeConstructor.newImage("green_space_ship.png", hexSize/2,hexSize/2, cellLaunchPositions[1],cellLaunchPositions[1+1], orientationSpaceShip);
+                    getChildren().removeAll(delaySpaceShip, delayShape);
+                    //delaySpaceShip = ShapeConstructor.newImage("green_space_ship.png", hexSize/2,hexSize/2, cellLaunchPositions[1],cellLaunchPositions[1+1], orientationSpaceShip);
                     delayShape = ShapeConstructor.newArrow(Color.RED, screenHeight*0.5,screenWidth*0.5, screenHeight*0.45,screenWidth*0.45, 2.0, orientationSpaceShip);
-                } catch(Exception e) { }
+                    getChildren().addAll(delaySpaceShip, delayShape);
+                } catch(Exception ep) { 
+                    
+                }
             }
         };
         cellLaunchBox.setOnAction(delay_orientation);
 
 
-		Executable next = (me) -> {playerinfo.send(new String[]{namefield.getText(), colorBox.getValue(), cellLaunchBox.getValue(), orientationBox.getValue()});};
-		Text nextButton = ControlConstructor.newButton("Start", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.85,screenHeight*0.800, Color.BLACK, next);
-		Text exitButton = ControlConstructor.newButton("Exit Game", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.85,screenHeight*0.875, Color.BLACK, exit);
+		//Executable next = (me) -> {playerinfo.send(new String[]{namefield.getText(), colorBox.getValue(), cellLaunchBox.getValue(), orientationBox.getValue()});};
+		Text nextButton = ControlConstructor.newButton("Start", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.85,screenHeight*0.800, Color.BLACK, exit), // next
+             mainMenuButton = ControlConstructor.newButton("Main Menu", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.85,screenHeight*0.842, Color.BLACK, exit), // mainMenu
+             exitButton = ControlConstructor.newButton("Exit Game", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.85,screenHeight*0.875, Color.BLACK, exit);
 
-		root.getChildren().addAll(paneMenu, namefieldLabel, namefield, colorBoxLabel, colorBox, cellLaunchBoxLabel, cellLaunchBox, orientatoBoxLabel, orientationBox, nextButton, exitButton);
+		getChildren().addAll(paneMenu, namefieldLabel, namefield, colorBoxLabel, colorBox, cellLaunchBoxLabel, cellLaunchBox, orientatoBoxLabel, orientationBox, nextButton, mainMenuButton, exitButton);
 	}
 }
 
