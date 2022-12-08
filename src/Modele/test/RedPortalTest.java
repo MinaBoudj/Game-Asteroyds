@@ -27,7 +27,7 @@ public class RedPortalTest {
     public void constructGameBoard() throws Exception {
         rPort = new RedPortal(4, 1,2, 3, 1);
         ship = new SpaceShip(3, 0,1, Color.Blue);
-        gm = new Cell[][]{{new LaunchPad(0,0), null, new EmptyCell(2,0)}, {null, new EmptyCell(1,1), null}, {new LaunchPad(0,2), rPort, null}};
+        gm = new Cell[][]{{new LaunchPad(0,0), null, new EmptyCell(2,0)}, {new EmptyCell(0,1), new EmptyCell(1,1), null}, {new LaunchPad(0,2), rPort, null}};
     }
 
     @Test(expected = Exception.class)
@@ -105,7 +105,7 @@ public class RedPortalTest {
     @Test
     public void testMoveOneCellToEmptyCell() throws Exception {
         rPort.move(gm, new int[]{3,4,4});
-        assertTrue(gm[1][1] == rPort && gm[2][0] instanceof EmptyCell && gm[0][0] instanceof LaunchPad);
+        assertTrue(gm[1][0] == rPort  && gm[0][0] instanceof LaunchPad);
     }
 
     @Test
