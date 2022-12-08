@@ -105,7 +105,7 @@ public class RedPortalTest {
     @Test
     public void testMoveOneCellToEmptyCell() throws Exception {
         rPort.move(gm, new int[]{3,4,4});
-        assertTrue(gm[1][1] == rPort && gm[2][1] instanceof EmptyCell && gm[0][0] instanceof LaunchPad);
+        assertTrue(gm[1][1] == rPort && gm[2][0] instanceof EmptyCell && gm[0][0] instanceof LaunchPad);
     }
 
     @Test

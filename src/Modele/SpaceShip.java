@@ -127,14 +127,22 @@ public class SpaceShip extends VisualObject{
 					{break;}
 				try {
 					pos = super.getPosition().getForward(super.getOrientation());
-					if(gameBoard[pos.getY()][pos.getX()] != null){//la pos qu'il a renvoyé n'est pas null
-						//ajouter dans la liste des vaiseaux (a l'exterieur du catch)
+					if(gameBoard[pos.getY()][pos.getX()] != null){
+						if(gameBoard[pos.getY()][pos.getX()] instanceof RedPortal)//la pos qu'il a renvoyé n'est pas null et que dans la case il n'y est pas d'asteroid
+							//lui donner la relic s'il a pas 
+							this.addRelic(((RedPortal)gameBoard[pos.getY()][pos.getX()]).getRelic());
+						else if(gameBoard[pos.getY()][pos.getX()] instanceof WhitePortal){
+							this.addRelic(((WhitePortal)gameBoard[pos.getY()][pos.getX()]).getRelic());
+						}else if(gameBoard[pos.getY()][pos.getX()] instanceof Asteroyd || gameBoard[pos.getY()][pos.getX()] instanceof AudiencePod){//dans la case c un asteroid ou c une case de spectateur
+							this.structurePoints = this.structurePoints-2;
+							break;
+						}//ajouter dans la liste des vaiseaux (a l'exterieur du catch)
 						gameBoard[pos.getY()][pos.getX()].addLSpaceShip(this); 
 						//retiter de la liste ou il etait
 						gameBoard[super.getPosition().y][super.getPosition().x].removeLSpaceShip(this);
 						//changer sa position
 						super.setPosition(pos);
-					}else{//case null
+					}else{//case null 
 						this.structurePoints = this.structurePoints-2;
 						break;
 					}
