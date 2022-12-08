@@ -51,6 +51,8 @@ public class View {
         setScene(menu);
         mainMenu = (ev) -> {
                 setScene(menu);
+                main = new MainScene(screenWidth,screenHeight);
+                turn = new TurnScene(screenWidth, screenHeight);
             };
     }
 
@@ -71,25 +73,25 @@ public class View {
         stage.setFullScreen(true);
     }
 
-    public void displayMainScene(String[][] gameBoard, String[] players, String nextPlayer, int difficulty, Executable newPlayerTurn) throws Exception {
+    public void displayMainScene(String[][] gameBoard, String[] players, String nextPlayer, int difficulty, int[] directions, Executable newPlayerTurn) throws Exception {
         updateGameBoardGroup(gameBoard, false);
         Executable simpInterface = (ev) -> {
                 ShapeConstructor.NOIMAGE = !ShapeConstructor.NOIMAGE;
                 try{
-                    displayMainScene(gameBoard, players, nextPlayer, difficulty, newPlayerTurn);
+                    displayMainScene(gameBoard, players, nextPlayer, difficulty, directions, newPlayerTurn);
                 } catch (Exception e) {/*TODO*/}
             };
         Executable startPlayerTurn = (ev) -> {
-                displayTurnScene(gameBoard, nextPlayer, difficulty, newPlayerTurn);
+                displayTurnScene(gameBoard, nextPlayer, difficulty, directions, newPlayerTurn);
             };
         main.newPlayerTurn(gameBoardGroup, players, nextPlayer, startPlayerTurn, mainMenu, simpInterface);
         setScene(main);
     }
 
-    public void displayTurnScene(String[][] gameBoard, String player, int difficulty, Executable newPlayerTurn) {
+    public void displayTurnScene(String[][] gameBoard, String player, int difficulty, int[] directions, Executable newPlayerTurn) {
         try {
             updateGameBoardGroup(gameBoard, true);
-            turn.updateRoot(gameBoardGroup, player, difficulty, mainMenu, stage, menu);
+            turn.updateRoot(gameBoardGroup, player, difficulty, directions, mainMenu);
         } catch(Exception e) {/*TODO*/}
         setScene(turn);
     }

@@ -81,7 +81,7 @@ public class Controller extends Application {
 
         if(i < players.length) {
             try {
-                view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), players[i].toString(), difficulty, (ev) -> {newPlayerTurn(i + 1);});
+                view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), players[i].toString(), difficulty, turnDirections, (ev) -> {newPlayerTurn(i + 1);});
             } catch(Exception e) {/*TODO*/}
         }
 
@@ -100,10 +100,13 @@ public class Controller extends Application {
         String[] size = text.get(0).split("x");
         int width = Integer.parseInt(size[0]),
             height = Integer.parseInt(size[1]),
-            remainingAsteroyds = Integer.parseInt(text.get(1));
+            nbAsteroyds = Integer.parseInt(text.get(1));
         gameBoard = new Cell[height][width];
-        asteroyds = new Asteroyd[remainingAsteroyds];
+        asteroyds = new Asteroyd[nbAsteroyds];
         
+        ArrayList<Integer> astPriorities = new ArrayList<Integer>();
+        for(int i = 0 ; i < nbAsteroyds ; i++)
+            astPriorities.add(i+1);
 
         int textCursor = 3,
             lineCursor = 0,
@@ -115,7 +118,7 @@ public class Controller extends Application {
             if(content.length == 0) {
                 lineCursor++;
                 if(columnCursor != width)
-                    throw new Exception();
+                    throw new Exception(/*TODO*/);
                 columnCursor = 0;
             } else {
                 for(int i = 0 ; i < Integer.parseInt(content[0]) ; i++) {
@@ -130,16 +133,18 @@ public class Controller extends Application {
 
                         case "portal":
                             Asteroyd portal = null;
-                            int relic = Integer.parseInt(content[3]);
-                            int pOrientation = rollDice();
+                            int relic = Integer.parseInt(content[3]),
+                                pOrientation = rollDice(),
+                                portalPriority = astPriorities.get((int)(Math.random() * astPriorities.size()));
+                            astPriorities.remove(Integer.valueOf(portalPriority));
 
                             switch(content[2]) {
                                 case "red":
-                                    portal = new RedPortal(pOrientation, columnCursor,lineCursor, relic, remainingAsteroyds);
+                                    portal = new RedPortal(pOrientation, columnCursor,lineCursor, relic, portalPriority);
                                     break;
 
                                 case "white":
-                                    portal = new WhitePortal(pOrientation, columnCursor,lineCursor, relic, remainingAsteroyds);
+                                    portal = new WhitePortal(pOrientation, columnCursor,lineCursor, relic, portalPriority);
                                     break;
 
                                 default:
@@ -147,33 +152,34 @@ public class Controller extends Application {
                             };
 
                             gameBoard[lineCursor][columnCursor] = portal;
-                            asteroyds[remainingAsteroyds-1] = portal;
-                            remainingAsteroyds--;
+                            asteroyds[portalPriority-1] = portal;
                             break;
 
                         case "asteroyd":
                             Asteroyd ast;
-                            int aOrientation = rollDice();
+                            int aOrientation = rollDice(),
+                                astPriority = astPriorities.get((int)(Math.random() * astPriorities.size()));
+                            astPriorities.remove(Integer.valueOf(astPriority));
 
                             switch(content[2]) {
                                 case "red":
-                                    ast = new RedAsteroyd(aOrientation, columnCursor,lineCursor, remainingAsteroyds);
+                                    ast = new RedAsteroyd(aOrientation, columnCursor,lineCursor, astPriority);
                                     break;
 
                                 case "blue":
-                                    ast = new BlueAsteroyd(aOrientation, columnCursor,lineCursor, remainingAsteroyds);
+                                    ast = new BlueAsteroyd(aOrientation, columnCursor,lineCursor, astPriority);
                                     break;
                             
                                 case "white":
-                                    ast = new WhiteAsteroyd(aOrientation, columnCursor,lineCursor, remainingAsteroyds);
+                                    ast = new WhiteAsteroyd(aOrientation, columnCursor,lineCursor, astPriority);
                                     break;
                             
                                 case "white_red":
-                                    ast = new WhiteRedAsteroyd(aOrientation, columnCursor,lineCursor, remainingAsteroyds);
+                                    ast = new WhiteRedAsteroyd(aOrientation, columnCursor,lineCursor, astPriority);
                                     break;
                             
                                 case "white_blue":
-                                    ast = new WhiteBlueAsteroyd(aOrientation, columnCursor,lineCursor, remainingAsteroyds);
+                                    ast = new WhiteBlueAsteroyd(aOrientation, columnCursor,lineCursor, astPriority);
                                     break;
 
                                 default:
@@ -181,8 +187,7 @@ public class Controller extends Application {
                             }
 
                             gameBoard[lineCursor][columnCursor] = ast;
-                            asteroyds[remainingAsteroyds-1] = ast;
-                            remainingAsteroyds--;
+                            asteroyds[astPriority-1] = ast;
                             break;
 
                         case "launchpad":
