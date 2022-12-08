@@ -39,6 +39,6 @@ public class SpaceShipTest {
     @Test
     public void testMove() throws Exception {
         spaceShip1.move(gameBoard,new Movement[]{Movement.Right,Movement.Forward,Movement.Forward});
-        assertTrue(gameBoard[4][1].getLSpaceShips().contains(spaceShip2));
+        assertTrue(gameBoard[4][1].getLSpaceShips().contains(spaceShip1) && gameBoard[4][4].getLSpaceShips().size()==0);
     }
 }

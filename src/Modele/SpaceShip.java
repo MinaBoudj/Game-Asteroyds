@@ -59,48 +59,48 @@ public class SpaceShip extends VisualObject{
 	private void moveLeft()throws Exception { 
 		if(super.getOrientation() == 1) 
 			super.setOrientation(6);
-		if(super.getOrientation() == 2) 
-			super.setOrientation(1);
-		if(super.getOrientation() == 3) 
-			super.setOrientation(2);
-		if(super.getOrientation() == 4)
-			super.setOrientation(3);
-		if(super.getOrientation() == 5)
-			super.setOrientation(4);
-		if(super.getOrientation() == 6)
-			super.setOrientation(5);
+		else if(super.getOrientation() == 2) 
+				super.setOrientation(1);
+			else if(super.getOrientation() == 3) 
+					super.setOrientation(2);
+				else if(super.getOrientation() == 4)
+						super.setOrientation(3);
+					else if(super.getOrientation() == 5)
+							super.setOrientation(4);
+						else if(super.getOrientation() == 6)
+								super.setOrientation(5);
 	}
 	
 	//le vaisseau bouge à droite donc modification de son orientation
 	private void moveRight() throws Exception{  
         if(super.getOrientation() == 1) 
 			super.setOrientation(2);
-		if(super.getOrientation() == 2) 
-			super.setOrientation(3);
-		if(super.getOrientation() == 3) 
-			super.setOrientation(4);
-		if(super.getOrientation() == 4)
-			super.setOrientation(5);
-		if(super.getOrientation() == 5)
-			super.setOrientation(6);
-		if(super.getOrientation() == 6)
-			super.setOrientation(1);
+		else if(super.getOrientation() == 2) 
+				super.setOrientation(3);
+			else if(super.getOrientation() == 3) 
+					super.setOrientation(4);
+				else if(super.getOrientation() == 4)
+						super.setOrientation(5);
+					else if(super.getOrientation() == 5)
+							super.setOrientation(6);
+						else if(super.getOrientation() == 6)
+								super.setOrientation(1);
     }
      
 	//le vaisseau fait demi-tourd donc modification de son orientation
 	private void turnAround()throws Exception { 
         if( super.getOrientation() == 1)
             super.setOrientation(4);
-        if( super.getOrientation() == 2)
-            super.setOrientation(5);
-        if( super.getOrientation() == 3)
-            super.setOrientation(6);
-        if( super.getOrientation() == 4)
-            super.setOrientation(1);
-        if( super.getOrientation() == 5)
-            super.setOrientation(2);
-        if( super.getOrientation() == 6)
-            super.setOrientation(3);
+        else if( super.getOrientation() == 2)
+            	super.setOrientation(5);
+        	else if( super.getOrientation() == 3)
+            	super.setOrientation(6);
+        		else if( super.getOrientation() == 4)
+            			super.setOrientation(1);
+        			else if( super.getOrientation() == 5)
+           					super.setOrientation(2);
+        				else if( super.getOrientation() == 6)
+            				super.setOrientation(3);
     }
 	
 	//ajouter des relics dans le tableau de relics
@@ -114,17 +114,18 @@ public class SpaceShip extends VisualObject{
 
 	// procedure qui deplace un vaisseau selon les mouvements choisis par le joureur
 	public void move(Cell[][] gameBoard, Movement[] movement)throws Exception {
-		for(int i=0; i<movement.length; i++) { //parcourir tous les mouvements 
+		for(Movement m : movement) { //parcourir tous les mouvements for(Movement m : movement)
 			Position pos;
-			if(movement[i] == Movement.Left) //changer l'orientation
+			if(m == Movement.Left) //changer l'orientation
 				moveLeft();
-			if(movement[i] == Movement.Right)
+			if(m == Movement.Right)
 				moveRight();
-			if(movement[i] == Movement.TurnAround)
+			if(m == Movement.TurnAround)
 				turnAround();
+			if(m == null)
+				{break;}
 			try {
 				pos = super.getPosition().getForward(super.getOrientation());
-				System.out.println("x="+pos.getX()+" y="+pos.getY()+ " i="+i+ " size="+movement.length);
 				if(gameBoard[pos.getY()][pos.getX()] != null){//la pos qu'il a renvoyé n'est pas null
 					//ajouter dans la liste des vaiseaux (a l'exterieur du catch)
 					gameBoard[pos.getY()][pos.getX()].addLSpaceShip(this); 
@@ -141,8 +142,6 @@ public class SpaceShip extends VisualObject{
 					this.structurePoints = this.structurePoints-2;
 					break;
 			}
-            if(movement[i] == null)
-				{break;}
 		}
     }
 
