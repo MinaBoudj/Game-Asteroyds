@@ -117,39 +117,26 @@ public class SpaceShip extends VisualObject{
 		for(Movement m : movement) { //parcourir tous les mouvements for(Movement m : movement)
 			if(m == Movement.TurnAround)
 				turnAround();
+			else if(m == null) 
+				break;
 			else {
 				Position pos;
 				if(m == Movement.Left) //changer l'orientation
 					moveLeft();
 				if(m == Movement.Right)
 					moveRight();
-				if(m == null)
-					{break;}
 				try {
 					pos = super.getPosition().getForward(super.getOrientation());
-					if(gameBoard[pos.getY()][pos.getX()] != null){
-						if(gameBoard[pos.getY()][pos.getX()] instanceof RedPortal)//la pos qu'il a renvoyé n'est pas null et que dans la case il n'y est pas d'asteroid
-							//lui donner la relic s'il a pas 
-							this.addRelic(((RedPortal)gameBoard[pos.getY()][pos.getX()]).getRelic());
-						else if(gameBoard[pos.getY()][pos.getX()] instanceof WhitePortal){
-							this.addRelic(((WhitePortal)gameBoard[pos.getY()][pos.getX()]).getRelic());
-						}else if(gameBoard[pos.getY()][pos.getX()] instanceof Asteroyd || gameBoard[pos.getY()][pos.getX()] instanceof AudiencePod){//dans la case c un asteroid ou c une case de spectateur
-							this.structurePoints = this.structurePoints-2;
-							break;
-						}//ajouter dans la liste des vaiseaux (a l'exterieur du catch)
-						gameBoard[pos.getY()][pos.getX()].addLSpaceShip(this); 
-						//retiter de la liste ou il etait
-						gameBoard[super.getPosition().y][super.getPosition().x].removeLSpaceShip(this);
-						//changer sa position
-						super.setPosition(pos);
-					}else{//case null 
-						this.structurePoints = this.structurePoints-2;
-						break;
-					}
+					//ajouter dans la liste des vaiseaux (a l'exterieur du catch)
+					gameBoard[pos.getY()][pos.getX()].addLSpaceShip(this); 
+					//retiter de la liste ou il etait
+					gameBoard[super.getPosition().getY()][super.getPosition().getX()].removeLSpaceShip(this);
+					//changer sa position
+					super.setPosition(pos);
 				} catch (Exception e) {
-						//le vaisseau se prend des degats et s'arrete 
-						this.structurePoints = this.structurePoints-2;
-						break;
+					//le vaisseau se prend des degats et s'arrete 
+					this.structurePoints = this.structurePoints-2;
+					break;
 				}
 			}
 		}

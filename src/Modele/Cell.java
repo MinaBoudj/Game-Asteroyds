@@ -38,6 +38,7 @@ public abstract class Cell extends VisualObject {
 	// ajouter un vaisseau dans la liste des vaisseaux
 	public void addLSpaceShip(SpaceShip newSpace) throws Exception{
 		if(newSpace == null) throw new Exception("pointeur null");
+		if(!canContainSpaceShips) throw new Exception();
 		this.LSpaceShips.add(newSpace);
 	}
 

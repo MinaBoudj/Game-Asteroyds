@@ -32,7 +32,7 @@ public class Controller extends Application {
 
         switch(gameInfos[1]) {
             case "Amateur - 50s":
-                difficulty = 50;
+                difficulty = 10;
                 break;
 
             case "Co-Pilot - 40s":

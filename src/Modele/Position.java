@@ -5,8 +5,8 @@ package Modele;
 */
 
 public class Position {
-    int x; // Abscisse
-    int y; // Ordonnée
+    private int x; // Abscisse
+    private int y; // Ordonnée
 
     
     public Position(int x, int y)throws Exception {  /* Constructeur */
@@ -28,8 +28,8 @@ public class Position {
 
     private Position getBottomRight() throws Exception{ // Retourne la posiiton de la case en bas à droite
          if (this.y%2 == 0)
-            return new Position(x+1, y+1);
-        return new Position(x, y+1);
+            return new Position(x, y+1);
+        return new Position(x+1, y+1);
     }
 
     private Position getBottomLeft()throws Exception { // Retourne la position de la case en bas à gauche

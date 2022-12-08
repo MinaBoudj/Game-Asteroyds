@@ -2,61 +2,76 @@
 
 
 
-## Name : Asteroyds
+## ASTEROYDS
 
-## Cahier des charges
+## Description
 
-Ce projet, reprenant un jeu de société, consiste à gérer une course spatiale où les joueurs programment les trajectoires de leur vaisseau en essayant d’anticiper les mouvements aléatoires des astéroïdes.
-Les dés sont lancés : rouge/bleu/blanc. Ces dés indiquent la direction que prendront les astéroïdes rouges, blancs et bleus quand ils se déplaceront. Puis on lance le chronomètre de 20 secondes.
-Les joueurs peuvent alors programmer chacun leur tour jusqu’à 6 mouvements parmi les 4 possibilités suivantes : tout droit, demi-tour, avancer à gauche, avancer à droite.
+Ce projet, reprenant le jeu de société éponyme, consiste à gérer une course spatiale où les joueurs programment les trajectoires de leur vaisseau en essayant d’anticiper les mouvements aléatoires des astéroïdes.  
+Les dés sont lancés : rouge/bleu/blanc. Ces dés indiquent la direction que prendront les astéroïdes de la (ou des) couleur correspondante quand ils se déplaceront. Puis on lance le minuteur dont la durée dépend de la difficultée choisie.
+Les joueurs peuvent alors programmer chacun leur tour jusqu’à 6 mouvements parmi les 4 possibilités suivantes : tout droit, demi-tour, avancer à gauche, avancer à droite.  
 Dès que le temps est fini, les joueurs arrêtent de programmer leurs mouvements.
-On déplace les astéroïdes selon les résultats indiqués pas les dés.
-Dans l’orde du tour on déplace les vaisseaux des joueurs selon la liste de leurs mouvements.
-Si, au cours de son déplacement, un vaisseau entre en collision avec un objet ou avec le bord du plateau, sa progression est stoppée, et le joueur encaisse des dommages. S’il perd tous ses points de structure, le vaisseau est détruit.
-Dès qu’un joueur passe les quatre portes, il a gagné la partie.
+On déplace les astéroïdes selon les résultats indiqués pas les dés en suivant leur ordre de priorité. Dès qu'un astéroïde rentre en collision avec un quelconque objet ou le bord du plateau, celui-ci stop immédiatement son déplacement.
 
-## Description générale
+Les astéroïdes ont des déplacements propres à leur couleur :
+- Les blancs se déplacent simplement d'une case dans la direction blanche ;
+- Les rouge sont plus rapides, ils se déplacent de deux cases dans la direction rouge ;
+- Les bleus sont plus lourds, ils se déplacent d'une case dans la direction bleu mais peuvent pousser un astéroîde qui gènerait ce déplacement si ce dernier a une case libre derrière lui ;
+- Les blancs et rouges se déplacent d'abord comme un astéroïde rouge puis comme un astéroïde blanc, même si leur déplacement en rouge a été stoppé ;
+- Les blancs et bleus se déplacent d'abord comme un astéroïde blanc puis comme un astéroïde bleu, même si leur déplacement en blanc a été stoppé.
+En outre, si un astéroïde rentre en collision avec un vaisseau, le vaisseau perd immédiatement 1 point de structure (attention à ne pas finir son déplacement au milieu d'un amas d'astéroïdes...).
 
-Un __jeu__ possède une liste de 6 joueurs, une liste d'astéroïdes, un plateau de jeu de 16x13 cases, une durée et liste de valeurs que peuvent prendre les 3 dès. Un __joueur__ est représenté par un nom, un vaisseau de sa couleur (qu’il aura choisi préalablement) , une liste de reliques et une liste de mouvements. Un __vaisseau__ est un VisualObject qui possède une couleur et des points de structure qui diminuent lorsqu’il rentre en collision avec un objet. Un __VisualObject__ (abstact) a une position ,une image et une orientation.
-Une __Position__ possède deux coordonnées x et y.
-Une __case__ (abstract ) est un VisualObject de forme hexagonale, qui peut contenir un ou plusieurs vaisseaux. Elle possède une liste de vaisseaux et un booléen qui indique si la case peut contenir des vaisseaux.
-Une __Capsule__ de spectateur est un type de case qui ne bouge pas et qui ne peut pas accueillir de vaisseau.
-Une __Plateforme__ est un type de case qui ne bouge pas et d’où part un vaisseau.
-Une __Case vide__ est le seul type de case où peuvent se déplacer les autres types de case. Ce type est ainsi remplacé par le nouveau et une case vide est placée là ou était précédemment l’objet. Il peut accueillir des vaisseau.
-Un __Astéroïde__ (abstract) est un type de case avec une couleur. Les astéroïdes rouges, astéroïdes bleus et astéroïdes blancs sont des astéroïdes avec une couleur fixe.
-Un __portail blanc__ est un astéroïde blanc avec des reliques, et où un vaisseau peut se déplacer.
-Un __portail rouge__ est un astéroïde rouge avec des reliques, et où un vaisseau peut se déplacer.
-Un __WhiteBleuAsteroyd__ est un astéroïde bleu qui a les déplacements d’un astéroïde bleu et blanc cumulés.
-Un __WhiteRedAsteroyd__ est un astéroïde rouge qui a les déplacements d’un astéroïde bleu et blanc cumulés.
+On déplace ensuite les vaisseaux des joueurs selon la liste de leurs mouvements.
+Si, au cours de son déplacement, un vaisseau entre en collision avec un quelconque objet (autre qu'un autre vaisseau, un portail ou une plateforme de lancement), ou avec le bord du plateau, sa progression est stoppée, et il perd immédiatement 2 points de structure.
+Si un vaisseau perd tous ses points de structure, il est détruit et le joueur qui le contrôle perd la partie (même s'il a réussi à atteindre les 4 portails).  
+Dès qu’un joueur passe les 4 portails avec un vaisseau en un seul morceau, il gagne la partie.
+Si plusieurs joueurs atteignent les 4 portails lors du même tour de jeu, c'est celui dont le vaisseau a le plus de points de stucture qui remporte la partie. En cas d'égalité, les joueurs sont considérés comme ex aequo.
+
+Pour plus de précisions sur les règles vous pouvez suivre le tutoriel suivant : https://www.youtube.com/watch?v=3JEBWf5B7CA.
 
 
-## Compilation et excution du projet 
-pour pouvoir exécuter javafx et lancer le projet. il est nécessaire d'instaler quelque fonctionnalité java.
+## Compilation et exécution du projet 
+Pour pouvoir lancer le projet, il est nécessaire de suivre les étapes suivantes :
 
-- Etape 1 : installer javafx selon la version de votre systéme d'exploitation. cliquer sur le lien d'instalation https://openjfx.io
-- Etape 2 : copier le docier lib dans la branche du projet
-- Etape 3 : cree un répertoire vide nommé bin dans la branche du projet. Qui contiendra tous les fichiers d'excution des classes
-- Etape 4 : compiler avec la commande :  
+- **Etape 0** : Cloner le projet sur sa machine... évidemment !
+- **Etape 1** : Télécharger le module javafx correspondant à la version de sa machine en choisissant le type JDK à l'adresse suivante : https://gluonhq.com/products/javafx/.
+- **Etape 2** : Copier le contenu du répertoire *lib* du dossier téléchargé dans le répertoire *lib* du dossier du projet.
+- **Etape 2-bis** : Pour les utilisateurs de Windows, il faut aussi copier le répertoire *bin* dans le dossier du projet.
+- **Etape 4** : Ouvrir un terminal et se rendre dans le dossier du projet.
+- **Etape 5** : Compiler les fichiers à l'aide de la commande suivante :
 
-        javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics src/view/*.java
+        javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics src/controller/*.java
 
-- Etape 5 : excecuter avec la commande :  
+- **Etape 6** : Enfin, il ne reste plus qu'à exécuter la commande suivante pour lancer le programme :
 
-        java -cp bin --module-path "./lib" --add-modules javafx.base,javafx.graphics view/Test
+        java -cp bin --module-path "./lib" --add-modules javafx.base,javafx.graphics,javafx.controls controller/Main
 
-## Support Utiliser
+
+**/!\\** Il est possible que lors de l'exécution le programme plante car la taille maximale des textures prises en charge par l'accélération matérielle de JavaFX, qui est définie dans le pilote graphique, est dépassée. **/!\\**   
+Dans ce cas pas d'inquiétude, il suffit de lancer la commande suivante avant dexécuter le programme (non testée sous Linux) :
+
+        set JAVA_TOOL_OPTIONS=-Dprism.maxvram=8G
+
+## Personnaliser son plateau de jeu
+Il est possible de créer et ajouter son propre plateau de jeu mais en respectant certaines contraintes bien précises :
+
+- Il est vivement conseillé de ne **jamais** modifier ni supprimer le fichier *Classic.txt* afin de **toujours** avoir un plateau de jeu valide qui sert aussi d'exemple de la syntaxe à suivre pour en créer d'autres ;
+- Le plateau de jeu doit être scripter dans un fichier au format *.txt* et être placé dans le répertoire *res/gameboards* du dossier du projet ;
+- La première ligne du fichier doit comporter le nombre de colonnes du plateau suivi de la lettre *x* suivie du nombre de lignes ;
+- La seconde ligne doit comporter le nombre total d'astéroïdes (portails compris) que votre plateau contiendra ;
+- La troisième ligne est ignorée pour plus de lisibilité vous pouvez donc y noter ce qui vous passe par la tête... ou rien du tout ;
+- Ensuite commence la création du plateau :
+        - Chaque ligne doit correspond à un type d'objet à savoir 
+
+## Supports utilisés
 une liste de technologies utiliser dans le projet:
-* [java](https://www.java.com/fr/) : java 17 2021-09-14 LTS
-* [javaFx](https://openjfx.io) : javafx-sdk-11.0.2
-* [VisualStudioCode](https://code.visualstudio.com) : Version : 1.73.1 (Universal)
+- [java](https://www.java.com/fr/) : java 17 2021-09-14 LTS
+- [javaFx](https://openjfx.io) : javafx-sdk-11.0.2
+- [VisualStudioCode](https://code.visualstudio.com) : Version : 1.73.1 (Universal)
 
 
-## Authors 
+## Auteurs 
 - ABBACI Juba
 - ACKERMANN Matéo
 - BOUDJEDIR Amina
 - BOUILLON Maylis
 - MOGUE GEGOUE Bebeine
-
-## Project status
-L2 programation oriente objet
