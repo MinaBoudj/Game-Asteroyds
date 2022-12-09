@@ -28,7 +28,7 @@ Un vaisseau peut se rendre sur une case où se trouve déjà un autre vaisseau, 
 Dès qu’un joueur passe les 4 portails avec un vaisseau en un seul morceau, il gagne la partie.
 Si plusieurs joueurs atteignent leur quatrième portail lors du même tour de jeu, c'est celui dont le vaisseau a le plus de points de stucture qui remporte la partie. En cas d'égalité, les joueurs sont considérés comme ex aequo.
 
-Pour plus de précisions sur les règles vous pouvez suivre le tutoriel suivant : https://www.youtube.com/watch?v=3JEBWf5B7CA.
+Pour plus de précisions sur les règles, vous pouvez suivre le tutoriel suivant : https://www.youtube.com/watch?v=3JEBWf5B7CA.
 
 
 ## Compilation et exécution du projet 
@@ -63,34 +63,26 @@ Il est possible de créer et d'ajouter son propre plateau de jeu, mais en respec
 - La troisième ligne doit comprter le nombre total de plateformes de lancement que votre plateau contiendra. Il doit y en avoir au moins 1.
 - La quatrième ligne est ignorée pour plus de lisibilité. Vous pouvez donc y noter ce qui vous passe par la tête... ou rien du tout.
 - Ensuite commence la création du plateau, où chaque ligne correspond à une suite d'éléments consécutifs de même type. Chaque paramètre doit être séparé par un tiret. Les paramètres sont obligatoires (sauf précision) et doivent suivre l'ordre suivant :
-
-        1. Un nombre indiquant la quantité d'éléments consécutifs de même type.
-        2. Le type de l'objet parmi les suivants :
-
-                - *asteroyd* pour un asteroïde,
-                - *portal* pour un portail,
-                - *empty* pour une case vide,
-                - *launchpad* pour une plateforme de lancement,
-                - *audience_pod* pour une cpasule de spectateurs,
-                - *null* pour une case interdite.
-
-        3. La couleur de l'objet, uniquement pour les types *portal* et *asteroyd* :
-
-                - Pour le type *portal* : 
-                        - *red* pour rouge,
-                        - *white* pour blanc.
-
-                - Pour le type *asteroyd* :
-                        - *red* pour rouge,
-                        - *white* pour blanc,
-                        - *blue* pour bleu,
-                        - *white_red* pour blanc et rouge,
-                        - *white_blue* pour blanc et bleu.
-
-        4. La valeur de la relique associée, uniquement pour le type *portal*, comprise dans l'intervalle ⟦1;4⟧.
-
-        Par exemple la ligne *4-asteroyd-red* créera 4 asteroïdes rouges consécutifs sur la ligne du plateau.
-
+  1. Un nombre indiquant la quantité d'éléments consécutifs de même type.
+  2. Le type de l'objet parmi les suivants :
+     - *asteroyd* pour un asteroïde,
+     - *portal* pour un portail,
+     - *empty* pour une case vide,
+     - *launchpad* pour une plateforme de lancement,
+     - *audience_pod* pour une cpasule de spectateurs,
+     - *null* pour une case interdite.
+  3. La couleur de l'objet, uniquement pour les types *portal* et *asteroyd* :
+     - Pour le type *portal* :
+       - *red* pour rouge,
+       - *white* pour blanc.
+     - Pour le type *asteroyd* :
+       - *red* pour rouge,
+       - *white* pour blanc,
+       - *blue* pour bleu,
+       - *white_red* pour blanc et rouge,
+       - *white_blue* pour blanc et bleu.
+  4. La valeur de la relique associée, uniquement pour le type *portal*, comprise dans l'intervalle ⟦1;4⟧.   
+  Par exemple la ligne *4-asteroyd-red* créera 4 asteroïdes rouges consécutifs sur la ligne du plateau.
 - Le caractère '-', seul sur une ligne du fichier, indique qu'on commence une nouvelle ligne du plateau.
 - Entre 2 '-' seuls, la somme des nombres débutants les lignes (voir (1)) doit être égale au nombre de colonnes indiqué au départ.
 - Le nombre de groupes d'objets (un groupe comprenant tout ce qui est situé entre 2 '-') doit être égal au nombre de lignes indiqué au départ.
