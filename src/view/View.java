@@ -20,9 +20,9 @@ import javafx.scene.input.KeyCombination;
 public class View {
     private Stage stage;
     private Group menu;
+    private GameKeyGroup gameKey;
     private OptionsGroup options,
-                  end,
-                  gameKey;
+                  end;
     private MainGroup main;
     private TurnGroup turn;
     private Group gameBoardGroup;
@@ -47,15 +47,13 @@ public class View {
         options = new OptionsGroup(screenWidth, screenHeight);
         main = new MainGroup(screenWidth,screenHeight);
         turn = new TurnGroup(screenWidth, screenHeight);
-        /*end = new EndScene(screenWidth, screenHeight, new Group(), exit);
-        gameKey = new GameKeyScene(screenWidth, screenHeight, new Group(), exit);*/
+        //end = new EndScene(screenWidth, screenHeight, new Group(), exit);
+        gameKey = new GameKeyGroup(screenWidth, screenHeight);
 
         gameBoardGroup = new Group();
 
         scene.setRoot(menu);
-        mainMenu = ev -> {
-                scene.setRoot(menu);
-            };
+        mainMenu = ev -> {scene.setRoot(menu);};
     }
 
     public void displayOptionsScene(String[][] gameBoard, ArrayList<String> colorChoices, int playerIndex, String[] launchpadPositions, Sendable playerInfo) {
@@ -68,11 +66,6 @@ public class View {
         scene.setRoot(options);
     }
 
-    private double calculateHexSize(String[][] gameBoard) {
-        return Math.min((screenWidth * 0.75 / gameBoard[0].length + 0.5) / Math.sqrt(3),
-                        screenHeight * 0.95 / gameBoard.length*1.5 + 0.5);
-    }
-
     public void displayMainScene(String[][] gameBoard, String[] players, Executable newTurn) throws Exception {
         updateGameBoardGroup(gameBoard, false);
         Executable simpInterface = ev -> {
@@ -81,7 +74,14 @@ public class View {
                     displayMainScene(gameBoard, players, newTurn);
                 } catch (Exception e) {/*TODO*/}
             };
-        main.newTurn(gameBoardGroup, players, newTurn, mainMenu, simpInterface);
+        Executable gk = ev -> {
+                gameKey.displayGameKeyGroup(ev2 -> {
+                        try{displayMainScene(gameBoard, players, newTurn);}
+                        catch (Exception e) {/*TODO*/}
+                    });
+                scene.setRoot(gameKey);
+            };
+        main.newTurn(gameBoardGroup, players, newTurn, mainMenu, gk, simpInterface);
         scene.setRoot(main);
     }
 
@@ -93,10 +93,17 @@ public class View {
                     displayMainScene(gameBoard, players, nextPlayer, difficulty, directions, newPlayerTurn);
                 } catch (Exception e) {/*TODO*/}
             };
+        Executable gk = ev -> {
+                    gameKey.displayGameKeyGroup(ev2 -> {
+                            try{displayMainScene(gameBoard, players, nextPlayer, difficulty, directions, newPlayerTurn);}
+                            catch (Exception e) {/*TODO*/}
+                        });
+                    scene.setRoot(gameKey);
+                };
         Executable startPlayerTurn = ev -> {
                 displayTurnScene(gameBoard, nextPlayer, difficulty, directions, newPlayerTurn);
             };
-        main.newPlayerTurn(gameBoardGroup, players, nextPlayer, startPlayerTurn, mainMenu, simpInterface);
+        main.newPlayerTurn(gameBoardGroup, players, nextPlayer, startPlayerTurn, mainMenu, gk, simpInterface);
         scene.setRoot(main);
     }
 
@@ -119,7 +126,8 @@ public class View {
 
         double gameBoardWidth = gameBoard[0].length + 0.5,
                gameBoardHeight = gameBoard.length * 1.5 + 0.5,
-               hexSize = calculateHexSize(gameBoard),
+               hexSize = Math.min((screenWidth * 0.75 / gameBoardWidth) / Math.sqrt(3),
+                                  screenHeight * 0.95 / gameBoardHeight),
                hexWidth = Math.sqrt(3) * hexSize,
                initX = hexSize + (screenWidth*0.8 - hexWidth*gameBoardWidth)/2,
                initY = hexSize + (screenHeight - hexSize*gameBoardHeight)/2,

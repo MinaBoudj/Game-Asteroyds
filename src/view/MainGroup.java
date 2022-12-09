@@ -21,8 +21,8 @@ public class MainGroup extends Group {
         this.screenHeight = screenHeight;
     }
 
-    private void updateRoot(Group gameBoardGroup, String[] players, Executable mainMenu, Executable simpInterface) throws Exception {
-        double maxTextHeight = screenHeight/18.5,
+    private void updateRoot(Group gameBoardGroup, String[] players, Executable mainMenu, Executable gameKey, Executable simpInterface) throws Exception {
+        double maxTextHeight = screenHeight/20,
                maxRelicSize = screenWidth/32.5;
 
         getChildren().removeAll(getChildren());
@@ -46,8 +46,9 @@ public class MainGroup extends Group {
             }
         }
 
-        Text mainMenuButton = ControlConstructor.newButton("Main Menu", Color.WHITE, screenWidth*0.18,maxTextHeight*0.8, screenWidth*0.9,maxTextHeight*17.25, Color.BLACK, mainMenu),
-             noSave = ShapeConstructor.newText("(game will not be saved)", Color.RED, screenWidth*0.18,maxTextHeight*0.4, screenWidth*0.9,maxTextHeight*17.75);
+        Text gameKeyButton = ControlConstructor.newButton("Game Key", Color.WHITE, screenWidth*0.18,maxTextHeight*0.8, screenWidth*0.9,maxTextHeight*17.5, Color.BLACK, gameKey),
+             mainMenuButton = ControlConstructor.newButton("Main Menu", Color.WHITE, screenWidth*0.18,maxTextHeight*0.8, screenWidth*0.9,maxTextHeight*18.75, Color.BLACK, mainMenu),
+             noSave = ShapeConstructor.newText("(game will not be saved)", Color.RED, screenWidth*0.18,maxTextHeight*0.4, screenWidth*0.9,maxTextHeight*19.25);
 
         double boxSize = screenHeight*0.02;
         Text simpInterfaceText = ShapeConstructor.newText("Simplified Interface", Color.WHITE, screenWidth,boxSize, (screenWidth*0.8)/2 + boxSize,screenHeight*0.9875);
@@ -55,20 +56,20 @@ public class MainGroup extends Group {
         simpInterfaceTextBox.setOnAction(ae -> {simpInterface.execute(ae);});
         simpInterfaceTextBox.setSelected(ShapeConstructor.NOIMAGE);
 
-        getChildren().addAll(mainMenuButton,noSave, simpInterfaceText,simpInterfaceTextBox);
+        getChildren().addAll(gameKeyButton,mainMenuButton,noSave, simpInterfaceText,simpInterfaceTextBox);
     }
 
-    public void newTurn(Group gameBoardGroup, String[] players, Executable newTurn, Executable mainMenu, Executable simpInterface) throws Exception {
-        updateRoot(gameBoardGroup, players, mainMenu, simpInterface);
-        getChildren().add(ControlConstructor.newButton("Next Turn", Color.WHITE, screenWidth*0.18,screenHeight*0.8/18.5, screenWidth*0.9,screenHeight*16/18.5, Color.BLACK, newTurn));
+    public void newTurn(Group gameBoardGroup, String[] players, Executable newTurn, Executable mainMenu, Executable gameKey, Executable simpInterface) throws Exception {
+        updateRoot(gameBoardGroup, players, mainMenu, gameKey, simpInterface);
+        getChildren().add(ControlConstructor.newButton("Next Turn", Color.WHITE, screenWidth*0.18,screenHeight*0.8/18.5, screenWidth*0.9,screenHeight*16/20, Color.BLACK, newTurn));
     }
 
-    public void newPlayerTurn(Group gameBoardGroup, String[] players, String nextPlayer, Executable startPlayerTurn, Executable mainMenu, Executable simpInterface) throws Exception {
-        updateRoot(gameBoardGroup, players, mainMenu, simpInterface);
+    public void newPlayerTurn(Group gameBoardGroup, String[] players, String nextPlayer, Executable startPlayerTurn, Executable mainMenu, Executable gameKey, Executable simpInterface) throws Exception {
+        updateRoot(gameBoardGroup, players, mainMenu, gameKey, simpInterface);
         String[] playerInfos = nextPlayer.split("-");
         String name = playerInfos[1];
         Color color = ControlConstructor.getPlayerColor(playerInfos[3]);
 
-        getChildren().add(ControlConstructor.newButton("Start " + name + "'s Turn", Color.WHITE, screenWidth*0.18,screenHeight*0.8/18.5, screenWidth*0.9,screenHeight*16/18.5, color, startPlayerTurn));
+        getChildren().add(ControlConstructor.newButton("Start " + name + "'s Turn", Color.WHITE, screenWidth*0.18,screenHeight*0.8/18.5, screenWidth*0.9,screenHeight*16/20, color, startPlayerTurn));
     }
 }

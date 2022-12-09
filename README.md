@@ -81,11 +81,11 @@ Il est possible de créer et d'ajouter son propre plateau de jeu, mais en respec
        - *blue* pour bleu,
        - *white_red* pour blanc et rouge,
        - *white_blue* pour blanc et bleu.
-  4. La valeur de la relique associée, uniquement pour le type *portal*, comprise dans l'intervalle ⟦1;4⟧.   
+  4. La valeur de la relique associée, uniquement pour le type *portal*, comprise dans l'intervalle ⟦1;4⟧.
   Par exemple la ligne *4-asteroyd-red* créera 4 asteroïdes rouges consécutifs sur la ligne du plateau.
-- Le caractère '-', seul sur une ligne du fichier, indique qu'on commence une nouvelle ligne du plateau.
-- Entre 2 '-' seuls, la somme des nombres débutants les lignes (voir (1)) doit être égale au nombre de colonnes indiqué au départ.
-- Le nombre de groupes d'objets (un groupe comprenant tout ce qui est situé entre 2 '-') doit être égal au nombre de lignes indiqué au départ.
+- Le caractère **-**, seul sur une ligne du fichier, indique qu'on commence une nouvelle ligne du plateau.
+- Entre 2 **-** seuls, la somme des nombres débutants les lignes (voir (1)) doit être égale au nombre de colonnes indiqué au départ.
+- Le nombre de groupes d'objets (un groupe comprenant tout ce qui est situé entre 2 **-**) doit être égal au nombre de lignes indiqué au départ.
 - Sans modification du code existant, aucun écart aux règles précédentes ne permettra le chargement du plateau.
 - Pour finir, il est préférable de s'appuyer sur le fichier *Classic.txt* pour créer un nouveau plateau.
         
