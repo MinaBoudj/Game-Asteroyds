@@ -2,6 +2,7 @@ package view;
 
 
 import java.util.ArrayList;
+
 import javafx.scene.Group;
 import javafx.scene.paint.Color; 
 import javafx.scene.shape.Rectangle;
@@ -11,9 +12,7 @@ import javafx.scene.text.Text;
 public class EndGroup extends Group {
     private double screenWidth;
     private double screenHeight;
-    private ArrayList<String[]> ranking_player;
-    private ArrayList<String[]> player_over;
-    private String[] playersplit;
+    private ArrayList<String[]> ranking;
 	
     public EndGroup(double screenWidth, double screenHeight) {
         super();
@@ -21,115 +20,99 @@ public class EndGroup extends Group {
         this.screenHeight = screenHeight;
     }
 
-    public void updateEndScene(Executable exit, Executable mainMenu, String players){ 
-        try {
-            root.getChildren().add(ShapeConstructor.newImage("menu_background", screenWidth*1.5,screenHeight*1.5, screenWidth/2,screenHeight/2, 1));
-        } catch (Exception e) {
-            setFill(Color.BLACK);
-        }
+    public void updateRoot(String[] players, Executable mainMenu) throws Exception {
+        getChildren().removeAll(getChildren());
+
+        double maxTextHeight = screenHeight/14.5,
+               maxTextWidth = screenWidth/8.5;
+        ranking = new ArrayList<String[]>();
+               
+        try {getChildren().add(ShapeConstructor.newImage("background", screenWidth*1.5,screenHeight*1.5, screenWidth/2,screenHeight/2, 1));}
+        catch (Exception e) {getChildren().add(ShapeConstructor.newRectangle(Color.BLACK, screenWidth*1.5, screenHeight*1.5, screenWidth/2, screenHeight/2));}
         
         ranking_player(players);
-        Text resultsText = ShapeConstructor.newText("Results : ", Color.WHITE, screenWidth*0.28,screenHeight*0.1, screenWidth*0.45,screenHeight*0.125);
-		Rectangle paneResultats = ShapeConstructor.newRectangle(Color.web("A9A9A9",0.6), screenWidth, screenHeight*0.15, screenWidth, screenHeight*0.15);
-        
-        displayRanking(playersplit.length);
-		Text backmainButton = ControlConstructor.newButton("Start", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.800, Color.BLACK, mainMenu);
-		Text exitButton = ControlConstructor.newButton("Exit Game", Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.15,screenHeight*0.875, Color.BLACK, exit);
+        Text title = ShapeConstructor.newText("Scores : ", Color.WHITE, screenWidth,maxTextHeight*1.5, screenWidth/2,maxTextHeight*0.75);
 
-		getChildren().addAll(resultsText, paneResultats, backmainButton, exitButton);
+		Rectangle scorePane = ShapeConstructor.newRectangle(Color.web("A9A9A9",0.6), maxTextWidth*7.5,maxTextHeight*10.8, screenWidth/2,screenHeight/2);
+        Text rank = ShapeConstructor.newText("Rank", Color.BLACK, maxTextWidth,maxTextHeight, maxTextWidth,maxTextHeight*3),
+             name = ShapeConstructor.newText("Pseudo", Color.BLACK, maxTextWidth,maxTextHeight*2, maxTextWidth*2.5,maxTextHeight*3),
+             relics = ShapeConstructor.newText("Number of Relics", Color.BLACK, maxTextWidth,maxTextHeight*2, maxTextWidth*4.5,maxTextHeight*3),
+             structPoints = ShapeConstructor.newText("Structure Points", Color.BLACK, maxTextWidth,maxTextHeight*2, maxTextWidth*7,maxTextHeight*3);
+
+        int minRank = 0;
+        for(int i = 0 ; i < ranking.size() ; i++) {
+            Color pColor = ControlConstructor.getPlayerColor(ranking.get(i)[3]);
+            double y = maxTextHeight*(i*1.5 + 4.5);
+            if(minRank == 0 || comparePlayers(ranking.get(i-1), ranking.get(i)) != 0)
+                minRank++;
+
+            Text pRank = ShapeConstructor.newText(Integer.toString(minRank), pColor, maxTextWidth,maxTextHeight, maxTextWidth,y),
+                 pName = ShapeConstructor.newText(ranking.get(i)[1], pColor, maxTextWidth,maxTextHeight*2, maxTextWidth*2.5,y),
+                 pRelics = ShapeConstructor.newText(ranking.get(i)[0], pColor, maxTextWidth,maxTextHeight*2, maxTextWidth*4.5,y),
+                 pStructPoints = ShapeConstructor.newText(ranking.get(i)[2], pColor, maxTextWidth,maxTextHeight*2, maxTextWidth*7,y);
+            getChildren().addAll(pRank, pName, pRelics, pStructPoints);
+        }
+
+		Text menuButton = ControlConstructor.newButton("Main Menu", Color.WHITE, screenWidth,maxTextHeight, screenWidth/2,maxTextHeight*14, Color.YELLOW, mainMenu);
+
+		getChildren().addAll(title, scorePane, rank,name,relics,structPoints, menuButton);
 	}
 
-    public void ranking_player(String players){
-        playersplit = players.split("_");
-        for (int i = 0; i < playersplit.length; i++){
-            String [] playerInfos = playersplit[i].split("-");
-            ranking_player.get(i)[0] = playerInfos[0];
-            ranking_player.get(i)[1] = playerInfos[1];
-            ranking_player.get(i)[2] = playerInfos[2];
-        }   
-        
-        for (String[] player : ranking_player){
-            if (player[2] == "0"){
-                player_over.add(player);
-                ranking_player.remove(player);
-            }
-        }
-        
-        String x;
-        for (int i = ranking_player.size(); i > 0; i--){
-            for (int j = 1; j < ranking_player.size(); j++){
-                int compare = ranking_player.get(j+1)[0].compareTo(ranking_player.get(j)[0]);
-                if (compare > 0){
-                    x = ranking_player.get(j+1)[0];
-                    ranking_player.get(j+1)[0] = ranking_player.get(j)[0];
-                    ranking_player.get(j)[0] = x;
-                }
+    public void ranking_player(String[] players){
+        for (String p : players) {
+            String[] playerInfos = p.split("-");
 
-            }
+            int relics = 0;
+            for(String r : playerInfos[0].split("/"))
+                if(r != "")
+                    relics++;
+            playerInfos[0] = Integer.toString(relics);
+
+            int i = 0;
+            while(i < ranking.size() && comparePlayers(ranking.get(i), playerInfos) == 1)
+                i++;
+            ranking.add(i, playerInfos);
         }
-        ranking_player.addAll(player_over);
     }
-        // usefull ?
-        //Collections.sort(ranking_player.get().get() , Collections.reverseOrder()); // marche pas ?
-        //Collections.sort(player_over , Collections.reverseOrder());
-        
-    public void displayRanking(int nombre_players){
-        String [] places = {"First : ", "Second : ", "Third : ", "Fourth : ", "Fifth : ", "Sixth : "},
-                  playerRelics;
-        switch(nombre_players){
-            case 2:  
-                for (int i = 0; i < ranking_player.size() ; i++){
-                    getChildren().addAll(ShapeConstructor.newText(places[i] + ranking_player.get(i)[1] , Color.WHITE, screenWidth*0.28,screenHeight*0.15, screenWidth*0.4,screenHeight*(0.25 + 0.18*i )),
-                        ShapeConstructor.newText("Relics : " + ranking_player.get(i)[0] , Color.WHITE, screenWidth*0.28,screenHeight*0.03, screenWidth*0.33,screenHeight*(0.30 +0.18*i)),
-                        playerRelics = ranking_player.get(i)[0].split("/");
-                        for (int j = 0 ; j < playerRelics.length ; j ++ ) {
-                            getChildren().add(ShapeConstructor.newImage("relic" + playerRelics[j], screenWidth*0.05, screenHeight*0.05, screenWidth*(0.33+0.15*(j+1)),screenHeight*(0.30 +0.18*i)));
-                        }
-                        ShapeConstructor.newText("Condition of the Ship : " + ranking_player.get(i)[2] , Color.WHITE, screenWidth*0.28,screenHeight*0.03, screenWidth*0.33,screenHeight*(0.35 +0.18*i)));
-                } break;
-            case 3:
-                displayRanking(2); break;
-                
-            case 4:
-                displayRanking(2); break;
 
-            case 5:
-                getChildren().addAll(ShapeConstructor.newText(places[0] + ranking_player.get(0)[1] , Color.WHITE, screenWidth*0.28,screenHeight*0.15, screenWidth*0.4,screenHeight*(0.25)),
-                        ShapeConstructor.newText("Relics : " + ranking_player.get(0)[0] , Color.WHITE, screenWidth*0.2,screenHeight*0.03, screenWidth*0.33,screenHeight*0.30),
-                        playerRelics = ranking_player.get(0)[0].split("/");
-                        for (int j = 0 ; j < playerRelics.length ; j ++ ) {
-                            getChildren().add(ShapeConstructor.newImage("relic" + playerRelics[j], screenWidth*0.05, screenHeight*0.05, screenWidth*(0.33+0.15*(j+1)),screenHeight*0.3));
-                        }
-                        ShapeConstructor.newText("Condition of the Ship : " + ranking_player.get(0)[2] , Color.WHITE, screenWidth*0.28,screenHeight*0.10, screenWidth*0.33,screenHeight*(0.35)));
-                for (int i = 1; i < 3 ; i++){
-                    getChildren().addAll(ShapeConstructor.newText(places[i] + ranking_player.get(i)[1] , Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.2,screenHeight*(0.25+ 0.18*i )),
-                        ShapeConstructor.newText("Relics : " + ranking_player.get(i)[0] , Color.WHITE, screenWidth*0.28,screenHeight*0.03, screenWidth*0.2,screenHeight*(0.30 +0.18*i)),
-                        playerRelics = ranking_player.get(i)[0].split("/");
-                        for (int j = 0 ; j < playerRelics.length ; j ++ ) {
-                            getChildren().add(ShapeConstructor.newImage("relic" + playerRelics[j], screenWidth*0.05, screenHeight*0.05, screenWidth*(0.2+0.15*(j+1)),screenHeight*0.3));
-                        }
-                        ShapeConstructor.newText("Condition of the Ship : " + ranking_player.get(i)[2] , Color.WHITE, screenWidth*0.28,screenHeight*0.03, screenWidth*0.2,screenHeight*(0.35 +0.18*i)));
-                }
-                for (int i = 1; i < 3 ; i++){
-                    getChildren().addAll(ShapeConstructor.newText(places[i] + ranking_player.get(i)[1] , Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.65,screenHeight*(0.25+ 0.18*i )),
-                        ShapeConstructor.newText("Relics : " + ranking_player.get(i)[0] , Color.WHITE, screenWidth*0.28,screenHeight*0.03, screenWidth*0.65,screenHeight*(0.30 +0.18*i)),
-                        playerRelics = ranking_player.get(i)[0].split("/");
-                        for (int j = 0 ; j < playerRelics.length ; j ++ ) {
-                            getChildren().add(ShapeConstructor.newImage("relic" + playerRelics[j], screenWidth*0.05, screenHeight*0.05, screenWidth*(0.65+0.15*(j+1)),screenHeight*0.3));
-                        }
-                        ShapeConstructor.newText("Condition of the Ship : " + ranking_player.get(i)[2] , Color.WHITE, screenWidth*0.28,screenHeight*0.03, screenWidth*0.65,screenHeight*(0.35 +0.18*i)));
-                } break;
-            case 6:
-                displayRanking(5);
-                getChildren().addAll(ShapeConstructor.newText(places[5] + ranking_player.get(5)[1] , Color.WHITE, screenWidth*0.28,screenHeight*0.05, screenWidth*0.33,screenHeight*0.8),
-                            ShapeConstructor.newText("Relics : " + ranking_player.get(5)[0] , Color.WHITE, screenWidth*0.28,screenHeight*0.03, screenWidth*0.33,screenHeight*0.85),
-                            playerrelics = ranking_player.get(i)[0].split("/");
-                            for (int j = 0 ; j < playerRelics.length ; j ++ ) {
-                                getChildren().add(ShapeConstructor.newImage("relic" + playerRelics[j], screenWidth*0.05, screenHeight*0.05, screenWidth*(0.33+0.15*(j+1)),screenHeight*0.85));
-                            }
-                            ShapeConstructor.newText("Condition of the Ship : " + ranking_player.get(5)[2] , Color.WHITE, screenWidth*0.28,screenHeight*0.03, screenWidth*0.33,screenHeight*0.9)
-                );
-                break;
-        }
-    } 
+    private int comparePlayers(String[] first, String[] second) {
+        if(Integer.parseInt(first[2]) <= 0)
+            if(Integer.parseInt(second[2]) == 0)
+                return comparePlayerRelics(first, second);
+            else
+                return -1;
+        else if(Integer.parseInt(second[2]) <= 0)
+            return 1;
+        else
+            return comparePlayerRelics(first, second) == 0 ? comparePlayerStructurePoints(first, second) : comparePlayerRelics(first, second);
+    }
+
+    private int comparePlayerRelics(String[] first, String[] second) {
+        return Integer.parseInt(first[0]) > Integer.parseInt(second[0]) ? 1 :
+                   Integer.parseInt(first[0]) == Integer.parseInt(second[0]) ? 0 : -1;
+    }
+
+    private int comparePlayerStructurePoints(String[] first, String[] second) {
+        return Integer.parseInt(first[2]) > Integer.parseInt(second[2]) ? 1 :
+                   Integer.parseInt(first[2]) == Integer.parseInt(second[2]) ? 0 : -1;
+    }
 }
+/* -1-1-2-2-
+1.5
+1
+1
+-
+1
+-
+1
+-
+1
+-
+1
+-
+1
+-
+1
+1
+1
+ */

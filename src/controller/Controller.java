@@ -19,7 +19,6 @@ public class Controller extends Application {
     private int difficulty;
     private int[] turnDirections;
     private Player[] players;
-    private ArrayList<Player> winners;
     private String[] launchpadPositions;
     private ArrayList<String> colorChoices;
 
@@ -29,7 +28,6 @@ public class Controller extends Application {
     }
 
     private void startGame(String[] gameInfos) {
-        winners = new ArrayList<Player>();
         players = new Player[Integer.parseInt(gameInfos[0])];
 
         switch(gameInfos[1]) {
@@ -110,7 +108,7 @@ public class Controller extends Application {
                 }
             } else
                 view.displayOptionsScene(gameBoardToString(gameBoard), colorChoices, playerIndex+1, launchpadPositions, args -> {savePlayerInfos(args, playerIndex+1);});
-        } catch(Exception e) {/*TODO*/}
+        } catch(Exception e) {System.out.println(e);/*TODO*/}
     }
 
     public void savePlayerMovements(Player player, String[] movements) {
@@ -183,11 +181,10 @@ public class Controller extends Application {
                 p.move(gameBoard);
             if(!p.hasSpaceShipInCondition())
                 gameBoard[p.getSpaceShip().getPosition().getX()][p.getSpaceShip().getPosition().getY()].removeLSpaceShip(p.getSpaceShip());
-            else if(p.getNumberOfRelics() == 4)
-                winners.add(p);
         }
 
-        if(isGameOver()) {}
+        if(isGameOver())
+            view.displayEndScene(playersToString(players));
         else
             try {
                 view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), ev -> {newTurn();});
@@ -317,7 +314,19 @@ public class Controller extends Application {
         }
     }
 
-    public boolean isGameOver() {return winners.size() > 0;}
+    public boolean isGameOver() {
+        int spaceShipsRemaining = 0;
+
+        for(Player p : players) {
+            if(p.hasSpaceShipInCondition()) {
+                if(p.getNumberOfRelics() == 4)
+                    return true;
+                spaceShipsRemaining++;
+            }
+        }
+
+        return spaceShipsRemaining < 2;
+    }
 
     public String[][] gameBoardToString(Cell[][] gameBoard) {
         String[][] stringGameBoard = new String[gameBoard.length][gameBoard[0].length];

@@ -15,6 +15,8 @@ public class GameKeyGroup extends Group {
     }
 
     public void displayGameKeyGroup(Executable back){
+        getChildren().removeAll(getChildren());
+
         double maxObjHeight = screenHeight/9.5,
                hexSize = Math.min(screenWidth/Math.sqrt(3), maxObjHeight/1.5),
                hexWidth = Math.sqrt(3) * hexSize;

@@ -21,8 +21,8 @@ public class View {
     private Stage stage;
     private Group menu;
     private GameKeyGroup gameKey;
-    private OptionsGroup options,
-                  end;
+    private OptionsGroup options;
+    private EndGroup end;
     private MainGroup main;
     private TurnGroup turn;
     private Group gameBoardGroup;
@@ -47,7 +47,7 @@ public class View {
         options = new OptionsGroup(screenWidth, screenHeight);
         main = new MainGroup(screenWidth,screenHeight);
         turn = new TurnGroup(screenWidth, screenHeight);
-        //end = new EndScene(screenWidth, screenHeight, new Group(), exit);
+        end = new EndGroup(screenWidth, screenHeight);
         gameKey = new GameKeyGroup(screenWidth, screenHeight);
 
         gameBoardGroup = new Group();
@@ -64,6 +64,11 @@ public class View {
             };
         options.updateOptionsGroup(gameBoardGroup, colorChoices, playerIndex, updateGameBoard, mainMenu, playerInfo, launchpadPositions, gameBoard);
         scene.setRoot(options);
+    }
+
+    public void displayEndScene(String[] players) throws Exception {
+        end.updateRoot(players, mainMenu);
+        scene.setRoot(end);
     }
 
     public void displayMainScene(String[][] gameBoard, String[] players, Executable newTurn) throws Exception {
