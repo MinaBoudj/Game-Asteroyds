@@ -22,7 +22,12 @@ public class EndGroup extends Group {
     }
 
     public void updateEndScene(Executable exit, Executable mainMenu, String players){ 
-	
+        try {
+            root.getChildren().add(ShapeConstructor.newImage("menu_background", screenWidth*1.5,screenHeight*1.5, screenWidth/2,screenHeight/2, 1));
+        } catch (Exception e) {
+            setFill(Color.BLACK);
+        }
+        
         ranking_player(players);
         Text resultsText = ShapeConstructor.newText("Results : ", Color.WHITE, screenWidth*0.28,screenHeight*0.1, screenWidth*0.45,screenHeight*0.125);
 		Rectangle paneResultats = ShapeConstructor.newRectangle(Color.web("A9A9A9",0.6), screenWidth, screenHeight*0.15, screenWidth, screenHeight*0.15);
