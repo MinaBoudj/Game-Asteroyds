@@ -21,7 +21,7 @@ public class RedAsteroydTest {
     @Before
     public void constructGameBoard() throws Exception {
         rAst = new RedAsteroyd(4, 1,2, 1);
-        gm = new Cell[][]{{new LaunchPad(0,0), null, new EmptyCell(2,0)}, {new EmptyCell(0,1), new EmptyCell(1,1), null}, {new LaunchPad(0,2), rAst, null}};
+        gm = new Cell[][]{{new LaunchPad(0,0), null, new EmptyCell(2,0)}, {new EmptyCell(0,1), new EmptyCell(1,1), null, new EmptyCell(2,1), new EmptyCell(3, 1)}, {new LaunchPad(0,2), rAst, null}};
     }
 
     @Test(expected = Exception.class)
@@ -77,14 +77,14 @@ public class RedAsteroydTest {
 
     @Test
     public void testMoveTwoCellsToEmptyCell() throws Exception {
-        rAst.move(gm, new int[]{2,4,4});
+        rAst.move(gm, new int[]{6,4,4});
         assertTrue(gm[0][2] == rAst && gm[1][1] instanceof EmptyCell && gm[2][1] instanceof EmptyCell);
     }
 
     @Test
     public void testMoveOneCellToEmptyCell() throws Exception {
-        rAst.move(gm, new int[]{6,4,1});
-        assertTrue(gm[1][0] == rAst && gm[2][1] instanceof EmptyCell && gm[0][0] instanceof LaunchPad);
+        rAst.move(gm, new int[]{3,4,1});
+        assertTrue(gm[1][0] == rAst && gm[0][0] instanceof LaunchPad);
     }
 
     @Test

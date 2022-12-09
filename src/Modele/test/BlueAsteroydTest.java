@@ -25,7 +25,7 @@ public class BlueAsteroydTest {
         bAst1 = new BlueAsteroyd(2, 1,1, 1);
         bAst2 = new BlueAsteroyd(2, 0,2, 2);
         bAst3 = new BlueAsteroyd(1, 1,2, 3);
-        gm = new Cell[][]{{null, null, new EmptyCell(2,0)}, {new LaunchPad(0,1), bAst1, new EmptyCell(1,2)}, {bAst2, bAst3, null}};
+        gm = new Cell[][]{{null, null, new EmptyCell(2,0)}, {new LaunchPad(0,1), bAst1, new EmptyCell(2,1)}, {bAst2, bAst3, null}};
     }
 
     @Test(expected = Exception.class)

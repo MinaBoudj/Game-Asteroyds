@@ -17,13 +17,15 @@ import Modele.LaunchPad;
 public class WhiteBlueAsteroydTest {
     private Cell[][] gm;
     private WhiteBlueAsteroyd wbAst,
-                              wbAst2;
+                              wbAst2,
+                              wbAst3;
 
     @Before
     public void constructGameBoard() throws Exception {
         wbAst = new WhiteBlueAsteroyd(6, 0,2, 1);
         wbAst2 = new WhiteBlueAsteroyd(3, 1,1, 2);
-        gm = new Cell[][]{{new EmptyCell(0,0), null, null}, {new EmptyCell(0,1), wbAst2, new EmptyCell(2,1)}, {wbAst, new LaunchPad(1,2), null}};
+        wbAst3 = new WhiteBlueAsteroyd(3, 2,1, 3);
+        gm = new Cell[][]{{new EmptyCell(0,0), null, null}, {new EmptyCell(0,1), wbAst2, wbAst3}, {wbAst, new LaunchPad(1,2), null}};
     }
 
     @Test(expected = Exception.class)
