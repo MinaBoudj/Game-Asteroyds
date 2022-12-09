@@ -20,6 +20,7 @@ public class Controller extends Application {
     private int[] turnDirections;
     private Player[] players;
     private ArrayList<Player> winners;
+    private String[] launchpadPositions;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -28,7 +29,7 @@ public class Controller extends Application {
     }
 
     private void start(String[] gameInfos) {
-        //players = new Player[Integer.parseInt(gameInfos[0])];
+        players = new Player[Integer.parseInt(gameInfos[0])];
 
         switch(gameInfos[1]) {
             case "Amateur - 50s":
@@ -52,18 +53,16 @@ public class Controller extends Application {
             constructGameBoard(view.readTextFile("res\\gameboards\\" + gameInfos[2] + ".txt"));
         } catch (Exception e) {/*TODO*/}
 
-        try{
-            players = new Player[]{new Player("Roro", Color.Green, 1, 8, 5), new Player("Toto", Color.Purple, 6, 7, 5)};
+        view.displayOptionsScene(gameBoardToString(gameBoard), 0, launchpadPositions, args -> {savePlayerInfo(args);});
+    }
 
-            for(Player p : players) {
-                SpaceShip sp = p.getSpaceShip();
-                gameBoard[sp.getPosition().getY()][sp.getPosition().getX()].addLSpaceShip(sp);
-            }
-        } catch (Exception e) {/*TODO*/}
+    public void savePlayerInfo(String[] playerInfos) {
+        String name = playerInfos[0],
+               color = playerInfos[1],
+               launchpad = playerInfos[2],
+               orientation = playerInfos[3];
 
-        try {
-            view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), ev -> {newTurn();});
-        } catch (Exception e) {/*TODO*/}
+        System.out.println(name);
     }
 
     public void savePlayerMovements(Player player, String[] movements) {
@@ -155,15 +154,17 @@ public class Controller extends Application {
         String[] size = text.get(0).split("x");
         int width = Integer.parseInt(size[0]),
             height = Integer.parseInt(size[1]),
-            nbAsteroyds = Integer.parseInt(text.get(1));
+            nbAsteroyds = Integer.parseInt(text.get(1)),
+            nbLaunchpads = Integer.parseInt(text.get(2));
         gameBoard = new Cell[height][width];
         asteroyds = new Asteroyd[nbAsteroyds];
+        launchpadPositions = new String[nbLaunchpads*2];
         
         ArrayList<Integer> astPriorities = new ArrayList<Integer>();
         for(int i = 0 ; i < nbAsteroyds ; i++)
             astPriorities.add(i+1);
 
-        int textCursor = 3,
+        int textCursor = 4,
             lineCursor = 0,
             columnCursor = 0;
 
@@ -247,6 +248,9 @@ public class Controller extends Application {
 
                         case "launchpad":
                             gameBoard[lineCursor][columnCursor] = new LaunchPad(columnCursor,lineCursor);
+                            nbLaunchpads--;
+                            launchpadPositions[nbLaunchpads*2] = Integer.toString(lineCursor);
+                            launchpadPositions[nbLaunchpads*2+1] = Integer.toString(columnCursor);
                             break;
 
                         case "audience_pod":

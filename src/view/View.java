@@ -19,8 +19,8 @@ import javafx.scene.input.KeyCombination;
 
 public class View {
     private Stage stage;
-    private Group menu,
-                  options,
+    private Group menu;
+    private OptionsGroup options,
                   end,
                   gameKey;
     private MainGroup main;
@@ -44,16 +44,33 @@ public class View {
         screenHeight = scene.getHeight();
 
         menu = new MenuGroup(screenWidth,screenHeight, ev -> {stage.close();}, gameInfos);
-        //options = new OptionsScene(screenWidth, screenHeight, new Group()), exit;
+        options = new OptionsGroup(screenWidth, screenHeight);
         main = new MainGroup(screenWidth,screenHeight);
         turn = new TurnGroup(screenWidth, screenHeight);
         /*end = new EndScene(screenWidth, screenHeight, new Group(), exit);
         gameKey = new GameKeyScene(screenWidth, screenHeight, new Group(), exit);*/
 
+        gameBoardGroup = new Group();
+
         scene.setRoot(menu);
         mainMenu = ev -> {
                 scene.setRoot(menu);
             };
+    }
+
+    public void displayOptionsScene(String[][] gameBoard, int playerIndex, String[] launchpadPositions, Sendable playerInfo) {
+        Executable updateGameBoard = ev -> {
+                try{
+                    updateGameBoardGroup(gameBoard, false);
+                } catch (Exception e) {/*TODO*/}
+            };
+        options.updateOptionsGroup(gameBoardGroup, playerIndex, updateGameBoard, mainMenu, playerInfo, launchpadPositions, gameBoard);
+        scene.setRoot(options);
+    }
+
+    private double calculateHexSize(String[][] gameBoard) {
+        return Math.min((screenWidth * 0.75 / gameBoard[0].length + 0.5) / Math.sqrt(3),
+                        screenHeight * 0.95 / gameBoard.length*1.5 + 0.5);
     }
 
     public void displayMainScene(String[][] gameBoard, String[] players, Executable newTurn) throws Exception {
@@ -92,7 +109,7 @@ public class View {
     }
 
     public void updateGameBoardGroup(String[][] gameBoard, boolean displayAstInfos) throws Exception {
-        gameBoardGroup = new Group();
+        gameBoardGroup.getChildren().removeAll(gameBoardGroup.getChildren());
 
         try {
             gameBoardGroup.getChildren().add(ShapeConstructor.newImage("background", screenWidth*1.5,screenHeight*1.5, screenWidth/2,screenHeight/2, 1));
@@ -102,8 +119,7 @@ public class View {
 
         double gameBoardWidth = gameBoard[0].length + 0.5,
                gameBoardHeight = gameBoard.length * 1.5 + 0.5,
-               hexSize = Math.min((screenWidth * 0.75 / gameBoardWidth) / Math.sqrt(3),
-                                  screenHeight * 0.95 / gameBoardHeight),
+               hexSize = calculateHexSize(gameBoard),
                hexWidth = Math.sqrt(3) * hexSize,
                initX = hexSize + (screenWidth*0.8 - hexWidth*gameBoardWidth)/2,
                initY = hexSize + (screenHeight - hexSize*gameBoardHeight)/2,

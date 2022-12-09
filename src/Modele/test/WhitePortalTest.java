@@ -100,7 +100,7 @@ public class WhitePortalTest {
 
     @Test
     public void testMoveToEmptyCell() throws Exception {
-        wPort1.move(gm, new int[]{5,4,4});
+        wPort1.move(gm, new int[] { 5, 4, 4 });
         assertTrue(gm[0][2] == wPort1 && gm[1][1] instanceof EmptyCell);
     }
 
@@ -113,7 +113,7 @@ public class WhitePortalTest {
     @Test
     public void testMoveToNullCell() throws Exception {
         wPort1.move(gm, new int[]{2,5,1});
-        assertTrue(gm[1][1] == wPort1 && gm[0][1] == null);
+        assertTrue(gm[1][1] == wPort1 && gm[2][2] == null);
     }
 
     @Test

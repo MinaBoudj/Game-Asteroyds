@@ -23,8 +23,7 @@ public class WhiteAsteroydTest {
     public void constructGameBoard() throws Exception {
         wAst1 = new WhiteAsteroyd(2, 1, 1, 1);
         wAst2 = new WhiteAsteroyd(2, 0, 2, 2);
-        gm = new Cell[][] { { null, null, new EmptyCell(2, 0) }, { new LaunchPad(0, 1), wAst1, null },
-                { wAst2, null, null } };
+        gm = new Cell[][] { { null, null, new EmptyCell(2, 0) }, { new LaunchPad(0, 1), wAst1, null }, { wAst2, null, null } };
     }
 
     @Test(expected = Exception.class)

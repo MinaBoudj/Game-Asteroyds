@@ -22,8 +22,8 @@ public class ControlConstructor {
     public static Text newButton(String content, Color fill, double maxWidth,double maxHeight, double centerX,double centerY, Color selected, Executable toDo) {
         Text button = ShapeConstructor.newText(content, fill, maxWidth,maxHeight, centerX,centerY);
 
-        button.setOnMouseEntered(mouseEvent -> {button.setFill(selected);});
-        button.setOnMouseExited(mouseEvent -> {button.setFill(fill);});
+        button.setOnMouseEntered(mouseEvent -> {button.setFill(selected); button.setStroke(Color.BLACK);});
+        button.setOnMouseExited(mouseEvent -> {button.setFill(fill); button.setStroke(Color.TRANSPARENT);});
         button.setOnMouseClicked((mouseEvent) -> {toDo.execute(mouseEvent);});
 
         return button; 

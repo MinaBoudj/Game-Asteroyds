@@ -21,7 +21,7 @@ public class WhiteAsteroyd extends Asteroyd {
 		else{
             try {
                 //Définir l'orientation
-                int neworientation = calculeOrientation(directions[1]);
+                int neworientation = calculeOrientation(directions[2]);
                 pos = super.getPosition().getForward(neworientation);
                 if(gameBoard[pos.getY()][pos.getX()]!= null && gameBoard[pos.getY()][pos.getX()] instanceof EmptyCell){ // Vérifie le type de case
                     if (gameBoard[pos.getY()][pos.getX()].getLSpaceShips().size() == 0) { // Vérifie si la case ne contient rien

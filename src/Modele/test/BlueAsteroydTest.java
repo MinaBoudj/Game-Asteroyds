@@ -106,6 +106,6 @@ public class BlueAsteroydTest {
     @Test
     public void testMoveToAsteroydCell() throws Exception {
         bAst3.move(gm, new int[]{2,1,1});
-        assertTrue(gm[2][1] == bAst3 && gm[1][1]==bAst1);
+        assertTrue(gm[1][1] == bAst3 && gm[0][2] == bAst1 && gm[2][1] instanceof EmptyCell);
     }
 }
