@@ -40,14 +40,15 @@ public class BlueAsteroyd extends Asteroyd{
                   if(gameBoard[pos2.getY()][pos2.getX()] instanceof EmptyCell){//c une case vide
                     if (gameBoard[pos2.getY()][pos2.getX()].getLSpaceShips().size() == 0) { // la case ne contient aucun vaisseau
                       // Déplacement de l'astéroïde de pos1 à pos2 et this de sa pos à pos1
+
                       gameBoard[pos1.getY()][pos1.getX()].setPosition(pos2);
                       gameBoard[pos2.getX()][pos2.getY()] = gameBoard[pos1.getY()][pos1.getX()];
                       
-                      super.getPosition().setX(pos1.getX());
-                      super.getPosition().setY(pos1.getY());
-
                       EmptyCell nec1 = new EmptyCell(super.getPosition());
                       gameBoard[super.getPosition().getY()][super.getPosition().getX()] = nec1;  
+                      
+                      super.getPosition().setX(pos1.getX());
+                      super.getPosition().setY(pos1.getY());
                       gameBoard[super.getPosition().getY()][super.getPosition().getX()] = this;
 
                     }else{
@@ -56,7 +57,7 @@ public class BlueAsteroyd extends Asteroyd{
                         gameBoard[pos2.getY()][pos2.getX()].getLSpaceShips().get(i).minusStructurePoint(1);
                       }
                     }
-                  }//ne rien deplacer si c pas une case vide
+                  }//verifier si c un asteroid  et que la case d'apres sois vide
                 }
               }else{
                 // Infliger des dégâts
@@ -73,11 +74,12 @@ public class BlueAsteroyd extends Asteroyd{
                       gameBoard[pos1.getY()][pos1.getX()].setPosition(pos2);
                       gameBoard[pos2.getY()][pos2.getX()] = gameBoard[pos1.getY()][pos1.getX()];
                       
+                      EmptyCell nec = new EmptyCell(super.getPosition());
+                      gameBoard[super.getPosition().getY()][super.getPosition().getX()] = nec;  
+                      
                       super.getPosition().setX(pos1.getX());
                       super.getPosition().setY(pos1.getY());
 
-                      EmptyCell nec = new EmptyCell(super.getPosition());
-                      gameBoard[super.getPosition().getY()][super.getPosition().getX()] = nec;  
                       gameBoard[super.getPosition().getY()][super.getPosition().getX()] = this;
 
                     }else{
