@@ -8,7 +8,6 @@
 4-empty
 3-null
 -
-2-null
 1-empty
 1-portal-red-1
 1-empty

@@ -50,7 +50,7 @@ public class Controller extends Application {
 
         try {
             constructGameBoard(view.readTextFile("res\\gameboards\\" + gameInfos[2] + ".txt"));
-        } catch (Exception e) {/*TODO*/}
+        } catch (Exception e) {view.displayErrorMessage(e.getMessage());}
 
         colorChoices = new ArrayList<String>();
         colorChoices.add("Green"); colorChoices.add("Blue"); colorChoices.add("Red");
@@ -95,7 +95,8 @@ public class Controller extends Application {
                 break;
 
             default:
-                /*TODO*/;
+                view.displayErrorMessage("Unknown color of space ship : " + playerInfos[1]);
+                return;
         }
         try {
             players[playerIndex] = new Player(name, color, orientation, c,l);
@@ -108,7 +109,7 @@ public class Controller extends Application {
                 }
             } else
                 view.displayOptionsScene(gameBoardToString(gameBoard), colorChoices, playerIndex+1, launchpadPositions, args -> {savePlayerInfos(args, playerIndex+1);});
-        } catch(Exception e) {System.out.println(e);/*TODO*/}
+        } catch(Exception e) {view.displayErrorMessage(e.getMessage());}
     }
 
     public void savePlayerMovements(Player player, String[] movements) {
@@ -134,7 +135,8 @@ public class Controller extends Application {
                         break;
                         
                     default:
-                        //TODO
+                    view.displayErrorMessage("Unknown movement : " + movements[i]);
+                    return;
                 }
         }
     }
@@ -165,11 +167,11 @@ public class Controller extends Application {
 
             try {
                 view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), players[i].toString(), difficulty, turnDirections, newPlayerTurn);
-            } catch(Exception e) {/*TODO*/}
+            } catch(Exception e) {view.displayErrorMessage(e.getMessage());}
         } else
             try {
                 endTurn();
-            } catch(Exception e) {/*TODO*/}
+            } catch(Exception e) {view.displayErrorMessage(e.getMessage());}
     }
 
     public void endTurn() throws Exception {
@@ -188,7 +190,7 @@ public class Controller extends Application {
         else
             try {
                 view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), ev -> {newTurn();});
-            } catch (Exception e) {/*TODO*/}
+            } catch (Exception e) {view.displayErrorMessage(e.getMessage());}
     }
 
     private int rollDice() {
@@ -217,9 +219,11 @@ public class Controller extends Application {
             String[] content = text.get(textCursor).split("-");
 
             if(content.length == 0) {
+                if(columnCursor != width) {
+                    view.displayErrorMessage("Not enought object in line : " + lineCursor + " (has " + columnCursor + ", expected " + width + ")");
+                    return;
+                }
                 lineCursor++;
-                if(columnCursor != width)
-                    throw new Exception(/*TODO*/);
                 columnCursor = 0;
             } else {
                 for(int i = 0 ; i < Integer.parseInt(content[0]) ; i++) {
@@ -249,7 +253,8 @@ public class Controller extends Application {
                                     break;
 
                                 default:
-                                    throw new Exception(/*TODO*/);
+                                view.displayErrorMessage("Unknown portal color : " + content[2]);
+                                return;
                             };
 
                             gameBoard[lineCursor][columnCursor] = portal;
@@ -284,7 +289,8 @@ public class Controller extends Application {
                                     break;
 
                                 default:
-                                    throw new Exception(/*TODO*/);
+                                    view.displayErrorMessage("Unknown asteroyd color : " + content[2]);
+                                    return;
                             }
 
                             gameBoard[lineCursor][columnCursor] = ast;
@@ -303,7 +309,8 @@ public class Controller extends Application {
                             break;
 
                         default:
-                            throw new Exception(/*TODO*/);
+                            view.displayErrorMessage("Unknown object type : " + content[1]);
+                            return;
                     }
 
                     columnCursor++;
@@ -311,6 +318,19 @@ public class Controller extends Application {
             }
 
             textCursor++;
+        }
+
+        if(lineCursor != height) {
+            view.displayErrorMessage("Not enought lines : (has " + lineCursor + ", expected " + height + ")");
+            return;
+        }
+        if(astPriorities.size() != 0) {
+            view.displayErrorMessage("Not enought asteroyds : (has " + (asteroyds.length - astPriorities.size()) + ", expected " + asteroyds.length + ")");
+            return;
+        }
+        if(nbLaunchpads != 0) {
+            view.displayErrorMessage("Not enought launchpads : (has " + (launchpadPositions.length/2 - nbLaunchpads) + ", expected " + launchpadPositions.length/2 + ")");
+            return;
         }
     }
 

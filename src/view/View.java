@@ -56,6 +56,17 @@ public class View {
         mainMenu = ev -> {scene.setRoot(menu);};
     }
 
+    public void displayErrorMessage(String content) {
+        Executable close = ev -> {
+            scene.setRoot(menu);
+        };
+        Text error = ShapeConstructor.newText(content, Color.RED, screenWidth/3,screenHeight*0.05, screenWidth/2,screenHeight*0.45),
+             closeButton = ControlConstructor.newButton("Close", Color.RED, screenWidth/3,screenHeight*0.05, screenWidth/2,screenHeight*0.55, Color.BLACK, close);
+        Rectangle background = ShapeConstructor.newRectangle(Color.web("FFFFFF",0.3), screenWidth*1.2,screenHeight*1.2, screenWidth/2,screenHeight/2),
+                  errorPane = ShapeConstructor.newRectangle(Color.WHITE, error.getBoundsInLocal().getWidth()*1.2,screenHeight*0.2, screenWidth/2,screenHeight/2);
+        scene.setRoot(new Group(background, errorPane, error, closeButton));
+    }
+
     public void displayOptionsScene(String[][] gameBoard, ArrayList<String> colorChoices, int playerIndex, String[] launchpadPositions, Sendable playerInfo) {
         Executable updateGameBoard = ev -> {
                 try{
