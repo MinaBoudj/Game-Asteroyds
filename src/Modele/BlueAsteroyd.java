@@ -26,8 +26,8 @@ public class BlueAsteroyd extends Asteroyd{
           pos1 = super.getPosition().getForward(neworientation); // Case en face.
           pos2 = pos1.getForward(neworientation); // Case derrière la case en face.
 
-          if(gameBoard[pos1.getY()][pos1.getX()]!= null && gameBoard[pos1.getY()][pos1.getX()] instanceof EmptyCell) { // Si la première case est vide
-              if (gameBoard[pos1.getY()][pos1.getX()].getLSpaceShips().size() == 0) {
+          if(gameBoard[pos1.getY()][pos1.getX()]!= null && gameBoard[pos1.getY()][pos1.getX()] instanceof EmptyCell) { // Si la première case est valide
+              if (gameBoard[pos1.getY()][pos1.getX()].getLSpaceShips().size() == 0) { // Si la première case est vide
                 // Déplacement de l'astéroïde
                 EmptyCell nec = new EmptyCell(super.getPosition());
                 gameBoard[super.getPosition().getY()][super.getPosition().getX()] = nec;  
@@ -36,17 +36,19 @@ public class BlueAsteroyd extends Asteroyd{
                 gameBoard[super.getPosition().getY()][super.getPosition().getX()] = this;
 
               } 
-              else 
-              if (gameBoard[pos2.getY()][pos2.getX()]!= null && gameBoard[pos2.getY()][pos2.getX()] instanceof EmptyCell) { // Si la 2ème case est vide
-                if (gameBoard[pos2.getY()][pos2.getX()].getLSpaceShips().size() == 0) {
-                  // Déplacement de l'astéroïde (obstacle)
-                  EmptyCell nec = new EmptyCell(super.getPosition()); // super au lieu de pos 1 ?
-                  gameBoard[super.getPosition().getY()][super.getPosition().getX()] = nec;
-                  super.getPosition().setX(pos2.getX()); // super au lieu de pos 1 ?
-                  super.getPosition().setY(pos2.getY()); // super au lieu de pos 1 ?
-                  gameBoard[super.getPosition().getY()][super.getPosition().getX()] = this;
+              else if (gameBoard[pos2.getY()][pos2.getX()]!= null && gameBoard[pos2.getY()][pos2.getX()] instanceof EmptyCell) { // Si la 2ème case est vide
+                    if (gameBoard[pos2.getY()][pos2.getX()].getLSpaceShips().size() == 0) {
+                      
+                    // Déplacement de l'obstacle sur la case d'après A VERIFIER ICI :
+                    EmptyCell nec = new EmptyCell(super.getPosition()); // super au lieu de pos 1 ?
+                    gameBoard[super.getPosition().getY()][super.getPosition().getX()] = nec;
+                    super.getPosition().setX(pos2.getX()); // super au lieu de pos 1 ?
+                    super.getPosition().setY(pos2.getY()); // super au lieu de pos 1 ?
+                    gameBoard[super.getPosition().getY()][super.getPosition().getX()] = this;
+                    
+                    // Déplacement de l'astéroïde voulu A FAIRE ICI :
 
-                } else {
+                    } else {
                     // Infliger des dégâts
                     for(int i=0; i<gameBoard[pos1.getY()][pos1.getX()].getLSpaceShips().size(); i++){
                       gameBoard[pos1.getY()][pos1.getX()].getLSpaceShips().get(i).minusStructurePoint(1);
