@@ -16,6 +16,8 @@ public class GameKeyGroup extends Group {
 
     public void delayGameKeyGroup(Executable back){
         try{
+            getChildren().add(ShapeConstructor.newRectangle(Color.BLACK, screenWidth*1.5, screenHeight*1.5, screenWidth/2, screenHeight/2));
+
             Text gamekeyText = ShapeConstructor.newText("GameKey ", Color.WHITE, screenWidth*0.20,screenHeight*0.15, screenWidth*0.40,screenHeight*0.1);
             
             ImageView audiencePodText = ShapeConstructor.newImage("audience_pod", screenWidth*0.15, screenHeight*0.15, screenWidth*0.15, screenHeight*0.2);
@@ -49,6 +51,7 @@ public class GameKeyGroup extends Group {
             asteroydBlueImage, asteroydText, asteroydRedText, asteroydWhiteText, asteroydBlueText, asteroydVariantsText,
             spaceShipImage, spaceShipText, launchpadImage, launchpadText, portailsImage, portailsText, relicsImage, relicsText, backButton);
         } catch ( Exception e){
+            getChildren().add(ShapeConstructor.newRectangle(Color.BLACK, screenWidth*1.5, screenHeight*1.5, screenWidth/2, screenHeight/2));
 
         }
     }
