@@ -21,19 +21,20 @@ public class Controller extends Application {
     private Player[] players;
     private ArrayList<Player> winners;
     private String[] launchpadPositions;
+    private ArrayList<String> colorChoices;
 
     @Override
     public void start(Stage stage) throws Exception {
-        view = new View(stage, (String[] args) -> {start(args);});
-        winners = new ArrayList<Player>();
+        view = new View(stage, (String[] args) -> {startGame(args);});
     }
 
-    private void start(String[] gameInfos) {
+    private void startGame(String[] gameInfos) {
+        winners = new ArrayList<Player>();
         players = new Player[Integer.parseInt(gameInfos[0])];
 
         switch(gameInfos[1]) {
             case "Amateur - 50s":
-                difficulty = 10;
+                difficulty = 50;
                 break;
 
             case "Co-Pilot - 40s":
@@ -53,16 +54,63 @@ public class Controller extends Application {
             constructGameBoard(view.readTextFile("res\\gameboards\\" + gameInfos[2] + ".txt"));
         } catch (Exception e) {/*TODO*/}
 
-        view.displayOptionsScene(gameBoardToString(gameBoard), 0, launchpadPositions, args -> {savePlayerInfo(args);});
+        colorChoices = new ArrayList<String>();
+        colorChoices.add("Green"); colorChoices.add("Blue"); colorChoices.add("Red");
+        colorChoices.add("Yellow"); colorChoices.add("Orange"); colorChoices.add("Purple");
+
+        view.displayOptionsScene(gameBoardToString(gameBoard), colorChoices, 0, launchpadPositions, args -> {savePlayerInfos(args, 0);});
     }
 
-    public void savePlayerInfo(String[] playerInfos) {
+    public void savePlayerInfos(String[] playerInfos, int playerIndex) {
         String name = playerInfos[0],
-               color = playerInfos[1],
-               launchpad = playerInfos[2],
-               orientation = playerInfos[3];
+               launchpad = playerInfos[2];
+        int l = Integer.parseInt(launchpadPositions[(Integer.parseInt(launchpad) -1) * 2]),
+            c = Integer.parseInt(launchpadPositions[(Integer.parseInt(launchpad) -1) * 2 +1]),
+            orientation = Integer.parseInt(playerInfos[3]);
+        Color color = null;
 
-        System.out.println(name);
+        colorChoices.remove(playerInfos[1]);
+
+        switch(playerInfos[1]) {
+            case "Green":
+                color = Color.Green;
+                break;
+
+            case "Red":
+                color = Color.Red;
+                break;
+
+            case "Blue":
+                color = Color.Blue;
+                break;
+
+            case "Yellow":
+                color = Color.Yellow;
+                break;
+
+            case "Orange":
+                color = Color.Orange;
+                break;
+
+            case "Purple":
+                color = Color.Purple;
+                break;
+
+            default:
+                /*TODO*/;
+        }
+        try {
+            players[playerIndex] = new Player(name, color, orientation, c,l);
+
+            if(playerIndex + 1 == players.length) {
+                for(Player p : players) {
+                    SpaceShip sp = p.getSpaceShip();
+                    gameBoard[sp.getPosition().getY()][sp.getPosition().getX()].addLSpaceShip(sp);
+                    view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), ev -> {newTurn();});
+                }
+            } else
+                view.displayOptionsScene(gameBoardToString(gameBoard), colorChoices, playerIndex+1, launchpadPositions, args -> {savePlayerInfos(args, playerIndex+1);});
+        } catch(Exception e) {/*TODO*/}
     }
 
     public void savePlayerMovements(Player player, String[] movements) {

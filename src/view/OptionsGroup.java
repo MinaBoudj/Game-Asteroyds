@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
@@ -17,11 +19,12 @@ public class OptionsGroup extends Group {
         this.screenWidth = screenWidth;
     }
 
-    public void updateOptionsGroup(Group gameBoardGroup, int playerIndex, Executable updateGameBoard, Executable mainMenu, Sendable playerInfo, String[] cellLaunchPositions, String[][] gameBoard) {
+    public void updateOptionsGroup(Group gameBoardGroup, ArrayList<String> colorChoices, int playerIndex, Executable updateGameBoard, Executable mainMenu, Sendable playerInfo, String[] cellLaunchPositions, String[][] gameBoard) {
+        getChildren().removeAll(getChildren());
+
         double maxTextHeight = screenHeight/13.5;
 		String[] orientationShipChoices = new String[]{"1","2","3","4","5","6"},
-				 cellLaunchChoices = new String[cellLaunchPositions.length/2],
-                 colorSpaceshipChoices = new String[]{"Green", "Blue", "Red", "Yellow", "Orange","Purple"};
+				 cellLaunchChoices = new String[cellLaunchPositions.length/2];
         for(int i = 0 ; i < cellLaunchChoices.length ; i++)
             cellLaunchChoices[i] = "n°" + (i + 1);
 
@@ -37,19 +40,19 @@ public class OptionsGroup extends Group {
         nameField.setMaxHeight(maxTextHeight);
         nameField.setLayoutX(screenWidth*0.855);
         nameField.setLayoutY(maxTextHeight*1.5);
-        nameField.setText("Player" + playerIndex);
+        nameField.setText("Player" + (playerIndex + 1));
         nameField.setAlignment(Pos.CENTER);
         nameField.selectEnd();
         nameField.setOnKeyPressed(ke -> {
                 if(nameField.getText() == "") {
-                    nameField.setText("Player" + playerIndex);
+                    nameField.setText("Player" + (playerIndex + 1));
                     nameField.selectEnd();
                 } else if(nameField.getText().length() > 10)
                     nameField.undo();
             });
 
 		Text colorBoxLabel = ShapeConstructor.newText("Color : ", Color.WHITE, screenWidth*0.18,maxTextHeight*0.8, screenWidth*0.9,maxTextHeight*3.5);
-        ComboBox<String> colorBox = ControlConstructor.newComboBox(colorSpaceshipChoices, screenWidth*0.18,maxTextHeight*0.8, screenWidth*0.9,maxTextHeight*4.5);
+        ComboBox<String> colorBox = ControlConstructor.newComboBox(colorChoices.toArray(new String[]{}), screenWidth*0.18,maxTextHeight*0.8, screenWidth*0.9,maxTextHeight*4.5);
 
 		Text cellLaunchBoxLabel = ShapeConstructor.newText("Cell of LaunchPad : ", Color.WHITE, screenWidth*0.18,maxTextHeight*0.8, screenWidth*0.9,maxTextHeight*6);
         ComboBox<String> cellLaunchBox = ControlConstructor.newComboBox(cellLaunchChoices, screenWidth*0.18,maxTextHeight*0.8, screenWidth*0.9,maxTextHeight*7);
@@ -60,10 +63,10 @@ public class OptionsGroup extends Group {
         Executable onAction = ev -> {
                 String spaceShip = "/space_ship-" + colorBox.getValue().toLowerCase() + "-" + orientationBox.getValue(),
                        launchpad = cellLaunchBox.getValue().substring(2,3),
-                       x = cellLaunchPositions[(Integer.parseInt(launchpad) -1) * 2],
-                       y = cellLaunchPositions[(Integer.parseInt(launchpad) -1) * 2 +1];
+                       l = cellLaunchPositions[(Integer.parseInt(launchpad) -1) * 2],
+                       c = cellLaunchPositions[(Integer.parseInt(launchpad) -1) * 2 +1];
 
-                updateSpaceShip.send(new String[]{x,y, spaceShip});
+                updateSpaceShip.send(new String[]{l,c, spaceShip});
             };
         onAction.execute(null);
 
@@ -72,28 +75,9 @@ public class OptionsGroup extends Group {
         orientationBox.setOnAction(ae -> {onAction.execute(ae);});
 
 		Executable next = ev -> {playerInfo.send(new String[]{nameField.getText(), colorBox.getValue(), cellLaunchBox.getValue().substring(2,3), orientationBox.getValue()});};
-		Text nextButton = ControlConstructor.newButton("Start", Color.WHITE, screenWidth*0.18,maxTextHeight*0.8, screenWidth*0.9,maxTextHeight*11.5, Color.BLACK, next), // next
+		Text nextButton = ControlConstructor.newButton("Next", Color.WHITE, screenWidth*0.18,maxTextHeight*0.8, screenWidth*0.9,maxTextHeight*11.5, Color.BLACK, next), // next
              mainMenuButton = ControlConstructor.newButton("Main Menu", Color.WHITE, screenWidth*0.18,maxTextHeight*0.8, screenWidth*0.9,maxTextHeight*12.5, Color.BLACK, mainMenu); // mainMenu
 
 		getChildren().addAll(gameBoardGroup, namefieldLabel, nameField, colorBoxLabel, colorBox, cellLaunchBoxLabel, cellLaunchBox, orientationBoxLabel, orientationBox, nextButton, mainMenuButton);
 	}
 }
-/*
--
-1
-1
--
-1
-1
--
-1
-1
--
-1
-1
--
-1
--
-1
--
-*/

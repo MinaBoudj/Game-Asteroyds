@@ -58,13 +58,13 @@ public class View {
             };
     }
 
-    public void displayOptionsScene(String[][] gameBoard, int playerIndex, String[] launchpadPositions, Sendable playerInfo) {
+    public void displayOptionsScene(String[][] gameBoard, ArrayList<String> colorChoices, int playerIndex, String[] launchpadPositions, Sendable playerInfo) {
         Executable updateGameBoard = ev -> {
                 try{
                     updateGameBoardGroup(gameBoard, false);
                 } catch (Exception e) {/*TODO*/}
             };
-        options.updateOptionsGroup(gameBoardGroup, playerIndex, updateGameBoard, mainMenu, playerInfo, launchpadPositions, gameBoard);
+        options.updateOptionsGroup(gameBoardGroup, colorChoices, playerIndex, updateGameBoard, mainMenu, playerInfo, launchpadPositions, gameBoard);
         scene.setRoot(options);
     }
 
