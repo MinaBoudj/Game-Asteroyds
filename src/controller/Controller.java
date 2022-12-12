@@ -49,7 +49,7 @@ public class Controller extends Application {
         }
 
         try {
-            constructGameBoard(view.readTextFile("res\\gameboards\\" + gameInfos[2] + ".txt"));
+            constructGameBoard(view.readTextFile("res/gameboards/" + gameInfos[2] + ".txt"));
         } catch (Exception e) {view.displayErrorMessage(e.getMessage());}
 
         colorChoices = new ArrayList<String>();
