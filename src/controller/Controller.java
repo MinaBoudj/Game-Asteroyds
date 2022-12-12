@@ -32,7 +32,7 @@ public class Controller extends Application {
 
         switch(gameInfos[1]) {
             case "Amateur - 50s":
-                difficulty = 5;
+                difficulty = 50;
                 break;
 
             case "Co-Pilot - 40s":
@@ -43,9 +43,13 @@ public class Controller extends Application {
                 difficulty = 30;
                 break;
 
-            case "Flight champion - 20s":
+            case "Flight Champion - 20s":
                 difficulty = 20;
                 break;
+
+            default:
+                view.displayErrorMessage("Unknown difficulty : " + gameInfos[1]);
+                return;
         }
 
         try {

@@ -26,7 +26,7 @@ public class MenuGroup extends Group {
         }
 		
 		String[] numberOfPlayersChoices = new String[]{"2","3","4","5","6"},
-				 difficultyChoices = new String[]{"Amateur - 50s", "Co-pilot - 40s", "Captain - 30s", "Flight champion - 20s"},
+				 difficultyChoices = new String[]{"Amateur - 50s", "Co-Pilot - 40s", "Captain - 30s", "Flight Champion - 20s"},
 				 gameBoardChoices = findAllFilesInFolder(new File("./res/gameboards"));
 
 		Rectangle paneMenu = ShapeConstructor.newRectangle(Color.web("A9A9A9",0.6), screenWidth*0.3, screenHeight, screenWidth*0.15, screenHeight/2);

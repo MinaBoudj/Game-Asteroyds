@@ -28,7 +28,13 @@ public class RedPortal extends RedAsteroyd{
 		if(this.relic <1 || this.relic>4) throw new Exception("valeur de relic à ajouter < 1 ou > 4");
 		else if(!newSpace.hasRelic(this.relic)) //s'il n'a pas cette relic l'ajouter à sa liste de relic
 				newSpace.addRelic(this.relic);
-	
+	}
+
+	@Override
+	public void move(Cell[][] gameBoard, int[] directions) throws Exception {
+		super.move(gameBoard, directions);
+		for(SpaceShip sp : getLSpaceShips())
+			sp.setPosition(getPosition());
 	}
 	
 	@Override
