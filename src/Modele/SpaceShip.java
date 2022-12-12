@@ -15,7 +15,7 @@ public class SpaceShip extends VisualObject{
 	/* Constructeur d'un vaisseau */
 	public SpaceShip(int orientation, Position pos, Color color)throws Exception{//exception dans VisualObject
 		super(orientation, pos);
-		this.structurePoints = 1;
+		this.structurePoints = 6;
         this.relics = new int[]{0,0,0,0};    
         this.color = color;
 	}
