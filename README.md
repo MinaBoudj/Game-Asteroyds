@@ -43,7 +43,7 @@ Pour pouvoir lancer le projet, il est nécessaire de suivre les étapes suivante
 
         javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics,javafx.controls src/Modele/*.java
         javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics,javafx.controls src/view/*.java
-        javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics,javafx.controls src/controller/*.java
+        javac -d bin -cp bin --module-path "./lib" --add-modules javafx.base,javafx.graphics,javafx.controls src/controller/*.java
 
 - **Etape 5** : Enfin, il ne reste plus qu'à exécuter la commande suivante pour lancer le programme :
 
