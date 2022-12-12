@@ -17,11 +17,14 @@ public class WhiteAsteroyd extends Asteroyd {
     
     public void move(Cell[][] gameBoard, int[] directions) throws Exception{ // MOUVEMENTS DU BLANC 1 déplacement
         Position pos;
-        if(directions[1]<=0||directions[1]>6 || gameBoard[super.getPosition().getY()][super.getPosition().getX()]!= this) throw new Exception("direction rouge incorrect ");
+        if(directions[1]<=0||directions[1]>6)
+            throw new Exception("Bad white direction : " + directions[1]);
+        if(gameBoard[super.getPosition().getY()][super.getPosition().getX()]!= this)
+            throw new Exception(this + " not at its position : line:" + super.getPosition().getY() + "column:" + super.getPosition().getX());
 		else{
             try {
                 //Définir l'orientation
-                int neworientation = calculeOrientation(directions[2]);
+                int neworientation = calculeOrientation(directions[1]);
                 pos = super.getPosition().getForward(neworientation);
                 if(gameBoard[pos.getY()][pos.getX()]!= null && gameBoard[pos.getY()][pos.getX()] instanceof EmptyCell){ // Vérifie le type de case
                     if (gameBoard[pos.getY()][pos.getX()].getLSpaceShips().size() == 0) { // Vérifie si la case ne contient rien

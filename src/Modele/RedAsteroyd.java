@@ -19,7 +19,10 @@ public class RedAsteroyd extends  Asteroyd {
 	//mouvement d'un asteroid rouge
 	public void move(Cell[][] gameBoard, int[] directions)throws Exception {
 		Position pos1, pos2;
-		if(directions[0]<=0||directions[0]>6||gameBoard[super.getPosition().getY()][super.getPosition().getX()]!= this) throw new Exception("direction rouge incorrect ");
+		if(directions[0]<=0||directions[0]>6)
+            throw new Exception("Bad red direction : " + directions[0]);
+        if(gameBoard[super.getPosition().getY()][super.getPosition().getX()]!= this)
+            throw new Exception(this + " not at its position : line:" + super.getPosition().getY() + "column:" + super.getPosition().getX());
 		else{
 			//changer l'orientation selon la direction
 			//ne peu pas faire bouger un objet devant lui 

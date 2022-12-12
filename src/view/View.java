@@ -64,7 +64,7 @@ public class View {
              closeButton = ControlConstructor.newButton("Close", Color.RED, screenWidth/3,screenHeight*0.05, screenWidth/2,screenHeight*0.55, Color.BLACK, close);
         Rectangle background = ShapeConstructor.newRectangle(Color.web("FFFFFF",0.3), screenWidth*1.2,screenHeight*1.2, screenWidth/2,screenHeight/2),
                   errorPane = ShapeConstructor.newRectangle(Color.WHITE, error.getBoundsInLocal().getWidth()*1.2,screenHeight*0.2, screenWidth/2,screenHeight/2);
-        scene.setRoot(new Group(background, errorPane, error, closeButton));
+        scene.setRoot(new Group(scene.getRoot(), background, errorPane, error, closeButton));
     }
 
     public void displayOptionsScene(String[][] gameBoard, ArrayList<String> colorChoices, int playerIndex, String[] launchpadPositions, Sendable playerInfo) {
@@ -212,7 +212,8 @@ public class View {
                             break;
 
                         default:
-                            throw new Exception(/*TODO*/);
+                            displayErrorMessage("Unknown asteroyd Color : " + asteroydColor);
+                            return;
                     }
                     group.getChildren().addAll(ShapeConstructor.newHexagon(color1,color2, hexSize, x,y));
                 }
@@ -227,7 +228,7 @@ public class View {
                        centerY = y + hexSize/2 * Math.sin((60 * (spaceShipOrientation -2)) * ShapeConstructor.TORAD);
 
                 try {
-                    group.getChildren().add(ShapeConstructor.newImage(spaceShipColor + "_space_ship", hexSize/2,hexSize/2, centerX,centerY, spaceShipOrientation));
+                    group.getChildren().add(ShapeConstructor.newImage(spaceShipColor.toLowerCase() + "_space_ship", hexSize/2,hexSize/2, centerX,centerY, spaceShipOrientation));
                 } catch (Exception e) {
                     Color color;
                     switch (spaceShipColor) {
@@ -256,7 +257,8 @@ public class View {
                             break;
 
                         default:
-                            throw new Exception(/*TODO*/);
+                            displayErrorMessage("Unknown space ship Color : " + spaceShipColor);
+                            return;
                     }
                     group.getChildren().add(ShapeConstructor.newTriangle(color, hexSize/2, centerX - hexSize/20,centerY, spaceShipOrientation));
                 }
@@ -305,7 +307,8 @@ public class View {
                             break;
 
                         default:
-                            throw new Exception(/*TODO*/);
+                            displayErrorMessage("Unknown portal Color : " + portalColor);
+                            return;
                     }
                     group.getChildren().add(ShapeConstructor.newCircle(color, hexWidth/3, x,y));
                 }
@@ -317,7 +320,8 @@ public class View {
                 break;
 
                 default:
-                    throw new Exception(/*TODO*/);
+                    displayErrorMessage("Unknown type of object : " + objectType);
+                    return;
         }
     }
 

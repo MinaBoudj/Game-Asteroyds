@@ -18,7 +18,10 @@ public class BlueAsteroyd extends Asteroyd{
     @Override
     public void move(Cell[][] gameBoard, int[] directions) throws Exception{ // Mouvements d'un astéroïde bleu : 1 pas + peut pousser si besoin
       Position pos1, pos2;
-      if(directions[2]<=0||directions[2]>6||gameBoard[super.getPosition().getY()][super.getPosition().getX()]!= this) throw new Exception("erreur de direction bleu");
+      if(directions[2]<=0||directions[2]>6)
+        throw new Exception("Bad blue direction : " + directions[2]);
+      if(gameBoard[super.getPosition().getY()][super.getPosition().getX()]!= this)
+        throw new Exception(this + " not at its position : line:" + super.getPosition().getY() + "column:" + super.getPosition().getX());
       else{
         try{
           // Définir l'orientation

@@ -39,9 +39,11 @@ Pour pouvoir lancer le projet, il est nécessaire de suivre les étapes suivante
 - **Etape 2** : Copier le contenu du répertoire *lib* du dossier téléchargé dans le répertoire *lib* du dossier du projet.
 - **Etape 2-bis** : Pour les utilisateurs de Windows, il faut aussi copier le répertoire *bin* dans le dossier du projet.
 - **Etape 3** : Ouvrir un terminal et se rendre dans le dossier du projet.
-- **Etape 4** : Compiler les fichiers à l'aide de la commande suivante :
+- **Etape 4** : Compiler les fichiers à l'aide des commandes suivantes (à exécuter dans l'ordre) :
 
-        javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics src/controller/*.java
+        javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics,javafx.controls src/Modele/*.java
+        javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics,javafx.controls src/view/*.java
+        javac -d bin --module-path "./lib" --add-modules javafx.base,javafx.graphics,javafx.controls src/controller/*.java
 
 - **Etape 5** : Enfin, il ne reste plus qu'à exécuter la commande suivante pour lancer le programme :
 

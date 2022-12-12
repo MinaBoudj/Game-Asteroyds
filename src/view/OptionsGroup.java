@@ -61,7 +61,7 @@ public class OptionsGroup extends Group {
         ComboBox<String> orientationBox = ControlConstructor.newComboBox(orientationShipChoices, screenWidth*0.18,maxTextHeight*0.8, screenWidth*0.9,maxTextHeight*9.5);
 
         Executable onAction = ev -> {
-                String spaceShip = "/space_ship-" + colorBox.getValue().toLowerCase() + "-" + orientationBox.getValue(),
+                String spaceShip = "/space_ship-" + colorBox.getValue() + "-" + orientationBox.getValue(),
                        launchpad = cellLaunchBox.getValue().substring(2,3),
                        l = cellLaunchPositions[(Integer.parseInt(launchpad) -1) * 2],
                        c = cellLaunchPositions[(Integer.parseInt(launchpad) -1) * 2 +1];

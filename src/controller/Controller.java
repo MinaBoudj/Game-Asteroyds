@@ -320,7 +320,7 @@ public class Controller extends Application {
             textCursor++;
         }
 
-        if(lineCursor != height) {
+        if(lineCursor >= height) {
             view.displayErrorMessage("Not enought lines : (has " + lineCursor + ", expected " + height + ")");
             return;
         }

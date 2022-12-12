@@ -20,7 +20,10 @@ public class WhiteRedAsteroyd extends RedAsteroyd {
 		//verifier que la case est pas null 
 		//il bouge selon le chiffre  directions[0] puis directions[1]	
 		//peu faire bouger un objet devant lui avec le bleu
-		if(directions[1]<=0 || directions[1]>6 || gameBoard[super.getPosition().getY()][super.getPosition().getX()]!= this) throw new Exception("directions du blans incorrect");
+        if(directions[1]<=0||directions[1]>6)
+			throw new Exception("Bad white direction : " + directions[1]);
+		if(gameBoard[super.getPosition().getY()][super.getPosition().getX()]!= this)
+			throw new Exception(this + " not at its position : line:" + super.getPosition().getY() + "column:" + super.getPosition().getX());
 		else{
 			Position pos;
 			//dabord en rouge 
