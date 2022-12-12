@@ -38,30 +38,6 @@ public class BlueAsteroyd extends Asteroyd{
                 super.getPosition().setX(pos1.getX());
                 super.getPosition().setY(pos1.getY());
                 gameBoard[super.getPosition().getY()][super.getPosition().getX()] = this;
-                // Vérification de la deuxième case 
-                if(gameBoard[pos2.getY()][pos2.getX()]!= null){
-                  if(gameBoard[pos2.getY()][pos2.getX()] instanceof EmptyCell){ // Vérifie si case vide
-                    if (gameBoard[pos2.getY()][pos2.getX()].getLSpaceShips().size() == 0) { // la case ne contient aucun vaisseau
-                      // Déplacement de l'astéroïde de pos1 à pos2 et this de sa position initiale à pos1
-
-                      gameBoard[pos1.getY()][pos1.getX()].setPosition(pos2);
-                      gameBoard[pos2.getX()][pos2.getY()] = gameBoard[pos1.getY()][pos1.getX()];
-                      
-                      EmptyCell nec1 = new EmptyCell(super.getPosition());
-                      gameBoard[super.getPosition().getY()][super.getPosition().getX()] = nec1;  
-                      
-                      super.getPosition().setX(pos1.getX());
-                      super.getPosition().setY(pos1.getY());
-                      gameBoard[super.getPosition().getY()][super.getPosition().getX()] = this;
-
-                    }else{
-                      // Infliger des dégâts
-                      for(int i=0; i<gameBoard[pos2.getY()][pos2.getX()].getLSpaceShips().size(); i++){
-                        gameBoard[pos2.getY()][pos2.getX()].getLSpaceShips().get(i).minusStructurePoint(1);
-                      }
-                    }
-                  } // Vérifier si c un asteroid et que la case d'après soit vide
-                }
               }else{
                 // Infliger des dégâts
                 for(int i=0; i<gameBoard[pos1.getY()][pos1.getX()].getLSpaceShips().size(); i++){
@@ -85,18 +61,13 @@ public class BlueAsteroyd extends Asteroyd{
 
                       gameBoard[super.getPosition().getY()][super.getPosition().getX()] = this;
 
-                    }else{
-                      // Infliger des dégâts
-                      for(int i=0; i<gameBoard[pos2.getY()][pos2.getX()].getLSpaceShips().size(); i++){
-                        gameBoard[pos2.getY()][pos2.getX()].getLSpaceShips().get(i).minusStructurePoint(1);
-                      }
                     }
                   }// Ne rien faire si ce n'est pas une case vide
                 }
             }
           }
         }catch(Exception e) {
-          // Traitement de l'erreur (orientation négative)
+          return;
             }
       }	
 	}
