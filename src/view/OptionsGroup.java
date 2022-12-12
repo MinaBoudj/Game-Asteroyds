@@ -1,5 +1,9 @@
 package view;
 
+/**
+ * @author Maylis
+ */
+
 import java.util.ArrayList;
 
 import javafx.geometry.Pos;
