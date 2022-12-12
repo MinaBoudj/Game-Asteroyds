@@ -45,6 +45,3 @@ public class RedPortal extends RedAsteroyd{
 		return str;
 	}
 }
-
-
-
