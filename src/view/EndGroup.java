@@ -33,7 +33,7 @@ public class EndGroup extends Group {
         try {getChildren().add(ShapeConstructor.newImage("background", screenWidth*1.5,screenHeight*1.5, screenWidth/2,screenHeight/2, 1));}
         catch (Exception e) {getChildren().add(ShapeConstructor.newRectangle(Color.BLACK, screenWidth*1.5, screenHeight*1.5, screenWidth/2, screenHeight/2));}
         
-        ranking_player(players);
+        rankingPlayer(players);
         Text title = ShapeConstructor.newText("Scores : ", Color.WHITE, screenWidth,maxTextHeight*1.5, screenWidth/2,maxTextHeight*0.75);
 
 		Rectangle scorePane = ShapeConstructor.newRectangle(Color.web("A9A9A9",0.6), maxTextWidth*7.5,maxTextHeight*10.8, screenWidth/2,screenHeight/2);
@@ -61,8 +61,9 @@ public class EndGroup extends Group {
 		getChildren().addAll(title, scorePane, rank,name,relics,structPoints, menuButton);
 	}
 
-    public void ranking_player(String[] players){
+    public void rankingPlayer(String[] players){
         for (String p : players) {
+            System.out.println(p);
             String[] playerInfos = p.split("-");
 
             int relics = 0;
@@ -100,22 +101,3 @@ public class EndGroup extends Group {
                    Integer.parseInt(first[2]) == Integer.parseInt(second[2]) ? 0 : -1;
     }
 }
-/* -1-1-2-2-
-1.5
-1
-1
--
-1
--
-1
--
-1
--
-1
--
-1
--
-1
-1
-1
- */

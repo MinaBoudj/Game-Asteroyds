@@ -71,7 +71,7 @@ public class View {
         Executable updateGameBoard = ev -> {
                 try{
                     updateGameBoardGroup(gameBoard, false);
-                } catch (Exception e) {/*TODO*/}
+                } catch (Exception e) {displayErrorMessage(e.getMessage());}
             };
         options.updateOptionsGroup(gameBoardGroup, colorChoices, playerIndex, updateGameBoard, mainMenu, playerInfo, launchpadPositions, gameBoard);
         scene.setRoot(options);
@@ -88,12 +88,12 @@ public class View {
                 ShapeConstructor.NOIMAGE = !ShapeConstructor.NOIMAGE;
                 try{
                     displayMainScene(gameBoard, players, newTurn);
-                } catch (Exception e) {/*TODO*/}
+                } catch (Exception e) {displayErrorMessage(e.getMessage());}
             };
         Executable gk = ev -> {
                 gameKey.displayGameKeyGroup(ev2 -> {
                         try{displayMainScene(gameBoard, players, newTurn);}
-                        catch (Exception e) {/*TODO*/}
+                        catch (Exception e) {displayErrorMessage(e.getMessage());}
                     });
                 scene.setRoot(gameKey);
             };
@@ -107,12 +107,12 @@ public class View {
                 ShapeConstructor.NOIMAGE = !ShapeConstructor.NOIMAGE;
                 try{
                     displayMainScene(gameBoard, players, nextPlayer, difficulty, directions, newPlayerTurn);
-                } catch (Exception e) {/*TODO*/}
+                } catch (Exception e) {displayErrorMessage(e.getMessage());}
             };
         Executable gk = ev -> {
                     gameKey.displayGameKeyGroup(ev2 -> {
                             try{displayMainScene(gameBoard, players, nextPlayer, difficulty, directions, newPlayerTurn);}
-                            catch (Exception e) {/*TODO*/}
+                            catch (Exception e) {displayErrorMessage(e.getMessage());}
                         });
                     scene.setRoot(gameKey);
                 };
@@ -127,7 +127,7 @@ public class View {
         try {
             updateGameBoardGroup(gameBoard, true);
             turn.updateRoot(gameBoardGroup, player, difficulty, directions, mainMenu, newPlayerTurn);
-        } catch(Exception e) {/*TODO*/}
+        } catch(Exception e) {displayErrorMessage(e.getMessage());}
         scene.setRoot(turn);
     }
 

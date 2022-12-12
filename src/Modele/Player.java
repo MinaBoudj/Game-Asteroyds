@@ -36,6 +36,10 @@ public class Player {
     public SpaceShip getSpaceShip() {
         return spaceShip;
     }
+
+    public String getName() {
+        return name;
+    }
     
     /* Méthode */
     public void move(Cell[][] gameBoard) throws Exception {

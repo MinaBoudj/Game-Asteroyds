@@ -209,7 +209,7 @@ public class ControlConstructor {
                 break;
 
             default:
-                throw new Exception(/*TODO*/);
+                throw new Exception("Unknwon player color : " + colorInfo);
         }
 
         return color;

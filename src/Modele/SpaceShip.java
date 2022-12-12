@@ -15,7 +15,7 @@ public class SpaceShip extends VisualObject{
 	/* Constructeur d'un vaisseau */
 	public SpaceShip(int orientation, Position pos, Color color)throws Exception{//exception dans VisualObject
 		super(orientation, pos);
-		this.structurePoints = 6;
+		this.structurePoints = 1;
         this.relics = new int[]{0,0,0,0};    
         this.color = color;
 	}
@@ -53,7 +53,11 @@ public class SpaceShip extends VisualObject{
 	}
 	
 	//diminu les points de structure de ce vaisseau
-	public void minusStructurePoint(int value) { this.structurePoints = this.structurePoints- value; }
+	public void minusStructurePoint(int value) {
+		this.structurePoints -= value;
+		if(structurePoints < 0)
+			structurePoints = 0;
+	}
 
 	//le vaisseau bouge a gauche donc modification de son orientation
 	private void moveLeft()throws Exception { 
@@ -135,7 +139,7 @@ public class SpaceShip extends VisualObject{
 					super.setPosition(pos);
 				} catch (Exception e) {
 					//le vaisseau se prend des degats et s'arrete 
-					this.structurePoints = this.structurePoints-2;
+					minusStructurePoint(2);
 					break;
 				}
 			}

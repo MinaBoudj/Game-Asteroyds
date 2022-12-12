@@ -51,8 +51,8 @@ public class OptionsGroup extends Group {
                 if(nameField.getText() == "") {
                     nameField.setText("Player" + (playerIndex + 1));
                     nameField.selectEnd();
-                } else if(nameField.getText().length() > 10)
-                    nameField.undo();
+                } else if(nameField.getText().length() > 10 || nameField.getText().charAt(nameField.getText().length()-1) == '-')
+                    nameField.setText(nameField.getText().substring(0, 10));
             });
 
 		Text colorBoxLabel = ShapeConstructor.newText("Color : ", Color.WHITE, screenWidth*0.18,maxTextHeight*0.8, screenWidth*0.9,maxTextHeight*3.5);

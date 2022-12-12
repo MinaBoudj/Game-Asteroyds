@@ -30,6 +30,13 @@ public class WhitePortal extends WhiteAsteroyd {
 		else if(!newSpace.hasRelic(this.relic)) //s'il n'a pas cette relic l'ajouter à sa liste de relic
 				newSpace.addRelic(this.relic);
 	}
+
+	@Override
+	public void move(Cell[][] gameBoard, int[] directions) throws Exception {
+		super.move(gameBoard, directions);
+		for(SpaceShip sp : getLSpaceShips())
+			sp.setPosition(getPosition());
+	}
 		
 	@Override
 	public String toString() {

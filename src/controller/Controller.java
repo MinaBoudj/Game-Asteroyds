@@ -32,7 +32,7 @@ public class Controller extends Application {
 
         switch(gameInfos[1]) {
             case "Amateur - 50s":
-                difficulty = 50;
+                difficulty = 5;
                 break;
 
             case "Co-Pilot - 40s":
@@ -149,12 +149,17 @@ public class Controller extends Application {
     }
 
     public void newTurn() {
-        turnDirections = new int[]{rollDice(),rollDice(),rollDice()};
-        newPlayerTurn(0);
+        if(isGameOver())
+            try {view.displayEndScene(playersToString(players));}
+            catch(Exception e) {view.displayErrorMessage(e.getMessage());}
+        else {
+            turnDirections = new int[]{rollDice(),rollDice(),rollDice()};
+            newPlayerTurn(0);
+        }
     }
 
     public void newPlayerTurn(int nextPlayerIndex) {
-        while(nextPlayerIndex < players.length && players[nextPlayerIndex].getSpaceShip().getStructurePoints() <= 0) {
+        while(nextPlayerIndex < players.length && !players[nextPlayerIndex].hasSpaceShipInCondition()) {
             nextPlayerIndex++;
         }
         final int i = nextPlayerIndex;
@@ -182,15 +187,12 @@ public class Controller extends Application {
             if(p.hasSpaceShipInCondition())
                 p.move(gameBoard);
             if(!p.hasSpaceShipInCondition())
-                gameBoard[p.getSpaceShip().getPosition().getX()][p.getSpaceShip().getPosition().getY()].removeLSpaceShip(p.getSpaceShip());
+                gameBoard[p.getSpaceShip().getPosition().getY()][p.getSpaceShip().getPosition().getX()].removeLSpaceShip(p.getSpaceShip());
         }
 
-        if(isGameOver())
-            view.displayEndScene(playersToString(players));
-        else
-            try {
-                view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), ev -> {newTurn();});
-            } catch (Exception e) {view.displayErrorMessage(e.getMessage());}
+        try {
+            view.displayMainScene(gameBoardToString(gameBoard), playersToString(players), ev -> {newTurn();});
+        } catch (Exception e) {view.displayErrorMessage(e.getMessage());}
     }
 
     private int rollDice() {
